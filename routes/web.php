@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => 'auth' ], function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard'); 
+});
