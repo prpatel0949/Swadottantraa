@@ -6,3 +6,5 @@
 <script src="{{ asset('assets/dashboard/js/core/app.js') }}"></script>
 <script src="{{ asset('assets/dashboard/js/scripts/components.js') }}"></script>
 <script src="{{ asset('assets/dashboard/vendors/js/charts/echarts/echarts.min.js') }}"></script>
+
+@yield('js')

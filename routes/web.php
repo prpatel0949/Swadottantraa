@@ -21,6 +21,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => 'auth' ], function () {
+Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual'] ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard'); 
+    Route::get('profile', 'UserController@profile')->name('individual.profile');
+    Route::PUT('profile', 'UserController@profileUpdate')->name('individual.profile.update');
+
+    Route::get('/program', 'ProgramController@index')->name('individual.program');
+    Route::post('payment/response', 'ProgramController@paymentResponse')->name('payment.response');
+    Route::post('/hash', 'ProgramController@hash')->name('generate.hash');
+
 });

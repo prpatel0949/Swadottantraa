@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function redirectTo()
     {
         if (Auth::user()->type == 0) {
-            return 'user/dashboard';
+            return 'user/program';
         }
 
         return '/';

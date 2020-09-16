@@ -144,7 +144,7 @@
                 },
                 email: {
                     required: true,
-                    maxlength: 100,
+                    maxlength: 255,
                     email: true
                 },
                 mobile: {

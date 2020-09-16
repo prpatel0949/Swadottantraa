@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -72,6 +73,10 @@ class RegisterController extends Controller
         if (Hash::check(0, $data['type'])) {
             $type = 0;
         }
+
+        $user = User::max('id') + 1;
+        $code = Str::random(5).''.$user;
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -81,6 +86,7 @@ class RegisterController extends Controller
             'dob' => (!empty($data['dob']) ? \Carbon\Carbon::parse($data['dob'])->format('Y-m-d') : null),
             'country_code' => $data['country_code'],
             'mobile' => $data['mobile'],
+            'code' => $code,
             'type' => $type,
         ]);
     }
