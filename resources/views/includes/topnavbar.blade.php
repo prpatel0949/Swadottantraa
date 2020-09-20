@@ -6,19 +6,19 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/')}}">Home</a>
+                <a data-scroll-to="home" class="nav-link" href="{{url('/')}}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('about-us')}}">About Us</a>
+                <a data-scroll-to="about" class="nav-link" href="{{url('/#about')}}">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('products')}}">Products</a>
+                <a data-scroll-to="product" class="nav-link" href="{{url('/#product')}}">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('testimonials')}}">Testimonials</a>
+                <a data-scroll-to="testimonial" class="nav-link" href="{{url('/#testimonial')}}">Testimonials</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('contact-us')}}">Contact Us</a>
+                <a data-scroll-to="contact" class="nav-link" href="{{url('/#contact')}}">Contact Us</a>
             </li>
             <li class="nav-item">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#login_modal">Login</button>
