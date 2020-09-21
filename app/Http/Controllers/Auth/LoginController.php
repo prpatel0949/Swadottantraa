@@ -45,6 +45,10 @@ class LoginController extends Controller
             return 'user/program';
         }
 
+        if (Auth::user()->type == 2) {
+            return 'franchisee/dashboard';
+        }
+
         return '/';
     }
 }

@@ -23,17 +23,9 @@
                         @method('PUT')
                         @csrf
                         <div class="card-body">
-                            @if (Session::has('success'))
-                                <div class="alert alert-success alert-dismissible mb-5" role="alert">
-                                    <span>{{ Session::get('success') }}</span>
-                                </div>
-                            @endif
+                            
+                            @include('individual.includes.message')
 
-                            @if (Session::has('error'))
-                                <div class="alert alert-warning alert-dismissible mb-5" role="alert">
-                                    <span>{{ Session::get('error') }}</span>
-                                </div>
-                            @endif
                             <div class="media">
                                 <a href="javascript: void(0);">
                                     <img src="{{ (!empty($user->profile) ? Storage::url($user->profile) : asset('assets/img/User.png')) }}" class="rounded mr-75" alt="profile image" height="64" width="64">
@@ -95,7 +87,7 @@
                                     <div class="form-group">
                                         <div class="controls">
                                             <label for="account-username">Franchisee Code</label>
-                                            <input type="text" name="franchisee_code" value="{{ $user->franchisee_code }}" class="form-control" id="account-username" placeholder="Franchisee Code" >
+                                            <input type="text" name="franchisee_code" value="{{ $user->franchisee->franchisee_code }}" class="form-control" id="account-username" placeholder="Franchisee Code" disabled="">
                                             @error('franchisee_code')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

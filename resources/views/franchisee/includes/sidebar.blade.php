@@ -13,11 +13,13 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <!-- <li class=" navigation-header"><span>Menu</span> -->
             <!-- </li> -->
-            <li class="{{ (request()->is('user/program*')) ? 'active' : '' }}"><a href="{{ route('individual.program') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">My Programs</span></a>
+            <li class="{{ (request()->is('franchisee/dashboard*')) ? 'active' : '' }}"><a href="{{ route('franchisee.dashboard') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
             </li>
-             <li class="{{ (request()->is('user/profile*')) ? 'active' : '' }}"><a href="{{ route('individual.profile') }}"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
+            <li class="{{ (request()->is('franchisee/clients*')) ? 'active' : '' }}"><a href="{{ route('franchisee.clients') }}"><i class="feather icon-circle"></i><span class="menu-title">Client List</span></a>
             </li>
-            <li class="{{ (request()->is('user/support*')) ? 'active' : '' }}"><a href="{{ route('support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
+            <li class="{{ (request()->is('franchisee/profile*')) ? 'active' : '' }}"><a href="#"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
+            </li>
+            <li class="{{ (request()->is('franchisee/support*')) ? 'active' : '' }}"><a href="#"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
             </li>
             <li><a href="#"><i class="feather icon-circle"></i><span class="menu-title">Recheck</span></a>
             </li>

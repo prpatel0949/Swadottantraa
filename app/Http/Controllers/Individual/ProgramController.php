@@ -37,4 +37,32 @@ class ProgramController extends Controller
 
         return redirect()->back()->with('error', 'Payment fail try after sometime.');
     }
+
+    public function accessProgram($id)
+    {
+        $program = $this->program->findorfail($id);
+
+        if (!$program->is_subcribe) {
+            return redirect()->back();
+        }
+
+        return view('individual.program_question', [ 'program' => $program ]);
+    }
+
+    public function questionAnswer(Request $request, $id)
+    {
+        foreach($request->get('question') as $a => $z)
+        {
+            $rules['answer.'.$z] = 'required';
+        }
+
+        $request->validate($rules, [ 'answer.*.required' => 'Answer is required.' ]);
+
+        if ($this->program->storeAnswer($request->all(), $id)) {
+            return redirect()->route('individual.program.access', ['id' => $id]);
+        }
+
+        return redirect()->route('individual.program.access', ['id' => $id ]);
+
+    }
 }

@@ -30,4 +30,13 @@ class UserController extends Controller
 
         return redirect()->route('individual.profile')->with('error', 'Something went wrong happen!');
     }
+
+    public function acceptInvitation($token)
+    {
+        if ($this->user->acceptInvitation($token)) {
+            return redirect()->route('individual.profile')->with('success', 'Franchisee join successfully.');
+        }
+
+        return redirect()->route('individual.profile')->with('error', 'Invalid token.');
+    }
 }

@@ -1,18 +1,23 @@
 <?php
 namespace App\Repository;
 
+use Auth;
+use Mail;
 use App\User;
+use App\Invite;
 use Carbon\Carbon;
+use App\Mail\InviteCreated;
 use Illuminate\Support\Facades\Hash;
 use App\Repository\Interfaces\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
-    private $user;
+    private $user, $invite;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Invite $invite)
     {
         $this->user = $user;
+        $this->invite = $invite;
     }
 
     public function update($data, $id)
@@ -33,5 +38,58 @@ class UserRepository implements UserRepositoryInterface
         $data['gender'] =  (isset($data['gender']) && !empty($data['gender']) ? $data['gender'] : 0);
 
         return $this->user->find($id)->update($data);
+    }
+
+    public function invite($data)
+    {
+        do {
+            $token = str_random();
+        }
+        while ($this->invite->where('token', $token)->first());
+        
+        
+        $invite = $this->invite->create([
+            'email' => $data['email'],
+            'token' => $token
+        ]);
+
+        $mail = Mail::send('emails.invite', [ 'invite' => $invite ], function ($message) use ($invite) {
+            $message->to($invite->email, 'Shreyash');
+            $message->subject('SWA Franchisee Invitation');
+        });
+
+        // Mail::to($data['email'])->send(new InviteCreated($invite));
+
+        return true;
+    }
+
+    public function acceptInvitation($data)
+    {
+        $invite = $this->invite->where('token', $data)->first();
+        if (empty($invite)) {
+            return false;
+        }
+
+        $user = $this->user->where('email', $invite->email)->first();
+        $user->franchisee_id = $invite->created_by;
+        $user->save();
+
+        $invite->delete();
+        return true;
+    }
+
+    public function clients($perPage = 10, $filters)
+    {
+        $users = $this->user->where('franchisee_id', Auth::user()->id);
+        if (isset($filters['search']) && !empty($filters['search'])) {
+            $search = $filters['search'];
+            $users = $users->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('mobile', 'LIKE', "%{$search}%");
+            });
+        }
+
+        return $users->paginate($perPage);
     }
 }

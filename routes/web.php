@@ -29,5 +29,18 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
     Route::get('/program', 'ProgramController@index')->name('individual.program');
     Route::post('payment/response', 'ProgramController@paymentResponse')->name('payment.response');
     Route::post('/hash', 'ProgramController@hash')->name('generate.hash');
+    Route::get('/program/{id}/access', 'ProgramController@accessProgram')->name('individual.program.access');
+    Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer');
 
+    Route::get('support', 'SupportController@index')->name('support.index');
+    Route::post('support', 'SupportController@store')->name('support.store');
+
+    Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');
+    
+});
+
+Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware' => [ 'auth', 'franchisee' ] ], function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('franchisee.dashboard');
+    Route::get('clients', 'UserController@list')->name('franchisee.clients');
+    Route::post('client/invite', 'UserController@invite')->name('franchisee.client.invite');
 });

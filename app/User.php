@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function franchisee()
+    {
+        return $this->belongsTo(User::class, 'franchisee_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'franchisee_id');
+    }
 }

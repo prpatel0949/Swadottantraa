@@ -32,7 +32,7 @@ class ProfileUpdateRequest extends FormRequest
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'profile' => [ 'nullable', 'mimes:png,jpg,jpeg, gif', 'max:800' ],
             'gender' => [ 'nullable', 'boolean' ],
-            'franchisee_code' => [ 'nullable', 'max:20' ],
+            // 'franchisee_code' => [ 'nullable', 'max:20' ],
             'education' => [ 'nullable', 'string', 'max:100' ],
             'occupation' => [ 'nullable', 'string', 'max:100' ],
             'address' => [ 'nullable', 'string' ],

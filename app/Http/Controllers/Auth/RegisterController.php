@@ -58,6 +58,7 @@ class RegisterController extends Controller
             'mobile' => ['required', 'numeric', 'digits:10', 'unique:users'],
             'dob' => [ 'nullable', 'date', 'date_format:m/d/Y' ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'franchisee_code' => [ 'nullable', 'exists:users,franchisee_code' ]
         ]);
     }
 

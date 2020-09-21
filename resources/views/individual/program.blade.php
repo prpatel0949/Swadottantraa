@@ -35,7 +35,11 @@
                                                 <p class="card-text  mb-0">{{ $program->prog_desc }}</p>
                                             </div>
                                             <div class="card-btns d-flex justify-content-between mt-2">
-                                                <button type="button" data-program="{{ $program }}" class="btn btn-primary text-white subscribe-btn">Subscribe</button>
+                                                @if ($program->is_subcribe)
+                                                    <a href="{{ route('individual.program.access', $program->id) }}" class="btn btn-success text-white subscribe-btn">Access</a>
+                                                @else
+                                                    <button type="button" data-program="{{ $program }}" class="btn btn-primary text-white subscribe-btn">Subscribe</button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
