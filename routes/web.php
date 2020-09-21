@@ -20,6 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('frontend.home');
+Route::get('about-us', 'HomeController@aboutUs')->name('frontend.about');
 
 Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual'] ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard'); 
