@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'merchant_key' => '992PsDPY',
-    'merchant_salt' => 'XxYwqjRuJA',
+    'merchant_key' => 'Qz3JBB7v',
+    'merchant_salt' => 'kff4EMiV28',
 
     'card' => [
         'card_type' => 'visa',

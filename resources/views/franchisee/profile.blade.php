@@ -1,4 +1,4 @@
-@extends('individual.layouts.app')
+@extends('franchisee.layouts.app')
 
 @section('title', 'Profile')
 
@@ -19,7 +19,7 @@
     	<div class="content-body">
     		<div class="card">
                 <div class="card-content">
-                    <form method="POST" action="{{ route('individual.profile.update') }}" id="addForm" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('franchisee.profile.update') }}" id="addForm" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="card-body">
@@ -51,9 +51,9 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <div class="controls">
-                                            <label for="account-username">My Code</label>
+                                            <label for="account-username">Franchisee Code</label>
                                             <div class="d-flex">
-                                                <input readonly type="text" value="{{ $user->code }}" class="form-control" id="account-username" placeholder="My Code" required data-validation-required-message="This username field is required">
+                                                <input readonly type="text" value="{{ $user->franchisee_code }}" class="form-control" id="account-username" placeholder="My Code" disabled data-validation-required-message="This username field is required">
                                             </div>
                                         </div>
                                     </div>
@@ -62,17 +62,8 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <div class="controls">
-                                            <label for="account-username">Full Name</label>
+                                            <label for="account-username">Name</label>
                                             <div class="d-flex">
-                                                <div class="male_female">
-                                                    <input type="checkbox" name="gender" id="male_female" value="1" {{ ($user->gender == 1 ? 'checked=""': '') }}>
-                                                    <label for="male_female"><span class="btn-male">Male</span> <span class="btn-female">Female</span></label>
-                                                    @error('gender')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
                                                 <input type="text" name="name" value="{{ $user->name }}" class="form-control" id="account-username" placeholder="Full Name" required data-validation-required-message="This username field is required">
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
@@ -80,19 +71,6 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="account-username">Franchisee Code</label>
-                                            <input type="text" name="franchisee_code" value="{{ (!empty($user->franchisee) ? $user->franchisee->franchisee_code : '') }}" class="form-control" id="account-username" placeholder="Franchisee Code" disabled="">
-                                            @error('franchisee_code')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -129,26 +107,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <div class="form-group">
-                                        <label for="">Education</label>
-                                        <input type="text" name="education" value="{{ $user->education }}" class="form-control" placeholder="Education">
-                                        @error('education')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Occupation</label>
-                                        <input type="text" name="occupation" value="{{ $user->occupation }}" class="form-control" placeholder="Occupation">
-                                        @error('occupation')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
@@ -222,9 +180,6 @@
                     required: true,
                     maxlength: 100
                 },
-            franchisee_code: {
-                maxlength: 20
-            },
             email: {
                 required: true,
                 maxlength: 255,
@@ -242,12 +197,6 @@
                 minlength: 8,
                 equalTo : "#password"
             },
-            educatoin:{
-                maxlength: 100,
-            },
-            occupation: {
-                maxlength: 100
-            }
         }
     });
 </script>

@@ -33,7 +33,7 @@
                         </a>
                     </div>
                     <div class="col-sm-4 p-3">
-                        <a href="{{ url('happiness') }}" class="login-button-card card shadow align-items-center">
+                        <a href="{{ url('login') }}" class="login-button-card card shadow align-items-center">
                             <div class="card-body text-center pl-1 pr-1">
                                 <img src="{{ asset('assets/img/f.png') }}" class="card-img-top mb-4">
                                 <h5 class="card-title text-primary"><b>Franchisee Login</b></h5>
@@ -42,7 +42,7 @@
                         </a>
                     </div>
                     <div class="col-sm-4 p-3">
-                        <a href="{{ url('happiness') }}" class="login-button-card card shadow align-items-center">
+                        <a href="{{ url('login') }}" class="login-button-card card shadow align-items-center">
                             <div class="card-body text-center pl-1 pr-1">
                                 <img src="{{ asset('assets/img/Institute.png') }}" class="card-img-top mb-4">
                                 <h5 class="card-title text-primary"><b>Institutional Login</b></h5>

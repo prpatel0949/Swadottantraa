@@ -4,7 +4,12 @@
 	@extends('franchisee.includes.head')
 </head>
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body style="display: none;" class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+    
+    <div class="loader"></div>
+    <div class="outer-box">
+
+    </div>
 
     @include('franchisee.includes.topnavbar')
     

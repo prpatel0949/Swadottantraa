@@ -45,4 +45,13 @@ Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware
     Route::get('/dashboard', 'DashboardController@index')->name('franchisee.dashboard');
     Route::get('clients', 'UserController@list')->name('franchisee.clients');
     Route::post('client/invite', 'UserController@invite')->name('franchisee.client.invite');
+    Route::get('profile', 'UserController@profile')->name('franchisee.profile');
+    Route::PUT('profile', 'UserController@profileUpdate')->name('franchisee.profile.update');
+
+    Route::get('support', 'SupportController@index')->name('franchisee.support.index');
+    Route::post('support', 'SupportController@store')->name('franchisee.support.store');
 });
+
+Route::get('happiness', 'HomeController@happiness')->name('happiness');
+Route::get('question', 'HomeController@question')->name('question');
+Route::post('question/next', 'HomeController@nextQuestion')->name('question.next');

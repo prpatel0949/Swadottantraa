@@ -17,9 +17,9 @@
             </li>
             <li class="{{ (request()->is('franchisee/clients*')) ? 'active' : '' }}"><a href="{{ route('franchisee.clients') }}"><i class="feather icon-circle"></i><span class="menu-title">Client List</span></a>
             </li>
-            <li class="{{ (request()->is('franchisee/profile*')) ? 'active' : '' }}"><a href="#"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
+            <li class="{{ (request()->is('franchisee/profile*')) ? 'active' : '' }}"><a href="{{ route('franchisee.profile') }}"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
             </li>
-            <li class="{{ (request()->is('franchisee/support*')) ? 'active' : '' }}"><a href="#"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
+            <li class="{{ (request()->is('franchisee/support*')) ? 'active' : '' }}"><a href="{{ route('franchisee.support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
             </li>
             <li><a href="#"><i class="feather icon-circle"></i><span class="menu-title">Recheck</span></a>
             </li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
+use Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -88,23 +89,24 @@ class RegisterController extends Controller
             'country_code' => $data['country_code'],
             'mobile' => $data['mobile'],
             'code' => $code,
-            'type' => $type,
+            'type' => 0,
         ]);
     }
 
     public function showRegistrationForm(Request $request)
     {
-        if (Hash::check(0, $request->type)) {
-            return view('auth.register', [ 'type' => 0 ]);
+        if (!empty(Session::get('question_1')) && !empty(Session::get('question_2')) 
+                && !empty(Session::get('question_3'))) {
+                return view('auth.register');
         }
 
-        abort(404);
+        return redirect()->route('happiness');
     }
 
     public function redirectTo()
     {
         if (Auth::user()->type == 0) {
-            return'/user/dashboard';
+            return'/user/program';
             die;
         }
 

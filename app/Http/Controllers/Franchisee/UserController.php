@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Franchisee;
 
+use Auth;
 use View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
+use App\Http\Requests\Individual\ProfileUpdateRequest;
 use App\Repository\Interfaces\UserRepositoryInterface;
 
 class UserController extends Controller
@@ -37,5 +39,19 @@ class UserController extends Controller
         $this->user->invite($request->all());
 
         return redirect()->back()->with('success', 'Invitation link send successfully.');
+    }
+
+    public function profile()
+    {
+        return view('franchisee.profile', [ 'user' => Auth::user() ]);
+    }
+
+    public function profileUpdate(ProfileUpdateRequest $request)
+    {
+        if ($this->user->update($request->validated(), Auth::user()->id)) {
+            return redirect()->route('franchisee.profile')->with('success', 'Profile Update successfully.');
+        }
+
+        return redirect()->route('franchisee.profile')->with('error', 'Something went wrong happen!');
     }
 }

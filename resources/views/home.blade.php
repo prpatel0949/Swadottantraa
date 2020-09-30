@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
+@section('title', 'Home')
+
 @section('content')
     <section class="section-hero" id="home" style="background-image: url(./assets/img/bg.png)">
         <div class="container">
