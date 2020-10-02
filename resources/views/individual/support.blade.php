@@ -57,7 +57,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover" id="tbl">
                                     <thead>
                                         <tr>
                                             <th>SrNo</th>
@@ -67,8 +67,8 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($supports as $index => $support)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
+                                            <tr data-id="{{ $support }}">
+                                                <td class="details-control" style="cursor: pointer">{{ $index + 1 }}</td>
                                                 <td>{{ $support->description }}</td>
                                                 <td>
                                                     @if ($support->status == 0)
@@ -96,11 +96,40 @@
 @section('js')
 
 <script>
+    var lastRow;
+    let table = $('#tbl').DataTable();
     var maxLength = 200;
     $('#description').keyup(function() {
         var textlen = maxLength - $(this).val().length;
         $('#rchars').text(textlen);
     });
+
+    $(document).on('click', '#tbl tbody td.details-control', function(){
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        if(lastRow != undefined && lastRow.otd!=this) {
+            lastRow.otr.removeClass('details');
+            lastRow.orow.child.hide();
+        }
+
+        lastRow = { otr : tr, orow: row, otd : this  };
+        if ( row.child.isShown() ) {
+            tr.removeClass('details');
+            row.child.hide();
+        } else {
+            var id = $(this).parent('tr').attr('data-id');
+            GetChiledHTML(id, function(oHtml) {
+                tr.addClass( 'details' );
+                row.child($(oHtml)).show(); 
+            });
+        }
+    });
+
+    function GetChiledHTML(id, returnFunction) {
+        let data = JSON.parse(id);
+        let oHtml = '<p>'+ (data.answer == null ? '' : data.answer) +'</p>';
+        returnFunction(oHtml);
+    }
 </script>
 
 @endsection

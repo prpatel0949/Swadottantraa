@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use Hash;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -37,6 +39,43 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm(Request $request)
+    {
+        $type = '';
+        if (Hash::check(0, $request->type)) {
+            $type = 0;
+        } else if (Hash::check(1, $request->type)) {
+            $type = 1;
+        } else if (Hash::check(2, $request->type)) {
+            $type = 2;
+        } else {
+            abort(404);
+        }
+
+        return view('auth.login');
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+        $type = '';
+        if (Hash::check(0, $request->type)) {
+            $type = 0;
+        } else if (Hash::check(1, $request->type)) {
+            $type = 1;
+        } else if (Hash::check(2, $request->type)) {
+            $type = 2;
+        }
+        
+        if ($user->type != $type) {
+            $this->logout($request);
+            return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([
+                $this->username() => 'These credentials do not match our records.'
+            ]);
+        }
     }
 
     public function redirectTo()

@@ -93,15 +93,15 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showRegistrationForm(Request $request)
-    {
-        if (!empty(Session::get('question_1')) && !empty(Session::get('question_2')) 
-                && !empty(Session::get('question_3'))) {
-                return view('auth.register');
-        }
+    // public function showRegistrationForm(Request $request)
+    // {
+    //     if (!empty(Session::get('question_1')) && !empty(Session::get('question_2')) 
+    //             && !empty(Session::get('question_3'))) {
+    //             return view('auth.register');
+    //     }
 
-        return redirect()->route('happiness');
-    }
+    //     return redirect()->route('happiness');
+    // }
 
     public function redirectTo()
     {

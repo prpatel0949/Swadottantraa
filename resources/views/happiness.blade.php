@@ -105,21 +105,21 @@
                      <div class="page-title">Relexation (Peace)</div>
                      <div class="row text-center">
                         <div class="col-sm-4">
-                            <a class="card shadow cursor-pointer" href="{{ route('question') }}">
+                            <a class="card shadow cursor-pointer" href="{{ route('register') }}">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">With Training</div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4">
-                            <a class="card shadow cursor-pointer" href="{{ route('question') }}">
+                            <a class="card shadow cursor-pointer" href="{{ route('register') }}">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Without Training</div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4">
-                            <a class="card shadow cursor-pointer" href="{{ route('question') }}">
+                            <a class="card shadow cursor-pointer" href="{{ route('register') }}">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">With Friends and Family</div>
                                 </div>

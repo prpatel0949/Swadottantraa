@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard/css/style.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/css/tables/datatable/datatables.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    {{-- <link rel="stylesheet" href=""> --}}
     
     @yield('css')

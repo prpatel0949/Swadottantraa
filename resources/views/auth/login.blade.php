@@ -11,7 +11,7 @@
             <div class="login-card card shadow">
                 <div class="d-flex align-items-center">
                     <img class="img-fluid" src="{{ asset('assets/img/login.png') }}" alt="">
-                    <form class="login-form" id="login-form" action="{{ route('login') }}" method="post">
+                    <form class="login-form" id="login-form" action="{{ route('login') }}?type={{ request()->type }}" method="post">
                         @csrf
                         <div class="card-body">
                             <h4 class="card-title"><b>Login</b></h4>
