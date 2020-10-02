@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -37,6 +38,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $append = [
+        'link'
+    ];
+
     public function franchisee()
     {
         return $this->belongsTo(User::class, 'franchisee_id');
@@ -45,5 +50,21 @@ class User extends Authenticatable
     public function users()
     {
         return $this->hasMany(User::class, 'franchisee_id');
+    }
+
+    public function getLinkAttribute()
+    {
+        $link = '#';
+        if (Auth::check()) {
+            if (Auth::user()->type == 0) {
+                $link = route('individual.program');
+            }
+    
+            if (Auth::user()->type == 2) {
+                $link = route('franchisee.dashboard');
+            }
+        }
+
+        return $this->attributes['link'] = $link;
     }
 }

@@ -30,7 +30,8 @@
                         		<div class="form-group">
                                     <div class="controls">
                                         <label for="description">Your Message</label>
-                                        <textarea type="text" class="form-control" name="description" rows="5" id="description" placeholder="Your Message"></textarea>
+                                        <textarea type="text" class="form-control" name="description" rows="5" maxlength="200" id="description" placeholder="Your Message"></textarea>
+                                        <span id="rchars">200</span> <small>characters remaining</small>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert" style="display: block">
                                                 <strong>{{ $message }}</strong>
@@ -90,4 +91,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+
+<script>
+    var maxLength = 200;
+    $('#description').keyup(function() {
+        var textlen = maxLength - $(this).val().length;
+        $('#rchars').text(textlen);
+    });
+</script>
+
 @endsection

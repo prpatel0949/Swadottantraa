@@ -21,9 +21,9 @@ class SupportRepository implements SupportRepositoryInterface
     public function all($filters = [])
     {
         if (count($filters) > 0) {
-            return $this->support->where($filters)->get();
+            return $this->support->where($filters)->orderBy('id', 'DESC')->get();
         }
 
-        return $this->support->all();
+        return $this->support->orderBy('id', 'DESC')->all();
     }
 }

@@ -20,9 +20,15 @@
             <li class="nav-item">
                 <a data-scroll-to="contact" class="nav-link" href="{{url('/#contact')}}">Contact Us</a>
             </li>
-            <li class="nav-item">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#login_modal">Login</button>
-            </li>
+            @if (Auth::check())
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="{{ Auth::user()->link }}">Home</a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#login_modal">Login</button>
+                </li>
+            @endif
         </ul>
     </div>
 </nav>
