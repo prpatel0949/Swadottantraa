@@ -17,13 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('frontend.home');
 Route::get('about-us', 'HomeController@aboutUs')->name('frontend.about');
 
-Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual'] ], function () {
+Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual', 'verified'] ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard'); 
     Route::get('profile', 'UserController@profile')->name('individual.profile');
     Route::PUT('profile', 'UserController@profileUpdate')->name('individual.profile.update');

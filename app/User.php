@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -62,6 +62,10 @@ class User extends Authenticatable
     
             if (Auth::user()->type == 2) {
                 $link = route('franchisee.dashboard');
+            }
+
+            if (Auth::user()->type == 3) {
+                $link = route('admin.dashboard');
             }
         }
 

@@ -56,9 +56,8 @@
 @endsection
 
 @section('js')
-    <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script>
-    {{-- <script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="<color-
-code>" bolt-logo="<image path>"></script> --}}
+    {{-- <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script> --}}
+    <script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script>
     <script>
         $(document).on('click', '.subscribe-btn', function() {
             let program = JSON.parse($(this).attr('data-program'));

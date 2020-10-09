@@ -11,15 +11,9 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <!-- <li class=" navigation-header"><span>Menu</span> -->
-            <!-- </li> -->
-            <li class="{{ (request()->is('franchisee/dashboard*')) ? 'active' : '' }}"><a href="{{ route('franchisee.dashboard') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
+            <li class="{{ (request()->is('admin/dashboard*')) ? 'active' : '' }}"><a href="{{ route('admin.dashboard') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
             </li>
-            <li class="{{ (request()->is('franchisee/clients*')) ? 'active' : '' }}"><a href="{{ route('franchisee.clients') }}"><i class="feather icon-circle"></i><span class="menu-title">Client List</span></a>
-            </li>
-            <li class="{{ (request()->is('franchisee/profile*')) ? 'active' : '' }}"><a href="{{ route('franchisee.profile') }}"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
-            </li>
-            <li class="{{ (request()->is('franchisee/support*')) ? 'active' : '' }}"><a href="{{ route('franchisee.support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
+            <li class="{{ (request()->is('admin/program*')) ? 'active' : '' }}"><a href="{{ route('program.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Programs</span></a>
             </li>
             <li>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>                
