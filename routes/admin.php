@@ -12,4 +12,6 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     })->name('admin.dashboard');
 
     Route::resource('program', 'ProgramController');
+
+    Route::resource('scale', 'ScaleController');
 });

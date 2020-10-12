@@ -207,3 +207,11 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	margin: -100px 0 0 -100px;
 	/* is width and height divided by two */
   }
+
+.invalid-feedback {
+	display: block !important;
+}
+
+input.error {
+	border: 1px solid red;
+}
