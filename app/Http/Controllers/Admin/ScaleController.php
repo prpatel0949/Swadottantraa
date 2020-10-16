@@ -70,7 +70,7 @@ class ScaleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.scale.edit', [ 'scale' => $this->scale->findorfail($id) ]);
     }
 
     /**
@@ -80,9 +80,13 @@ class ScaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AddRequest $request, $id)
     {
-        //
+        if ($this->scale->update($request->all(), $id)) {
+            return redirect()->route('scale.index')->with('success', 'Scale updated successfully.');
+        }
+
+        return redirect()->route('scale.index')->with('error', 'Something went wrong happen.');
     }
 
     /**

@@ -39,7 +39,9 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $scale->title }}</td>
                                             <td>{{ $scale->description }}</td>
-                                            <td></td>
+                                            <td>
+                                                <a href="{{ route('scale.edit', $scale->id) }}"><i class="fa fa-edit"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

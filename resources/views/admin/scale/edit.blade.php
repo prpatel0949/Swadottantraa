@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Add Scale')
+@section('title', 'Edit Scale')
 
 @section('css')
     <link rel="stylesheet" href="https://bevacqua.github.io/dragula/dist/dragula.css">
@@ -20,20 +20,22 @@
 		    <div class="content-header-left col-md-9 col-12 mb-2">
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12">
-		                <h2 class="content-header-title float-left mb-0">New Scale</h2>
+		                <h2 class="content-header-title float-left mb-0">Edit Scale</h2>
 		            </div>
 		        </div>
             </div>
         </div>
         <div class="content-body">
-            <form action="{{ route('scale.store') }}" method="POST">
+            <form action="{{ route('scale.update', $scale->id) }}" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Scale Title">
+                                    <input type="text" class="form-control @error('title') error @enderror" 
+                                        value="{{ (old('title') ? old('title') : $scale->title) }}" name="title" placeholder="Scale Title">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -41,7 +43,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control @error('interpreatation') error @enderror" value="{{ old('interpreatation') }}" name="interpreatation" placeholder="Note for Interpreatation">
+                                    <input type="text" class="form-control @error('interpreatation') error @enderror" 
+                                        value="{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}" name="interpreatation" placeholder="Note for Interpreatation">
                                     @error('interpreatation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -51,7 +54,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="form-control @error('scale_description') error @enderror" value="{{ old('scale_description') }}" name="scale_description" placeholder="Scale Description">
+                                    <input type="text" class="form-control @error('scale_description') error @enderror" 
+                                        value="{{ (old('scale_description') ? old('scale_description') : $scale->description) }}" name="scale_description" placeholder="Scale Description">
                                     @error('scale_description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -78,6 +82,7 @@
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ old('order.'.$index) }}" class="order-cls">
+                                            <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ old('question_id.'.$index) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -108,6 +113,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group input-group">
                                                 <input type="text" name="answer[{{ $index }}][]" value="{{ $answer }}" class="form-control @error('answer.'.$index.'.'.$key) error @enderror" placeholder="Answer">
+                                                <input type="hidden" name="answer_id[{{ $index }}][]" data-index="{{ $index }}" value="{{ old('answer_id.'.$index.'.'.$key) }}">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text add-value" id="basic-addon2">$</span>
                                                     <input type="text" name="answer_value[{{ $index }}][]" value="{{ old('answer_value.'.$index.'.'.$key) }}" class="input-group-text value-box" style="width: 60px" readonly=""/>
@@ -129,35 +135,39 @@
                         </div>
                         @endforeach
                     @else
+                        @foreach ($scale->questions as $index => $question)
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group float-right">
-                                            <button type="button" class="btn btn-primary add-answer" data-index="0">Add Answer</button>
-                                            <input type="hidden" name="order[0]" data-index="0" value="0" class="order-cls">
+                                            <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
+                                            <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $index }}" class="order-cls">
+                                            <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->id }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="question[0]" class="form-control" placeholder="Question">
+                                            <input type="text" name="question[{{ $index }}]" value="{{ $question->question }}" class="form-control" placeholder="Question">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="description[0]" class="form-control" placeholder="Description">
+                                            <input type="text" name="description[{{ $index }}]" value="{{ $question->description }}" class="form-control" placeholder="Description">
                                         </div>
                                     </div>
                                 </div>
+                                @foreach ($question->answers as $answer)
                                 <div class="row answer-section">
                                     <div class="col-md-4">
                                         <div class="form-group input-group">
-                                            <input type="text" name="answer[0][]" class="form-control" placeholder="Answer">
+                                            <input type="text" name="answer[{{ $index }}][]" value="{{ $answer->answer }}" class="form-control" placeholder="Answer">
                                             <div class="input-group-append">
                                                 <span class="input-group-text add-value" id="basic-addon2">$</span>
-                                                <input type="text" name="answer_value[0][]" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                                                <input type="text" name="answer_value[{{ $index }}][]" value="{{ $answer->answer_value }}" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                                                <input type="hidden" name="answer_id[{{ $index }}][]" data-index="{{ $index }}" value="{{ $answer->id }}">
                                             </div>
                                         </div>
                                     </div>
@@ -165,9 +175,11 @@
                                         <a href="#" class="text-danger delete-answer"><i class="fa fa-trash fa-2x"></i></a>
                                     </div>
                                 </div>
+                                @endforeach
                                 <div class="answer-tab"></div>
                             </div>
-                        </div>
+                        </div>   
+                        @endforeach
                     @endif
                 </div>
                 <div class="row">
@@ -190,6 +202,7 @@
                         <button type="button" class="btn btn-primary add-answer" data-index="`SrNo`">Add Answer</button>
                         <button type="button" class="btn btn-primary delete-question" data-index="`SrNo`">Delete Question</button>
                         <input type="hidden" name="order[`SrNo`]" data-index="`SrNo`" value="0" class="order-cls">
+                        <input type="hidden" name="question_id[`SrNo`]" data-index="`SrNo`" value="">
                     </div>
                 </div>
             </div>
@@ -232,6 +245,7 @@
                 <div class="input-group-append">
                     <span class="input-group-text add-value" id="basic-addon2">$</span>
                     <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                    <input type="hidden" name="answer_id[`SrNo`][]" data-index="`SrNo`" value="">
                 </div>
             </div>
         </div>
@@ -246,7 +260,7 @@
 @section('js')
     <script src="https://bevacqua.github.io/dragula/dist/dragula.js"></script>
     <script>
-        let question = {{ (old('question') ? count(old('question')) + 1 : 1) }};
+        let question = {{ (old('question') ? count(old('question')) + 1 : $scale->questions->count()) }};
         $(function() {
             var container = document.getElementById('question-tab');
             var rows = container.children;

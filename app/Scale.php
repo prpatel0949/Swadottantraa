@@ -15,4 +15,9 @@ class Scale extends Model
             $model->updated_by = Auth::user()->id;
         });
     }
+
+    public function questions()
+    {
+        return $this->hasMany(ScaleQuestion::class);
+    }
 }
