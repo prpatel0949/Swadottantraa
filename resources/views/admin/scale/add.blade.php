@@ -28,7 +28,7 @@
         <div class="content-body">
             <form action="{{ route('scale.store') }}" method="POST">
                 @csrf
-                <div class="card">
+                <div class="card header-block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
@@ -312,10 +312,6 @@
                 e.preventDefault();
                 $(this).closest('.card').remove();
             });
-
-            // dragula([document.getElementById('question-tab')], { moves: function (el, source, handle, sibling) {
-            //     console.log(el, source, handle);
-            // }});
         });
     </script>
 @endsection

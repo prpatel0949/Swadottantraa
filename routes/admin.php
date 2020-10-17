@@ -14,4 +14,5 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::resource('program', 'ProgramController');
 
     Route::resource('scale', 'ScaleController');
+    Route::resource('workout', 'WorkoutController');
 });
