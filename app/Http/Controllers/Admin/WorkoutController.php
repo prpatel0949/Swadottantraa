@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Workout\AddRequest;
+use App\Repository\Interfaces\WorkoutRepositoryInterface;
 
 class WorkoutController extends Controller
 {
+    private $workout;
+
+    public function __construct(WorkoutRepositoryInterface $workout)
+    {
+        $this->workout = $workout;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class WorkoutController extends Controller
      */
     public function index()
     {
-        return view('admin.workout.index');
+        return view('admin.workout.index', [ 'workouts' => $this->workout->all() ]);
     }
 
     /**
@@ -33,9 +41,13 @@ class WorkoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddRequest $request)
     {
-        //
+        if ($this->workout->create($request->all())) {
+            return redirect()->route('workout.index')->with('success', 'Workout created successfully.');
+        }
+
+        return redirect()->route('workout.index')->with('error', 'Something went wrong happen.');
     }
 
     /**
@@ -57,7 +69,7 @@ class WorkoutController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.workout.edit', [ 'workout' => $this->workout->find($id) ]);
     }
 
     /**
@@ -67,9 +79,13 @@ class WorkoutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AddRequest $request, $id)
     {
-        //
+        if ($this->workout->update($request->all(), $id)) {
+            return redirect()->route('workout.index')->with('success', 'Workout updated successfully.');
+        }
+
+        return redirect()->route('workout.index')->with('error', 'Something went wrong happen.');
     }
 
     /**

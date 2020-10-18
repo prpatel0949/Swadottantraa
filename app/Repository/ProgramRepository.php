@@ -9,6 +9,7 @@ use App\Program;
 use Carbon\Carbon;
 use App\Transaction;
 use App\UserProgram;
+use Illuminate\Support\Facades\Log;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
@@ -37,26 +38,31 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     public function subscribe($request)
     {
-        DB::transaction(function () use ($request) {
-            $tnxId = explode('/', $request->txnid);
-            $now = Carbon::now();
-            $end = $now->copy()->addYear();
-            $userProgram = $this->userProgram;
-            $userProgram->program_id = $tnxId[1];
-            $userProgram->user_id = Auth::user()->id;
-            $userProgram->subscribe_date = $now->format('Y-m-d');
-            $userProgram->end_date = $end->format('Y-m-d');
-            $userProgram->amount = $request->amount;
-            $userProgram->save();
-
-            $transaction = $this->transaction;
-            $transaction->user_program_id = $userProgram->id;
-            $transaction->amount = $request->amount;
-            $transaction->payuMoneyId = $request->payuMoneyId;
-            $transaction->save();
-        });
-
-        return;
+        try {
+            DB::transaction(function () use ($request) {
+                $tnxId = explode('/', $request->txnid);
+                $now = Carbon::now();
+                $end = $now->copy()->addYear();
+                $userProgram = $this->userProgram;
+                $userProgram->program_id = $tnxId[1];
+                $userProgram->user_id = Auth::user()->id;
+                $userProgram->subscribe_date = $now->format('Y-m-d');
+                $userProgram->end_date = $end->format('Y-m-d');
+                $userProgram->amount = $request->amount;
+                $userProgram->save();
+    
+                $transaction = $this->transaction;
+                $transaction->user_program_id = $userProgram->id;
+                $transaction->amount = $request->amount;
+                $transaction->payuMoneyId = $request->payuMoneyId;
+                $transaction->save();
+            });
+    
+            return true;
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
+            return false;
+        }
     }
 
     public function findorfail($id)

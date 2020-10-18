@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Add Workout')
+@section('title', 'Edit Workout')
 
 @section('css')
     <link rel="stylesheet" href="https://bevacqua.github.io/dragula/dist/dragula.css">
@@ -26,14 +26,15 @@
             </div>
         </div>
         <div class="content-body">
-            <form action="{{ route('workout.store') }}" method="POST">
+            <form action="{{ route('workout.update', $workout->id) }}" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="card header-block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Workout Title">
+                                    <input type="text" class="form-control @error('title') error @enderror" value="{{ (old('title') ? old('title') : $workout->title) }}" name="title" placeholder="Workout Title">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -134,6 +135,85 @@
                             </div>
                         </div>
                         @endforeach
+                    @else
+                        @foreach ($workout->questions as $index => $question)
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group float-right">
+                                            @if (old('answer_type.'.$index) == 0)
+                                                <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
+                                            @endif
+                                            <button type="button" class="btn btn-primary delete-question" data-index="{{ $index }}">Delete Question</button>
+                                            <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->order }}" class="order-cls">
+                                            <input type="hidden" name="answer_type[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->answer_type }}">
+                                            <input type="hidden" name="question_id[{{ $index }}]" value="{{ $question->id }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" name="question[{{ $index }}]" class="form-control" placeholder="Question" value="{{ $question->question }}">
+                                            @error('question.'.$index)
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" name="description[{{ $index }}]" class="form-control" placeholder="Description"
+                                                value="{{ $question->description }}">
+                                            @error('description.'.$index)
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                @if ($question->answer_type == 0)
+                                    @foreach ($question->answers as $key => $answer)
+                                    <div class="row answer-section">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="hidden" name="answer_id[{{ $index }}][]" value="{{ $answer->id }}">
+                                                <input type="text" name="answer[{{ $index }}][]" value="{{ $answer->answer }}" class="form-control" placeholder="Answer">
+                                                @error('answer.'.$index.$key)
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a href="#" class="text-danger delete-answer"><i class="fa fa-trash fa-2x"></i></a>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                @else
+                                <div class="row answer-section">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="hidden" name="answer_id[{{ $index }}]" value="{{ $question->answers[0]->id }}">
+                                            <input type="text" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
+                                                value="{{ $question->answers[0]->answer }}">
+                                            @error('answer.'.$index)
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                <div class="answer-tab"></div>
+                            </div>
+                        </div>
+                        @endforeach
                     @endif
                 </div>
 
@@ -176,6 +256,7 @@
             <div class="row answer-section">
                 <div class="col-md-4">
                     <div class="form-group">
+                        <input type="hidden" name="answer_id[`SrNo`][]" value="">
                         <input type="text" name="answer[`SrNo`][]" class="form-control" placeholder="Answer">
                     </div>
                 </div>
@@ -215,6 +296,7 @@
             <div class="row answer-section">
                 <div class="col-md-12">
                     <div class="form-group">
+                        <input type="hidden" name="answer_id[`SrNo`]" value="">
                         <input type="text" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer">
                     </div>
                 </div>
@@ -228,6 +310,7 @@
     <div class="row answer-section">
         <div class="col-md-4">
             <div class="form-group">
+                <input type="hidden" name="answer_id[`SrNo`][]" value="">
                 <input type="text" name="answer[`SrNo`][]" class="form-control" placeholder="Answer">
             </div>
         </div>
@@ -242,7 +325,7 @@
 @section('js')
     <script src="https://bevacqua.github.io/dragula/dist/dragula.js"></script>
     <script>
-        let question = {{ (old('question') ? count(old('question')) : 0) }};
+        let question = {{ (old('question') ? count(old('question')) : $workout->questions->count()) }};
         $(function() {
             var container = document.getElementById('question-tab');
             var rows = container.children;

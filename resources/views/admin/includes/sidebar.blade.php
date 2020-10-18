@@ -13,13 +13,13 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="{{ (request()->is('admin/dashboard*')) ? 'active' : '' }}"><a href="{{ route('admin.dashboard') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
             </li>
-            <li class="{{ (request()->is('admin/scale*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Programs</span></a>
+            <li class="{{ (request()->is('admin/scale*') || request()->is('admin/workout*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Programs</span></a>
                 <ul class="menu-content">
                     <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Programs</span></a>
                     </li>
                     <li class="{{ (request()->is('admin/scale*') ? 'active' : '') }}"><a href="{{ route('scale.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Scales</span></a>
                     </li>
-                    <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Workouts</span></a>
+                    <li class="{{ (request()->is('admin/workout*') ? 'active' : '') }}"><a href="{{ route('workout.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Workouts</span></a>
                     </li>
                 </ul>
             </li>
