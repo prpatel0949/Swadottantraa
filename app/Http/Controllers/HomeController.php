@@ -51,4 +51,24 @@ class HomeController extends Controller
     {
         return view('product/emr');
     }
+
+    public function offline()
+    {
+        return view('product/offline');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('privacy_policy');
+    }
+
+    public function termsAndConditions()
+    {
+        return view('terms_and_conditions');
+    }
+
+    public function psyheal()
+    {
+        return view('product/psyheal');
+    }
 }

@@ -68,11 +68,11 @@
             <div class="section-content">
                 <div class="row justify-content-center">
                     <div class="col-sm-3">
-                        <a href="./happiness.html" class="btn btn-primary btn-block">Online</a>
+                        <a href="{{ url('happiness') }}" class="btn btn-primary btn-block">Online</a>
                         <div class="text-center mt-2">Programs over the Internet</div>
                     </div>
                     <div class="col-sm-3">
-                        <a href="./offline.html" class="btn btn-primary btn-block">Offline</a>
+                        <a href="{{ url('offline') }}" class="btn btn-primary btn-block">Offline</a>
                         <div class="text-center mt-2">Programs over the Centers</div>
                     </div>
                 </div>
