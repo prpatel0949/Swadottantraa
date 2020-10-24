@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
- 
+
     /**
      * Show the application dashboard.
      *
@@ -40,5 +40,15 @@ class HomeController extends Controller
             return;
         }
         return view('next_question', [ 'current_question' => $request->current_question, 'answer' => $request->answer ])->render();
+    }
+
+    public function BrainAndMindGym()
+    {
+        return view('product/bamg');
+    }
+
+    public function EMR()
+    {
+        return view('product/emr');
     }
 }

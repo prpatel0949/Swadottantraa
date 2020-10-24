@@ -22,6 +22,8 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('frontend.home');
 Route::get('about-us', 'HomeController@aboutUs')->name('frontend.about');
+Route::get('brain-and-mind-gym', 'HomeController@BrainAndMindGym')->name('frontend.bamg');
+Route::get('emr', 'HomeController@EMR')->name('frontend.emr');
 
 Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual', 'verified'] ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard'); 
