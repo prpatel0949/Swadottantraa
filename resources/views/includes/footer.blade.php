@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row flex-column justify-content-center align-items-center">
             <div class="d-flex">
-                <a href="#" class="text-light nav-link">Privacy Policy</a>
-                <a href="#" class="text-light nav-link">Terms & Conditions</a>
+                <a href="{{ url('privacy-policy') }}" class="text-light nav-link">Privacy Policy</a>
+                <a href="{{ url('terms-and-conditions') }}" class="text-light nav-link">Terms & Conditions</a>
             </div>
             <div class="mt-2 text-light">
                 Copyright &copy; 2018 SWA.TANTRAA Wellness. Designed by Bestle Group

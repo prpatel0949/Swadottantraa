@@ -22,9 +22,15 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('frontend.home');
 Route::get('about-us', 'HomeController@aboutUs')->name('frontend.about');
+Route::get('brain-and-mind-gym', 'HomeController@BrainAndMindGym')->name('frontend.bamg');
+Route::get('emr', 'HomeController@EMR')->name('frontend.emr');
+Route::get('offline', 'HomeController@offline')->name('frontend.offline');
+Route::get('privacy-policy', 'HomeController@privacyPolicy')->name('frontend.privacy_policy');
+Route::get('terms-and-conditions', 'HomeController@termsAndConditions')->name('frontend.terms_and_conditions');
+Route::get('psyheal', 'HomeController@psyheal')->name('frontend.psyheal');
 
 Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual', 'verified'] ], function () {
-    Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard'); 
+    Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard');
     Route::get('profile', 'UserController@profile')->name('individual.profile');
     Route::PUT('profile', 'UserController@profileUpdate')->name('individual.profile.update');
 
@@ -38,7 +44,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
     Route::post('support', 'SupportController@store')->name('support.store');
 
     Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');
-    
+
 });
 
 Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware' => [ 'auth', 'franchisee' ] ], function () {

@@ -208,6 +208,9 @@
 		var _this = this
 		$($(_this).data('show')).slideDown(200)
 	});
+    $(document).on("click", ".hide-self-on-click", function () {
+        $(this).hide();
+    })
 </script>
 
 @endsection
