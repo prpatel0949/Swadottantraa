@@ -30,7 +30,7 @@ class AddRequest extends FormRequest
             'time' => 'required|numeric',
             'cost' => 'required|numeric',
             'tag' => 'required|string',
-            'image' => 'required|mimes:jpeg, jpg, png',
+            'image' => 'required|mimes:jpeg,jpg,png',
             'stage_name.*' => 'required|string|max:100', 
             'stage_description.*' => 'required|string|max:100',
             'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',
