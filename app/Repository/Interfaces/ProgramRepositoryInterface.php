@@ -10,4 +10,8 @@ interface ProgramRepositoryInterface
     public function findorfail($id);
 
     public function storeAnswer($data, $id);
+
+    public function store($data);
+
+    public function find($id);
 }

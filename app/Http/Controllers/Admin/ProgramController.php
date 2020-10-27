@@ -2,11 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Hash;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Program\AddRequest;
+use App\Repository\Interfaces\ScaleRepositoryInterface;
+use App\Repository\Interfaces\ProgramRepositoryInterface;
+use App\Repository\Interfaces\WorkoutRepositoryInterface;
 
 class ProgramController extends Controller
 {
+    private $scale, $workout, $program;
+
+    public function __construct(
+        ScaleRepositoryInterface $scale,
+        WorkoutRepositoryInterface $workout,
+        ProgramRepositoryInterface $program
+    )
+    {
+        $this->scale = $scale;
+        $this->workout = $workout;
+        $this->program = $program;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +31,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.program.index', [ 'programs' => $this->program->all() ]);
     }
 
     /**
@@ -22,9 +39,20 @@ class ProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $page = '';
+        if (Hash::check(0, $request->type)) {
+            $page = 'admin.program.add';
+        } else if (Hash::check(1, $request->type)) {
+            $page = 'admin.program.add_guided';
+        } else {
+            abort(404);
+        }
+        return view($page,  [
+            'scales' => $this->scale->all(),
+            'workouts' => $this->workout->all(),
+        ]);
     }
 
     /**
@@ -33,9 +61,13 @@ class ProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddRequest $request)
     {
-        //
+        if ($this->program->store($request->all())) {
+            return redirect()->route('program.index')->with('success', 'Program created successfully.');
+        }
+
+        return redirect()->route('program.index')->with('error', 'Something went wrong happen!');
     }
 
     /**
@@ -57,7 +89,18 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        //
+        $program = $this->program->find($id);
+        if ($program->type == 0) {
+            $page = 'admin.program.edit';
+        } else {
+            $page = 'admin.program.edit_guided';
+        }
+        return view($page,  [
+            'scales' => $this->scale->all(),
+            'workouts' => $this->workout->all(),
+            'program' => $program
+        ]);
+        
     }
 
     /**

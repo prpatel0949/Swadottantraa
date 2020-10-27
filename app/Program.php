@@ -9,6 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     protected $appends = [ 'is_subcribe' ];
+
+    public static function boot() {
+        parent::boot();
+    
+        static::creating(function($model) {
+            $model->created_by = Auth::user()->id;
+            $model->updated_by = Auth::user()->id;
+        });
+    }
     
     public function userPrograms()
     {
@@ -31,5 +40,10 @@ class Program extends Model
 
             return $this->attributes['is_subcribe'] = false;
         }
+    }
+
+    public function stages()
+    {
+        return $this->hasMany('App\ProgramStage');
     }
 }
