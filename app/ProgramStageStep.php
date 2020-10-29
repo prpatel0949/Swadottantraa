@@ -25,4 +25,9 @@ class ProgramStageStep extends Model
     {
         return $this->hasMany('App\StepWorkout', 'step_id');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany('App\StepAttachment', 'step_id');
+    }
 }

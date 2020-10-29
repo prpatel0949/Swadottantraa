@@ -20,4 +20,9 @@ class Scale extends Model
     {
         return $this->hasMany(ScaleQuestion::class);
     }
+
+    public function programs()
+    {
+        return $this->hasMany('App\StepScale');
+    }
 }

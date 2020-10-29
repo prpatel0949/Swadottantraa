@@ -159,13 +159,23 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group input-group">
                                                                         <input type="text" name="step_description[{{ $index }}][]" value="{{ old('step_description.'.$index.'.'.$key) }}" class="form-control" placeholder="Step Description">
+                                                                        <div class="input-group-append">
+                                                                            <a href="javascript:void(0)" class="input-group-text add-value" id="basic-addon2">
+                                                                                <i class="fa fa-stethoscope"></i>
+                                                                            </a>
+                                                                        </div>
                                                                         @error('step_description.'.$index.'.'.$key)
                                                                             <span class="invalid-feedback" role="alert">
                                                                                 <strong>{{ $message }}</strong>
                                                                             </span>
                                                                         @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 d-none comment">
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="comment[{{ $index }}][]" value="{{ old('comment.'.$index.'.'.$key) }}" class="form-control" placeholder="Comment">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -250,13 +260,23 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12">
-                                                                <div class="form-group">
+                                                                <div class="form-group input-group">
                                                                     <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
+                                                                    <div class="input-group-append">
+                                                                        <a href="javascript:void(0)" class="input-group-text add-value" id="basic-addon2">
+                                                                            <i class="fa fa-stethoscope"></i>
+                                                                        </a>
+                                                                    </div>
                                                                     @error('step_description.'.$index.'.'.$key)
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>{{ $message }}</strong>
                                                                         </span>
                                                                     @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 d-none comment">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="comment[{{ $index }}][]" value="{{ $step->comment }}" class="form-control" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -351,8 +371,18 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group input-group">
                                         <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
+                                        <div class="input-group-append">
+                                            <a href="javascript:void(0)" class="input-group-text add-value" id="basic-addon2">
+                                                <i class="fa fa-stethoscope"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 d-none comment">
+                                    <div class="form-group">
+                                        <input type="text" name="comment[`SrNo`][]" class="form-control" placeholder="Comment">
                                     </div>
                                 </div>
                             </div>
@@ -502,6 +532,11 @@
         $(document).on('click', '.delete-stage', function(e) {
             e.preventDefault();
             $(this).closest('.card').remove();
+        });
+
+        $(document).on('click', '.add-value', function(e) {
+            e.preventDefault();
+            $(this).parent().parent().parent().parent().find('.comment').toggleClass('d-none');
         });
 
     </script>

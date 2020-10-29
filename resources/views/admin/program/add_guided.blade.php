@@ -227,8 +227,11 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             Stage `SrNo~1`
-            <button type="button" name="" class="btn btn-primary add-step" data-index="`SrNo`">Add Step</button>
-            <input type="hidden" name="order[`SrNo`]" data-index="`SrNo`" value="0" class="order-cls">
+            <div>
+                <button type="button" name="" class="btn btn-primary add-step" data-index="`SrNo`">Add Step</button>
+                <button type="button" name="" class="btn btn-primary delete-stage" data-index="`SrNo`">Delete Stage</button>
+                <input type="hidden" name="order[`SrNo`]" data-index="`SrNo`" value="0" class="order-cls">
+            </div>
         </div>
         <div class="card-body">
             <div class="row">
@@ -418,6 +421,11 @@
         $(document).on('click', '.add-value', function(e) {
             e.preventDefault();
             $(this).parent().parent().parent().parent().find('.comment').toggleClass('d-none');
+        });
+
+        $(document).on('click', '.delete-stage', function(e) {
+            e.preventDefault();
+            $(this).closest('.card').remove();
         });
 
     </script>

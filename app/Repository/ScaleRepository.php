@@ -116,4 +116,19 @@ class ScaleRepository implements ScaleRepositoryInterface
             return false;
         }
     }
+
+    public function destroy($id)
+    {
+        $scale = $this->scale->find($id);
+        if ($scale->programs->count() > 0) {
+            return false;
+        }
+
+        foreach ($scale->questions as $question) {
+            $question->answers()->delete();
+            $question->delete();
+        }
+
+        $scale->delete();
+    }
 }

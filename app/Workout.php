@@ -20,4 +20,9 @@ class Workout extends Model
     {
         return $this->hasMany(WorkoutQuestion::class);
     }
+
+    public function programs()
+    {
+        return $this->hasMany('App\StepWorkout');
+    }
 }

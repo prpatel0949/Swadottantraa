@@ -10,4 +10,6 @@ interface ScaleRepositoryInterface
     public function findorfail($id);
 
     public function update($data, $id);
+
+    public function destroy($id);
 }

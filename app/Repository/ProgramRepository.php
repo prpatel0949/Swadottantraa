@@ -3,6 +3,7 @@ namespace App\Repository;
 
 use DB;
 use Auth;
+use Storage;
 use App\Option;
 use App\Result;
 use App\Program;
@@ -184,5 +185,143 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function find($id)
     {
         return $this->program->find($id);
+    }
+
+    public function update($data, $id)
+    {
+        DB::transaction(function () use ($data, $id) {
+            $program = $this->program->find($id);
+            $image = '';
+            if (!empty($data['image'])) {
+                Storage::delete($program->image);
+                $program->image = $data['image']->store('programs');
+            }
+            $program->title = $data['title'];
+            $program->description = $data['description'];
+            $program->cost = $data['cost'];
+            $program->tag = $data['tag'];
+            $program->time = $data['time'];
+            $program->save();
+
+            $allStage = [];
+            if (!empty($data['stage_name'])) {
+                foreach ($data['stage_name'] as $index => $value) {
+                    $stage_id = (isset($data['stage_id'][$index]) ? $data['stage_id'][$index] : '');
+                    if (!empty($stage_id)) {
+                        $stage = $this->stage->find($stage_id);
+                    } else {
+                        $stage = new $this->stage;
+                        $stage->program_id = $program->id;
+                    }
+                    $stage->title = $value;
+                    $stage->description = $data['stage_description'][$index];
+                    $stage->order = $data['order'][$index];
+                    $stage->save();
+                    $allStage[] = $stage->id;
+
+                    $allSteps = [];
+                    if (!empty($data['step_name'][$index])) {
+                        foreach ($data['step_name'][$index] as $key => $value) {
+                            $step_id = (isset($data['step_id'][$index]) ? $data['step_id'][$index][$key] : '');
+                            if (!empty($step_id)) {
+                                $step = $this->step->find($step_id);
+                            } else {
+                                $step = new $this->step;
+                                $step->program_stage_id = $stage->id;
+                            }
+                            $step->title = $value;
+                            $step->description = $data['step_description'][$index][$key];
+                            $step->comment = (isset($data['comment']) ? $data['comment'][$index][$key] : '');
+                            $step->save();
+                            $allSteps[] = $step->id;
+                        }
+
+                        $allScales = [];
+                        if (!empty($data['scales'][$index][$key])) {
+                            foreach ($data['scales'][$index][$key] as $value) {
+                                echo 'step_id ========>'.$step->id.'scale_id ===>'.$value; echo '<br>';
+                                $scale = $this->scale->where([ 'step_id' => $step->id, 'scale_id' => $value ])->first();
+                                if (empty($scale)) {
+                                    $scale = new $this->scale;
+                                    $scale->step_id = $step->id;
+                                    $scale->scale_id = $value;
+                                    $scale->save();
+                                }
+                                $scale = $this->scale->firstorcreate([ 'step_id' => $step->id, 'scale_id' => $value ]);
+                                $allScales[] = $scale->id;
+                            }
+                        }
+
+                        $this->scale->where('step_id', $step->id)->whereNotIn('id', $allScales)->delete();
+
+                        $allWorkouts = [];
+                        if (!empty($data['workouts'][$index][$key])) {
+                            foreach ($data['workouts'][$index][$key] as $value) {
+                                $workout = $this->workout->firstorcreate([ 'step_id' => $step->id, 'workout_id' => $value ]);
+                                $allWorkouts[] = $workout->id;
+                            }
+                        }
+
+                        $this->workout->where('step_id', $step->id)->whereNotIn('id', $allWorkouts)->delete();
+
+                        $allAttachment = [];
+                        if (!empty($data['attachment'][$index][$key])) {
+                            foreach ($data['attachment'][$index][$key] as $value) {
+                                $img = $value->store('attachments');
+                                $attachment = new $this->attachment;
+                                $attachment->step_id = $step->id;
+                                $attachment->image = $img;
+                                $attachment->save();
+                            }
+                        }
+                    }
+
+                    $deleteSteps = $this->step->where('program_stage_id', $stage->id)->whereNotIn('id', $allSteps)->get();
+                    foreach ($deleteSteps as $step) {
+                        $step->scales()->delete();
+                        $step->workouts()->delete();
+                        foreach ($step->attachments as $attachment) {
+                            Storage::delete($attachment->image);
+                        }
+                        $step->attachments()->delete();
+                        $step->delete();
+                    }
+                }
+            }
+
+            $deleteStages = $this->stage->where('program_id', $program->id)->whereNotIn('id', $allStage)->get();
+            foreach ($deleteStages as $stage) {
+                foreach ($stage->steps as $step) {
+                    $step->scales()->delete();
+                    $step->workouts()->delete();
+                    foreach ($step->attachments as $attachment) {
+                        Storage::delete($attachment->image);
+                    }
+                    $step->attachments()->delete();
+                    $step->delete();
+                }
+                $stage->delete();
+            }
+        });
+        return true;
+    }
+
+    public function destroy($id)
+    {
+        $program = $this->program->find($id);
+        foreach ($program->stages as $stage) {
+            foreach ($stage->steps as $step) {
+                $step->scales()->delete();
+                $step->workouts()->delete();
+                foreach ($step->attachments as $attachment) {
+                    Storage::delete($attachment->image);
+                }
+                $step->attachments()->delete();
+                $step->delete();
+            }
+            $stage->delete();
+        }
+        $program->delete();
+        return true;
     }
 }

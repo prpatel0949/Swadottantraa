@@ -97,6 +97,10 @@ class ScaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->scale->destroy($id)) {
+            return response()->json([ 'success' => 'success' ], 200);
+        }
+
+        return response()->json([ 'error' => 'error' ], 500);
     }
 }

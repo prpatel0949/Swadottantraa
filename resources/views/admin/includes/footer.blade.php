@@ -8,7 +8,7 @@
 <script src="{{ asset('assets/dashboard/vendors/js/charts/echarts/echarts.min.js') }}"></script>
 <script src="{{ asset('assets/dashboard/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/dashboard/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
-
+<script src="{{ asset('assets/dashboard/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
 <script>
     $(window).on('load', function() { // makes sure the whole site is loaded 
         $('#status').fadeOut(); // will first fade out the loading animation 

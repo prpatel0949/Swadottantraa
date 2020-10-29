@@ -145,4 +145,19 @@ class WorkoutRepository implements WorkoutRepositoryInterface
             return false;
         }
     }
+
+    public function destroy($id)
+    {
+        $workout = $this->workout->find($id);
+        if ($workout->programs->count() > 0) {
+            return false;
+        }
+
+        foreach ($workout->questions as $question) {
+            $question->answers()->delete();
+            $question->delete();
+        }
+
+        $workout->delete();
+    }
 }

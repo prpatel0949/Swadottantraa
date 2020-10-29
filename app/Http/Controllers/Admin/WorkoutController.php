@@ -96,6 +96,10 @@ class WorkoutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->workout->destroy($id)) {
+            return response()->json([ 'success' => 'success' ], 200);
+        }
+
+        return response()->json([ 'error' => 'error' ], 500);
     }
 }

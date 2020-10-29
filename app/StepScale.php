@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class StepScale extends Model
 {
+    protected $fillable = [ 'step_id', 'scale_id' ];
+
     public static function boot() {
         parent::boot();
     

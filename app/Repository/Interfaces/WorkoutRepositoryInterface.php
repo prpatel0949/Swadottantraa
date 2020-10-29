@@ -10,4 +10,6 @@ interface WorkoutRepositoryInterface
     public function find($id);
 
     public function update($data, $id);
+
+    public function destroy($id);
 }

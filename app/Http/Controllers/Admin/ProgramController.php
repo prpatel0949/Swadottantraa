@@ -6,6 +6,7 @@ use Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Program\AddRequest;
+use App\Http\Requests\Admin\Program\UpdateRequest;
 use App\Repository\Interfaces\ScaleRepositoryInterface;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 use App\Repository\Interfaces\WorkoutRepositoryInterface;
@@ -110,9 +111,13 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        if ($this->program->update($request->all(), $id)) {
+            return redirect()->route('program.index')->with('success', 'Program updated successfully.');
+        }
+
+        return redirect()->route('program.index')->with('error', 'Something went wrong happen!');
     }
 
     /**
@@ -123,6 +128,10 @@ class ProgramController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->program->destroy($id)) {
+            return response()->json([ 'success' => 'success' ], 200);
+        }
+
+        return response()->json([ 'error' => 'error' ], 500);
     }
 }

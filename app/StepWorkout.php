@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class StepWorkout extends Model
 {
+    protected $fillable = [ 'step_id', 'workout_id' ];
+
     public static function boot() {
         parent::boot();
     

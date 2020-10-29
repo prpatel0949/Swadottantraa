@@ -39,6 +39,7 @@
                                             <td>{{ $workout->title }}</td>
                                             <td>
                                                 <a href="{{ route('workout.edit', $workout->id) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('workout.destroy', $workout->id) }}" class="delete-scale"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -57,5 +58,37 @@
 @section('js')
     <script>
         $('#scaleTbl').DataTable();
+        $('.delete-scale').on('click', function (e) {
+            e.preventDefault();
+            let url = $(this).attr('href');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                confirmButtonClass: 'btn btn-primary',
+                cancelButtonClass: 'btn btn-danger ml-1',
+                buttonsStyling: false,
+            }).then(function (result) {
+                $.ajax({
+                    url: url,
+                    method: 'DELETE',
+                    data : { '_token': '{{ csrf_token() }}' },
+                    success: function (res) {
+                        window.location.reload();
+                    }, error: function (error) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Your Can`t delete this workout.',
+                            type: 'error',
+                            confirmButtonClass: 'btn btn-success',
+                        });
+                    }
+                });
+            })
+        });
     </script>
 @endsection
