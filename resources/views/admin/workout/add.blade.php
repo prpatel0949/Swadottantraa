@@ -47,8 +47,8 @@
                                     <div class="btn-group">
                                         <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Add Question</button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item add-question" data-type="0" href="#">Descriptive Answer</a></li>
-                                            <li><a class="dropdown-item add-question" data-type="1" href="#">MCQ Answer</a></li>
+                                            <li><a class="dropdown-item add-question" data-type="0" href="#">Descriptive</a></li>
+                                            <li><a class="dropdown-item add-question" data-type="1" href="#">MCQ</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="text" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
-                                                value="{{ old('answer.'.$index) }}">
+                                                value="{{ old('answer.'.$index) }}" readonly>
                                             @error('answer.'.$index)
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -215,7 +215,7 @@
             <div class="row answer-section">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer">
+                        <input type="text" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer" readonly>
                     </div>
                 </div>
             </div>

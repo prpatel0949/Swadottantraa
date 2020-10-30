@@ -15,4 +15,6 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
 
     Route::resource('scale', 'ScaleController');
     Route::resource('workout', 'WorkoutController');
+
+    Route::resource('franchisee', 'FranchiseeController');
 });

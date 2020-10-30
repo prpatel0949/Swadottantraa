@@ -92,4 +92,26 @@ class UserRepository implements UserRepositoryInterface
 
         return $users->paginate($perPage);
     }
+
+    public function store($data)
+    {
+        $password = str_random(8);
+        $data['country_code'] = (isset($data['country_code']) ? $data['country_code'] : '');
+        $data['password'] = Hash::make($password);
+        $user = $this->user->create($data);
+
+        $mail = Mail::send('emails.password', [ 'password' => $password, 'user' => $user ], function ($message) use ($user) {
+            $message->to($user->email, $user->name);
+            $message->subject('SWA Account Password');
+        });
+    }
+
+    public function all($filters)
+    {
+        if (!empty($filters)) {
+            return $this->user->where($filters)->get();
+        }
+
+        return $this->user->all();
+    }
 }

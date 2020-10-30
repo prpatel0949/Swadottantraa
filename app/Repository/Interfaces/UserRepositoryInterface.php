@@ -9,4 +9,9 @@ interface UserRepositoryInterface
     public function invite($data);
 
     public function clients($perPage, $filters);
+
+    public function store($data);
+
+    public function all($filters);
+
 }
