@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
+@section('title', 'PsyHeal')
+
 @section('content')
 <div class="header-space">
     <div class="container">

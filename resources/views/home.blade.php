@@ -13,7 +13,7 @@
                     <div class="hero-subtitle">
                         The Difference between who you are and who you want to be is what you do. Work on yourself and the rest will follow!
                         <br />
-                        At SWA (self) DOT (digital) TANTRAA (techniques), we help you, to help yourself!
+                        At <b>SWA</b> (<i>self</i>) <b>DOT</b> (<i>digital</i>) <b>TANTRAA</b> (<i>techniques</i>), we help you, to help yourself!
                     </div>
                 </div>
                 <div class="col-sm-4 sm-align-self-start">
@@ -36,8 +36,11 @@
                         About <span class="text-primary">Us</span>
                     </div>
                     <div class="section-content">
-                        <p>Established in 2018, <b class="text-primary">Swa.Tantraa</b> provides comprehensive solutions for mental wellbeing. SWA.TANTRAA means self-help regarding wellbeing with the help of technological tools.</p>
-                        <p>It is beacon of light and trusted friend for those with mental health concerns. Mental health is just as important as one's physical health and yet, most of us are not mindful about the quality of our life. At SWA.TANTRAA we have experts with 25 years of experience in treating mental health and related issues with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also preventive and positive mental health.</p>
+                        <p>
+                        <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD</b> provides comprehensive solutions for mental wellbeing. SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help for wellbeing with the help of technological tools. It is a beacon of light and trusted friend for those with wellness concerns. At SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA we have experts with more than 25 years of experience in providing  mental health and wellness with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also in preventive and positive mental health.
+                        </p>
+                        <!-- <p>Established in 2018, <b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa</b> provides comprehensive solutions for mental wellbeing. SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help regarding wellbeing with the help of technological tools.</p>
+                        <p>It is beacon of light and trusted friend for those with mental health concerns. Mental health is just as important as one's physical health and yet, most of us are not mindful about the quality of our life. At SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA we have experts with 25 years of experience in treating mental health and related issues with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also preventive and positive mental health.</p> -->
                     </div>
                     <a href="{{ url('about-us') }}" class="btn btn-primary about-btn">Read More</a>
                 </div>
@@ -102,7 +105,7 @@
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify">
                                 <div class="page-title">Brain and Mind Gym</div>
-                                <p>Swa.Tantraa’s <b class="text-primary">Brain & Mind Gym</b> is an International class emotional wellness development solution compliant to WHO & Other international standards and Indian Healthcare IT Standards. Adopting this solution will not only help the organizations to form a conducive and quality environment for the human resource but also will establish the fact that the organization is progressive who understands the importance of emotional well-being of the people.</p>
+                                <p>Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa’s <b class="text-primary">Brain & Mind Gym</b> is an International class emotional wellness development solution compliant to WHO & Other international standards and Indian Healthcare IT Standards. Adopting this solution will not only help the organizations to form a conducive and quality environment for the human resource but also will establish the fact that the organization is progressive who understands the importance of emotional well-being of the people.</p>
                                 <a href="{{url('brain-and-mind-gym')}}" class="btn btn-primary">Read More</a>
                             </div>
                             <div class="col-sm-4 product-img">
@@ -161,7 +164,7 @@
                             <div class="col-sm-8 product-desc text-justify order-2">
                                 <div class="page-title">PsyTele</div>
                                 <p>Erase the distance and create the trust!</p>
-                                <p>Through <b class="text-primary">PsyTele</b>, We Swa.Tantraa, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management..</p>
+                                <p>Through <b class="text-primary">PsyTele</b>, We Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management..</p>
                                 <p> <b class="text-primary">PsyTele</b> connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients.</p>
                                 <a href="{{ url('psytele') }}" class="btn btn-primary">Read More</a>
                             </div>

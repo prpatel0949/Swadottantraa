@@ -131,7 +131,7 @@
                     </div>
                  </div>
                  <div class="online_modal_sub_content online_modal_sub_content2" style="display: none">
-                     <div class="page-title">Relexation (Psychological skills and solutions)</div>
+                     <div class="page-title">Rejuvenation (Psychological skills and solutions)</div>
                      <div class="row text-center">
                         <div class="col-sm-4">
                             <a class="card shadow cursor-pointer" href="{{ route('question') }}">

@@ -32,37 +32,40 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('title') error @enderror" 
-                                        value="{{ (old('title') ? old('title') : $scale->title) }}" name="title" placeholder="Scale Title">
-                                    @error('title')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('interpreatation') error @enderror" 
-                                        value="{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}" name="interpreatation" placeholder="Note for Interpreatation">
-                                    @error('interpreatation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control @error('title') error @enderror"
+                                            value="{{ (old('title') ? old('title') : $scale->title) }}" name="title" placeholder="Scale Title">
+                                            @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea type="text" class="form-control @error('interpreatation') error @enderror"
+                                            value="{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}" name="interpreatation" placeholder="Note for Interpreatation">{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}</textarea>
+                                        @error('interpreatation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea type="text" class="form-control @error('scale_description') error @enderror"
+                                            value="{{ (old('scale_description') ? old('scale_description') : $scale->description) }}" name="scale_description" placeholder="Scale Description">{{ (old('scale_description') ? old('scale_description') : $scale->description) }}</textarea>
+                                        @error('scale_description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('scale_description') error @enderror" 
-                                        value="{{ (old('scale_description') ? old('scale_description') : $scale->description) }}" name="scale_description" placeholder="Scale Description">
-                                    @error('scale_description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group float-right">
                                     <button type="button" class="btn btn-primary add-question">Add Question</button>
@@ -178,7 +181,7 @@
                                 @endforeach
                                 <div class="answer-tab"></div>
                             </div>
-                        </div>   
+                        </div>
                         @endforeach
                     @endif
                 </div>
@@ -278,7 +281,7 @@
                     listArray.push({ 'id': $(row), 'index': index })
   				});
 
-                console.log(listArray);  
+                console.log(listArray);
             });
 
             // var container_ans = document.getElementsByClassName('answer-section');
@@ -289,7 +292,7 @@
             //         listArray.push({ 'id': $(row), 'index': index })
   			// 	});
 
-            //     console.log(listArray);  
+            //     console.log(listArray);
             // });
 
             $(document).on('click', '.add-question', function(e) {
