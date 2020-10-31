@@ -2,13 +2,15 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'country_code', 'prefix', 'franchisee_code', 'dob', 'mobile', 'type', 'education', 'profile', 'occupation', 'gender', 'address', 'code'
     ];
 
     /**
@@ -36,4 +38,38 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $append = [
+        'link'
+    ];
+
+    public function franchisee()
+    {
+        return $this->belongsTo(User::class, 'franchisee_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'franchisee_id');
+    }
+
+    public function getLinkAttribute()
+    {
+        $link = '#';
+        if (Auth::check()) {
+            if (Auth::user()->type == 0) {
+                $link = route('individual.program');
+            }
+    
+            if (Auth::user()->type == 2) {
+                $link = route('franchisee.dashboard');
+            }
+
+            if (Auth::user()->type == 3) {
+                $link = route('admin.dashboard');
+            }
+        }
+
+        return $this->attributes['link'] = $link;
+    }
 }
