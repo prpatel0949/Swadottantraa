@@ -49,6 +49,17 @@ class ProgramController extends Controller
         return view('individual.program_detail', [ 'program' => $program ]);
     }
 
+    public function accessProgramStage($id, $stage_id)
+    {
+        $program = $this->program->findorfail($id);
+
+        if (!$program->is_subcribe) {
+            return redirect()->back();
+        }
+
+        return view('individual.program_stage', [ 'program' => $program, 'stage_id' => $stage_id ]);
+    }
+
     public function questionAnswer(Request $request, $id)
     {
         foreach($request->get('question') as $a => $z)
