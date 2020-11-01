@@ -42,11 +42,11 @@
                             <i class="feather icon-more-horizontal cursor-pointer" data-toggle="collapse" data-target="#stage_wrapper"></i>
                         </div>
                         <div class="card-body py-0 collapse show" id="stage_wrapper">
-                            @foreach ($program->stages as $stage)
+                            @foreach ($steps as $step)
 
-                                <a href="{{ route('individual.program.stage', ['id' => $program->id, 'stage_id' => $stage->id ]) }}" class="d-block border-top mt-1 pt-1">
+                                <a href="#" class="d-block border-top mt-1 pt-1">
                                     <div class="user-page-info">
-                                        <h5 class="mb-0 v-stage-description">{{ $stage->title }}</h5>
+                                        <h5 class="mb-0 v-stage-description">{{ $step->title }}</h5>
                                     </div>
                                     <div class="progress progress-bar-primary mb-1">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
@@ -57,29 +57,15 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-lg-8">
-                    <div class="row">
-                        @foreach ($steps as $step)
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="card h100">
-                                    <div class="card-header">
-                                        <h4>{{ $step->title }}</h4>
-                                    </div>
-                                    <div class="card-body py-0">
-                                        <div class="progress progress-bar-primary mb-1">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
-                                        </div>
-                                        <div class="d-flex justify-content-start align-items-center">
-                                            <div class="user-page-info">
-                                                <h5 class="mb-0 v-stage-description"">{{ $step->description }}</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-white pt-0 pb-1 border-top-0">
-                                        <a href="{{ route('individual.program.step', [ 'id' => $program->id, 'stage_id' => $step->program_stage_id, 'step_id' => $step->id ]) }}" class="btn btn-outline-primary">Explore</a>
-                                    </div>
-                                </div>
+                    <div class="card h100">
+                        <div class="card-header">
+                            <h4>{{ $current_step->title }}</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="v-program-description">{{ $current_step->description }}</div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

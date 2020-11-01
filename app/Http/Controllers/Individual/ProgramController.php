@@ -57,7 +57,25 @@ class ProgramController extends Controller
             return redirect()->back();
         }
 
-        return view('individual.program_stage', [ 'program' => $program, 'stage_id' => $stage_id ]);
+        return view('individual.program_stage', [
+            'program' => $program,
+            'steps' => $program->stages->where('id', $stage_id)->first()->steps
+        ]);
+    }
+
+    public function accessProgramStep($id, $stage_id, $step_id)
+    {
+        $program = $this->program->findorfail($id);
+
+        if (!$program->is_subcribe) {
+            return redirect()->back();
+        }
+
+        return view('individual.program_step', [
+            'program' => $program,
+            'steps' => $program->stages->where('id', $stage_id)->first()->steps,
+            'current_step' => $program->stages->where('id', $stage_id)->first()->steps->where('id', $step_id)->first()
+        ]);
     }
 
     public function questionAnswer(Request $request, $id)

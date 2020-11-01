@@ -232,7 +232,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                             }
                             $step->title = $value;
                             $step->description = $data['step_description'][$index][$key];
-                            $step->comment = (isset($data['comment']) ? $data['comment'][$index][$key] : '');
+                            $step->comment = (isset($data['comment']) && isset($data['comment'][$index]) && isset($data['comment'][$index][$key]) ? $data['comment'][$index][$key] : '');
                             $step->save();
                             $allSteps[] = $step->id;
                         }
