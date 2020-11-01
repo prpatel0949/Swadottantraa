@@ -31,34 +31,41 @@
                 <div class="card header-block">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Scale Title">
-                                    @error('title')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('interpreatation') error @enderror" value="{{ old('interpreatation') }}" name="interpreatation" placeholder="Note for Interpreatation">
-                                    @error('interpreatation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Scale Title">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea type="text" class="form-control @error('interpreatation') error @enderror" value="{{ old('interpreatation') }}" name="interpreatation" placeholder="Note for Interpreatation">{{ old('interpreatation') }}</textarea>
+                                            @error('interpreatation')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea type="text" class="form-control @error('scale_description') error @enderror" value="{{ old('scale_description') }}" name="scale_description" placeholder="Scale Description">{{ old('scale_description') }}</textarea>
+                                            @error('scale_description')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('scale_description') error @enderror" value="{{ old('scale_description') }}" name="scale_description" placeholder="Scale Description">
-                                    @error('scale_description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group float-right">
                                     <button type="button" class="btn btn-primary add-question">Add Question</button>
@@ -264,7 +271,7 @@
                     listArray.push({ 'id': $(row), 'index': index })
   				});
 
-                console.log(listArray);  
+                console.log(listArray);
             });
 
             // var container_ans = document.getElementsByClassName('answer-section');
@@ -275,7 +282,7 @@
             //         listArray.push({ 'id': $(row), 'index': index })
   			// 	});
 
-            //     console.log(listArray);  
+            //     console.log(listArray);
             // });
 
             $(document).on('click', '.add-question', function(e) {

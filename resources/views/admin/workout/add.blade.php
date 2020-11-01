@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group mb-0">
                                     <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Workout Title">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="form-group float-right">
+                                <div class="text-right">
                                     {{-- <button type="button" class="btn btn-primary add-question">Add Question</button> --}}
                                     <div class="btn-group">
                                         <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Add Question</button>
@@ -260,7 +260,7 @@
                     listArray.push({ 'id': $(row), 'index': index })
   				});
 
-                console.log(listArray);  
+                console.log(listArray);
             });
 
             $(document).on('click', '.add-question', function(e) {

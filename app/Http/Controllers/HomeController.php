@@ -71,4 +71,12 @@ class HomeController extends Controller
     {
         return view('product/psyheal');
     }
+    public function psytele()
+    {
+        return view('product/psytele');
+    }
+    public function selfie()
+    {
+        return view('product/selfie');
+    }
 }

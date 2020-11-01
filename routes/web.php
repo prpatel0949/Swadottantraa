@@ -28,6 +28,8 @@ Route::get('offline', 'HomeController@offline')->name('frontend.offline');
 Route::get('privacy-policy', 'HomeController@privacyPolicy')->name('frontend.privacy_policy');
 Route::get('terms-and-conditions', 'HomeController@termsAndConditions')->name('frontend.terms_and_conditions');
 Route::get('psyheal', 'HomeController@psyheal')->name('frontend.psyheal');
+Route::get('psytele', 'HomeController@psytele')->name('frontend.psytele');
+Route::get('selfie', 'HomeController@selfie')->name('frontend.selfie');
 
 Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => ['auth', 'individual', 'verified'] ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('individual.dashboard');
