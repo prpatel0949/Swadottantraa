@@ -120,6 +120,6 @@ class FranchiseeController extends Controller
 
     public function users($id)
     {
-        // return view('admin.franchisee.users', [ 'franchisee' => $this->user->find($id) ]);
+        return view('admin.franchisee.users', [ 'franchisee' => $this->user->find($id) ]);
     }
 }

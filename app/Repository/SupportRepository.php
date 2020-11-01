@@ -24,6 +24,21 @@ class SupportRepository implements SupportRepositoryInterface
             return $this->support->where($filters)->orderBy('id', 'DESC')->get();
         }
 
-        return $this->support->orderBy('id', 'DESC')->all();
+        return $this->support->orderBy('id', 'DESC')->get();
+    }
+
+    public function find($id)
+    {
+        return $this->support->findorfail($id);
+    }
+
+    public function update($data, $id)
+    {
+        $support = $this->support->find($id);
+        $support->answer = $data['answer'];
+        $support->status = $data['status'];
+        $support->save();
+
+        return true;
     }
 }

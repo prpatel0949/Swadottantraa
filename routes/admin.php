@@ -16,4 +16,14 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
 
     Route::get('framchisee/{id}/users', 'FranchiseeController@users')->name('franchisee.user');
     Route::resource('franchisee', 'FranchiseeController');
+
+    Route::get('support', 'SupportController@index')->name('support.index');
+    Route::get('support/{id}/edit', 'SupportController@edit')->name('support.edit');
+    Route::put('support/{id}/update', 'SupportController@update')->name('support.update');
+
+    Route::group([ 'prefix' => 'report' ], function () {
+        Route::get('program', 'ReportController@program')->name('report.program');
+        Route::post('program/list', 'ReportController@programList')->name('report.program.list');
+    });
+
 });

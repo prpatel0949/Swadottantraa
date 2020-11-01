@@ -46,7 +46,7 @@ class ProgramController extends Controller
             return redirect()->back();
         }
 
-        return view('individual.program_question', [ 'program' => $program ]);
+        return view('individual.program_detail', [ 'program' => $program ]);
     }
 
     public function questionAnswer(Request $request, $id)

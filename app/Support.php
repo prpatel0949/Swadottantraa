@@ -16,4 +16,9 @@ class Support extends Model
             $model->user_id = Auth::user()->id;
         });
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

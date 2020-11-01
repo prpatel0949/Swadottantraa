@@ -26,16 +26,16 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:100',
-            'description' => 'required|string|max:100',
+            'description' => 'required|string',
             'time' => 'required|numeric',
             'cost' => 'required|numeric',
             'tag' => 'required|string',
             'image' => 'nullable|mimes:jpeg, jpg, png',
             'stage_name.*' => 'required|string|max:100', 
-            'stage_description.*' => 'required|string|max:100',
+            'stage_description.*' => 'required|string',
             'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',
             'step_name.*.*' => 'required|string|max:100',
-            'step_description.*.*' => 'required|string|max:100',
+            'step_description.*.*' => 'required|string',
             'comment.*.*' => 'nullable|string|max:200'
         ];
     }
