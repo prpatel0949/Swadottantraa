@@ -406,14 +406,14 @@
             e.preventDefault();
             let page = $(this).attr('data-index');
             let content = $('.step-section').html();
-            let section_number = $(this).parent().parent().find('.step-div > div').length;
+            let section_number = $(this).parent().parent().parent().find('.step-div > div').length;
             console.log(section_number);
             section_number = (section_number == '' ? 0 : section_number);
             section_number = parseInt(section_number) + 1;
             content = content.replace(/`SrNo`/gi, page);
             content = content.replace(/`SrNo~1`/gi, section_number);
-            console.log($(this).parent().parent().find('.step-div'));
-            $(this).parent().parent().find('.step-div').append(content);
+            console.log($(this).parent().parent().parent().find('.step-div'));
+            $(this).parent().parent().parent().find('.step-div').append(content);
             $('#scale_'+ page +'_' + section_number).select2();
             $('#workout_'+ page +'_' + section_number).select2();
         });
