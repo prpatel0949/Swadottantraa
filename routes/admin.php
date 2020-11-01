@@ -7,14 +7,13 @@ Route::group(['middleware' => ['web']], function () {
 
 
 Route::group(['middleware' => 'auth', 'admin'], function () {
-    Route::get('dashboard', function() {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
 
     Route::resource('program', 'ProgramController');
 
     Route::resource('scale', 'ScaleController');
     Route::resource('workout', 'WorkoutController');
 
+    Route::get('framchisee/{id}/users', 'FranchiseeController@users')->name('franchisee.user');
     Route::resource('franchisee', 'FranchiseeController');
 });

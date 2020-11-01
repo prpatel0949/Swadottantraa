@@ -29,10 +29,10 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media">
-                                            <img src="../assets/dashboard/images/pages/content-img-1.jpg" class="rounded mr-75" alt="profile image" height="64" width="64">
+                                            <img src="{{ Storage::url($program->image) }}" class="rounded mr-75" alt="profile image" height="64" width="64">
                                             <div class="media-body mt-75">
-                                                <h5>{{ $program->prog_name }}</h5>
-                                                <p class="card-text  mb-0">{{ $program->prog_desc }}</p>
+                                                <h5>{{ $program->title }}</h5>
+                                                <p class="card-text  mb-0">{{ $program->description }}</p>
                                             </div>
                                             <div class="card-btns d-flex justify-content-between mt-2">
                                                 @if ($program->is_subcribe)
@@ -56,8 +56,8 @@
 @endsection
 
 @section('js')
-    {{-- <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script> --}}
-    <script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script>
+    <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script>
+    {{-- <script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script> --}}
     <script>
         $(document).on('click', '.subscribe-btn', function() {
             let program = JSON.parse($(this).attr('data-program'));
@@ -72,11 +72,11 @@
                         key: '{{ config("payu.merchant_key") }}',
                         txnid: timestamp, 
                         hash: res,
-                        amount: program.amount,
+                        amount: program.cost,
                         firstname: '{{ Auth::user()->name }}',
                         email: '{{ Auth::user()->email }}',
                         phone: '{{ Auth::user()->mobile }}',
-                        productinfo: program.prog_name,
+                        productinfo: program.title,
                         udf5: 1,
                         surl : '{{ route("payment.response") }}',
                         furl: '{{ route("payment.response") }}',

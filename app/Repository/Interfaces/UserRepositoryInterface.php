@@ -12,6 +12,9 @@ interface UserRepositoryInterface
 
     public function store($data);
 
-    public function all($filters);
+    public function all($filters = []);
 
+    public function find($id);
+
+    public function destroy($id);
 }

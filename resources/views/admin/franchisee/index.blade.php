@@ -30,10 +30,26 @@
                                         <th>SrNo</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Code</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($users as $key => $user)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->mobile }}</td>
+                                            <td>{{ $user->franchisee_code }}</td>
+                                            <td>
+                                                <a href="{{ route('franchisee.edit', $user->id) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('franchisee.destroy', $user->id) }}" class="delete-user"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('franchisee.user', $user->id) }}" target="_blank"><i class="fa fa-eye" title="Users"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -49,37 +65,37 @@
 @section('js')
     <script>
         $('#scaleTbl').DataTable();
-        // $('.delete-scale').on('click', function (e) {
-        //     e.preventDefault();
-        //     let url = $(this).attr('href');
-        //     Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: "You won't be able to revert this!",
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, delete it!',
-        //         confirmButtonClass: 'btn btn-primary',
-        //         cancelButtonClass: 'btn btn-danger ml-1',
-        //         buttonsStyling: false,
-        //     }).then(function (result) {
-        //         $.ajax({
-        //             url: url,
-        //             method: 'DELETE',
-        //             data : { '_token': '{{ csrf_token() }}' },
-        //             success: function (res) {
-        //                 window.location.reload();
-        //             }, error: function (error) {
-        //                 Swal.fire({
-        //                     title: 'Error',
-        //                     text: 'Your Can`t delete this scale.',
-        //                     type: 'error',
-        //                     confirmButtonClass: 'btn btn-success',
-        //                 });
-        //             }
-        //         });
-        //     })
-        // });
+        $('.delete-user').on('click', function (e) {
+            e.preventDefault();
+            let url = $(this).attr('href');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                confirmButtonClass: 'btn btn-primary',
+                cancelButtonClass: 'btn btn-danger ml-1',
+                buttonsStyling: false,
+            }).then(function (result) {
+                $.ajax({
+                    url: url,
+                    method: 'DELETE',
+                    data : { '_token': '{{ csrf_token() }}' },
+                    success: function (res) {
+                        window.location.reload();
+                    }, error: function (error) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Your Can`t delete this franchisee.',
+                            type: 'error',
+                            confirmButtonClass: 'btn btn-success',
+                        });
+                    }
+                });
+            })
+        });
     </script>
 @endsection

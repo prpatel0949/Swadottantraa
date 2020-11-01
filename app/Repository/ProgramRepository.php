@@ -70,6 +70,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                 $transaction = $this->transaction;
                 $transaction->user_program_id = $userProgram->id;
                 $transaction->amount = $request->amount;
+                $transaction->txnid = $request->txnid;
                 $transaction->payuMoneyId = $request->payuMoneyId;
                 $transaction->save();
             });

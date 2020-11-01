@@ -25,7 +25,7 @@ class ProgramController extends Controller
     public function hash(Request $request)
     {
         // key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5||||||salt;
-        return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->program['amount'].'|'.$request->program['prog_name'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
+        return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->program['cost'].'|'.$request->program['title'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
     }
 
     public function paymentResponse(Request $request)

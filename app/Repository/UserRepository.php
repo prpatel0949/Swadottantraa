@@ -36,7 +36,6 @@ class UserRepository implements UserRepositoryInterface
 
         $data['dob'] = (isset($data['dob']) && !empty($data['dob']) ? Carbon::parse($data['dob'])->format('Y-m-d') : null);
         $data['gender'] =  (isset($data['gender']) && !empty($data['gender']) ? $data['gender'] : 0);
-
         return $this->user->find($id)->update($data);
     }
 
@@ -104,14 +103,32 @@ class UserRepository implements UserRepositoryInterface
             $message->to($user->email, $user->name);
             $message->subject('SWA Account Password');
         });
+
+        return true;
     }
 
-    public function all($filters)
+    public function all($filters = [])
     {
-        if (!empty($filters)) {
-            return $this->user->where($filters)->get();
+        if (count($filters)) {
+            return $this->user->where($filters)->orderBy('id', 'DESC')->get();
         }
 
-        return $this->user->all();
+        return $this->user->orderBy('id', 'DESC')->get();
+    }
+
+    public function find($id)
+    {
+        return $this->user->findorfail($id);
+    }
+
+    public function destroy($id)
+    {
+        $user = $this->user->find($id);
+        if ($user->users->count() == 0 && empty($user->franchisee)) {
+            $user->delete();
+            return true;
+        }
+
+        return false;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Franchisee\AddRequest;
+use App\Http\Requests\Admin\Franchisee\UpdateRequest;
 use App\Repository\Interfaces\UserRepositoryInterface;
 
 class FranchiseeController extends Controller
@@ -22,7 +23,7 @@ class FranchiseeController extends Controller
      */
     public function index()
     {
-        return view('admin.franchisee.index');
+        return view('admin.franchisee.index', [ 'users' => $this->user->all([ 'type' => 2 ]) ]);
     }
 
     /**
@@ -83,7 +84,7 @@ class FranchiseeController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.franchisee.edit', [ 'user' => $this->user->find($id) ]);
     }
 
     /**
@@ -93,9 +94,13 @@ class FranchiseeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        if ($this->user->update($request->validated(), $id)) {
+            return redirect()->route('franchisee.index')->with('success', 'Franchisee updated successfully.');
+        }
+
+        return redirect()->route('franchisee.index')->with('error', 'Something went wrong happen!');
     }
 
     /**
@@ -106,6 +111,15 @@ class FranchiseeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->user->destroy($id)) {
+            return response()->json([ 'message' => 'success' ], 200);
+        }
+
+        return response()->json([ 'message' => 'error' ], 500);
+    }
+
+    public function users($id)
+    {
+        // return view('admin.franchisee.users', [ 'franchisee' => $this->user->find($id) ]);
     }
 }
