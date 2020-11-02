@@ -23,7 +23,7 @@
 
                         @include('franchisee.includes.message')
 
-                        <form method="POST" action="{{ route('support.store') }}">
+                        <form method="POST" action="{{ route('franchisee.support.index') }}">
                             @csrf
                         <div class="row">
                         	<div class="col-sm-8">
