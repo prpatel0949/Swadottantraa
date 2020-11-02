@@ -35,7 +35,7 @@ class AddRequest extends FormRequest
             'stage_description.*' => 'required|string',
             'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',
             'step_name.*.*' => 'required|string|max:100',
-            'step_description.*.*' => 'required|string|max:100',
+            'step_description.*.*' => 'required|string',
             'comment.*.*' => 'nullable|string|max:200'
         ];
     }
