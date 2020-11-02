@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="content-body">
-            <form action="{{ route('support.update', $support->id) }}" method="POST">
+            <form action="{{ route('admin.support.update', $support->id) }}" method="POST">
                 @method('PUT')
                 @csrf
                 <div class="card">

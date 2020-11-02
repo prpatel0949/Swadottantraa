@@ -38,7 +38,7 @@
                 <div class="col-sm-12 col-lg-4">
                     <div class="card h100">
                         <div class="card-header">
-                            <h4>Stages</h4>
+                            <h4>steps</h4>
                             <i class="feather icon-more-horizontal cursor-pointer" data-toggle="collapse" data-target="#stage_wrapper"></i>
                         </div>
                         <div class="card-body py-0 collapse show" id="stage_wrapper">
@@ -69,6 +69,32 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mt-2">
+                @foreach ($current_step->scales as $scale)
+                <div class="col-md-12">
+                    <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate">
+                        <div class="card-body p-0">
+                            <div class="accordion search-content-info" id="accordionExample">
+                                <div class="collapse-margin search-content mt-0 bg-white">
+                                    <div class="card-header" id="headingOne" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <span class="lead collapse-title">
+                                            {{ $scale->scale->title }}
+                                        </span>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            {{ $scale->scale->description }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
     	</div>
     </div>
 </div>

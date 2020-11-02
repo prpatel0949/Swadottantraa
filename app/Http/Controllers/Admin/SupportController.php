@@ -28,9 +28,9 @@ class SupportController extends Controller
     public function update(Request $request, $id)
     {
         if ($this->support->update($request->all(), $id)) {
-            return redirect()->route('support.index')->with('success', 'Updated successfully.');
+            return redirect()->route('admin.support.index')->with('success', 'Updated successfully.');
         }
 
-        return redirect()->route('support.index')->with('success', 'Something went wrong happen!');
+        return redirect()->route('admin.support.index')->with('success', 'Something went wrong happen!');
     }
 }

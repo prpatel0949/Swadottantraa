@@ -51,7 +51,7 @@
                                                     <td>{{ ($support->user->type == 0 ? 'Customer' : 'Franchisee') }}</td>
                                                     <td>{{ $support->description }}</td>
                                                     <td>
-                                                        <a href="{{ route('support.edit', $support->id) }}"><i class="fa fa-edit"></i></a>
+                                                        <a href="{{ route('admin.support.edit', $support->id) }}"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -81,7 +81,7 @@
                                                     <td>{{ ($support->user->type == 0 ? 'Customer' : 'Franchisee') }}</td>
                                                     <td>{{ $support->description }}</td>
                                                     <td>
-                                                        <a href="{{ route('support.edit', $support->id) }}"><i class="fa fa-edit"></i></a>
+                                                        <a href="{{ route('admin.support.edit', $support->id) }}"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

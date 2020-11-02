@@ -50,12 +50,12 @@
                             <div class="row">
                                 <div class="col-sm-5">
                                     <div class="form-group">
-                                        <div class="controls">
+                                        {{-- <div class="controls">
                                             <label for="account-username">My Code</label>
                                             <div class="d-flex">
                                                 <input readonly type="text" value="{{ $user->code }}" class="form-control" id="account-username" placeholder="My Code" required data-validation-required-message="This username field is required">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-sm-5"></div>
@@ -162,7 +162,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-10">
+                                {{-- <div class="col-10">
                                     <div class="alert alert-warning alert-dismissible mb-2" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">×</span>
@@ -172,7 +172,7 @@
                                         </p>
                                         <a href="javascript: void(0);">Resend confirmation</a>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <div class="controls">

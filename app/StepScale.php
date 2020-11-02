@@ -17,4 +17,9 @@ class StepScale extends Model
             $model->updated_by = Auth::user()->id;
         });
     }
+
+    public function scale()
+    {
+        return $this->belongsTo(Scale::class);
+    }
 }
