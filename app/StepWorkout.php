@@ -17,4 +17,9 @@ class StepWorkout extends Model
             $model->updated_by = Auth::user()->id;
         });
     }
+
+    public function workout()
+    {
+        return $this->belongsTo(Workout::class);
+    }
 }

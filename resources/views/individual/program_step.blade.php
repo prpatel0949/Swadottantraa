@@ -77,14 +77,87 @@
                         <div class="card-body p-0">
                             <div class="accordion search-content-info" id="accordionExample">
                                 <div class="collapse-margin search-content mt-0 bg-white">
-                                    <div class="card-header" id="headingOne" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div class="card-header" id="headingOne" role="button" data-toggle="collapse" data-target="#scale_{{ $scale->id }}" aria-expanded="false" aria-controls="collapseOne">
                                         <span class="lead collapse-title">
                                             {{ $scale->scale->title }}
+                                            <p><small>{{ $scale->scale->description }}</small></p>
                                         </span>
                                     </div>
-                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div id="scale_{{ $scale->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
-                                            {{ $scale->scale->description }}
+
+                                            <div class="row">
+                                                @foreach ($scale->scale->questions as $key => $question)
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="card-question"><span class="q_no">
+                                                                {{ $key + 1 }}.</span>{{ $question->question }}<br>
+                                                                <small>{{ $question->description }}</small>
+                                                            </div>
+                                                            <div class="card-options mb-2">
+                                                                @foreach ($question->answers as $answer)
+                                                                <label class="card-option form-control mb-2">
+                                                                    <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"> <span>{{ $answer->answer }}</span>
+                                                                    <i class="fa fa-check"></i>
+                                                                </label>
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="dropdown-divider"></div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            <div class="row mt-2">
+                @foreach ($current_step->workouts as $workout)
+                <div class="col-md-12">
+                    <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate">
+                        <div class="card-body p-0">
+                            <div class="accordion search-content-info" id="accordionExample">
+                                <div class="collapse-margin search-content mt-0 bg-white">
+                                    <div class="card-header" id="headingOne" role="button" data-toggle="collapse" data-target="#workout_{{ $workout->id }}" aria-expanded="false" aria-controls="collapseOne">
+                                        <span class="lead collapse-title">
+                                            {{ $workout->workout->title }}
+                                            <p><small>{{ $workout->workout->description }}</small></p>
+                                        </span>
+                                    </div>
+                                    <div id="workout_{{ $workout->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                @foreach ($workout->workout->questions as $key => $question)
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="card-question"><span class="q_no">
+                                                                {{ $key + 1 }}.</span>{{ $question->question }}<br>
+                                                                <small>{{ $question->description }}</small>
+                                                            </div>
+                                                            @if ($question->answer_type == 1)
+                                                                <textarea class="form-control"></textarea>
+                                                            @else
+                                                            <div class="card-options mb-2">
+                                                                @foreach ($question->answers as $answer)
+                                                                <label class="card-option form-control mb-2">
+                                                                    <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"> <span>{{ $answer->answer }}</span>
+                                                                    <i class="fa fa-check"></i>
+                                                                </label>
+                                                                @endforeach
+                                                            </div>
+                                                            @endif
+                                                            <div class="dropdown-divider"></div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
