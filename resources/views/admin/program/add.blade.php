@@ -38,6 +38,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Title</label>
                                     <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Program Title">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -48,6 +49,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Description</label>
                                     <input type="text" class="form-control @error('description') error @enderror" value="{{ old('description') }}" name="description" placeholder="Program Description">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -58,6 +60,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Time</label>
                                     <input type="text" class="form-control @error('time') error @enderror" value="{{ old('time') }}" name="time" placeholder="Average Time">
                                     @error('time')
                                         <span class="invalid-feedback" role="alert">
@@ -68,6 +71,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Cost</label>
                                     <input type="text" class="form-control @error('cost') error @enderror" value="{{ old('cost') }}" name="cost" placeholder="Cost">
                                     @error('cost')
                                         <span class="invalid-feedback" role="alert">
@@ -78,6 +82,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Tag</label>
                                     <input type="text" class="form-control @error('tag') error @enderror" value="{{ old('tag') }}" name="tag" placeholder="Tag">
                                     @error('tag')
                                         <span class="invalid-feedback" role="alert">
@@ -88,6 +93,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Image</label>
                                     <input type="file" class="form-control @error('image') error @enderror" value="{{ old('image') }}" name="image">
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
@@ -96,6 +102,36 @@
                                     @enderror
                                 </div>
                             </div>
+                            {{-- <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Years</label>
+                                    <select class="form-control">
+                                        @for ($i = 0; $i < 10; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Months</label>
+                                    <select class="form-control">
+                                        @for ($i = 0; $i < 12; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Days</label>
+                                    <select class="form-control">
+                                        @for ($i = 0; $i < 30; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -112,6 +148,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                                <label>Stage Title</label>
                                                 <input type="text" name="stage_name[{{ $index }}]" value="{{ $stage }}" class="form-control" placeholder="Stage Title">
                                                 @error('stage_name.'.$index)
                                                     <span class="invalid-feedback" role="alert">
@@ -122,6 +159,7 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                                <label>Stage Description</label>
                                                 <input type="text" name="stage_description[{{ $index }}]" value="{{ old('stage_description.'.$index) }}" class="form-control" placeholder="Stage Description">
                                                 @error('stage_description.'.$index)
                                                     <span class="invalid-feedback" role="alert">
@@ -140,10 +178,11 @@
                                                         Step {{ $key + 1 }}
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <div class="card card-body bg-light">
+                                                        <div class="card card-body bg-step">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
+                                                                        <label>Step Title</label>
                                                                         <input type="text" name="step_name[{{ $index }}][]" value="{{ old('step_name.'.$index.'.'.$key) }}" class="form-control" placeholder="Step Name">
                                                                         @error('step_name.'.$index.'.'.$key)
                                                                             <span class="invalid-feedback" role="alert">
@@ -154,6 +193,7 @@
                                                                 </div>
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
+                                                                        <label>Step Description</label>
                                                                         <input type="text" name="step_description[{{ $index }}][]" value="{{ old('step_description.'.$index.'.'.$key) }}" class="form-control" placeholder="Step Description">
                                                                         @error('step_description.'.$index.'.'.$key)
                                                                             <span class="invalid-feedback" role="alert">
@@ -232,11 +272,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
+                        <label>Stage Title</label>
                         <input type="text" name="stage_name[`SrNo`]" class="form-control" placeholder="Stage Title">
                     </div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-group">
+                        <label>Stage Description</label>
                         <input type="text" name="stage_description[`SrNo`]" class="form-control" placeholder="Stage Description">
                     </div>
                 </div>
@@ -248,15 +290,17 @@
                         Step 1
                     </div>
                     <div class="col-sm-10">
-                        <div class="card card-body bg-light">
+                        <div class="card card-body bg-step">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label>Step Title</label>
                                         <input type="text" name="step_name[`SrNo`][]" class="form-control" placeholder="Step Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label>Step Description</label>
                                         <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
                                     </div>
                                 </div>
@@ -304,15 +348,17 @@
             Step `SrNo~1`
         </div>
         <div class="col-sm-10">
-            <div class="card card-body bg-light">
+            <div class="card card-body bg-step">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
+                            <label>Step Title</label>
                             <input type="text" name="step_name[`SrNo`][]" class="form-control" placeholder="Step Name">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
+                            <label>Step Description</label>
                             <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
                         </div>
                     </div>

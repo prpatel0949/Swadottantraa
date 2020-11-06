@@ -146,7 +146,7 @@
                                                         <input type="hidden" name="step_id[{{ $index }}][]" value="{{ old('step_id.'.$index.'.'.$key) }}">
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <div class="card card-body bg-light">
+                                                        <div class="card card-body bg-step">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
@@ -242,7 +242,7 @@
                                                     <input type="hidden" name="step_id[{{ $index }}][]" value="{{ $step->id }}">
                                                 </div>
                                                 <div class="col-sm-10">
-                                                    <div class="card card-body bg-light">
+                                                    <div class="card card-body bg-step">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
@@ -343,7 +343,7 @@
                         <input type="hidden" name="step_id[1]" value="">
                     </div>
                     <div class="col-sm-10">
-                        <div class="card card-body bg-light">
+                        <div class="card card-body bg-step">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -400,7 +400,7 @@
             <input type="hidden" name="step_id[[`SrNo`][]" value="">
         </div>
         <div class="col-sm-10">
-            <div class="card card-body bg-light">
+            <div class="card card-body bg-step">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">

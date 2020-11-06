@@ -140,7 +140,7 @@
                                                         Step {{ $key + 1 }}
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <div class="card card-body bg-light">
+                                                        <div class="card card-body bg-step">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
@@ -253,7 +253,7 @@
                         Step 1
                     </div>
                     <div class="col-sm-10">
-                        <div class="card card-body bg-light">
+                        <div class="card card-body bg-step">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -319,7 +319,7 @@
             Step `SrNo~1`
         </div>
         <div class="col-sm-10">
-            <div class="card card-body bg-light">
+            <div class="card card-body bg-step">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">

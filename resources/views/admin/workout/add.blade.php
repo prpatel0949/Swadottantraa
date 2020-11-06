@@ -119,7 +119,7 @@
                                 <div class="row answer-section">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
+                                            <input type="hidden" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
                                                 value="{{ old('answer.'.$index) }}" readonly>
                                             @error('answer.'.$index)
                                                 <span class="invalid-feedback" role="alert">
@@ -215,7 +215,7 @@
             <div class="row answer-section">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer" readonly>
+                        <input type="hidden" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer" readonly>
                     </div>
                 </div>
             </div>

@@ -78,20 +78,27 @@ class ProgramController extends Controller
         ]);
     }
 
-    public function questionAnswer(Request $request, $id)
+    // public function questionAnswer(Request $request, $id)
+    // {
+    //     foreach($request->get('question') as $a => $z)
+    //     {
+    //         $rules['answer.'.$z] = 'required';
+    //     }
+
+    //     $request->validate($rules, [ 'answer.*.required' => 'Answer is required.' ]);
+
+    //     if ($this->program->storeAnswer($request->all(), $id)) {
+    //         return redirect()->route('individual.program.access', ['id' => $id]);
+    //     }
+
+    //     return redirect()->route('individual.program.access', ['id' => $id ]);
+    // }
+
+    public function scaleQuestionAnswer(Request $request, $id)
     {
-        foreach($request->get('question') as $a => $z)
-        {
-            $rules['answer.'.$z] = 'required';
+        if ($this->program->scaleQuestionAnswer($request->all(), $id)) {
+            return redirect()->back()->with('success', 'Answer submited successfully.');
         }
-
-        $request->validate($rules, [ 'answer.*.required' => 'Answer is required.' ]);
-
-        if ($this->program->storeAnswer($request->all(), $id)) {
-            return redirect()->route('individual.program.access', ['id' => $id]);
-        }
-
-        return redirect()->route('individual.program.access', ['id' => $id ]);
-
+        dd($request->all());
     }
 }

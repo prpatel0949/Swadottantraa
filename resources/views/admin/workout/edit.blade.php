@@ -120,7 +120,7 @@
                                 <div class="row answer-section">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
+                                            <input type="hidden" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
                                                 value="{{ old('answer.'.$index) }}" readonly>
                                             @error('answer.'.$index)
                                                 <span class="invalid-feedback" role="alert">
@@ -142,7 +142,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group float-right">
-                                            @if (old('answer_type.'.$index) == 0)
+                                            @if ($question->answer_type == 0)
                                                 <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
                                             @endif
                                             <button type="button" class="btn btn-primary delete-question" data-index="{{ $index }}">Delete Question</button>
@@ -199,7 +199,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="hidden" name="answer_id[{{ $index }}]" value="{{ $question->answers[0]->id }}">
-                                            <input type="text" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
+                                            <input type="hidden" name="answer[{{ $index }}]" class="form-control" placeholder="Descriptive Answer"
                                                 value="{{ $question->answers[0]->answer }}" readonly>
                                             @error('answer.'.$index)
                                                 <span class="invalid-feedback" role="alert">
@@ -297,7 +297,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <input type="hidden" name="answer_id[`SrNo`]" value="">
-                        <input type="text" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer" readonly>
+                        <input type="hidden" name="answer[`SrNo`]" class="form-control" placeholder="Descriptive Answer" readonly>
                     </div>
                 </div>
             </div>

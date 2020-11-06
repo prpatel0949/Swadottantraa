@@ -85,27 +85,33 @@
                                     </div>
                                     <div id="scale_{{ $scale->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
-
                                             <div class="row">
-                                                @foreach ($scale->scale->questions as $key => $question)
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <div class="card-question"><span class="q_no">
-                                                                {{ $key + 1 }}.</span>{{ $question->question }}<br>
-                                                                <small>{{ $question->description }}</small>
+                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="scale_id" value="{{ $scale->scale->id }}">
+                                                    @foreach ($scale->scale->questions as $key => $question)
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="card-question"><span class="q_no">
+                                                                    {{ $key + 1 }}.</span>{{ $question->question }}<br>
+                                                                    <small>{{ $question->description }}</small>
+                                                                </div>
+                                                                <div class="card-options mb-2">
+                                                                    @foreach ($question->answers as $answer)
+                                                                    <label class="card-option form-control mb-2">
+                                                                        <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}" required> <span>{{ $answer->answer }}</span>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </label>
+                                                                    @endforeach
+                                                                </div>
+                                                                <div class="dropdown-divider"></div>
                                                             </div>
-                                                            <div class="card-options mb-2">
-                                                                @foreach ($question->answers as $answer)
-                                                                <label class="card-option form-control mb-2">
-                                                                    <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"> <span>{{ $answer->answer }}</span>
-                                                                    <i class="fa fa-check"></i>
-                                                                </label>
-                                                                @endforeach
-                                                            </div>
-                                                            <div class="dropdown-divider"></div>
                                                         </div>
+                                                    @endforeach
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
-                                                @endforeach
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

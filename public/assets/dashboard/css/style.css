@@ -233,3 +233,7 @@ input.error {
     line-height: 26px;
     font-size: 15px;
 }
+
+.bg-step {
+    background-color: #F8F8F8;
+}

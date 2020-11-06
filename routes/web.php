@@ -51,6 +51,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
 
     Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');
 
+    Route::post('program/{id}/question_answer', 'ProgramController@scaleQuestionAnswer')->name('user.program.question_answer');
+
 });
 
 Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware' => [ 'auth', 'franchisee' ] ], function () {

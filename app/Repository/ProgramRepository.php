@@ -325,4 +325,9 @@ class ProgramRepository implements ProgramRepositoryInterface
         $program->delete();
         return true;
     }
+
+    public function scaleQuestionAnswer($data, $id)
+    {
+        dd($data);
+    }
 }
