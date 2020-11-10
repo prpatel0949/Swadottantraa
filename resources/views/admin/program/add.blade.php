@@ -25,7 +25,7 @@
         <div class="content-body">
             <form action="{{ route('program.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="card">
+                <div class="card sticky_block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -169,7 +169,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="step-div">
                                         @if (!empty(old('step_name.'.$index)))
                                             @foreach (old('step_name.'.$index) as $key => $scale)
@@ -209,7 +209,7 @@
                                                                         <label>Scales</label>
                                                                         <select name="scales[{{ $index }}][{{ $key }}][]" id="scale_{{ $index }}_{{ $key }}" class="form-control old_select2" multiple style="width: 100%;">
                                                                             @foreach ($scales as $item)
-                                                                                <option value="{{ $item->id }}" 
+                                                                                <option value="{{ $item->id }}"
                                                                                     {{ (!empty(old('scales.'.$index.'.'.$key)) && in_array($item->id, old('scales.'.$index.'.'.$key)) ? 'selected=""' : '') }}>{{ $item->title }}</option>
                                                                             @endforeach
                                                                         </select>
@@ -239,7 +239,7 @@
                                             @endforeach
                                         @endif
                                     </div>
-                    
+
                                 </div>
                             </div>
                         @endforeach
@@ -257,7 +257,7 @@
     </div>
 </div>
 
-    
+
 <div class="stage-section d-none">
     <div class="card">
         <div class="card-header d-flex justify-content-between">
@@ -283,7 +283,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="step-div">
                 <div class="row">
                     <div class="col-sm-2 mt-2">
@@ -418,7 +418,7 @@
                 listArray.push({ 'id': $(row), 'index': index })
             });
 
-            console.log(listArray);  
+            console.log(listArray);
         });
         $('.old_select2').select2();
         let index = {{ (old('stage_name') ? count(old('stage_name')) : 0) }};

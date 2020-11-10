@@ -29,7 +29,7 @@
             <form action="{{ route('workout.update', $workout->id) }}" method="POST">
                 @method('PUT')
                 @csrf
-                <div class="card header-block">
+                <div class="card header-block sticky_block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">

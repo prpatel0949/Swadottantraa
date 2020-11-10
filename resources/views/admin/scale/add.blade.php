@@ -28,7 +28,7 @@
         <div class="content-body">
             <form action="{{ route('scale.store') }}" method="POST">
                 @csrf
-                <div class="card header-block">
+                <div class="card header-block sticky_block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8">

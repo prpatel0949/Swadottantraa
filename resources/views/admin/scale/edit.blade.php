@@ -29,7 +29,7 @@
             <form action="{{ route('scale.update', $scale->id) }}" method="POST">
                 @method('PUT')
                 @csrf
-                <div class="card">
+                <div class="card sticky_block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8">

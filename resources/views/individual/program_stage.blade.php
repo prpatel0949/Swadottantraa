@@ -60,14 +60,15 @@
                     <div class="row">
                         @foreach ($steps as $step)
                             <div class="col-sm-6 col-lg-4">
-                                <div class="card h100">
+                                <div class="card h100 locked_stage" >
+                                    <div class="locked_wrapper shadow">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </div>
                                     <div class="card-header">
                                         <h4>{{ $step->title }}</h4>
                                     </div>
                                     <div class="card-body py-0">
-                                        <div class="progress progress-bar-primary mb-1">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
-                                        </div>
+                                        <hr>
                                         <div class="d-flex justify-content-start align-items-center">
                                             <div class="user-page-info">
                                                 <h5 class="mb-0 v-stage-description"">{{ $step->description }}</h5>
