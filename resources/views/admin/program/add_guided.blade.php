@@ -23,8 +23,9 @@
             </div>
         </div>
         <div class="content-body">
-            <form action="{{ route('program.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('program.store') }}" id="addForm" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div id="validation-errors"></div>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -38,6 +39,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Title</label>
                                     <input type="text" class="form-control @error('title') error @enderror" value="{{ old('title') }}" name="title" placeholder="Program Title">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -48,6 +50,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Description</label>
                                     <input type="text" class="form-control @error('description') error @enderror" value="{{ old('description') }}" name="description" placeholder="Program Description">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -56,8 +59,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Time</label>
                                     <input type="text" class="form-control @error('time') error @enderror" value="{{ old('time') }}" name="time" placeholder="Average Time">
                                     @error('time')
                                         <span class="invalid-feedback" role="alert">
@@ -65,9 +69,10 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Cost</label>
                                     <input type="text" class="form-control @error('cost') error @enderror" value="{{ old('cost') }}" name="cost" placeholder="Cost">
                                     @error('cost')
                                         <span class="invalid-feedback" role="alert">
@@ -78,6 +83,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Tag</label>
                                     <input type="text" class="form-control @error('tag') error @enderror" value="{{ old('tag') }}" name="tag" placeholder="Tag">
                                     @error('tag')
                                         <span class="invalid-feedback" role="alert">
@@ -88,6 +94,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label>Image</label>
                                     <input type="file" class="form-control @error('image') error @enderror" value="{{ old('image') }}" name="image">
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
@@ -96,124 +103,46 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Years</label>
+                                    <select name="year" class="form-control">
+                                        @for ($i = 0; $i < 10; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Months</label>
+                                    <select name="month" class="form-control">
+                                        @for ($i = 0; $i < 12; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Days</label>
+                                    <select name="day" class="form-control">
+                                        @for ($i = 0; $i < 30; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="stage-div" id="stage-div">
-                    @if (old('stage_name'))
-                        @foreach (old('stage_name') as $index => $stage)
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between">
-                                    Stage {{ $index + 1 }}
-                                    <button type="button" name="" class="btn btn-primary add-step" data-index="{{ $index }}">Add Step</button>
-                                    <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ old('order.'.$index) }}" class="order-cls">
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" name="stage_name[{{ $index }}]" value="{{ $stage }}" class="form-control" placeholder="Stage Title">
-                                                @error('stage_name.'.$index)
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" name="stage_description[{{ $index }}]" value="{{ old('stage_description.'.$index) }}" class="form-control" placeholder="Stage Description">
-                                                @error('stage_description.'.$index)
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="step-div">
-                                        @if (!empty(old('step_name.'.$index)))
-                                            @foreach (old('step_name.'.$index) as $key => $scale)
-                                                <div class="row">
-                                                    <div class="col-sm-2 mt-2">
-                                                        Step {{ $key + 1 }}
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                        <div class="card card-body bg-step">
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <input type="text" name="step_name[{{ $index }}][]" value="{{ old('step_name.'.$index.'.'.$key) }}" class="form-control" placeholder="Step Name">
-                                                                        @error('step_name.'.$index.'.'.$key)
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <input type="text" name="step_description[{{ $index }}][]" value="{{ old('step_description.'.$index.'.'.$key) }}" class="form-control" placeholder="Step Description">
-                                                                        @error('step_description.'.$index.'.'.$key)
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-12 d-none comment">
-                                                                    <div class="form-group">
-                                                                        <input type="text" name="comment[{{ $index }}][]" value="{{ old('comment.'.$index.'.'.$key) }}" class="form-control" placeholder="Comment">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label>Scales</label>
-                                                                        <select name="scales[{{ $index }}][{{ $key }}][]" id="scale_{{ $index }}_{{ $key }}" class="form-control old_select2" multiple style="width: 100%;">
-                                                                            @foreach ($scales as $item)
-                                                                                <option value="{{ $item->id }}" 
-                                                                                    {{ (!empty(old('scales.'.$index.'.'.$key)) && in_array($item->id, old('scales.'.$index.'.'.$key)) ? 'selected=""' : '') }}>{{ $item->title }}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label>Workouts</label>
-                                                                        <select name="workouts[{{ $index }}][{{ $key }}][]" id="workout_{{ $index }}_{{ $key }}" class="form-control old_select2" multiple style="width: 100%;">
-                                                                            @foreach ($workouts as $item)
-                                                                                <option value="{{ $item->id }}"
-                                                                                    {{ (!empty(old('workouts.'.$index.'.'.$key)) && in_array($item->id, old('workouts.'.$index.'.'.$key)) ? 'selected=""' : '') }}>{{ $item->title }}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label>Attachment</label>
-                                                                        <input type="file" name="attachment[{{ $index }}][{{ $key }}][]" class="form-control" multiple>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
                     
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                     </div>
                 </div>
 
@@ -237,18 +166,20 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
+                        <label>Stage Title</label>
                         <input type="text" name="stage_name[`SrNo`]" class="form-control" placeholder="Stage Title">
                     </div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-group">
+                        <label>Stage Description</label>
                         <input type="text" name="stage_description[`SrNo`]" class="form-control" placeholder="Stage Description">
                     </div>
                 </div>
             </div>
             
             <div class="step-div">
-                <div class="row">
+                <div class="row step-row">
                     <div class="col-sm-2 mt-2">
                         Step 1
                     </div>
@@ -257,52 +188,36 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label>Step Title</label>
                                         <input type="text" name="step_name[`SrNo`][]" class="form-control" placeholder="Step Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="form-group input-group">
-                                        <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
-                                        <div class="input-group-append">
-                                            <a href="javascript:void(0)" class="input-group-text add-value" id="basic-addon2">
-                                                <i class="fa fa-stethoscope"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 d-none comment">
                                     <div class="form-group">
-                                        <input type="text" name="comment[`SrNo`][]" class="form-control" placeholder="Comment">
+                                        <label>Step Description</label>
+                                        <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Scales</label>
-                                        <select name="scales[`SrNo`][1][]" id="scale_`SrNo`_1" class="form-control select2" multiple style="width: 100%;">
-                                            @foreach ($scales as $item)
-                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                            @endforeach
-                                        </select>
+                                        <button class="btn btn-outline-primary add-scale-btn" data-index="`SrNo`" data-step="0">Add Scale</button>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Workouts</label>
-                                        <select name="workouts[`SrNo`][1][]" id="workout_`SrNo`_1" class="form-control select2" multiple style="width: 100%;">
-                                            @foreach ($workouts as $item)
-                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                            @endforeach
-                                        </select>
+                                        <button class="btn btn-outline-primary add-workout-btn" data-index="`SrNo`" data-step="0">Add Workout</button>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Attachment</label>
-                                        <input type="file" name="attachment[`SrNo`][1][]" class="form-control" multiple>
+                                        <button class="btn btn-outline-primary add-attachment-btn" data-index="`SrNo`" data-step="0">Add Attachment</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="scale-workout-section">
+
                             </div>
                         </div>
                     </div>
@@ -314,7 +229,7 @@
 </div>
 
 <div class="step-section d-none">
-    <div class="row">
+    <div class="row step-row">
         <div class="col-sm-2 mt-2">
             Step `SrNo~1`
         </div>
@@ -323,44 +238,94 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
+                            <label>Step Title</label>
                             <input type="text" name="step_name[`SrNo`][]" class="form-control" placeholder="Step Name">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
+                            <label>Step Description</label>
                             <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label>Scales</label>
-                            <select name="scales[`SrNo`][`SrNo~1`][]" id="scale_`SrNo`_`SrNo~1`" class="form-control select2" multiple style="width: 100%;">
-                                @foreach ($scales as $item)
-                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                @endforeach
-                            </select>
+                            <button class="btn btn-outline-primary add-scale-btn" data-index="`SrNo`" data-step="`SrNo~1`">Add Scale</button>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label>Workouts</label>
-                            <select name="workouts[`SrNo`][`SrNo~1`][]" id="workout_`SrNo`_`SrNo~1`" class="form-control select2" multiple style="width: 100%;">
-                                @foreach ($workouts as $item)
-                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                @endforeach
-                            </select>
+                            <button class="btn btn-outline-primary add-workout-btn" data-index="`SrNo`" data-step="`SrNo~1`">Add Workout</button>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label>Attachment</label>
-                            <input type="file" name="attachment[`SrNo`][`SrNo~1`][]" class="form-control" multiple>
+                            <button class="btn btn-outline-primary add-attachment-btn" data-index="`SrNo`" data-step="`SrNo~1`">Add Attachment</button>
                         </div>
                     </div>
                 </div>
+                <div class="scale-workout-section">
+
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="scale-div d-none">
+    <div class="row">
+        <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="scale">
+        <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Scales</label>
+                <select name="scales[`SrNo`][`SrNo~1`][`length`]" id="scale_`SrNo`_`length`" class="form-control select2" style="width: 100%;">
+                    @foreach ($scales as $item)
+                        <option value="{{ $item->id }}">{{ $item->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-2 mt-2">
+            <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="workout-div d-none">
+    <div class="row">
+        <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="workout">
+        <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Workouts</label>
+                <select name="workouts[`SrNo`][`SrNo~1`][`length`]" id="workout_`SrNo`_`length`" class="form-control select2" style="width: 100%;">
+                    @foreach ($workouts as $item)
+                        <option value="{{ $item->id }}">{{ $item->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-2 mt-2">
+            <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="attachment-div d-none">
+    <div class="row">
+        <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="attachment">
+        <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Attachment</label>
+                <input type="file" name="attachment[`SrNo`][`SrNo~1`][`length`]" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-2 mt-2">
+            <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
         </div>
     </div>
 </div>
@@ -371,6 +336,7 @@
     <script src="https://bevacqua.github.io/dragula/dist/dragula.js"></script>
     <script src="{{ asset('assets/dashboard/vendors/js/forms/select/select2.min.js') }}"></script>
     <script>
+        var length = 0;
         var container = document.getElementById('stage-div');
         var rows = container.children;
         var nodeListForEach = function (array, callback, scope) {
@@ -395,7 +361,7 @@
             e.preventDefault();
             let content = $('.stage-section').html();
             content = content.replace(/`SrNo`/gi, index);
-            content = content.replace(/`SrNo~1`/gi, parseInt(index) + 1);
+            content = content.replace(/`SrNo~1`/gi, 0);
             $('.stage-div').append(content);
             $('#scale_'+ index +'_1').select2();
             $('#workout_'+ index +'_1').select2();
@@ -409,23 +375,86 @@
             let section_number = $(this).parent().parent().parent().find('.step-div > div').length;
             console.log(section_number);
             section_number = (section_number == '' ? 0 : section_number);
-            section_number = parseInt(section_number) + 1;
+            // section_number = parseInt(section_number) + 1;
             content = content.replace(/`SrNo`/gi, page);
             content = content.replace(/`SrNo~1`/gi, section_number);
-            console.log($(this).parent().parent().parent().find('.step-div'));
+            console.log($(this).parent().parent().find('.step-div'));
             $(this).parent().parent().parent().find('.step-div').append(content);
-            $('#scale_'+ page +'_' + section_number).select2();
-            $('#workout_'+ page +'_' + section_number).select2();
-        });
-
-        $(document).on('click', '.add-value', function(e) {
-            e.preventDefault();
-            $(this).parent().parent().parent().parent().find('.comment').toggleClass('d-none');
+            // $('#scale_'+ page +'_' + section_number).select2();
+            // $('#workout_'+ page +'_' + section_number).select2();
         });
 
         $(document).on('click', '.delete-stage', function(e) {
             e.preventDefault();
             $(this).closest('.card').remove();
+        });
+
+        $(document).on('click', '.add-scale-btn', function (e) {
+            e.preventDefault();
+            let ind = $(this).attr('data-index');
+            let content = $('.scale-div').html();
+            let step = $(this).attr('data-step');
+            content = content.replace(/`SrNo`/gi, ind);
+            content = content.replace(/`length`/gi, length);
+            content = content.replace(/`SrNo~1`/gi, step);
+            $(this).closest('.step-row').find('.scale-workout-section').append(content);
+            $('#scale_' + ind + '_' + length).select2();
+            length++;
+        });
+
+        $(document).on('click', '.add-workout-btn', function (e) {
+            e.preventDefault();
+            let ind = $(this).attr('data-index');
+            let content = $('.workout-div').html();
+            let step = $(this).attr('data-step');
+            content = content.replace(/`SrNo`/gi, ind);
+            content = content.replace(/`length`/gi, length);
+            content = content.replace(/`SrNo~1`/gi, step);
+            $(this).closest('.step-row').find('.scale-workout-section').append(content);
+            $('#workout_' + ind + '_' + length).select2();
+            length++;
+        });
+
+        $(document).on('click', '.add-attachment-btn', function (e) {
+            e.preventDefault();
+            let ind = $(this).attr('data-index');
+            let content = $('.attachment-div').html();
+            let step = $(this).attr('data-step');
+            content = content.replace(/`SrNo`/gi, ind);
+            content = content.replace(/`length`/gi, length);
+            content = content.replace(/`SrNo~1`/gi, step);
+            $(this).closest('.step-row').find('.scale-workout-section').append(content);
+            length++;
+        });
+
+        $(document).on('click', '.delete-scale', function (e) {
+            e.preventDefault();
+            $(this).closest('.row').remove();
+        });
+
+        $('#addForm').submit(function() {
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                data: formData,
+                contentType: false,
+                processData: false,
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                success: function(response) {
+                    window.location.href = '{{ route("program.index") }}';
+                }, error: function (error) {
+                    $('#validation-errors').html('');
+                    if (error.status == 422) {
+                        $.each(error.responseJSON, function(key,value) {
+                            $('#validation-errors').append('<div class="alert alert-danger">'+value[0] +'</div');
+                        });
+                    } else {
+                        $('#validation-errors').append('<div class="alert alert-danger">Something went wrong.</div');
+                    }
+                    document.documentElement.scrollTop = 0;
+                }
+            });
+            return false;
         });
 
     </script>

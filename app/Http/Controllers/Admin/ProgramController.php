@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Hash;
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Program\AddRequest;
@@ -62,8 +63,32 @@ class ProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddRequest $request)
+    public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:100',
+            'description' => 'required|string',
+            // 'time' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'tag' => 'required|string',
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'stage_name.*' => 'required|string|max:100', 
+            'stage_description.*' => 'required|string',
+            'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',
+            'step_name.*.*' => 'required|string|max:100',
+            'step_description.*.*' => 'required|string',
+            'comment.*.*' => 'nullable|string|max:200',
+        ], [
+            'stage_name.*.required' => 'Stage name is required.',
+            'stage_description.*.required' => 'Stage description is required.',
+            'step_name.*.*.required' => 'Step Name is required.',
+            'step_description.*.*.required' => 'Step description is required.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         if ($this->program->store($request->all())) {
             return redirect()->route('program.index')->with('success', 'Program created successfully.');
         }
@@ -111,8 +136,32 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:100',
+            'description' => 'required|string',
+            // 'time' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'tag' => 'required|string',
+            'image' => 'nullable|mimes:jpeg,jpg,png',
+            'stage_name.*' => 'required|string|max:100', 
+            'stage_description.*' => 'required|string',
+            // 'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',
+            'step_name.*.*' => 'required|string|max:100',
+            'step_description.*.*' => 'required|string',
+            'comment.*.*' => 'nullable|string|max:200',
+        ], [
+            'stage_name.*.required' => 'Stage name is required.',
+            'stage_description.*.required' => 'Stage description is required.',
+            'step_name.*.*.required' => 'Step Name is required.',
+            'step_description.*.*.required' => 'Step description is required.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         if ($this->program->update($request->all(), $id)) {
             return redirect()->route('program.index')->with('success', 'Program updated successfully.');
         }

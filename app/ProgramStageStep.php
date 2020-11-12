@@ -30,4 +30,9 @@ class ProgramStageStep extends Model
     {
         return $this->hasMany('App\StepAttachment', 'step_id');
     }
+
+    public function sequences()
+    {
+        return $this->hasMany(ScaleWorkoutSequence::class, 'step_id');
+    }
 }

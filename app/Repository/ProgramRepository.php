@@ -15,12 +15,13 @@ use App\UserProgram;
 use App\ProgramStage;
 use App\StepAttachment;
 use App\ProgramStageStep;
+use App\ScaleWorkoutSequence;
 use Illuminate\Support\Facades\Log;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
-    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment;
+    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce;
 
     public function __construct(
         Program $program,
@@ -32,7 +33,8 @@ class ProgramRepository implements ProgramRepositoryInterface
         ProgramStageStep $step,
         StepScale $scale,
         StepWorkout $workout,
-        StepAttachment $attachment
+        StepAttachment $attachment,
+        ScaleWorkoutSequence $sequence
     )
     {
         $this->program = $program;
@@ -45,6 +47,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         $this->scale = $scale;
         $this->workout = $workout;
         $this->attachment = $attachment;
+        $this->sequence = $sequence;
     }
 
     public function all()
@@ -125,9 +128,10 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->description = $data['description'];
             $program->cost = $data['cost'];
             $program->tag = $data['tag'];
-            $program->time = $data['time'];
+            $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->type = $data['type'];
             $program->save();
+
 
             if (!empty($data['stage_name'])) {
                 foreach ($data['stage_name'] as $index => $value) {
@@ -147,31 +151,58 @@ class ProgramRepository implements ProgramRepositoryInterface
                             $step->comment = (isset($data['comment']) ? $data['comment'][$index][$key] : '');
                             $step->save();
 
+                            $storeScale = [];
                             if (!empty($data['scales'][$index][$key])) {
-                                foreach ($data['scales'][$index][$key] as $value) {
+                                foreach ($data['scales'][$index][$key] as $k1 => $value) {
                                     $scale = new $this->scale;
                                     $scale->step_id = $step->id;
                                     $scale->scale_id = $value;
                                     $scale->save();
+                                    $storeScale[$index][$key][$k1] = $scale->id;
                                 }
                             }
 
+                            $storeWorkout = [];
                             if (!empty($data['workouts'][$index][$key])) {
-                                foreach ($data['workouts'][$index][$key] as $value) {
+                                foreach ($data['workouts'][$index][$key] as $k1 => $value) {
                                     $workout = new $this->workout;
                                     $workout->step_id = $step->id;
                                     $workout->workout_id = $value;
                                     $workout->save();
+                                    $storeWorkout[$index][$key][$k1] = $workout->id;
                                 }
                             }
 
+                            $storeAttachment = [];
                             if (!empty($data['attachment'][$index][$key])) {
-                                foreach ($data['attachment'][$index][$key] as $value) {
+                                foreach ($data['attachment'][$index][$key] as $k1 => $value) {
                                     $img = $value->store('attachments');
                                     $attachment = new $this->attachment;
                                     $attachment->step_id = $step->id;
                                     $attachment->image = $img;
                                     $attachment->save();
+                                    $storeAttachment[$index][$key][$k1] = $attachment->id;
+                                }
+                            }
+                            
+                            if (!empty($data['innerOrder'][$index][$key])) {
+                                foreach ($data['innerOrder'][$index][$key] as $key1 => $value) {
+                                    $type = $data['innerType'][$index][$key][$key1];
+                                    $orderNo = $data['innerOrder'][$index][$key][$key1];
+                                    $sequence = new $this->sequence;
+                                    if ($type == 'scale') {
+                                        $sequence->typable_type = get_class($this->scale);
+                                        $sequence->typable_id = $storeScale[$index][$key][$orderNo];
+                                    } elseif ($type == 'workout') {
+                                        $sequence->typable_type = get_class($this->workout);
+                                        $sequence->typable_id = $storeWorkout[$index][$key][$orderNo];
+                                    } else {
+                                        $sequence->typable_type = get_class($this->attachment);
+                                        $sequence->typable_id = $storeAttachment[$index][$key][$orderNo];
+                                    }
+                                    $sequence->step_id = $step->id;
+                                    $sequence->sequence = $value;
+                                    $sequence->save();
                                 }
                             }
                         }
@@ -201,7 +232,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->description = $data['description'];
             $program->cost = $data['cost'];
             $program->tag = $data['tag'];
-            $program->time = $data['time'];
+            $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->save();
 
             $allStage = [];
@@ -238,9 +269,10 @@ class ProgramRepository implements ProgramRepositoryInterface
                         }
 
                         $allScales = [];
+                        $storeScale = [];
+                        
                         if (!empty($data['scales'][$index][$key])) {
-                            foreach ($data['scales'][$index][$key] as $value) {
-                                echo 'step_id ========>'.$step->id.'scale_id ===>'.$value; echo '<br>';
+                            foreach ($data['scales'][$index][$key] as $k1 => $value) {
                                 $scale = $this->scale->where([ 'step_id' => $step->id, 'scale_id' => $value ])->first();
                                 if (empty($scale)) {
                                     $scale = new $this->scale;
@@ -249,6 +281,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                                     $scale->save();
                                 }
                                 $scale = $this->scale->firstorcreate([ 'step_id' => $step->id, 'scale_id' => $value ]);
+                                $storeScale[$index][$key][$k1] = $scale->id;
                                 $allScales[] = $scale->id;
                             }
                         }
@@ -256,23 +289,57 @@ class ProgramRepository implements ProgramRepositoryInterface
                         $this->scale->where('step_id', $step->id)->whereNotIn('id', $allScales)->delete();
 
                         $allWorkouts = [];
+                        $storeWorkout = [];
                         if (!empty($data['workouts'][$index][$key])) {
-                            foreach ($data['workouts'][$index][$key] as $value) {
+                            foreach ($data['workouts'][$index][$key] as $k1 => $value) {
                                 $workout = $this->workout->firstorcreate([ 'step_id' => $step->id, 'workout_id' => $value ]);
                                 $allWorkouts[] = $workout->id;
+                                $storeWorkout[$index][$key][$k1] = $workout->id;
                             }
                         }
 
                         $this->workout->where('step_id', $step->id)->whereNotIn('id', $allWorkouts)->delete();
 
                         $allAttachment = [];
+                        $storeAttachment = [];
                         if (!empty($data['attachment'][$index][$key])) {
-                            foreach ($data['attachment'][$index][$key] as $value) {
-                                $img = $value->store('attachments');
-                                $attachment = new $this->attachment;
-                                $attachment->step_id = $step->id;
-                                $attachment->image = $img;
-                                $attachment->save();
+                            foreach ($data['attachment'][$index][$key] as $k1 => $value) {
+                                if (is_file($value)) {
+                                    $img = $value->store('attachments');
+                                    $attachment = new $this->attachment;
+                                    $attachment->step_id = $step->id;
+                                    $attachment->image = $img;
+                                    $attachment->save();
+                                    $allAttachment[] = $attachment->id;
+                                    $storeAttachment[$index][$key][$k1] = $attachment->id;
+                                } else {
+                                    $allAttachment[] = $value;
+                                    $storeAttachment[$index][$key][$k1] = $value;
+                                }
+                            }
+                        }
+
+                        $this->attachment->where('step_id', $step->id)->whereNotIn('id', $allAttachment)->delete();
+
+                        $this->sequence->where('step_id', $step->id)->delete(); 
+                        if (!empty($data['innerOrder'][$index][$key])) {
+                            foreach ($data['innerOrder'][$index][$key] as $key1 => $value) {
+                                $type = $data['innerType'][$index][$key][$key1];
+                                $orderNo = $data['innerOrder'][$index][$key][$key1];
+                                $sequence = new $this->sequence;
+                                if ($type == 'scale') {
+                                    $sequence->typable_type = get_class($this->scale);
+                                    $sequence->typable_id = $storeScale[$index][$key][$orderNo];
+                                } elseif ($type == 'workout') {
+                                    $sequence->typable_type = get_class($this->workout);
+                                    $sequence->typable_id = $storeWorkout[$index][$key][$orderNo];
+                                } else {
+                                    $sequence->typable_type = get_class($this->attachment);
+                                    $sequence->typable_id = $storeAttachment[$index][$key][$orderNo];
+                                }
+                                $sequence->step_id = $step->id;
+                                $sequence->sequence = $value;
+                                $sequence->save();
                             }
                         }
                     }
@@ -304,6 +371,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                 $stage->delete();
             }
         });
+        die;
         return true;
     }
 
@@ -318,6 +386,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                     Storage::delete($attachment->image);
                 }
                 $step->attachments()->delete();
+                $step->sequences()->delete();
                 $step->delete();
             }
             $stage->delete();

@@ -27,7 +27,7 @@ class AddRequest extends FormRequest
         return [
             'title' => 'required|string|max:100',
             'description' => 'required|string',
-            'time' => 'required|numeric',
+            // 'time' => 'required|numeric',
             'cost' => 'required|numeric',
             'tag' => 'required|string',
             'image' => 'required|mimes:jpeg,jpg,png',
@@ -36,7 +36,7 @@ class AddRequest extends FormRequest
             'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',
             'step_name.*.*' => 'required|string|max:100',
             'step_description.*.*' => 'required|string',
-            'comment.*.*' => 'nullable|string|max:200'
+            'comment.*.*' => 'nullable|string|max:200',
         ];
     }
 

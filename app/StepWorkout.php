@@ -22,4 +22,9 @@ class StepWorkout extends Model
     {
         return $this->belongsTo(Workout::class);
     }
+
+    public function sequences()
+    {
+        return $this->morphMany('App\ScaleWorkoutSequence', 'typable');
+    }
 }
