@@ -27,7 +27,7 @@
                 @method('PUT')
                 @csrf
                 <div id="validation-errors"></div>
-                <div class="card">
+                <div class="card sticky_block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -285,7 +285,7 @@
     </div>
 </div>
 
-    
+
 <div class="stage-section d-none">
     <div class="card">
         <div class="card-header d-flex justify-content-between">
@@ -312,7 +312,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="step-div">
                 <div class="row step-row">
                     <div class="col-sm-2 mt-2">
@@ -489,7 +489,7 @@
                 listArray.push({ 'id': $(row), 'index': index })
             });
 
-            console.log(listArray);  
+            console.log(listArray);
         });
         $('.old_select2').select2();
         let index = {{ $program->stages->count() }};

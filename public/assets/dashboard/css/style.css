@@ -235,5 +235,38 @@ input.error {
 }
 
 .bg-step {
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
+}
+
+.locked_stage {
+    position: relative;
+    pointer-events: none;
+}
+
+.locked_wrapper {
+    background: rgba(183, 28, 28, 0.3);
+    position: absolute;
+    top: 0px;
+    right: 0;
+    bottom: 0px;
+    left: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.locked_wrapper i {
+    color: #b61b68;
+    font-size: 100px;
+}
+
+.sticky_block {
+    position: sticky;
+    top: 63px;
+    z-index: 100;
+}
+html body .content.app-content {
+    height: 100%;
+    overflow: scroll;
 }
