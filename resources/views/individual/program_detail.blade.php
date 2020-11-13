@@ -33,10 +33,12 @@
 
                 @foreach ($program->stages as $stage)
                     <div class="col-sm-6 col-lg-4">
-                        <div class="card h100 locked_stage">
-                            <div class="locked_wrapper shadow">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
-                            </div>
+                        <div class="card h100 {{ ($program->type == 1 ? 'locked_stage' : '') }}">
+                            @if ($program->type == 1)
+                                <div class="locked_wrapper shadow">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                </div>
+                            @endif
                             <div class="card-header">
                                 <h4>{{ $stage->title }}</h4>
                             </div>

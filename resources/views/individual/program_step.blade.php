@@ -73,7 +73,7 @@
             <div class="row mt-2">
                 @foreach ($current_step->scales as $scale)
                 <div class="col-md-12">
-                    <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate">
+                    <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate mb-0">
                         <div class="card-body p-0">
                             <div class="accordion search-content-info" id="accordionExample">
                                 <div class="collapse-margin search-content mt-0 bg-white">
@@ -126,7 +126,7 @@
             <div class="row mt-2">
                 @foreach ($current_step->workouts as $workout)
                 <div class="col-md-12">
-                    <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate">
+                    <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate mb-0">
                         <div class="card-body p-0">
                             <div class="accordion search-content-info" id="accordionExample">
                                 <div class="collapse-margin search-content mt-0 bg-white">
