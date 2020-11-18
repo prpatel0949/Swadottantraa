@@ -20,4 +20,8 @@ interface ProgramRepositoryInterface
     public function destroy($id);
 
     public function scaleQuestionAnswer($data, $id);
+
+    public function updateStatus($id);
+
+    public function active();
 }

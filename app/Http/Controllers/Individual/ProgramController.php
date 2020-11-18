@@ -19,12 +19,11 @@ class ProgramController extends Controller
 
     public function index()
     {
-        return view('individual.program', [ 'programs' => $this->program->all() ]);
+        return view('individual.program', [ 'programs' => $this->program->active() ]);
     }
 
     public function hash(Request $request)
     {
-        // key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5||||||salt;
         return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->program['cost'].'|'.$request->program['title'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
     }
 
@@ -42,10 +41,6 @@ class ProgramController extends Controller
     {
         $program = $this->program->findorfail($id);
 
-        if (!$program->is_subcribe) {
-            return redirect()->back();
-        }
-
         return view('individual.program_detail', [ 'program' => $program ]);
     }
 
@@ -53,13 +48,14 @@ class ProgramController extends Controller
     {
         $program = $this->program->findorfail($id);
 
-        if (!$program->is_subcribe) {
-            return redirect()->back();
+        $stage = $program->stages->where('id', $stage_id)->first();
+        if (empty($stage)) {
+            abort(404);
         }
 
         return view('individual.program_stage', [
             'program' => $program,
-            'steps' => $program->stages->where('id', $stage_id)->first()->steps
+            'steps' => $stage->steps
         ]);
     }
 
@@ -67,14 +63,20 @@ class ProgramController extends Controller
     {
         $program = $this->program->findorfail($id);
 
-        if (!$program->is_subcribe) {
-            return redirect()->back();
+        $stage = $program->stages->where('id', $stage_id)->first();
+        if (empty($stage)) {
+            abort(404);
+        }
+
+        $step = $stage->steps->where('id', $step_id)->first();
+        if (empty($step)) {
+            abort(404);
         }
 
         return view('individual.program_step', [
             'program' => $program,
-            'steps' => $program->stages->where('id', $stage_id)->first()->steps,
-            'current_step' => $program->stages->where('id', $stage_id)->first()->steps->where('id', $step_id)->first()
+            'steps' => $stage->steps,
+            'current_step' => $step
         ]);
     }
 
@@ -99,6 +101,7 @@ class ProgramController extends Controller
         if ($this->program->scaleQuestionAnswer($request->all(), $id)) {
             return redirect()->back()->with('success', 'Answer submited successfully.');
         }
-        dd($request->all());
+
+        return redirect()->back()->with('error', 'Something went wrong happen.');
     }
 }

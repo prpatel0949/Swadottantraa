@@ -46,4 +46,9 @@ class Program extends Model
     {
         return $this->hasMany('App\ProgramStage');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

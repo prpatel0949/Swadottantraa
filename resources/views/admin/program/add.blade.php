@@ -81,7 +81,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Tag</label>
                                     <input type="text" class="form-control @error('tag') error @enderror" value="{{ old('tag') }}" name="tag" placeholder="Tag">
@@ -92,7 +92,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Image</label>
                                     <input type="file" class="form-control @error('image') error @enderror" value="{{ old('image') }}" name="image">
@@ -105,9 +105,9 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label>Years</label>
+                                    <label>Minutes</label>
                                     <select name="year" class="form-control">
-                                        @for ($i = 0; $i < 10; $i++)
+                                        @for ($i = 0; $i < 60 ; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
@@ -115,9 +115,9 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label>Months</label>
+                                    <label>Hours</label>
                                     <select name="month" class="form-control">
-                                        @for ($i = 0; $i < 12; $i++)
+                                        @for ($i = 0; $i < 24; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
@@ -142,7 +142,10 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                        <input type="hidden" name="is_live" id="is_live" value="0">
+                        <button type="button" class="btn btn-primary submit-btn" data-type="0">Complete & Save</button>
+                        <button type="button" class="btn btn-primary submit-btn" data-type="1">Complete & Live</button>
+                        <a href="{{ route('program.index') }}" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
 
@@ -278,6 +281,9 @@
     <div class="row">
         <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="scale">
         <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-1 mt-2">
+            `index`
+        </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Scales</label>
@@ -298,6 +304,9 @@
     <div class="row">
         <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="workout">
         <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-1 mt-2">
+            `index`
+        </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Workouts</label>
@@ -318,6 +327,9 @@
     <div class="row">
         <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="attachment">
         <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-1 mt-2">
+            `index`
+        </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Attachment</label>
@@ -394,6 +406,9 @@
             let ind = $(this).attr('data-index');
             let content = $('.scale-div').html();
             let step = $(this).attr('data-step');
+            let number_index = $(this).closest('.step-row').find('.scale-workout-section > div').length;
+            number_index = (isNaN(number_index) ? 0 : number_index) + 1;
+            content = content.replace(/`index`/gi, number_index);
             content = content.replace(/`SrNo`/gi, ind);
             content = content.replace(/`length`/gi, length);
             content = content.replace(/`SrNo~1`/gi, step);
@@ -407,6 +422,9 @@
             let ind = $(this).attr('data-index');
             let content = $('.workout-div').html();
             let step = $(this).attr('data-step');
+            let number_index = $(this).closest('.step-row').find('.scale-workout-section > div').length;
+            number_index = (isNaN(number_index) ? 0 : number_index) + 1;
+            content = content.replace(/`index`/gi, number_index);
             content = content.replace(/`SrNo`/gi, ind);
             content = content.replace(/`length`/gi, length);
             content = content.replace(/`SrNo~1`/gi, step);
@@ -420,6 +438,9 @@
             let ind = $(this).attr('data-index');
             let content = $('.attachment-div').html();
             let step = $(this).attr('data-step');
+            let number_index = $(this).closest('.step-row').find('.scale-workout-section > div').length;
+            number_index = (isNaN(number_index) ? 0 : number_index) + 1;
+            content = content.replace(/`index`/gi, number_index);
             content = content.replace(/`SrNo`/gi, ind);
             content = content.replace(/`length`/gi, length);
             content = content.replace(/`SrNo~1`/gi, step);
@@ -432,7 +453,14 @@
             $(this).closest('.row').remove();
         });
 
-        $('#addForm').submit(function() {
+        $(document).on('click', '.submit-btn', function (e) {
+            e.preventDefault();
+            let is_live = $(this).attr('data-type');
+            $('#is_live').val(is_live);
+            $('#addForm').submit();
+        });
+
+        $('#addForm').submit(function(e) {
             var formData = new FormData($(this)[0]);
             $.ajax({
                 data: formData,

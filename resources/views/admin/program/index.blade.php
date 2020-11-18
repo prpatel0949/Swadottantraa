@@ -35,6 +35,7 @@
                                         <th>Description</th>
                                         <th>Cost</th>
                                         <th>Type</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -47,6 +48,13 @@
                                             <td class="text-right">{{ number_format($program->cost, 2, '.', '') }}</td>
                                             <td>
                                                 {{ ($program->type == 0 ? 'Single Session' : 'Guided') }}
+                                            </td>
+                                            <td>
+                                                @if ($program->is_active == 1)
+                                                    <a href="{{ route('program.status.update', $program->id) }}"><span class="badge badge-success">Live</span></a>
+                                                @else
+                                                    <a href="{{ route('program.status.update', $program->id) }}"><span class="badge badge-danger">Go Live</span></a>
+                                                @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-edit"></i></a>

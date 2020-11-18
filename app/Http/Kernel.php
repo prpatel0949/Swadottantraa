@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
         'individual' => \App\Http\Middleware\IsIndividualMiddleware::class,
         'franchisee' => \App\Http\Middleware\IsFranchiseeMiddleware::class,
         'admin' => \App\Http\Middleware\IsAdminMiddleware::class,
+        'program.active' => \App\Http\Middleware\IsActiveProgramMiddleware::class,
+        'program.subscribe' => \App\Http\Middleware\IsSubscribeProgramMiddleware::class
     ];
 }

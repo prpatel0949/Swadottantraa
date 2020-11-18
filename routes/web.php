@@ -41,10 +41,13 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
     Route::get('/program', 'ProgramController@index')->name('individual.program');
     Route::post('payment/response', 'ProgramController@paymentResponse')->name('payment.response');
     Route::post('/hash', 'ProgramController@hash')->name('generate.hash');
-    Route::get('/program/{id}', 'ProgramController@accessProgram')->name('individual.program.access');
-    Route::get('/program/{id}/{stage_id}', 'ProgramController@accessProgramStage')->name('individual.program.stage');
-    Route::get('/program/{id}/{stage_id}/{step_id}', 'ProgramController@accessProgramStep')->name('individual.program.step');
-    Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer');
+
+    Route::group(['middleware' => ['program.active', 'program.subscribe' ]], function () {
+        Route::get('/program/{id}', 'ProgramController@accessProgram')->name('individual.program.access');
+        Route::get('/program/{id}/{stage_id}', 'ProgramController@accessProgramStage')->name('individual.program.stage');
+        Route::get('/program/{id}/{stage_id}/{step_id}', 'ProgramController@accessProgramStep')->name('individual.program.step');
+        Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer'); 
+    });
 
     Route::get('support', 'SupportController@index')->name('support.index');
     Route::post('support', 'SupportController@store')->name('support.store');

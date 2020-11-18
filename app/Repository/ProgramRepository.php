@@ -13,6 +13,7 @@ use App\StepWorkout;
 use App\Transaction;
 use App\UserProgram;
 use App\ProgramStage;
+use App\ProgramAnswer;
 use App\StepAttachment;
 use App\ProgramStageStep;
 use App\ScaleWorkoutSequence;
@@ -21,7 +22,7 @@ use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
-    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce;
+    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer;
 
     public function __construct(
         Program $program,
@@ -34,7 +35,8 @@ class ProgramRepository implements ProgramRepositoryInterface
         StepScale $scale,
         StepWorkout $workout,
         StepAttachment $attachment,
-        ScaleWorkoutSequence $sequence
+        ScaleWorkoutSequence $sequence,
+        ProgramAnswer $answer
     )
     {
         $this->program = $program;
@@ -48,6 +50,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         $this->workout = $workout;
         $this->attachment = $attachment;
         $this->sequence = $sequence;
+        $this->answer = $answer;
     }
 
     public function all()
@@ -130,6 +133,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->tag = $data['tag'];
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->type = $data['type'];
+            $program->is_active = $data['is_live'];
             $program->save();
 
 
@@ -371,7 +375,6 @@ class ProgramRepository implements ProgramRepositoryInterface
                 $stage->delete();
             }
         });
-        die;
         return true;
     }
 
@@ -397,6 +400,42 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     public function scaleQuestionAnswer($data, $id)
     {
-        dd($data);
+        try {
+            dd($data);
+            if (isset($data['scale_id'])) {
+                foreach ($data['question'] as $key => $question) {
+                    $answer = new $this->answer;
+                    $answer->program_id = request()->id;
+                    $answer->step_id = $data['step_id'];
+                    $answer->scale_question_id = $key;
+                    $answer->scale_question_answer_id = $question;
+                    $answer->type = $data['type'][$key];
+                    $answer->save();
+                }
+            }
+
+            return true;
+
+
+        } catch (Exception $ex) {
+            dd($ex->getMessage());
+        }
+    }
+
+    public function updateStatus($id)
+    {
+        $program = $this->program->find($id);
+        if ($program->is_active == 1) {
+            $program->is_active = 0;
+        } else {
+            $program->is_active = 1;
+        }
+        $program->save();
+        return true;
+    }
+
+    public function active()
+    {
+        return $this->program->active()->get();
     }
 }

@@ -82,7 +82,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Tag</label>
                                     <input type="text" class="form-control @error('tag') error @enderror" value="{{ (old('tag') ? old('tag') : $program->tag) }}" name="tag" placeholder="Tag">
@@ -93,7 +93,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Image</label>
                                     <input type="file" class="form-control @error('image') error @enderror" value="{{ old('image') }}" name="image">
@@ -106,10 +106,10 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label>Years</label>
+                                    <label>Minutes</label>
                                     @php $time = explode('-', $program->time); @endphp
                                     <select name="year" class="form-control">
-                                        @for ($i = 0; $i < 10; $i++)
+                                        @for ($i = 0; $i < 60; $i++)
                                             <option value="{{ $i }}" {{ (old('year') && old('year') == $i ? 'selected=""' : ($time[0] == $i ? 'selected=""' : '') ) }}>{{ $i }}</option>
                                         @endfor
                                     </select>
@@ -117,9 +117,9 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label>Months</label>
+                                    <label>Hours</label>
                                     <select name="month" class="form-control">
-                                        @for ($i = 0; $i < 12; $i++)
+                                        @for ($i = 0; $i < 24; $i++)
                                             <option value="{{ $i }}" {{ (old('month') && old('month') == $i ? 'selected=""' : ($time[1] == $i ? 'selected=""' : '') ) }}>{{ $i }}</option>
                                         @endfor
                                     </select>
@@ -213,6 +213,9 @@
                                                                     <div class="row">
                                                                         <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="scale">
                                                                         <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
+                                                                        <div class="col-sm-1 mt-2">
+                                                                            {{ $key1 + 1 }}
+                                                                        </div>
                                                                         <div class="col-sm-4">
                                                                             <div class="form-group">
                                                                                 <label>Scales</label>
@@ -231,6 +234,9 @@
                                                                     <div class="row">
                                                                         <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="workout">
                                                                         <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
+                                                                        <div class="col-sm-1 mt-2">
+                                                                            {{ $key1 + 1 }}
+                                                                        </div>
                                                                         <div class="col-sm-4">
                                                                             <div class="form-group">
                                                                                 <label>Workouts</label>
@@ -249,6 +255,9 @@
                                                                     <div class="row">
                                                                         <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="attachment">
                                                                         <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
+                                                                        <div class="col-sm-1">
+                                                                            {{ $key1 + 1 }}
+                                                                        </div>
                                                                         <div class="col-sm-4">
                                                                             <div class="form-group">
                                                                                 <input type="hidden" name="attachment[{{ $index }}][{{ $key }}][{{ $length }}]" value="{{ $sequence->typable_id }}">
@@ -415,6 +424,9 @@
     <div class="row">
         <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="scale">
         <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-1 mt-2">
+            `index`
+        </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Scales</label>
@@ -435,6 +447,9 @@
     <div class="row">
         <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="workout">
         <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-1 mt-2">
+            `index`
+        </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Workouts</label>
@@ -455,6 +470,9 @@
     <div class="row">
         <input type="hidden" name="innerType[`SrNo`][`SrNo~1`][]" value="attachment">
         <input type="hidden" name="innerOrder[`SrNo`][`SrNo~1`][]" value="`length`">
+        <div class="col-sm-1 mt-2">
+            `index`
+        </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Attachment</label>
@@ -530,6 +548,9 @@
             let ind = $(this).attr('data-index');
             let content = $('.scale-div').html();
             let step = $(this).attr('data-step');
+            let number_index = $(this).closest('.step-row').find('.scale-workout-section > div').length;
+            number_index = (isNaN(number_index) ? 0 : number_index) + 1;
+            content = content.replace(/`index`/gi, number_index);
             content = content.replace(/`SrNo`/gi, ind);
             content = content.replace(/`length`/gi, length);
             content = content.replace(/`SrNo~1`/gi, step);
@@ -543,6 +564,9 @@
             let ind = $(this).attr('data-index');
             let content = $('.workout-div').html();
             let step = $(this).attr('data-step');
+            let number_index = $(this).closest('.step-row').find('.scale-workout-section > div').length;
+            number_index = (isNaN(number_index) ? 0 : number_index) + 1;
+            content = content.replace(/`index`/gi, number_index);
             content = content.replace(/`SrNo`/gi, ind);
             content = content.replace(/`length`/gi, length);
             content = content.replace(/`SrNo~1`/gi, step);
@@ -556,6 +580,9 @@
             let ind = $(this).attr('data-index');
             let content = $('.attachment-div').html();
             let step = $(this).attr('data-step');
+            let number_index = $(this).closest('.step-row').find('.scale-workout-section > div').length;
+            number_index = (isNaN(number_index) ? 0 : number_index) + 1;
+            content = content.replace(/`index`/gi, number_index);
             content = content.replace(/`SrNo`/gi, ind);
             content = content.replace(/`length`/gi, length);
             content = content.replace(/`SrNo~1`/gi, step);
