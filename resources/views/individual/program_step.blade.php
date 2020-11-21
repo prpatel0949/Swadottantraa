@@ -85,8 +85,8 @@
                                     </div>
                                     <div id="scale_{{ $scale->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
-                                            <div class="row">
-                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
+                                            <div>
+                                                <form  class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="step_id" value="{{ $scale->step_id }}">
                                                     <input type="hidden" name="scale_id" value="{{ $scale->scale->id }}">
@@ -141,8 +141,8 @@
                                     <div id="workout_{{ $workout->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
 
-                                            <div class="row">
-                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
+                                            <div>
+                                                <form class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
                                                     @csrf
                                                     <input type="hidden" name="step_id" value="{{ $scale->step_id }}">
                                                     <input type="hidden" name="workout_id" value="{{ $workout->workout->id }}">

@@ -36,8 +36,8 @@
             <div class="row">
 
                 <div class="col-sm-12 col-lg-4">
-                    <div class="card h100">
-                        <div class="card-header">
+                    <div class="card">
+                        <div class="card-header mb-1">
                             <h4>Stages</h4>
                             <i class="feather icon-more-horizontal cursor-pointer" data-toggle="collapse" data-target="#stage_wrapper"></i>
                         </div>
@@ -48,7 +48,8 @@
                                     <div class="user-page-info">
                                         <h5 class="mb-0 v-stage-description">{{ $stage->title }}</h5>
                                     </div>
-                                    <div class="progress progress-bar-primary mb-1">
+                                    <div class="progress progress-bar-primary mb-1 extra_progess_percentage_warpper">
+                                        <span class="extra_progess_percentage">50%</span>
                                         <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
                                     </div>
                                 </a>

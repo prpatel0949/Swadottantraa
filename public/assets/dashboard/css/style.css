@@ -270,3 +270,32 @@ html body .content.app-content {
     height: 100%;
     overflow: scroll;
 }
+
+#stage_wrapper a {
+    display: block;
+    padding: 0px 7px;
+    padding-top: 5px;
+    margin-left: -7px;
+    margin-right: -7px;
+}
+
+#stage_wrapper a.active {
+    display: block;
+    padding: 0px 7px;
+    border-radius: 5px;
+    border: 1px solid #b61b68 !important;
+    padding-top: 5px;
+    background: rgba(182, 43, 104, 0.2);
+}
+
+.extra_progess_percentage_warpper {
+    position: relative;
+    overflow: visible;
+}
+span.extra_progess_percentage {
+    position: absolute;
+    top: -19px;
+    right: 0;
+    color: #444;
+    font-size: 12px;
+}
