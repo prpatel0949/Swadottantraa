@@ -40,17 +40,26 @@ class ProgramController extends Controller
     public function accessProgram($id)
     {
         $program = $this->program->findorfail($id);
-
-        return view('individual.program_detail', [ 'program' => $program ]);
+        return view('individual.program_detail', [ 
+            'program' => $program,
+            'access' => $this->program->getAccess($id, Auth::user()->id)->pluck('stage_id')->toArray()
+        ]);
     }
 
     public function accessProgramStage($id, $stage_id)
     {
         $program = $this->program->findorfail($id);
 
+        $first_stage = $program->stages->first()->id;
+
         $stage = $program->stages->where('id', $stage_id)->first();
         if (empty($stage)) {
             abort(404);
+        }
+
+        $access = $this->program->getAccess($id, Auth::user()->id)->pluck('stage_id')->toArray();
+        if ($program->type == 1 && $first_stage != $stage->id && !in_array($stage->id, $access)) {
+            abort(403);
         }
 
         return view('individual.program_stage', [
@@ -62,10 +71,16 @@ class ProgramController extends Controller
     public function accessProgramStep($id, $stage_id, $step_id)
     {
         $program = $this->program->findorfail($id);
+        $first_stage = $program->stages->first()->id;
 
         $stage = $program->stages->where('id', $stage_id)->first();
         if (empty($stage)) {
             abort(404);
+        }
+
+        $access = $this->program->getAccess($id, Auth::user()->id)->pluck('stage_id')->toArray();
+        if ($program->type == 1 && $first_stage != $stage->id && !in_array($stage->id, $access)) {
+            abort(403);
         }
 
         $step = $stage->steps->where('id', $step_id)->first();

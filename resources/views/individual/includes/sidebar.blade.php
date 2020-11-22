@@ -15,11 +15,11 @@
             <!-- </li> -->
             <li class="{{ (request()->is('user/program*')) ? 'active' : '' }}"><a href="{{ route('individual.program') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">My Programs</span></a>
             </li>
-             <li class="{{ (request()->is('user/profile*')) ? 'active' : '' }}"><a href="{{ route('individual.profile') }}"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
-            </li>
-            <li class="{{ (request()->is('user/support*')) ? 'active' : '' }}"><a href="{{ route('support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
-            </li>
             <li><a href="#"><i class="feather icon-circle"></i><span class="menu-title">Recheck</span></a>
+            </li>
+            <li class="{{ (request()->is('user/profile*')) ? 'active' : '' }}"><a href="{{ route('individual.profile') }}"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
+            </li>
+            <li class="{{ (request()->is('user/support*')) ? 'active' : '' }}"><a href="{{ route('support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Technical Support</span></a>
             </li>
             <li>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>                

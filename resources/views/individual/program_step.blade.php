@@ -44,7 +44,7 @@
                         <div class="card-body py-0 collapse show" id="stage_wrapper">
                             @foreach ($steps as $step)
 
-                                <a href="#" class="d-block border-top mt-1 pt-1">
+                                <a href="#" class="d-block border-top mt-1 pt-1 {{ ($step->id == request()->step_id ? 'active' : '') }}">
                                     <div class="user-page-info">
                                         <h5 class="mb-0 v-stage-description">{{ $step->title }}</h5>
                                     </div>
@@ -142,9 +142,10 @@
                                         <div class="card-body">
 
                                             <div class="row">
-                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
+                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
                                                     @csrf
                                                     <input type="hidden" name="step_id" value="{{ $scale->step_id }}">
+                                                    <input type="hidden" name="workout_id" value="{{ $workout->workout->id }}">
                                                     @foreach ($workout->workout->questions as $key => $question)
                                                         <div class="col-md-12">
                                                             <div class="form-group">
@@ -154,12 +155,12 @@
                                                                     <small>{{ $question->description }}</small>
                                                                 </div>
                                                                 @if ($question->answer_type == 1)
-                                                                    <textarea class="form-control"></textarea>
+                                                                    <textarea class="form-control" name="question[{{ $question->id }}]" required></textarea>
                                                                 @else
                                                                 <div class="card-options mb-2">
                                                                     @foreach ($question->answers as $answer)
                                                                     <label class="card-option form-control mb-2">
-                                                                        <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"> <span>{{ $answer->answer }}</span>
+                                                                        <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}" required> <span>{{ $answer->answer }}</span>
                                                                         <i class="fa fa-check"></i>
                                                                     </label>
                                                                     @endforeach

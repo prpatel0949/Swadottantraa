@@ -141,143 +141,141 @@
                 <div class="stage-div" id="stage-div">
                     @php $length = 0; @endphp
                     @foreach ($program->stages as $index => $stage)
-                        <div class="stage-section">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between">
-                                    Stage {{ $index + 1 }}
-                                    <div>
-                                        <button type="button" name="" class="btn btn-primary add-step" data-index="{{ $index }}">Add Step</button>
-                                        <button type="button" name="" class="btn btn-primary delete-stage" data-index="{{ $index }}">Delete Stage</button>
-                                        <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $stage->order }}" class="order-cls">
-                                        <input type="hidden" name="stage_id[{{ $index }}]" value="{{ $stage->id }}">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between">
+                                Stage {{ $index + 1 }}
+                                <div>
+                                    <button type="button" name="" class="btn btn-primary add-step" data-index="{{ $index }}">Add Step</button>
+                                    <button type="button" name="" class="btn btn-primary delete-stage" data-index="{{ $index }}">Delete Stage</button>
+                                    <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $stage->order }}" class="order-cls">
+                                    <input type="hidden" name="stage_id[{{ $index }}]" value="{{ $stage->id }}">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Stage Title</label>
+                                            <input type="text" name="stage_name[{{ $index }}]" value="{{ $stage->title }}" class="form-control" placeholder="Stage Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Stage Description</label>
+                                            <input type="text" name="stage_description[{{ $index }}]" value="{{ $stage->description }}" class="form-control" placeholder="Stage Description">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Stage Title</label>
-                                                <input type="text" name="stage_name[{{ $index }}]" value="{{ $stage->title }}" class="form-control" placeholder="Stage Title">
+                                @foreach ($stage->steps as $key => $step)
+                                    <div class="step-div">
+                                        <div class="row step-row">
+                                            <div class="col-sm-2 mt-2">
+                                                Step {{ $key + 1 }}
+                                                <input type="hidden" name="step_id[{{ $index }}][]" value="{{ $step->id }}">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Stage Description</label>
-                                                <input type="text" name="stage_description[{{ $index }}]" value="{{ $stage->description }}" class="form-control" placeholder="Stage Description">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @foreach ($stage->steps as $key => $step)
-                                        <div class="step-div">
-                                            <div class="row step-row">
-                                                <div class="col-sm-2 mt-2">
-                                                    Step {{ $key + 1 }}
-                                                    <input type="hidden" name="step_id[{{ $index }}][]" value="{{ $step->id }}">
-                                                </div>
-                                                <div class="col-sm-10">
-                                                    <div class="card card-body bg-step">
-                                                        <div class="row">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label>Step Title</label>
-                                                                    <input type="text" name="step_name[{{ $index }}][]" value="{{ $step->title }}" class="form-control" placeholder="Step Name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label>Step Description</label>
-                                                                    <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
-                                                                </div>
+                                            <div class="col-sm-10">
+                                                <div class="card card-body bg-step">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Step Title</label>
+                                                                <input type="text" name="step_name[{{ $index }}][]" value="{{ $step->title }}" class="form-control" placeholder="Step Name">
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <button class="btn btn-outline-primary add-scale-btn" data-index="{{ $index }}" data-step="0">Add Scale</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <button class="btn btn-outline-primary add-workout-btn" data-index="{{ $index }}" data-step="0">Add Workout</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <button class="btn btn-outline-primary add-attachment-btn" data-index="{{ $index }}" data-step="0">Add Attachment</button>
-                                                                </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Step Description</label>
+                                                                <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
                                                             </div>
                                                         </div>
-                                                        <div class="scale-workout-section">
-                                                            @foreach ($step->sequences as $key1 => $sequence)
-                                                                @if ($sequence->typable_type == 'App\StepScale')
-                                                                    <div class="row">
-                                                                        <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="scale">
-                                                                        <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
-                                                                        <div class="col-sm-1 mt-2">
-                                                                            {{ $key1 + 1 }}
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <div class="form-group">
-                                                                                <label>Scales</label>
-                                                                                <select name="scales[{{ $index }}][{{ $key }}][{{ $length }}]" id="scale_{{ $index }}_{{ $length }}" class="form-control old_select2" style="width: 100%;">
-                                                                                    @foreach ($scales as $item)
-                                                                                        <option value="{{ $item->id }}" {{ ($item->id == $sequence->typable->scale_id ? 'selected=""' : '') }}>{{ $item->title }}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-2 mt-2">
-                                                                            <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
-                                                                        </div>
-                                                                    </div>
-                                                                @elseif ($sequence->typable_type == 'App\StepWorkout')
-                                                                    <div class="row">
-                                                                        <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="workout">
-                                                                        <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
-                                                                        <div class="col-sm-1 mt-2">
-                                                                            {{ $key1 + 1 }}
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <div class="form-group">
-                                                                                <label>Workouts</label>
-                                                                                <select name="workouts[{{ $index }}][{{ $key }}][{{ $length }}]" id="workout_{{ $index }}_{{ $length }}" class="form-control old_select2" style="width: 100%;">
-                                                                                    @foreach ($workouts as $item)
-                                                                                        <option value="{{ $item->id }}" {{ ($item->id == $sequence->typable->workout_id ? 'selected=""' : '') }}>{{ $item->title }}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-2 mt-2">
-                                                                            <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
-                                                                        </div>
-                                                                    </div>
-                                                                @else
-                                                                    <div class="row">
-                                                                        <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="attachment">
-                                                                        <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
-                                                                        <div class="col-sm-1">
-                                                                            {{ $key1 + 1 }}
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <div class="form-group">
-                                                                                <input type="hidden" name="attachment[{{ $index }}][{{ $key }}][{{ $length }}]" value="{{ $sequence->typable_id }}">
-                                                                                <a href="{{ Storage::url($sequence->typable->image) }}" target="_blank">{{ basename($sequence->typable->image) }}</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-2">
-                                                                            <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                            @php $length++; @endphp
-                                                            @endforeach
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-outline-primary add-scale-btn" data-index="{{ $index }}" data-step="0">Add Scale</button>
+                                                            </div>
                                                         </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-outline-primary add-workout-btn" data-index="{{ $index }}" data-step="0">Add Workout</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-outline-primary add-attachment-btn" data-index="{{ $index }}" data-step="0">Add Attachment</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scale-workout-section">
+                                                        @foreach ($step->sequences as $key1 => $sequence)
+                                                            @if ($sequence->typable_type == 'App\StepScale')
+                                                                <div class="row">
+                                                                    <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="scale">
+                                                                    <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
+                                                                    <div class="col-sm-1 mt-2">
+                                                                        {{ $key1 + 1 }}
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label>Scales</label>
+                                                                            <select name="scales[{{ $index }}][{{ $key }}][{{ $length }}]" id="scale_{{ $index }}_{{ $length }}" class="form-control old_select2" style="width: 100%;">
+                                                                                @foreach ($scales as $item)
+                                                                                    <option value="{{ $item->id }}" {{ ($item->id == $sequence->typable->scale_id ? 'selected=""' : '') }}>{{ $item->title }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-2 mt-2">
+                                                                        <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            @elseif ($sequence->typable_type == 'App\StepWorkout')
+                                                                <div class="row">
+                                                                    <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="workout">
+                                                                    <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
+                                                                    <div class="col-sm-1 mt-2">
+                                                                        {{ $key1 + 1 }}
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label>Workouts</label>
+                                                                            <select name="workouts[{{ $index }}][{{ $key }}][{{ $length }}]" id="workout_{{ $index }}_{{ $length }}" class="form-control old_select2" style="width: 100%;">
+                                                                                @foreach ($workouts as $item)
+                                                                                    <option value="{{ $item->id }}" {{ ($item->id == $sequence->typable->workout_id ? 'selected=""' : '') }}>{{ $item->title }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-2 mt-2">
+                                                                        <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="row">
+                                                                    <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="attachment">
+                                                                    <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
+                                                                    <div class="col-sm-1">
+                                                                        {{ $key1 + 1 }}
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <input type="hidden" name="attachment[{{ $index }}][{{ $key }}][{{ $length }}]" value="{{ $sequence->typable_id }}">
+                                                                            <a href="{{ Storage::url($sequence->typable->image) }}" target="_blank">{{ basename($sequence->typable->image) }}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @php $length++; @endphp
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endforeach
@@ -298,7 +296,7 @@
 <div class="stage-section d-none">
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            Stage `SrNo~1`
+            Stage `SrNo`
             <div>
                 <button type="button" name="" class="btn btn-primary add-step" data-index="`SrNo`">Add Step</button>
                 <button type="button" name="" class="btn btn-primary delete-stage" data-index="`SrNo`">Delete Stage</button>
@@ -513,13 +511,13 @@
         let index = {{ $program->stages->count() }};
         $(document).on('click', '.add-stage', function(e) {
             e.preventDefault();
+            index++;
             let content = $('.stage-section').html();
             content = content.replace(/`SrNo`/gi, index);
             content = content.replace(/`SrNo~1`/gi, 0);
             $('.stage-div').append(content);
             $('#scale_'+ index +'_1').select2();
             $('#workout_'+ index +'_1').select2();
-            index++;
         });
 
         $(document).on('click', '.add-step', function(e) {

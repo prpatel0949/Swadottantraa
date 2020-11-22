@@ -24,4 +24,12 @@ interface ProgramRepositoryInterface
     public function updateStatus($id);
 
     public function active();
+
+    public function answers();
+
+    public function answer($id);
+
+    public function stageAccess($data, $id);
+
+    public function getAccess($id, $user_id);
 }

@@ -20,4 +20,9 @@ class ScaleQuestion extends Model
     {
         return $this->hasMany(ScaleQuestionAnswer::class);
     }
+
+    public function scale()
+    {
+        return $this->belongsTo('App\Scale');
+    }
 }

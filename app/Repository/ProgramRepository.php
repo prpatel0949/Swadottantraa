@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\StepWorkout;
 use App\Transaction;
 use App\UserProgram;
+use App\StageAccess;
 use App\ProgramStage;
 use App\ProgramAnswer;
 use App\StepAttachment;
@@ -22,7 +23,7 @@ use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
-    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer;
+    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer, $access;
 
     public function __construct(
         Program $program,
@@ -36,7 +37,8 @@ class ProgramRepository implements ProgramRepositoryInterface
         StepWorkout $workout,
         StepAttachment $attachment,
         ScaleWorkoutSequence $sequence,
-        ProgramAnswer $answer
+        ProgramAnswer $answer,
+        StageAccess $access
     )
     {
         $this->program = $program;
@@ -51,6 +53,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         $this->attachment = $attachment;
         $this->sequence = $sequence;
         $this->answer = $answer;
+        $this->access = $access;
     }
 
     public function all()
@@ -401,15 +404,32 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function scaleQuestionAnswer($data, $id)
     {
         try {
-            dd($data);
+            $setno = $this->answer->max('set_no');
+            $setno = (empty($setno) ? 1 : $setno + 1);
             if (isset($data['scale_id'])) {
                 foreach ($data['question'] as $key => $question) {
                     $answer = new $this->answer;
+                    $answer->set_no = $setno;
                     $answer->program_id = request()->id;
                     $answer->step_id = $data['step_id'];
                     $answer->scale_question_id = $key;
                     $answer->scale_question_answer_id = $question;
                     $answer->type = $data['type'][$key];
+                    $answer->save();
+                }
+            } else if (isset($data['workout_id'])) {
+                foreach ($data['question'] as $key => $question) {
+                    $answer = new $this->answer;
+                    $answer->set_no = $setno;
+                    $answer->program_id = request()->id;
+                    $answer->step_id = $data['step_id'];
+                    $answer->workout_question_id = $key;
+                    $answer->type = $data['type'][$key];
+                    if ($data['type'][$key] == 1) {
+                        $answer->answer = $question;
+                    } else {
+                        $answer->workout_question_answer_id = $question;
+                    }
                     $answer->save();
                 }
             }
@@ -437,5 +457,37 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function active()
     {
         return $this->program->active()->get();
+    }
+
+    public function answers()
+    {
+        return $this->answer->groupBy('set_no')->orderBy('id', 'DESC')->get();
+    }
+
+    public function answer($id)
+    {
+        $answer = $this->answer->find($id);
+        $this->answer->where('set_no', $answer->set_no)->update([ 'is_read' => 1 ]);
+        return $this->answer->where('set_no', $answer->set_no)->get();
+    }
+
+    public function stageAccess($data, $id)
+    {
+        $allAccess = [];
+        if (isset($data['stages']) && !empty($data['stages'])) {
+            foreach($data['stages'] as $stage) {
+                $access = $this->access->firstorcreate([ 'program_id' => $id, 'stage_id' => $stage, 'user_id' => $data['user_id'] ]);
+                $allAccess[] = $access['id'];
+            }
+        }
+
+        $this->access->where([ 'program_id' => $id, 'user_id' => $data['user_id'] ])->whereNotIn('id', $allAccess)->delete();
+
+        return true;
+    }
+
+    public function getAccess($id, $user_id)
+    {
+        return $this->access->where([ 'program_id' => $id, 'user_id' => $user_id ])->get();
     }
 }

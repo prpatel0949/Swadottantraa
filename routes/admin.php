@@ -27,4 +27,10 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
         Route::post('program/list', 'ReportController@programList')->name('report.program.list');
     });
 
+    Route::get('user/answer', 'ProgramController@answers')->name('admin.user.answer');
+    Route::get('user/answer/{id}/detail', 'ProgramController@answerDetail')->name('admin.user.answer.detail');
+
+    Route::get('program/{id}/access/stages', 'ProgramController@getAccessStages')->name('program.access.stages');
+    Route::post('program/{id}/access/stages', 'ProgramController@stageAccess')->name('program.add.access_stage');
+
 });

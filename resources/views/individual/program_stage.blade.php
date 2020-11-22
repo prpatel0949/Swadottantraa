@@ -44,7 +44,7 @@
                         <div class="card-body py-0 collapse show" id="stage_wrapper">
                             @foreach ($program->stages as $stage)
 
-                                <a href="{{ route('individual.program.stage', ['id' => $program->id, 'stage_id' => $stage->id ]) }}" class="d-block border-top mt-1 pt-1">
+                                <a class="{{ ($stage->id == request()->stage_id ? 'active' : '') }}" href="{{ route('individual.program.stage', ['id' => $program->id, 'stage_id' => $stage->id ]) }}" class="d-block border-top mt-1 pt-1">
                                     <div class="user-page-info">
                                         <h5 class="mb-0 v-stage-description">{{ $stage->title }}</h5>
                                     </div>
@@ -58,10 +58,10 @@
                 </div>
                 <div class="col-sm-12 col-lg-8">
                     <div class="row">
-                        @foreach ($steps as $step)
+                        @foreach ($steps as $key => $step)
                             <div class="col-sm-6 col-lg-6">
-                                <div class="card h100 {{ ($program->type == 1 ? 'locked_stage' : '') }}" >
-                                    @if ($program->type == 1)
+                                <div class="card h100 {{ ($program->type == 1 && $key != 0 ? 'locked_stage' : '') }}" >
+                                    @if ($program->type == 1 && $key != 0)
                                         <div class="locked_wrapper shadow">
                                             <i class="fa fa-lock" aria-hidden="true"></i>
                                         </div>

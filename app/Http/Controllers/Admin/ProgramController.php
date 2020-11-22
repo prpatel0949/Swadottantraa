@@ -192,4 +192,31 @@ class ProgramController extends Controller
 
         return redirect()->route('program.index')->with('error', 'Something went wrong happen.');
     }
+
+    public function answers()
+    {
+        return view('admin.program.user_answer', [ 'answers' => $this->program->answers() ]);
+    }
+
+    public function answerDetail($id)
+    {
+        return view('admin.program.user_answer_detail', [ 'answers' => $this->program->answer($id) ]);
+    }
+
+    public function getAccessStages($id, Request $request)
+    {
+        return view('admin.program.stages', [ 
+            'program' => $this->program->find($id),
+            'access' => $this->program->getAccess($id, $request->user_id)->pluck('stage_id')->toArray(),
+        ]);
+    }
+
+    public function stageAccess(Request $request, $id)
+    {
+        if ($this->program->stageAccess($request->all(), $id)) {
+            return response()->json([ 'success' => 'success' ], 200);
+        }
+
+        return response()->json([ 'error' => 'error' ], 500);
+    }
 }

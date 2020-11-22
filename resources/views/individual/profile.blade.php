@@ -83,11 +83,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                @php $content = ""; @endphp
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <div class="controls">
                                             <label for="account-username">Franchisee Code</label>
-                                            <input type="text" name="franchisee_code" value="{{ (!empty($user->franchisee) ? $user->franchisee->franchisee_code : '') }}" class="form-control" id="account-username" placeholder="Franchisee Code" disabled="">
+                                            <div class="input-group">
+                                                <input type="text" name="franchisee_code" value="{{ (!empty($user->franchisee) ? $user->franchisee->franchisee_code : '') }}" class="form-control" id="account-username" placeholder="Franchisee Code" disabled="">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon2">
+                                                        <a href="#" class="show-text">?</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <p class="myText d-none">Franchisee code will be reflected here once you connect the physical franchisee venue. To know more about franchisee and locate, please <a href="{{ URL::to('offline.html') }}" target="_blank">click here</a></p>
                                             @error('franchisee_code')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -216,39 +225,45 @@
 
 @section('js')
 <script>
-    $('#addForm').validate({
-        rules: {
-            name: {
-                    required: true,
-                    maxlength: 100
-                },
-            franchisee_code: {
-                maxlength: 20
-            },
-            email: {
-                required: true,
-                maxlength: 255,
-                email: true
-            },
-            mobile: {
-                required: true,
-                maxlength: 10,
-                number: true
-            },
-            password: {
-                minlength: 8
-            },
-            password_confirmation: {
-                minlength: 8,
-                equalTo : "#password"
-            },
-            educatoin:{
-                maxlength: 100,
-            },
-            occupation: {
-                maxlength: 100
-            }
-        }
+    // $('#addForm').validate({
+    //     rules: {
+    //         name: {
+    //                 required: true,
+    //                 maxlength: 100
+    //             },
+    //         franchisee_code: {
+    //             maxlength: 20
+    //         },
+    //         email: {
+    //             required: true,
+    //             maxlength: 255,
+    //             email: true
+    //         },
+    //         mobile: {
+    //             required: true,
+    //             maxlength: 10,
+    //             number: true
+    //         },
+    //         password: {
+    //             minlength: 8
+    //         },
+    //         password_confirmation: {
+    //             minlength: 8,
+    //             equalTo : "#password"
+    //         },
+    //         educatoin:{
+    //             maxlength: 100,
+    //         },
+    //         occupation: {
+    //             maxlength: 100
+    //         }
+    //     }
+    // });
+
+    $(document).on('click', '.show-text', function(e) {
+        e.preventDefault();
+        console.log(125);
+        $('.myText').toggleClass('d-none');
     });
 </script>
 @endsection

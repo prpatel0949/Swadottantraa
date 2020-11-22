@@ -1,6 +1,6 @@
 @extends('individual.layouts.app')
 
-@section('title', 'Programs Question')
+@section('title', 'Programs Stages')
 
 @section('content')
 
@@ -31,10 +31,10 @@
 
             <div class="row">
 
-                @foreach ($program->stages as $stage)
+                @foreach ($program->stages as $key => $stage)
                     <div class="col-sm-6 col-lg-4">
-                        <div class="card h100 {{ ($program->type == 1 ? 'locked_stage' : '') }}">
-                            @if ($program->type == 1)
+                        <div class="card h100 {{ ($program->type == 1 && $key != 0 && !in_array($stage->id, $access) ? 'locked_stage' : '') }}">
+                            @if ($program->type == 1 &&  $key != 0 && !in_array($stage->id, $access))
                                 <div class="locked_wrapper shadow">
                                     <i class="fa fa-lock" aria-hidden="true"></i>
                                 </div>

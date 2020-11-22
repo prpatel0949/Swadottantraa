@@ -20,4 +20,9 @@ class WorkoutQuestion extends Model
     {
         return $this->hasMany(WorkoutQuestionAnswer::class);
     }
+
+    public function workout()
+    {
+        return $this->belongsTo('App\Workout');
+    }
 }
