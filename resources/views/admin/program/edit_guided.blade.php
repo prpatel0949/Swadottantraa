@@ -296,7 +296,7 @@
 <div class="stage-section d-none">
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            Stage `SrNo`
+            Stage `SrNo~1`
             <div>
                 <button type="button" name="" class="btn btn-primary add-step" data-index="`SrNo`">Add Step</button>
                 <button type="button" name="" class="btn btn-primary delete-stage" data-index="`SrNo`">Delete Stage</button>
@@ -514,7 +514,7 @@
             index++;
             let content = $('.stage-section').html();
             content = content.replace(/`SrNo`/gi, index);
-            content = content.replace(/`SrNo~1`/gi, 0);
+            content = content.replace(/`SrNo~1`/gi, parseInt(index) + 1);
             $('.stage-div').append(content);
             $('#scale_'+ index +'_1').select2();
             $('#workout_'+ index +'_1').select2();

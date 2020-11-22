@@ -515,7 +515,7 @@
             e.preventDefault();
             let content = $('.stage-section').html();
             content = content.replace(/`SrNo`/gi, index);
-            content = content.replace(/`SrNo~1`/gi, 0);
+            content = content.replace(/`SrNo~1`/gi, parseInt(index) + 1);
             $('.stage-div').append(content);
             $('#scale_'+ index +'_1').select2();
             $('#workout_'+ index +'_1').select2();
