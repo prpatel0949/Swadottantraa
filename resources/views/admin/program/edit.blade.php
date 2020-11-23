@@ -13,13 +13,19 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
-        <div class="content-header row">
-		    <div class="content-header-left col-sm-9 col-12 mb-2">
+        <div class="content-header row sticky_block">
+		    <div class="content-header-left col-sm-9 col-12">
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12">
 		                <h2 class="content-header-title float-left mb-0">Edit Program</h2>
 		            </div>
 		        </div>
+            </div>
+            <div class="col-sm-3 col-12">
+                <div class="float-right">
+                    <input type="hidden" name="type" value="0">
+                    <button type="button" class="btn btn-primary add-stage">Add Stage</button>
+                </div>
             </div>
         </div>
         <div class="content-body">
@@ -27,16 +33,8 @@
                 @method('PUT')
                 @csrf
                 <div id="validation-errors"></div>
-                <div class="card sticky_block">
+                <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group float-right">
-                                    <input type="hidden" name="type" value="0">
-                                    <button type="button" class="btn btn-primary add-stage">Add Stage</button>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">

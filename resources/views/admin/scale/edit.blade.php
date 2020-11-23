@@ -16,7 +16,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
-        <div class="content-header row">
+        <div class="content-header row sticky_block">
 		    <div class="content-header-left col-md-9 col-12 mb-2">
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12">
@@ -24,15 +24,20 @@
 		            </div>
 		        </div>
             </div>
+            <div class="col-md-3 col-12">
+                <div class="float-right">
+                    <button type="button" class="btn btn-primary add-question">Add Question</button>
+                </div>
+            </div>
         </div>
         <div class="content-body">
             <form action="{{ route('scale.update', $scale->id) }}" method="POST">
                 @method('PUT')
                 @csrf
-                <div class="card sticky_block">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -63,12 +68,6 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group float-right">
-                                    <button type="button" class="btn btn-primary add-question">Add Question</button>
                                 </div>
                             </div>
                         </div>

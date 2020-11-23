@@ -16,7 +16,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
-        <div class="content-header row">
+        <div class="content-header row sticky_block">
 		    <div class="content-header-left col-md-9 col-12 mb-2">
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12">
@@ -24,12 +24,24 @@
 		            </div>
 		        </div>
             </div>
+            <div class="col-md-3 col-12">
+                <div class="text-right">
+                    {{-- <button type="button" class="btn btn-primary add-question">Add Question</button> --}}
+                    <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Add Question</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item add-question" data-type="0" href="#">Descriptive</a></li>
+                            <li><a class="dropdown-item add-question" data-type="1" href="#">MCQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="content-body">
             <form action="{{ route('workout.update', $workout->id) }}" method="POST">
                 @method('PUT')
                 @csrf
-                <div class="card header-block sticky_block">
+                <div class="card header-block">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
@@ -40,18 +52,6 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="text-right">
-                                    {{-- <button type="button" class="btn btn-primary add-question">Add Question</button> --}}
-                                    <div class="btn-group">
-                                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Add Question</button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item add-question" data-type="0" href="#">Descriptive</a></li>
-                                            <li><a class="dropdown-item add-question" data-type="1" href="#">MCQ</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                         </div>

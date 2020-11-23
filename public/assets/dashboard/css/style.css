@@ -265,6 +265,9 @@ input.error {
     position: sticky;
     top: 63px;
     z-index: 100;
+    padding-top: 20px;
+    background: #f5f5f5;
+    margin-top: -20px;
 }
 html body .content.app-content {
     height: 100%;

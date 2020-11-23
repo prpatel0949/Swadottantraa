@@ -13,7 +13,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
-        <div class="content-header row">
+        <div class="content-header row sticky_block">
 		    <div class="content-header-left col-sm-9 col-12 mb-2">
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12">
@@ -21,21 +21,19 @@
 		            </div>
 		        </div>
             </div>
+            <div class="col-sm-3 col-12">
+                <div class="form-group float-right">
+                    <input type="hidden" name="type" value="1">
+                    <button type="button" class="btn btn-primary add-stage">Add Stage</button>
+                </div>
+            </div>
         </div>
         <div class="content-body">
             <form action="{{ route('program.store') }}" id="addForm" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div id="validation-errors"></div>
-                <div class="card sticky_block">
+                <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group float-right">
-                                    <input type="hidden" name="type" value="1">
-                                    <button type="button" class="btn btn-primary add-stage">Add Stage</button>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
@@ -137,7 +135,7 @@
                     </div>
                 </div>
                 <div class="stage-div" id="stage-div">
-                    
+
                 </div>
 
                 <div class="row">
