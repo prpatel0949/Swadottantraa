@@ -32,7 +32,7 @@
             <div class="row">
 
                 @foreach ($program->stages as $key => $stage)
-                    <div class="col-sm-6 col-lg-4 form-control">
+                    <div class="col-sm-6 col-lg-4 form-group">
                         <div class="card h100 {{ ($program->type == 1 && $key != 0 && !in_array($stage->id, $access) ? 'locked_stage' : '') }}">
                             @if ($program->type == 1 &&  $key != 0 && !in_array($stage->id, $access))
                                 <div class="locked_wrapper shadow">
