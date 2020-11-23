@@ -48,7 +48,8 @@
                                     <div class="user-page-info">
                                         <h5 class="mb-0 v-stage-description">{{ $step->title }}</h5>
                                     </div>
-                                    <div class="progress progress-bar-primary mb-1">
+                                    <div class="progress progress-bar-primary mb-1 extra_progess_percentage_warpper">
+                                        <span class="extra_progess_percentage">50%</span>
                                         <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
                                     </div>
                                 </a>
@@ -85,8 +86,8 @@
                                     </div>
                                     <div id="scale_{{ $scale->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
-                                            <div class="row">
-                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
+                                            <div>
+                                                <form  class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="step_id" value="{{ $scale->step_id }}">
                                                     <input type="hidden" name="scale_id" value="{{ $scale->scale->id }}">
@@ -141,8 +142,8 @@
                                     <div id="workout_{{ $workout->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
 
-                                            <div class="row">
-                                                <form action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
+                                            <div>
+                                                <form class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
                                                     @csrf
                                                     <input type="hidden" name="step_id" value="{{ $scale->step_id }}">
                                                     <input type="hidden" name="workout_id" value="{{ $workout->workout->id }}">
