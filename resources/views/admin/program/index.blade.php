@@ -50,11 +50,15 @@
                                                 {{ ($program->type == 0 ? 'Single Session' : 'Guided') }}
                                             </td>
                                             <td>
-                                                @if ($program->is_active == 1)
+                                                <div class="male_female">
+                                                    <input type="checkbox" name="status[]" class="program_status" id="male_female_{{ $program->id }}" value="{{ $program->id }}" {{ ($program->is_active == 0 ? 'checked=""': '') }}>
+                                                    <label for="male_female_{{ $program->id }}"><span class="btn-male">Active</span> <span class="btn-female">Inactive</span></label>
+                                                </div>
+                                                {{-- @if ($program->is_active == 1)
                                                     <a href="{{ route('program.status.update', $program->id) }}"><span class="badge badge-success">Live</span></a>
                                                 @else
                                                     <a href="{{ route('program.status.update', $program->id) }}"><span class="badge badge-danger">Go Live</span></a>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                             <td>
                                                 <a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-edit"></i></a>
@@ -101,6 +105,23 @@
                     }
                 });
             })
+        });
+
+        $(document).on('click', '.program_status', function (e) {
+            let status = ($(this).is(':checked') ? 0 : 1);
+            let program_id = $(this).val();
+            let url = "{{ route('program.status.update', ':id') }}";
+            url = url.replace(':id', program_id);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (res) {
+
+                }, error: function (error) {
+
+                }
+            });
+            
         });
     </script>
 @endsection

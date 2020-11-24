@@ -36,7 +36,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                             <div class="dropdown-divider mt-3 mb-3"></div>
-                            <a href="{{ route('happiness') }}" class="btn btn-outline-primary btn-block">Sign Up</a>
+                            @if (Hash::check(0, request()->type))
+                                <a href="{{ route('happiness') }}" class="btn btn-outline-primary btn-block">Sign Up</a>
+                            @endif
                             <p class="text-center mt-4">If you have already checked before then kindly login to access your programs</p>
                         </div>
                     </form>

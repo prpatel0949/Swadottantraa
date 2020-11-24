@@ -187,10 +187,12 @@ class ProgramController extends Controller
     public function updateStatus($id)
     {
         if ($this->program->updateStatus($id)) {
-            return redirect()->route('program.index')->with('success', 'Status updated successfully.');
+            return response()->json([ 'success' => 'Status updated successfully.' ], 200);
+            // return redirect()->route('program.index')->with('success', 'Status updated successfully.');
         }
 
-        return redirect()->route('program.index')->with('error', 'Something went wrong happen.');
+        return response()->json([ 'error' => 'Something went wrong happen.' ], 500);
+        // return redirect()->route('program.index')->with('error', 'Something went wrong happen.');
     }
 
     public function answers()
