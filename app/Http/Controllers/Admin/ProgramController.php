@@ -221,4 +221,10 @@ class ProgramController extends Controller
 
         return response()->json([ 'error' => 'error' ], 500);
     }
+
+    public function copy($id)
+    {
+        $program = $this->program->copy($id);
+        return redirect()->route('program.edit', ['program' => $program->id ]);
+    }
 }

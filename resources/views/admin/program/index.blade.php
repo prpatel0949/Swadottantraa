@@ -63,6 +63,7 @@
                                             <td>
                                                 <a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-edit"></i></a>
                                                 <a href="{{ route('program.destroy', $program->id) }}" class="delete-program"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('program.copy', $program->id) }}"><i class="fa fa-copy"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

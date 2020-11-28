@@ -490,4 +490,65 @@ class ProgramRepository implements ProgramRepositoryInterface
     {
         return $this->access->where([ 'program_id' => $id, 'user_id' => $user_id ])->get();
     }
+
+    public function copy($id)
+    {
+        $program;
+        DB::transaction(function () use ($id, &$program) {
+            $program = $this->program->find($id);
+            $newProgram = $program->replicate();
+            $newProgram->save();
+
+            $stages = $this->stage->where('program_id', $program->id);
+            foreach ($stages as $stage) {
+                $newStage = $stage->replicate();
+                $newStage->program_id = $newProgram->id;
+                $newStage->save();
+
+                foreach ($stage->steps as $step) {
+                    $newStep = $step->replicate();
+                    $newStep->program_stage_id = $newStage->id;
+                    $newStep->save();
+
+                    foreach ($step->sequences as $sequence) {
+                        if ($sequence->type == 'App\StepScale') {
+                            $scale = new $this->scale;
+                            $scale->step_id = $newStep->id;
+                            $scale->scale_id = $sequence->typable->scale_id;
+                            $scale->save();
+
+                            $newSequence = $sequence->replicate();
+                            $newSequence->typable_id = $scale->id;
+                            $newSequence->step_id = $newStep->id;
+                            $newSequence->save();
+                            
+                        } else if ($sequence->type == 'App\StepWorkout') {
+                            $workout = new $this->workout;
+                            $workout->step_id = $newStep->id;
+                            $workout->workout_id = $sequence->typable->workout_id;
+                            $workout->save();
+
+                            $newSequence = $sequence->replicate();
+                            $newSequence->typable_id = $workout->id;
+                            $newSequence->step_id = $newStep->id;
+                            $newSequence->save();
+
+                        } else {
+                            $attachment = new $this->attachment;
+                            $attachment->step_id = $newStep->id;
+                            $attachment->image = $sequence->typable->image;
+                            $attachment->save();
+
+                            $newSequence = $sequence->replicate();
+                            $newSequence->typable_id = $attachment->id;
+                            $newSequence->step_id = $newStep->id;
+                            $newSequence->save();
+                        }
+                    }
+                }                         
+            }
+        });
+
+        return $program;
+    }
 }

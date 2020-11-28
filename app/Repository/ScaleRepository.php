@@ -5,18 +5,20 @@ use DB;
 use App\Scale;
 use App\ScaleQuestion;
 use App\ScaleQuestionAnswer;
+use App\ScaleInterpreatation;
 use Illuminate\Support\Facades\Log;
 use App\Repository\Interfaces\ScaleRepositoryInterface;
 
 class ScaleRepository implements ScaleRepositoryInterface
 {
-    private $scale, $scaleQuestion, $scaleAnswer;
+    private $scale, $scaleQuestion, $scaleAnswer, $interpatation;
 
-    public function __construct(Scale $scale, ScaleQuestion $scaleQuestion, ScaleQuestionAnswer $scaleAnswer)
+    public function __construct(Scale $scale, ScaleQuestion $scaleQuestion, ScaleQuestionAnswer $scaleAnswer, ScaleInterpreatation $interpatation)
     {
         $this->scale = $scale;
         $this->scaleQuestion = $scaleQuestion;
         $this->scaleAnswer = $scaleAnswer;
+        $this->interpatation = $interpatation;
     }
 
     public function create($data)
@@ -43,6 +45,17 @@ class ScaleRepository implements ScaleRepositoryInterface
                         $scaleAnswer->answer = $answer;
                         $scaleAnswer->answer_value = $data['answer_value'][$key][$index];
                         $scaleAnswer->save();
+                    }
+                }
+
+                if (!empty($data['start'])) {
+                    foreach ($data['start'] as $key => $start) {
+                        $interpatation = new $this->interpatation;
+                        $interpatation->start = $start;
+                        $interpatation->end = $data['end'][$key];
+                        $interpatation->value = $data['value'][$key];
+                        $interpatation->scale_id = $scale->id;
+                        $interpatation->save();
                     }
                 }
             });
@@ -109,6 +122,26 @@ class ScaleRepository implements ScaleRepositoryInterface
                     $question->answers()->delete();
                     $question->delete();
                 }
+
+                $allInter = [];
+                if (!empty($data['start'])) {
+                    foreach ($data['start'] as $key => $start) {
+                        if (!empty($data['inter_ids'][$key])) {
+                            $interpatation = $this->interpatation->find($data['inter_ids'][$key]);
+                        } else {
+                            $interpatation = new $this->interpatation;
+                            $interpatation->scale_id = $scale->id;
+                        }
+                        $interpatation->start = $start;
+                        $interpatation->end = $data['end'][$key];
+                        $interpatation->value = $data['value'][$key];
+                        $interpatation->save();
+                        $allInter[] = $interpatation->id;
+                    }
+                }
+
+                $this->interpatation->where('scale_id', $scale->id)->whereNotIn('id', $allInter)->delete();
+
             });
             return true;
         } catch (Exception $ex) {

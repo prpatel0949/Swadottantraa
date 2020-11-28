@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProgramStage extends Model
 {
+    protected $fillable = [ 'program_id', 'title', 'description', 'order' ];
+
     public static function boot() {
         parent::boot();
     

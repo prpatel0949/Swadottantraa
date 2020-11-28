@@ -10,6 +10,7 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
 
     Route::get('program/{id}/status/update', 'ProgramController@updateStatus')->name('program.status.update');
+    Route::get('program/{id}/copy', 'ProgramController@copy')->name('program.copy');
     Route::resource('program', 'ProgramController');
 
     Route::resource('scale', 'ScaleController');

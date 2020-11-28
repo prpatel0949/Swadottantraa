@@ -32,4 +32,6 @@ interface ProgramRepositoryInterface
     public function stageAccess($data, $id);
 
     public function getAccess($id, $user_id);
+
+    public function copy($id);
 }

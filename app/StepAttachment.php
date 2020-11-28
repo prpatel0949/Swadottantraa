@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StepAttachment extends Model
 {
+    protected $fillable = [ 'step_id', 'image' ];
     public static function boot() {
         parent::boot();
     

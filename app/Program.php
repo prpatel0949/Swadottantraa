@@ -10,6 +10,8 @@ class Program extends Model
 {
     protected $appends = [ 'is_subcribe' ];
 
+    protected $fillable = [ 'image', 'title', 'description', 'cost', 'tag', 'time', 'type', 'is_active' ];
+
     public static function boot() {
         parent::boot();
     
