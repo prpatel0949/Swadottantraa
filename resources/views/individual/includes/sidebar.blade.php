@@ -19,7 +19,15 @@
             </li>
             <li class="{{ (request()->is('user/profile*')) ? 'active' : '' }}"><a href="{{ route('individual.profile') }}"><i class="feather icon-circle"></i><span class="menu-title">My Profile</span></a>
             </li>
-            <li class="{{ (request()->is('user/support*')) ? 'active' : '' }}"><a href="{{ route('support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Technical Support</span></a>
+            {{-- <li class="{{ (request()->is('user/support*')) ? 'active' : '' }}"><a href="{{ route('support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Technical Support</span></a>
+            </li> --}}
+            <li class="{{ (request()->is('user/support*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Support</span></a>
+                <ul class="menu-content">
+                    <li class="{{ (request()->is('user/support*') ? 'active' : '') }}"><a href="{{ route('support.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Technical</span></a>
+                    </li>
+                    <li class="{{ (request()->is('user/support*') ? 'active' : '') }}"><a href="{{ route('support.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Medical</span></a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>                
