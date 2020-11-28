@@ -34,6 +34,18 @@
                                 </small>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            @if ($answers->first()->scale_question_id)
+                                <strong>Interpretation : </strong>
+                                @php 
+                                $val = $answers->pluck('scaleQuestionAnswer')->sum('answer_value');
+                                $inter = $answers->first()->scaleQuestion->scale->interpreatations->filter(function ($value) use ($val) {
+                                    return ($value->start <= $val && $value->end >= $val);
+                                })->first();
+                                echo (!empty($inter) ? $inter->value : '');
+                                @endphp
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
