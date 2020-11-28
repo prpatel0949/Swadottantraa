@@ -15,7 +15,7 @@
             </li>
             <li class="{{ (request()->is('admin/program*') || request()->is('admin/scale*') || request()->is('admin/workout*') || request()->is('admin/user/answer*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Program Management</span></a>
                 <ul class="menu-content">
-                    <li class="{{ (request()->is('admin/program*') ? 'active' : '') }}"><a href="{{ route('program.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Programs</span></a>
+                    <li class="{{ (request()->is('admin/program*') ? 'active' : '') }}"><a href="{{ route('program.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Program Sales</span></a>
                     </li>
                     <li class="{{ (request()->is('admin/scale*') ? 'active' : '') }}"><a href="{{ route('scale.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Scales</span></a>
                     </li>
@@ -29,7 +29,7 @@
             </li>
             <li class="{{ (request()->is('admin/support*')) ? 'active' : '' }}"><a href="{{ route('admin.support.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Technical Support</span></a>
             </li>
-            <li class="{{ (request()->is('admin/report*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Reports</span></a>
+            <li class="{{ (request()->is('admin/report*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Business Overview</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->is('admin/report/program*') ? 'active' : '') }}"><a href="{{ route('report.program') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Programs</span></a>
                     </li>
