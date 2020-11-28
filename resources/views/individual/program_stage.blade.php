@@ -43,7 +43,7 @@
                             <h4>Stages</h4>
                             <i class="feather icon-more-horizontal cursor-pointer" data-toggle="collapse" data-target="#stage_wrapper"></i>
                         </div>
-                        <div class="card-body py-0 collapse show" id="stage_wrapper">
+                        <div class="card-body pt-0 collapse show" id="stage_wrapper">
                             @foreach ($program->stages as $stage)
 
                                 <a class="{{ ($stage->id == request()->stage_id ? 'active' : '') }}" href="{{ route('individual.program.stage', ['id' => $program->id, 'stage_id' => $stage->id ]) }}" class="d-block border-top mt-1 pt-1">

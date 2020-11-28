@@ -50,7 +50,7 @@
                             <h4>steps</h4>
                             <i class="feather icon-more-horizontal cursor-pointer" data-toggle="collapse" data-target="#stage_wrapper"></i>
                         </div>
-                        <div class="card-body py-0 collapse show" id="stage_wrapper">
+                        <div class="card-body pt-0 collapse show" id="stage_wrapper">
                             @foreach ($steps as $step)
 
                                 <a href="#" class="d-block border-top mt-1 pt-1 {{ ($step->id == request()->step_id ? 'active' : '') }}">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                    @elseif($item->typable_type == 'App\StepWorkout') 
+                    @elseif($item->typable_type == 'App\StepWorkout')
                         <div class="col-md-12">
                             <div class="card bg-transparent border-0 shadow-none collapse-icon accordion-icon-rotate mb-0">
                                 <div class="card-body p-0">
@@ -146,7 +146,7 @@
                                             </div>
                                             <div id="workout_{{ $item->typable->workout->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                 <div class="card-body">
-        
+
                                                     <div>
                                                         <form class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
                                                             @csrf
@@ -192,7 +192,7 @@
                         <div class="col-md-12">
                             <a href="{{ Storage::url($item->typable->image) }}" target="_blank"><i class="fa fa-paperclip"></i> {{ basename($item->typable->image) }}</a>
                         </div>
-                    @endif  
+                    @endif
                 @endforeach
             </div>
 

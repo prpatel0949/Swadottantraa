@@ -13,7 +13,7 @@
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12 d-flex justify-content-between">
                         <h2 class="content-header-title float-left mb-0">Franchisees</h2>
-                        <a href="{{ route('franchisee.create') }}" class="btn btn-primary">Add</a>
+                        <a href="{{ route('franchisee.create') }}" class="btn btn-primary">Create Account</a>
 		            </div>
 		        </div>
             </div>
