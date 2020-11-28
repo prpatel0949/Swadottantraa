@@ -25,4 +25,9 @@ class Scale extends Model
     {
         return $this->hasMany('App\StepScale');
     }
+
+    public function interpreatations()
+    {
+        return $this->hasMany(ScaleInterpreatation::class);
+    }
 }

@@ -32,6 +32,9 @@ class AddRequest extends FormRequest
             'description.*' => 'required|string|max:200',
             'answer.*.*' => 'required|string|max:100',
             'answer_value.*.*' => 'nullable|string|max:50',
+            'start.*' => 'required|numeric',
+            'end.*' => 'required|numeric',
+            'value.*' => 'required|string'
         ];
     }
 
@@ -40,7 +43,12 @@ class AddRequest extends FormRequest
         return [
             'question.*.required' => 'The question field is required.',
             'description.*.required' => 'The description field is required.',
-            'answer.*.*.required' => 'The answer field is required'
+            'answer.*.*.required' => 'The answer field is required',
+            'start.*.required' => 'Start value is required.',
+            'start.*.numeric' => 'Start value must be number.',
+            'end.*.required' => 'End value is required.',
+            'end.*.numeric' => 'End value must be number.',
+            'value.*.required' => 'value is required.',
         ];
     }
 }

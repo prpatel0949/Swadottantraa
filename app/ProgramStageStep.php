@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProgramStageStep extends Model
 {
+    protected $fillable = [ 'program_stage_id', 'title', 'description', 'comment' ];
     public static function boot() {
         parent::boot();
     
