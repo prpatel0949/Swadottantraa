@@ -33,5 +33,5 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
 
     Route::get('program/{id}/access/stages', 'ProgramController@getAccessStages')->name('program.access.stages');
     Route::post('program/{id}/access/stages', 'ProgramController@stageAccess')->name('program.add.access_stage');
-
+    Route::post('program/answer/{id}/comment', 'ProgramController@answerComment')->name('program.answer.comment');
 });

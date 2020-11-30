@@ -34,4 +34,8 @@ interface ProgramRepositoryInterface
     public function getAccess($id, $user_id);
 
     public function copy($id);
+
+    public function answerComment($data, $id);
+
+    public function usersAnswers($step_id, $user_id);
 }

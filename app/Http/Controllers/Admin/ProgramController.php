@@ -227,4 +227,13 @@ class ProgramController extends Controller
         $program = $this->program->copy($id);
         return redirect()->route('program.edit', ['program' => $program->id ]);
     }
+
+    public function answerComment(Request $request, $id)
+    {
+        if ($this->program->answerComment($request->all(), $id)) {
+            return redirect()->back()->with('success', 'Comment added Successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Something went wrong happen.');
+    }
 }

@@ -91,6 +91,27 @@
             </div>
         </div>
 
+        @if ($answers->first()->program->type == 1)
+            <form action="{{ route('program.answer.comment', request()->id) }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Comment</label>
+                            <textarea class="form-control" name="comment" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        @endif
+
     </div>
 </div>
 

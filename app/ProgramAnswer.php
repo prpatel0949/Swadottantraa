@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProgramAnswer extends Model
 {
+    protected $fillable = [ 'is_resubmit' ];
+
     public static function boot() {
         parent::boot();
     
@@ -43,5 +45,10 @@ class ProgramAnswer extends Model
     public function workoutQuestionAnswer()
     {
         return $this->belongsTo('App\WorkoutQuestionAnswer');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(AnswerComment::class);
     }
 }

@@ -88,10 +88,13 @@ class ProgramController extends Controller
             abort(404);
         }
 
+        // echo $this->program->usersAnswers($step->id, Auth::user()->id); die;
+
         return view('individual.program_step', [
             'program' => $program,
             'steps' => $stage->steps,
-            'current_step' => $step
+            'current_step' => $step,
+            'answers' =>  $this->program->usersAnswers($step->id, Auth::user()->id)
         ]);
     }
 

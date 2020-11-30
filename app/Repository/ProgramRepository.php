@@ -9,11 +9,12 @@ use App\Result;
 use App\Program;
 use App\StepScale;
 use Carbon\Carbon;
+use App\StageAccess;
 use App\StepWorkout;
 use App\Transaction;
 use App\UserProgram;
-use App\StageAccess;
 use App\ProgramStage;
+use App\AnswerComment;
 use App\ProgramAnswer;
 use App\StepAttachment;
 use App\ProgramStageStep;
@@ -23,7 +24,7 @@ use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
-    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer, $access;
+    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer, $access, $comment;
 
     public function __construct(
         Program $program,
@@ -38,7 +39,8 @@ class ProgramRepository implements ProgramRepositoryInterface
         StepAttachment $attachment,
         ScaleWorkoutSequence $sequence,
         ProgramAnswer $answer,
-        StageAccess $access
+        StageAccess $access,
+        AnswerComment $comment
     )
     {
         $this->program = $program;
@@ -54,6 +56,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         $this->sequence = $sequence;
         $this->answer = $answer;
         $this->access = $access;
+        $this->comment = $comment;
     }
 
     public function all()
@@ -550,5 +553,23 @@ class ProgramRepository implements ProgramRepositoryInterface
         });
 
         return $program;
+    }
+
+    public function answerComment($data, $id)
+    {
+        $answer = $this->answer->find($id);
+        $all_answer = $this->answer->where('set_no', $answer->set_no)->update([ 'is_resubmit' => 1 ]);
+
+        $comment = new $this->comment;
+        $comment->program_answer_id = $id;
+        $comment->comment = $data['comment'];
+        $comment->save();
+
+        return true;
+    }
+
+    public function usersAnswers($step_id, $user_id)
+    {
+        return $this->answer->where([ 'step_id' => $step_id, 'user_id' => $user_id ])->get();
     }
 }
