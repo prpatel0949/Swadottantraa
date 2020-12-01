@@ -27,12 +27,12 @@ class ClientRepository implements ClientRepositoryInterface
     {
         $client = $this->client->where('email', $data['email'])->first();
         $code = rand(1111, 9999);
-        Mail::send([], [], function ($message) use ($client, $code) {
-            $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            $message->to($client->email, $client->name);
-            $message->subject('Forgot Password');
-            $message->setBody('Your Forgot Password Code is :'. $code);
-        });
+        // Mail::send([], [], function ($message) use ($client, $code) {
+        //     $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        //     $message->to($client->email, $client->name);
+        //     $message->subject('Forgot Password');
+        //     $message->setBody('Your Forgot Password Code is :'. $code);
+        // });
 
         $client->code = $code;
         $client->send_time = now();
