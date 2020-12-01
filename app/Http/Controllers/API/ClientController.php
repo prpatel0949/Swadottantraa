@@ -66,10 +66,10 @@ class ClientController extends Controller
             'new_password' => 'required|string|min:8'
         ]);
 
-        if ($client = $this->client->changePassword($request->all())) {
-            return response()->json([ 'message' => 'Password changed successfully.' ], 200);
-        }
+        // if ($client = $this->client->changePassword($request->all())) {
+        //     return response()->json([ 'message' => 'Password changed successfully.' ], 200);
+        // }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        // return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
     }
 }

@@ -9,5 +9,5 @@ interface ClientRepositoryInterface
 
     public function resetPassword($data);
 
-    public function changePassword($data);
+    // public function changePassword($data);
 }
