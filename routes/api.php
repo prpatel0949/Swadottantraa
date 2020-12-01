@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('user/register', 'ClientController@register');
+Route::post('user/forgot_passwod', 'ClientController@forgotPassword');
+Route::post('user/reset_passwod', 'ClientController@resetPassword');
+
+Route::group(['middleware' => ['api', 'auth:client']], function () {
+    Route::post('user/change_passwod', 'ClientController@changePassword');
+});
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
