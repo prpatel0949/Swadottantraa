@@ -20,6 +20,8 @@ Route::post('user/reset_passwod', 'ClientController@resetPassword');
 
 Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::post('user/change_passwod', 'ClientController@changePassword');
+
+    Route::get('emotions', 'EmotionController@index');
 });
 
 

@@ -65,8 +65,16 @@ class ClientRepository implements ClientRepositoryInterface
         }
     }
 
-    // public function changePassword($data)
-    // {
-    //     dd(Auth::user());
-    // }
+    public function changePassword($data)
+    {
+        $client = $this->client->find(Auth::user()->id);
+        if (Hash::check($data['old_password'], $client->password)) {
+            $client->password = Hash::make($data['new_password']);
+            $client->save();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
