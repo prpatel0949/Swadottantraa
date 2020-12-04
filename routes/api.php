@@ -22,6 +22,12 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::post('user/change_passwod', 'ClientController@changePassword');
 
     Route::get('emotions', 'EmotionController@index');
+    Route::get('emotions_pain_intensity', 'EmotionController@getEmotionPainIntensity');
+    Route::get('emotions_injuries', 'EmotionController@getEmotionInjuries');
+
+    Route::get('tips', 'GeneralController@getTips');
+    Route::get('traumas', 'GeneralController@getTraumas');
+    Route::get('menu_links', 'GeneralController@getMenuLinks');
 });
 
 

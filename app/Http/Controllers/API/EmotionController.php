@@ -19,4 +19,14 @@ class EmotionController extends Controller
     {
         return $this->emotion->all();
     }
+
+    public function getEmotionPainIntensity()
+    {
+        return $this->emotion->getEmotionPainIntensity();
+    }
+
+    public function getEmotionInjuries()
+    {
+        return $this->emotion->getEmotionInjuries();
+    }
 }
