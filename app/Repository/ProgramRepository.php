@@ -140,6 +140,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->type = $data['type'];
             $program->is_active = $data['is_live'];
+            $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
 
 
@@ -243,6 +244,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->cost = $data['cost'];
             $program->tag = $data['tag'];
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
+            $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
 
             $allStage = [];

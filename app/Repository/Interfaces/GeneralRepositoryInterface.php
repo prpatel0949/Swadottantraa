@@ -8,4 +8,6 @@ interface GeneralRepositoryInterface
     public function getTraumas();
 
     public function getMenuLinks();
+
+    public function getImages();
 }

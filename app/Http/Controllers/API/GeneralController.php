@@ -30,4 +30,9 @@ class GeneralController extends Controller
     {
         return $this->general->getMenuLinks();
     }
+
+    public function getImages()
+    {
+        return $this->general->getImages();   
+    }
 }

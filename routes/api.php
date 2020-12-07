@@ -28,6 +28,7 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::get('tips', 'GeneralController@getTips');
     Route::get('traumas', 'GeneralController@getTraumas');
     Route::get('menu_links', 'GeneralController@getMenuLinks');
+    Route::get('images', 'GeneralController@getImages');
 });
 
 

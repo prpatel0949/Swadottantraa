@@ -123,15 +123,18 @@
                                                                     </div>
                                                                 </div>
                                                             @endforeach
+                                                            @php
+                                                                $questions_id = $item->typable->scale->questions->pluck('id');
+                                                                $ans = $answers->whereIn('scale_question_id', $questions_id)->flatten();
+                                                                $comments = $answers->whereIn('scale_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
+                                                            @endphp
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $program->is_multiple == 1))
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                                 </div>
                                                             </div>
-                                                            @php
-                                                                $questions_id = $item->typable->scale->questions->pluck('id');
-                                                                $comments = $answers->whereIn('scale_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
-                                                            @endphp
+                                                            @endif
                                                             @if ($comments->count() > 0)
                                                                 <div class="dropdown-divider"></div>
                                                                 <div class="col-md-12">
@@ -177,23 +180,23 @@
                                                             <input type="hidden" name="step_id" value="{{ $item->typable->step_id }}">
                                                             <input type="hidden" name="workout_id" value="{{ $item->typable->workout->id }}">
                                                             @foreach ($item->typable->workout->questions as $key => $question)
-                                                                @php
+                                                                {{-- @php
                                                                     $currect_answer = $answers->where('workout_question_id', $question->id)->first();
-                                                                @endphp
+                                                                @endphp --}}
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <input type="hidden" name="type[{{ $question->id }}]" value="{{ $question->answer_type }}">
+                                                                        <input type="hidden" name="type[{{ $question->id }}]" value="">
                                                                         <div class="card-question"><span class="q_no">
                                                                             {{ $key + 1 }}.</span>{{ $question->question }}<br>
                                                                             <small>{{ $question->description }}</small>
                                                                         </div>
                                                                         @if ($question->answer_type == 1)
-                                                                            <textarea class="form-control" name="question[{{ $question->id }}]" required>{{ (!empty($currect_answer) ? $currect_answer->answer : '') }}</textarea>
+                                                                            <textarea class="form-control" name="question[{{ $question->id }}]" required></textarea>
                                                                         @else
                                                                         <div class="card-options mb-2">
                                                                             @foreach ($question->answers as $answer)
                                                                             <label class="card-option form-control mb-2">
-                                                                                <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}" {{ (!empty($currect_answer) && $currect_answer->workout_question_answer_id == $answer->id ? 'checked' : '') }} required> <span>{{ $answer->answer }}</span>
+                                                                                <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"  required> <span>{{ $answer->answer }}</span>
                                                                                 <i class="fa fa-check"></i>
                                                                             </label>
                                                                             @endforeach
@@ -203,13 +206,18 @@
                                                                     </div>
                                                                 </div>
                                                             @endforeach
-                                                            <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                            </div>
                                                             @php
                                                                 $questions_id = $item->typable->workout->questions->pluck('id');
+                                                                $ans = $answers->whereIn('workout_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('workout_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $program->is_multiple == 1))
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                             @if ($comments->count() > 0)
                                                                 <div class="dropdown-divider"></div>
                                                                 <div class="col-md-12">
