@@ -133,6 +133,14 @@
                                     </div>
                                 @endforeach
                                 <div class="answer-tab"></div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="is_interpreatation[{{ $index }}]" value="1" {{ (old('is_interpreatation.'.$index) == 1 ? 'checked' : '') }}>
+                                            <label>Is Interpreatation</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @endforeach
@@ -179,6 +187,14 @@
                                 </div>
                                 @endforeach
                                 <div class="answer-tab"></div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="is_interpreatation[{{ $index }}]" value="1" {{ ($question->is_interpreatation == 1 ? 'checked' : '') }}>
+                                            <label>Is Interpreatation</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @endforeach
@@ -341,6 +357,14 @@
                 </div>
             </div>
             <div class="answer-tab"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="is_interpreatation[`SrNo`]" value="1">
+                        <label>Is Interpreatation</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

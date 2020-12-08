@@ -37,6 +37,7 @@ class ScaleRepository implements ScaleRepositoryInterface
                     $scaleQuestion->question = $question;
                     $scaleQuestion->description = $data['description'][$key];
                     $scaleQuestion->order = $data['order'][$key];
+                    $scaleQuestion->is_interpreatation = (isset($data['is_interpreatation'][$key]) ? $data['is_interpreatation'][$key] : 0);
                     $scaleQuestion->save();
 
                     foreach ($data['answer'][$key] as $index => $answer) {
@@ -98,6 +99,7 @@ class ScaleRepository implements ScaleRepositoryInterface
                     $scaleQuestion->question = $question;
                     $scaleQuestion->description = $data['description'][$key];
                     $scaleQuestion->order = $data['order'][$key];
+                    $scaleQuestion->is_interpreatation = (isset($data['is_interpreatation'][$key]) ? $data['is_interpreatation'][$key] : 0);
                     $scaleQuestion->save();
                     $allQuestion[] = $scaleQuestion->id;
 
