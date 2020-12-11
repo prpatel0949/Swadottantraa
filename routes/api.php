@@ -29,6 +29,11 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::get('traumas', 'GeneralController@getTraumas');
     Route::get('menu_links', 'GeneralController@getMenuLinks');
     Route::get('images', 'GeneralController@getImages');
+
+    Route::get('scale_question_answers', 'GeneralController@getScaleQuestionAnswers');
+
+    Route::post('emotions_injuries', 'EmotionController@storeEmotionInjuries');
+
 });
 
 

@@ -10,4 +10,6 @@ interface GeneralRepositoryInterface
     public function getMenuLinks();
 
     public function getImages();
+
+    public function getQuestions();
 }

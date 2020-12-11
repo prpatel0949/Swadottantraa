@@ -1,0 +1,142 @@
+{
+    "Table": [
+        {
+            "QueDescription": "Feeling nervous, anxious or on edge",
+            "QueId": 1,
+            "AppId": 1,
+            "MQueDescription": "चिंताग्रस्त, बेचैन आणि अस्वस्थ वाटणे"
+        },
+        {
+            "QueDescription": "Not being able to stop or control worrying",
+            "QueId": 2,
+            "AppId": 1,
+            "MQueDescription": "काळजीचे विचार थांबवता किंवा कमी करता न येणे"
+        },
+        {
+            "QueDescription": "Little interest or pleasure in doing things",
+            "QueId": 3,
+            "AppId": 1,
+            "MQueDescription": "कोणतीही गोष्ट करण्यासाठी खूप कमी रस किंवा आनंद"
+        },
+        {
+            "QueDescription": "Feeling down, depressed, or hopeless",
+            "QueId": 4,
+            "AppId": 1,
+            "MQueDescription": "निरुत्साही, दु:खी किंवा निराश वाटणे"
+        }
+    ],
+    "Table1": [
+        {
+            "AnsId": 1,
+            "AnsDescription": "Not at all",
+            "MAnsDescription": "मुळीच\r\n नाही",
+            "Score": 0.00,
+            "AnsQueId": 1
+        },
+        {
+            "AnsId": 2,
+            "AnsDescription": "Less than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा कमी",
+            "Score": 1.00,
+            "AnsQueId": 1
+        },
+        {
+            "AnsId": 3,
+            "AnsDescription": "More than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा जास्त",
+            "Score": 2.00,
+            "AnsQueId": 1
+        },
+        {
+            "AnsId": 4,
+            "AnsDescription": "Nearly every day",
+            "MAnsDescription": "जवळपास दररोज",
+            "Score": 3.00,
+            "AnsQueId": 1
+        },
+        {
+            "AnsId": 5,
+            "AnsDescription": "Not at all",
+            "MAnsDescription": "मुळीच\r\n नाही",
+            "Score": 0.00,
+            "AnsQueId": 2
+        },
+        {
+            "AnsId": 6,
+            "AnsDescription": "Less than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा कमी",
+            "Score": 1.00,
+            "AnsQueId": 2
+        },
+        {
+            "AnsId": 7,
+            "AnsDescription": "More than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा जास्त",
+            "Score": 2.00,
+            "AnsQueId": 2
+        },
+        {
+            "AnsId": 8,
+            "AnsDescription": "Nearly every day",
+            "MAnsDescription": "जवळपास दररोज",
+            "Score": 3.00,
+            "AnsQueId": 2
+        },
+        {
+            "AnsId": 9,
+            "AnsDescription": "Not at all",
+            "MAnsDescription": "मुळीच\r\n नाही",
+            "Score": 0.00,
+            "AnsQueId": 3
+        },
+        {
+            "AnsId": 10,
+            "AnsDescription": "Less than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा कमी",
+            "Score": 1.00,
+            "AnsQueId": 3
+        },
+        {
+            "AnsId": 11,
+            "AnsDescription": "More than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा जास्त",
+            "Score": 2.00,
+            "AnsQueId": 3
+        },
+        {
+            "AnsId": 12,
+            "AnsDescription": "Nearly every day",
+            "MAnsDescription": "जवळपास दररोज",
+            "Score": 3.00,
+            "AnsQueId": 3
+        },
+        {
+            "AnsId": 13,
+            "AnsDescription": "Not at all",
+            "MAnsDescription": "मुळीच\r\n नाही",
+            "Score": 0.00,
+            "AnsQueId": 4
+        },
+        {
+            "AnsId": 14,
+            "AnsDescription": "Less than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा कमी",
+            "Score": 1.00,
+            "AnsQueId": 4
+        },
+        {
+            "AnsId": 15,
+            "AnsDescription": "More than a week",
+            "MAnsDescription": "एका आठवड्या पेक्षा जास्त",
+            "Score": 2.00,
+            "AnsQueId": 4
+        },
+        {
+            "AnsId": 16,
+            "AnsDescription": "Nearly every day",
+            "MAnsDescription": "जवळपास दररोज",
+            "Score": 3.00,
+            "AnsQueId": 4
+        }
+    ]
+}

@@ -17,7 +17,9 @@ class EmotionController extends Controller
 
     public function index()
     {
-        return $this->emotion->all();
+        $emotions = $this->emotion->all();
+        return response()->json([ 'emotions' => $emotions, 'sub_emotions' => $emotions->pluck('subEmotions') ], 200);
+        // subEmotions
     }
 
     public function getEmotionPainIntensity()
@@ -28,5 +30,17 @@ class EmotionController extends Controller
     public function getEmotionInjuries()
     {
         return $this->emotion->getEmotionInjuries();
+    }
+
+    public function storeEmotionInjuries(Request $request)
+    {
+        $request->validate([
+            'emotional_injury_id' => 'required|exists:emotional_injuries,id',
+            'other' => 'nullable|string'
+        ]);
+
+        $this->emotion->storeEmotionInjuries($request->all());
+
+        return response()->json([ 'message' => 'User emotionals injury created successfully.' ], 200);
     }
 }

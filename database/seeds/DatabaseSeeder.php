@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(TipSeeder::class);
         // $this->call(TraumaSeeder::class);
         // $this->call(MenuLinkSeeder::class);
-        $this->call(ImageSeeder::class);
+        // $this->call(ImageSeeder::class);
+        $this->call(ApiScaleQuestionSeeder::class);
     }
 }

@@ -8,4 +8,6 @@ interface EmotionRepositoryInterface
     public function getEmotionPainIntensity();
 
     public function getEmotionInjuries();
+
+    public function storeEmotionInjuries($data);
 }

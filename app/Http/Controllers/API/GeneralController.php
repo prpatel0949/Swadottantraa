@@ -35,4 +35,10 @@ class GeneralController extends Controller
     {
         return $this->general->getImages();   
     }
+
+    public function getScaleQuestionAnswers()
+    {
+        $questions = $this->general->getQuestions();
+        return response()->json([ 'question' => $questions, 'answers' => $questions->pluck('answers') ], 200);
+    }
 }
