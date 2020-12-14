@@ -31,6 +31,7 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::get('images', 'GeneralController@getImages');
 
     Route::get('scale_question_answers', 'GeneralController@getScaleQuestionAnswers');
+    Route::post('scale_question_answers', 'GeneralController@storeScaleQuestionAnswers');
 
     Route::post('emotions_injuries', 'EmotionController@storeEmotionInjuries');
 

@@ -12,4 +12,6 @@ interface GeneralRepositoryInterface
     public function getImages();
 
     public function getQuestions();
+
+    public function storeAnswer($data);
 }

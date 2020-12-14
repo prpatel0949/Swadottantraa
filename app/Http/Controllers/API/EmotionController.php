@@ -18,7 +18,15 @@ class EmotionController extends Controller
     public function index()
     {
         $emotions = $this->emotion->all();
-        return response()->json([ 'emotions' => $emotions, 'sub_emotions' => $emotions->pluck('subEmotions') ], 200);
+        $allData = [];
+        foreach ($emotions as $emotion) {
+            $rowRes = new \StdClass;
+            $rowRes->id = $emotion->id;
+            $rowRes->emotions = $emotion->emotions;
+            $rowRes->emotions_marathi = $emotion->emotions_marathi;
+            $allData[] = $rowRes;
+        }
+        return response()->json([ 'emotions' => $allData, 'sub_emotions' => $emotions->pluck('subEmotions')->flatten() ], 200);
         // subEmotions
     }
 

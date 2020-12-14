@@ -41,4 +41,17 @@ class GeneralController extends Controller
         $questions = $this->general->getQuestions();
         return response()->json([ 'question' => $questions, 'answers' => $questions->pluck('answers') ], 200);
     }
+
+    public function storeScaleQuestionAnswers(Request $request)
+    {
+        $request->validate([
+            'answer_id' => 'required|integer|exists:api_scale_question_answers,id'
+        ]);
+
+        if ($this->general->storeAnswer($request->all())) {
+            return response()->json([ 'messsage' => 'Answer submit successfully.' ], 200);
+        }
+
+        return response()->json([ 'messsage' => 'Something went wrong happen!' ], 500);
+    }
 }

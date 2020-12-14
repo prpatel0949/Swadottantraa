@@ -27,7 +27,7 @@
             </li>
             <li class="{{ (request()->is('admin/franchisee*')) ? 'active' : '' }}"><a href="{{ route('franchisee.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Franchisee</span></a>
             </li>
-            <li class="{{ (request()->is('admin/institue*')) ? 'active' : '' }}"><a href="{{ route('franchisee.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Institue</span></a>
+            <li class="{{ (request()->is('admin/institue*')) ? 'active' : '' }}"><a href="{{ route('institue.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Institue</span></a>
             </li>
             <li class="{{ (request()->is('admin/support*')) ? 'active' : '' }}"><a href="{{ route('admin.support.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Technical Support</span></a>
             </li>
