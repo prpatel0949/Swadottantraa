@@ -29,7 +29,7 @@
                         </ul>
                     </li>
                 </ol>
-                <p>If any loss occurs to client due change in the technology standards, the SWA•TANTRAA WELLNESS PVT LTD shall not be liable for the same and the SWA•TANTRAA WELLNESS PVT LTD shall not be bound to make the loss good in any case.</p>
+                <p>If any loss occurs to client due change in the technology standards, the SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD shall not be liable for the same and the SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD shall not be bound to make the loss good in any case.</p>
                 <p>The information on this site should not be relied on as a substitute for psychiatric treatment or medication. The service is the practice of Psycho-education, Self-help programs, Counselling and Psychotherapy.</p>
                 <div class="page-subtitle mb-3">DISCLAIMER</div>
                 <p>We are keen at keeping the digital data securely. However, SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD is not responsible for any leakage in electronically transmitted communication.</p>
