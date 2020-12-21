@@ -23,7 +23,6 @@
             </div>
             <div class="col-sm-3 col-12">
                 <div class="float-right">
-                    <input type="hidden" name="type" value="0">
                     <button type="button" class="btn btn-primary add-stage">Add Stage</button>
                 </div>
             </div>
@@ -32,6 +31,7 @@
             <form action="{{ route('program.update', $program->id) }}" id="addForm" method="PUT" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
+                <input type="hidden" name="type" value="0">
                 <div id="validation-errors"></div>
                 <div class="card">
                     <div class="card-body">
@@ -83,7 +83,16 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Tag</label>
-                                    <input type="text" class="form-control @error('tag') error @enderror" value="{{ (old('tag') ? old('tag') : $program->tag) }}" name="tag" placeholder="Tag">
+                                    <select name="tag[]" id="tag" class="form-control old_select2" multiple style="width: 100%">
+                                        <option value="" disabled>Select Tag</option>
+                                        <option value="A" {{ (Str::contains($program->tag, 'A') ? 'selected' : '') }}>A</option>
+                                        <option value="B" {{ (Str::contains($program->tag, 'B') ? 'selected' : '') }}>B</option>
+                                        <option value="C" {{ (Str::contains($program->tag, 'C') ? 'selected' : '') }}>C</option>
+                                        <option value="D" {{ (Str::contains($program->tag, 'D') ? 'selected' : '') }}>D</option>
+                                        <option value="E" {{ (Str::contains($program->tag, 'E') ? 'selected' : '') }}>E</option>
+                                        <option value="F" {{ (Str::contains($program->tag, 'F') ? 'selected' : '') }}>F</option>
+                                    </select>
+                                    {{-- <input type="text" class="form-control @error('tag') error @enderror" value="{{ (old('tag') ? old('tag') : $program->tag) }}" name="tag" placeholder="Tag"> --}}
                                     @error('tag')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

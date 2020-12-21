@@ -128,6 +128,7 @@ class ProgramRepository implements ProgramRepositoryInterface
     {
         DB::transaction(function () use ($data) {
             $image = '';
+            $tags = implode(',', $data['tag']);
             if (!empty($data['image'])) {
                 $image = $data['image']->store('programs');
             }
@@ -136,7 +137,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->title = $data['title'];
             $program->description = $data['description'];
             $program->cost = $data['cost'];
-            $program->tag = $data['tag'];
+            $program->tag = $tags;
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->type = $data['type'];
             $program->is_active = $data['is_live'];
@@ -235,6 +236,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         DB::transaction(function () use ($data, $id) {
             $program = $this->program->find($id);
             $image = '';
+            $tags = implode(',', $data['tag']);
             if (!empty($data['image'])) {
                 Storage::delete($program->image);
                 $program->image = $data['image']->store('programs');
@@ -242,7 +244,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->title = $data['title'];
             $program->description = $data['description'];
             $program->cost = $data['cost'];
-            $program->tag = $data['tag'];
+            $program->tag = $tags;
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();

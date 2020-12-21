@@ -23,7 +23,6 @@
             </div>
             <div class="col-sm-3 col-12">
                 <div class="form-group float-right">
-                    <input type="hidden" name="type" value="1">
                     <button type="button" class="btn btn-primary add-stage">Add Stage</button>
                 </div>
             </div>
@@ -31,6 +30,7 @@
         <div class="content-body">
             <form action="{{ route('program.store') }}" id="addForm" method="POST" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="type" value="1">
                 <div id="validation-errors"></div>
                 <div class="card">
                     <div class="card-body">
@@ -82,7 +82,16 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Tag</label>
-                                    <input type="text" class="form-control @error('tag') error @enderror" value="{{ old('tag') }}" name="tag" placeholder="Tag">
+                                    <select name="tag[]" id="tag" class="form-control old_select2" multiple style="width: 100%">
+                                        <option value="" disabled>Select Tag</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                    </select>
+                                    {{-- <input type="text" class="form-control @error('tag') error @enderror" value="{{ old('tag') }}" name="tag" placeholder="Tag"> --}}
                                     @error('tag')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

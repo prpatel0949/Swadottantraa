@@ -29,7 +29,7 @@ class AddRequest extends FormRequest
             'description' => 'required|string',
             // 'time' => 'required|numeric',
             'cost' => 'required|numeric',
-            'tag' => 'required|string',
+            'tag' => 'required',
             'image' => 'required|mimes:jpeg,jpg,png',
             'stage_name.*' => 'required|string|max:100', 
             'stage_description.*' => 'required|string',

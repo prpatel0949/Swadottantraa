@@ -71,12 +71,21 @@ class HomeController extends Controller
     {
         return view('product/psyheal');
     }
+
     public function psytele()
     {
         return view('product/psytele');
     }
+
     public function selfie()
     {
         return view('product/selfie');
+    }
+
+    public function storeTags(Request $request)
+    {
+        $request->session()->put('question_tags', $request->tags);
+
+        return response()->json([ 'tag store successfully.' ], 200);
     }
 }

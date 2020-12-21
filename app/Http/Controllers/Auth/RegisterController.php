@@ -71,6 +71,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $tags = collect(Session::get('question_tags'));
         $type = 0;
         if (Hash::check(0, $data['type'])) {
             $type = 0;
@@ -78,7 +79,7 @@ class RegisterController extends Controller
 
         $user = User::max('id') + 1;
         $code = Str::random(5).''.$user;
-
+        Session::forget('question_tags');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -90,18 +91,18 @@ class RegisterController extends Controller
             'mobile' => $data['mobile'],
             'code' => $code,
             'type' => 0,
+            'tags' => $tags->implode('tag', ',')
         ]);
     }
 
-    // public function showRegistrationForm(Request $request)
-    // {
-    //     if (!empty(Session::get('question_1')) && !empty(Session::get('question_2')) 
-    //             && !empty(Session::get('question_3'))) {
-    //             return view('auth.register');
-    //     }
+    public function showRegistrationForm(Request $request)
+    {
+        if (Session::has('question_tags') && !empty(Session::get('question_tags'))) {
+            return view('auth.register');
+        }
 
-    //     return redirect()->route('happiness');
-    // }
+        return redirect()->route('happiness');
+    }
 
     public function redirectTo()
     {

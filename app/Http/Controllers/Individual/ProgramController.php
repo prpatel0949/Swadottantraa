@@ -19,7 +19,19 @@ class ProgramController extends Controller
 
     public function index()
     {
-        return view('individual.program', [ 'programs' => $this->program->active() ]);
+        $programs = $this->program->active();
+        $tags = explode(',', Auth::user()->tags);
+        $programs = $programs->filter(function($value, $key) use ($tags) {
+            $program_tag = explode(',', $value->tag);
+            $return = false;
+            foreach ($tags as $tag) {
+                if (in_array($tag, $program_tag)) {
+                    $return = true;
+                }
+            }
+            return $return;
+        })->values();
+        return view('individual.program', [ 'programs' => $programs ]);
     }
 
     public function hash(Request $request)
