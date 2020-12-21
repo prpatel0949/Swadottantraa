@@ -36,7 +36,7 @@
                         About <span class="text-primary">Us</span>
                     </div>
                     <div class="section-content">
-                        <p>
+                        <p class="text-justify">
                         <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD</b> provides comprehensive solutions for mental wellbeing. SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help for wellbeing with the help of technological tools. It is a beacon of light and trusted friend for those with wellness concerns. At SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA we have experts with more than 25 years of experience in providing  mental health and wellness with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also in preventive and positive mental health.
                         </p>
                         <!-- <p>Established in 2018, <b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa</b> provides comprehensive solutions for mental wellbeing. SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help regarding wellbeing with the help of technological tools.</p>

@@ -134,6 +134,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="checkbox" name="is_multiple" value="1" {{ ($program->is_multiple == 1 ? 'checked' : '') }}>
+                                    <label for="is_multiple">Multiple Answer</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="stage-div" id="stage-div">

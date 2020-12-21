@@ -21,6 +21,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repository\Interfaces\TransactionRepositoryInterface::class, \App\Repository\TransactionRepository::class);
         $this->app->bind(\App\Repository\Interfaces\ReportRepositoryInterface::class, \App\Repository\ReportRepository::class);
         $this->app->bind(\App\Repository\Interfaces\ClientRepositoryInterface::class, \App\Repository\ClientRepository::class);
+        $this->app->bind(\App\Repository\Interfaces\EmotionRepositoryInterface::class, \App\Repository\EmotionRepository::class);
+        $this->app->bind(\App\Repository\Interfaces\GeneralRepositoryInterface::class, \App\Repository\GeneralRepository::class);
     }
 
     /**

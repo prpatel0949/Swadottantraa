@@ -37,8 +37,8 @@
                         <div class="col-md-12">
                             @if ($answers->first()->scale_question_id)
                                 <strong>Interpretation : </strong>
-                                @php 
-                                $val = $answers->pluck('scaleQuestionAnswer')->sum('answer_value');
+                                @php
+                                $val = $answers->where('scaleQuestion.is_interpreatation', 1)->flatten()->pluck('scaleQuestionAnswer')->sum('answer_value');
                                 $inter = $answers->first()->scaleQuestion->scale->interpreatations->filter(function ($value) use ($val) {
                                     return ($value->start <= $val && $value->end >= $val);
                                 })->first();

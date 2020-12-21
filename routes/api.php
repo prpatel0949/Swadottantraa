@@ -20,6 +20,21 @@ Route::post('user/reset_passwod', 'ClientController@resetPassword');
 
 Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::post('user/change_passwod', 'ClientController@changePassword');
+
+    Route::get('emotions', 'EmotionController@index');
+    Route::get('emotions_pain_intensity', 'EmotionController@getEmotionPainIntensity');
+    Route::get('emotions_injuries', 'EmotionController@getEmotionInjuries');
+
+    Route::get('tips', 'GeneralController@getTips');
+    Route::get('traumas', 'GeneralController@getTraumas');
+    Route::get('menu_links', 'GeneralController@getMenuLinks');
+    Route::get('images', 'GeneralController@getImages');
+
+    Route::get('scale_question_answers', 'GeneralController@getScaleQuestionAnswers');
+    Route::post('scale_question_answers', 'GeneralController@storeScaleQuestionAnswers');
+
+    Route::post('emotions_injuries', 'EmotionController@storeEmotionInjuries');
+
 });
 
 
