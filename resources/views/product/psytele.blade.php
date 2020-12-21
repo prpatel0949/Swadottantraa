@@ -15,7 +15,7 @@
                 <p>PsyTele connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients. </p>
                 <div class="page-subtitle">Features:</div>
                 <ul>
-                    <li>A telemedicine tool integration for EzeeMedNote (Electronic Medical Record system by Swa.tantraa)</li>
+                    <li>A telemedicine tool integration for EzeeMedNote (Electronic Medical Record system by Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> tantraa)</li>
                     <li>Compliant with Indian telemedicine guidelines</li>
                     <li>Offers secure access to the electronic health record of the clients on the go</li>
                     <li>Updated Case paper for clients with important history and progress notes in their pockets</li>
