@@ -88,6 +88,10 @@ class LoginController extends Controller
             return 'franchisee/dashboard';
         }
 
+        if (Auth::user()->type == 1) {
+            return 'institue/dashboard';
+        }
+
         return '/';
     }
 }

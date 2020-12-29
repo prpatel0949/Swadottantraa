@@ -35,6 +35,8 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
 
     Route::post('emotions_injuries', 'EmotionController@storeEmotionInjuries');
 
+    Route::post('code', 'ClientController@applyCode');
+
 });
 
 

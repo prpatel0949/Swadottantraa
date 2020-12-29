@@ -72,4 +72,17 @@ class ClientController extends Controller
 
         return response()->json([ 'message' => 'Old password is invalid.' ], 500);
     }
+
+    public function applyCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|exists:users,code'
+        ], [
+            'code.exists' => 'Code is invalid'
+        ]);
+
+        if ($this->client->applyCode($request->all())) {
+            return response()->json([ 'message' => 'Code apply successfully.' ], 200);
+        }
+    }
 }

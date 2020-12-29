@@ -10,4 +10,8 @@ interface ClientRepositoryInterface
     public function resetPassword($data);
 
     public function changePassword($data);
+
+    public function applyCode($data);
+
+    public function update($data, $id);
 }

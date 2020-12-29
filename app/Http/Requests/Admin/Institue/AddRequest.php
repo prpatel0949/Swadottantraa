@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Admin\Institue;
 
-use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class AddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -24,10 +23,9 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('institue');
         return [
-            'name' => 'required|string|max:100|unique:users,name,'.$id,
-            'email' => 'required|string|max:150|unique:users,email,'.$id,
+            'name' => 'required|string|max:100|unique:users,name',
+            'email' => 'required|string|max:150|unique:users,email',
             'mobile' => 'required|numeric|digits:10',
             'address' => 'nullable|string',
             'number_of_users' => 'required|numeric'

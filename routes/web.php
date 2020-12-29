@@ -69,6 +69,15 @@ Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware
     Route::post('support', 'SupportController@store')->name('franchisee.support.store');
 });
 
+
+Route::group(['prefix' => 'institue', 'namespace' => 'Institue', 'middleware' => ['auth', 'institue' ] ], function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('institue.dashboard');
+    Route::get('/users', 'UserController@index')->name('institue.users');
+
+    Route::post('user/approve/{id}', 'UserController@approveUser')->name('user.approve');
+    Route::post('user/reject/{id}', 'UserController@approveReject')->name('user.reject');
+});
+
 Route::get('happiness', 'HomeController@happiness')->name('happiness');
 Route::get('question', 'HomeController@question')->name('question');
 Route::post('question/next', 'HomeController@nextQuestion')->name('question.next');

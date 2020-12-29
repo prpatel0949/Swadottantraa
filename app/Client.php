@@ -10,5 +10,6 @@ class Client extends Authenticatable
 {
     use HasApiTokens;
 
-    protected $fillable = [ 'name', 'email', 'mobile', 'password' ];
+    protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve' ];
+
 }

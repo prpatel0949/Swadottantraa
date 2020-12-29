@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'country_code', 'prefix', 'franchisee_code', 'dob', 'mobile', 'type', 'education', 'profile', 'occupation', 'gender', 'address', 'code', 'tags'
+        'name', 'email', 'password', 'country_code', 'prefix', 'franchisee_code', 'dob', 'mobile', 'type', 'education', 'profile', 'occupation', 'gender', 'address', 'code', 'tags', 'number_of_users'
     ];
 
     /**
@@ -68,8 +68,17 @@ class User extends Authenticatable
             if (Auth::user()->type == 3) {
                 $link = route('admin.dashboard');
             }
+
+            if (Auth::user()->type == 1) {
+                $link = route('institue.dashboard');
+            }
         }
 
         return $this->attributes['link'] = $link;
+    }
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
     }
 }

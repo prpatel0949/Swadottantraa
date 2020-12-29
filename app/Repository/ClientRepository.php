@@ -2,19 +2,21 @@
 namespace App\Repository;
 
 use Auth;
-use Mail;
 use Hash;
+use Mail;
+use App\User;
 use App\Client;
 use Carbon\Carbon;
 use App\Repository\Interfaces\ClientRepositoryInterface;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    private $client;
+    private $client, $user;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, User $user)
     {
         $this->client = $client;
+        $this->user = $user;
     }
 
     public function store($data)
@@ -76,5 +78,20 @@ class ClientRepository implements ClientRepositoryInterface
         } else {
             return false;
         }
+    }
+
+    public function applyCode($data)
+    {
+        $user = $this->user->where('code', $data['code'])->first();
+
+        $client = $this->client->find(Auth::user()->id);
+        $client->user_id = $user->id;
+        $client->save();
+        return true;
+    }
+
+    public function update($data, $id)
+    {
+        return $this->client->find($id)->update($data);
     }
 }
