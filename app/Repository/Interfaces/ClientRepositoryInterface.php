@@ -14,4 +14,6 @@ interface ClientRepositoryInterface
     public function applyCode($data);
 
     public function update($data, $id);
+
+    public function approveUser($id);
 }

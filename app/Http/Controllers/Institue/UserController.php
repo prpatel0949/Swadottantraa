@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function approveUser(Request $requrest, $id)
     {
-        if ($this->client->update([ 'is_approve' => 1 ], $id)) {
+        if ($this->client->approveUser($id)) {
             return response()->json([ 'success' => 'success' ], 200);
         }
 

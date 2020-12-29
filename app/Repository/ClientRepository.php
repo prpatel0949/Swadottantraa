@@ -4,6 +4,7 @@ namespace App\Repository;
 use Auth;
 use Hash;
 use Mail;
+use Session;
 use App\User;
 use App\Client;
 use Carbon\Carbon;
@@ -93,5 +94,16 @@ class ClientRepository implements ClientRepositoryInterface
     public function update($data, $id)
     {
         return $this->client->find($id)->update($data);
+    }
+
+    public function approveUser($id)
+    {
+        $count = $this->client->where([ 'user_id' => Auth::user()->id, 'is_approve' => 1 ])->count();
+        if (Auth::user()->number_of_users != 0 && Auth::user()->number_of_users >= $count) {
+            return $this->client->find($id)->update([ 'is_approve' => 1 ]);
+        }
+
+        Session::flash('error', 'Number of users reached');
+        return true;
     }
 }
