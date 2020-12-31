@@ -76,6 +76,9 @@ Route::group(['prefix' => 'institue', 'namespace' => 'Institue', 'middleware' =>
 
     Route::post('user/approve/{id}', 'UserController@approveUser')->name('user.approve');
     Route::post('user/reject/{id}', 'UserController@approveReject')->name('user.reject');
+
+    Route::get('support', 'SupportController@index')->name('institue.support.index');
+    Route::post('support', 'SupportController@store')->name('institue.support.store');
 });
 
 Route::get('happiness', 'HomeController@happiness')->name('happiness');
