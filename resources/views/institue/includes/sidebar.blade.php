@@ -17,7 +17,8 @@
             </li>
             <li class="{{ (request()->is('institue/users*')) ? 'active' : '' }}"><a href="{{ route('institue.users') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Users</span></a>
             </li>
-            <li class="{{ (request()->is('institue/support*')) ? 'active' : '' }}"><a href="{{ route('institue.support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Technical Support</span></a>
+            <li class="{{ (request()->is('institue/profile*') ? 'active' : '') }}"><a href="{{ route('institue.profile') }}"><i class="feather icon-circle"></i> Profile</a></li>
+            <li class="{{ (request()->is('institue/support*')) ? 'active' : '' }}"><a href="{{ route('institue.support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
             </li>
             <li>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>                

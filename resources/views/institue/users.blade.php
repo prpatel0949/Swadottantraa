@@ -91,19 +91,21 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
+                confirmButtonText: 'Yes, approve it!',
                 confirmButtonClass: 'btn btn-primary',
                 cancelButtonClass: 'btn btn-danger ml-1',
                 buttonsStyling: false,
             }).then(function (result) {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data : { '_token': '{{ csrf_token() }}' },
-                    success: function (res) {
-                        window.location.reload();
-                    }
-                });
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data : { '_token': '{{ csrf_token() }}' },
+                        success: function (res) {
+                            window.location.reload();
+                        }
+                    });
+                }
             })
     });
 
@@ -122,14 +124,16 @@
                 cancelButtonClass: 'btn btn-danger ml-1',
                 buttonsStyling: false,
             }).then(function (result) {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data : { '_token': '{{ csrf_token() }}' },
-                    success: function (res) {
-                        window.location.reload();
-                    }
-                });
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data : { '_token': '{{ csrf_token() }}' },
+                        success: function (res) {
+                            window.location.reload();
+                        }
+                    });
+                }
             })
     });
 </script>

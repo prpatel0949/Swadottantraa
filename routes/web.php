@@ -79,6 +79,9 @@ Route::group(['prefix' => 'institue', 'namespace' => 'Institue', 'middleware' =>
 
     Route::get('support', 'SupportController@index')->name('institue.support.index');
     Route::post('support', 'SupportController@store')->name('institue.support.store');
+
+    Route::get('profile', 'UserController@profile')->name('institue.profile');
+    Route::PUT('profile', 'UserController@profileUpdate')->name('institue.profile.update');
 });
 
 Route::get('happiness', 'HomeController@happiness')->name('happiness');
