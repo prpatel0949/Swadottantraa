@@ -46,16 +46,18 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
         Route::get('/program/{id}', 'ProgramController@accessProgram')->name('individual.program.access');
         Route::get('/program/{id}/{stage_id}', 'ProgramController@accessProgramStage')->name('individual.program.stage');
         Route::get('/program/{id}/{stage_id}/{step_id}', 'ProgramController@accessProgramStep')->name('individual.program.step');
-        Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer'); 
-    });
+        Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer');
 
+    });
+    
     Route::get('support', 'SupportController@index')->name('support.index');
     Route::post('support', 'SupportController@store')->name('support.store');
-
+    
     Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');
-
+    
     Route::post('program/{id}/question_answer', 'ProgramController@scaleQuestionAnswer')->name('user.program.question_answer');
-
+    
+    Route::post('coupon/apply', 'ProgramController@applyCode')->name('coupon.apply');
 });
 
 Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware' => [ 'auth', 'franchisee' ] ], function () {

@@ -69,6 +69,9 @@ class ProgramRepository implements ProgramRepositoryInterface
         try {
             DB::transaction(function () use ($request) {
                 $tnxId = explode('/', $request->txnid);
+
+                $program = $this->program->find($tnxId[1]);
+
                 $now = Carbon::now();
                 $end = $now->copy()->addYear();
                 $userProgram = $this->userProgram;
@@ -77,6 +80,8 @@ class ProgramRepository implements ProgramRepositoryInterface
                 $userProgram->subscribe_date = $now->format('Y-m-d');
                 $userProgram->end_date = $end->format('Y-m-d');
                 $userProgram->amount = $request->amount;
+                $userProgram->program_amount = $program->cost;
+                $userProgram->coupon_id = (isset($tnxId[2]) && $tnxId[2] ? $tnxId[2] : null);
                 $userProgram->save();
     
                 $transaction = $this->transaction;
@@ -141,7 +146,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->type = $data['type'];
             $program->is_active = $data['is_live'];
-            $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
+            // $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
 
 
@@ -156,11 +161,13 @@ class ProgramRepository implements ProgramRepositoryInterface
                     
                     if (!empty($data['step_name'][$index])) {
                         foreach ($data['step_name'][$index] as $key => $value) {
+                            $step_index = $data['step_index'][$index][$key];
                             $step = new $this->step;
                             $step->program_stage_id = $stage->id;
                             $step->title = $value;
                             $step->description = $data['step_description'][$index][$key];
                             $step->comment = (isset($data['comment']) ? $data['comment'][$index][$key] : '');
+                            $step->is_multiple = (isset($data['is_multiple'][$index][$step_index]) && !empty($data['is_multiple'][$index][$step_index]) ? 1 : 0);
                             $step->save();
 
                             $storeScale = [];
@@ -246,7 +253,7 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->cost = $data['cost'];
             $program->tag = $tags;
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
-            $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
+            // $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
 
             $allStage = [];
@@ -269,6 +276,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                     if (!empty($data['step_name'][$index])) {
                         foreach ($data['step_name'][$index] as $key => $value) {
                             $step_id = (isset($data['step_id'][$index]) ? $data['step_id'][$index][$key] : '');
+                            $step_index = $data['step_index'][$index][$key];
                             if (!empty($step_id)) {
                                 $step = $this->step->find($step_id);
                             } else {
@@ -278,6 +286,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                             $step->title = $value;
                             $step->description = $data['step_description'][$index][$key];
                             $step->comment = (isset($data['comment']) && isset($data['comment'][$index]) && isset($data['comment'][$index][$key]) ? $data['comment'][$index][$key] : '');
+                            $step->is_multiple = (isset($data['is_multiple'][$index][$step_index]) && !empty($data['is_multiple'][$index][$step_index]) ? 1 : 0);
                             $step->save();
                             $allSteps[] = $step->id;
                         }

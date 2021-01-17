@@ -143,14 +143,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <input type="checkbox" name="is_multiple" value="1" {{ ($program->is_multiple == 1 ? 'checked' : '') }}>
                                     <label for="is_multiple">Multiple Answer</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="stage-div" id="stage-div">
@@ -202,6 +202,7 @@
                                                                 <div class="form-group">
                                                                     <label>Step Description</label>
                                                                     <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
+                                                                    <input type="hidden" name="step_index[{{ $index }}][]" value="{{ $key + 1 }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -287,6 +288,12 @@
                                                             @php $length++; @endphp
                                                             @endforeach
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <input type="checkbox" name="is_multiple[{{ $index }}][{{ $key + 1 }}]" value="1" {{ ($step->is_multiple == 1 ? 'checked' : '') }}>
+                                                                <label for="is_multiple">Multiple Answer</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -356,6 +363,7 @@
                                     <div class="form-group">
                                         <label>Step Description</label>
                                         <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
+                                        <input type="hidden" name="step_index[`SrNo`][]" value="1">
                                     </div>
                                 </div>
                             </div>
@@ -378,6 +386,12 @@
                             </div>
                             <div class="scale-workout-section">
 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="checkbox" name="is_multiple[`SrNo`][1]" value="1" >
+                                    <label for="is_multiple">Multiple Answer</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -407,6 +421,7 @@
                         <div class="form-group">
                             <label>Step Description</label>
                             <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
+                            <input type="hidden" name="step_index[`SrNo`][]" value="`SrNo~1`">
                         </div>
                     </div>
                 </div>
@@ -429,6 +444,12 @@
                 </div>
                 <div class="scale-workout-section">
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="checkbox" name="is_multiple[`SrNo`][`SrNo~1`]" value="1" >
+                        <label for="is_multiple">Multiple Answer</label>
+                    </div>
                 </div>
             </div>
         </div>

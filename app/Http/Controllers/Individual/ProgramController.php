@@ -6,15 +6,17 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repository\Interfaces\CouponRepositoryInterface;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramController extends Controller
 {
-    private $program;
+    private $program, $coupon;
 
-    public function __construct(ProgramRepositoryInterface $program)
+    public function __construct(ProgramRepositoryInterface $program, CouponRepositoryInterface $coupon)
     {
         $this->program = $program;
+        $this->coupon = $coupon;
     }
 
     public function index()
@@ -36,7 +38,7 @@ class ProgramController extends Controller
 
     public function hash(Request $request)
     {
-        return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->program['cost'].'|'.$request->program['title'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
+        return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->cost.'|'.$request->program['title'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
     }
 
     public function paymentResponse(Request $request)
@@ -133,5 +135,25 @@ class ProgramController extends Controller
         }
 
         return redirect()->back()->with('error', 'Something went wrong happen.');
+    }
+
+    public function applyCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|exists:coupons,code'
+        ], [
+            'code.exists' => 'Coupon code is invalid.'
+        ]);
+
+        if ($code = $this->coupon->applyCode($request->all())) {
+            if ($code == -1) {
+                return response()->json([ 'message' => 'Coupon code already used.' ], 500);
+            }
+            
+            return response()->json([ 'message' => 'Coupon code apply successfully.', 'code' => $code ], 200);
+        }
+
+        return response()->json([ 'message' => 'Coupon code expired.' ], 500);
+
     }
 }

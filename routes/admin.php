@@ -36,4 +36,5 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::post('program/answer/{id}/comment', 'ProgramController@answerComment')->name('program.answer.comment');
 
     Route::resource('institue', 'InstitueController');
+    Route::resource('coupon', 'CouponController');
 });

@@ -128,7 +128,7 @@
                                                                 $ans = $answers->whereIn('scale_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('scale_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
-                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $program->is_multiple == 1))
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1))
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -211,7 +211,7 @@
                                                                 $ans = $answers->whereIn('workout_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('workout_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
-                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $program->is_multiple == 1))
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1))
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <button type="submit" class="btn btn-primary">Submit</button>
