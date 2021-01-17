@@ -49,11 +49,12 @@ class CouponRepository implements CouponRepositoryInterface
         $code = $this->coupon->where('code', $data['code'])->first();
         $userProgram = $this->userProgram->where([ 'coupon_id' => $code->id, 'user_id' => Auth::user()->id ])->count();
         if ($userProgram > 0) {
-            return -1;    
+            return response()->json([ 'message' => 'Coupon code already used.' ], 500);    
         }
         if ($code->is_valid) {
-            return $code;
+            return response()->json([ 'message' => 'Coupon code apply successfully.', 'code' => $code ], 200);
         }
-        return false;
+        
+        return response()->json([ 'message' => 'Coupon code expired.' ], 500);
     }
 }

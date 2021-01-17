@@ -145,15 +145,8 @@ class ProgramController extends Controller
             'code.exists' => 'Coupon code is invalid.'
         ]);
 
-        if ($code = $this->coupon->applyCode($request->all())) {
-            if ($code == -1) {
-                return response()->json([ 'message' => 'Coupon code already used.' ], 500);
-            }
+        return $this->coupon->applyCode($request->all());
             
-            return response()->json([ 'message' => 'Coupon code apply successfully.', 'code' => $code ], 200);
-        }
-
-        return response()->json([ 'message' => 'Coupon code expired.' ], 500);
 
     }
 }
