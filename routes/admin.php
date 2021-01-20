@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::resource('franchisee', 'FranchiseeController');
 
     Route::get('support', 'SupportController@index')->name('admin.support.index');
+    Route::get('support/medical', 'SupportController@index')->name('admin.support.medical.index');
     Route::get('support/{id}/edit', 'SupportController@edit')->name('admin.support.edit');
     Route::put('support/{id}/update', 'SupportController@update')->name('admin.support.update');
 

@@ -146,7 +146,5 @@ class ProgramController extends Controller
         ]);
 
         return $this->coupon->applyCode($request->all());
-            
-
     }
 }

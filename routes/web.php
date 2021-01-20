@@ -50,7 +50,10 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
 
     });
     
-    Route::get('support', 'SupportController@index')->name('support.index');
+    Route::get('support/technical', 'SupportController@index')->name('support.index');
+    Route::post('support', 'SupportController@store')->name('support.store');
+
+    Route::get('support/medical', 'SupportController@index')->name('support.medical.index');
     Route::post('support', 'SupportController@store')->name('support.store');
     
     Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');

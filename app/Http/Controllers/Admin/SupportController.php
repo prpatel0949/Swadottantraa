@@ -17,7 +17,8 @@ class SupportController extends Controller
 
     public function index()
     {
-        return view('admin.support.index', [ 'supports' => $this->support->all() ]);
+        $type = (request()->segment(3) != '' && request()->segment(3) == 'medical' ? 1 : 0);
+        return view('admin.support.index', [ 'supports' => $this->support->all([ 'type' => $type ]) ]);
     }
 
     public function edit($id)

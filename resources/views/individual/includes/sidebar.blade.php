@@ -23,9 +23,9 @@
             </li> --}}
             <li class="{{ (request()->is('user/support*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Support</span></a>
                 <ul class="menu-content">
-                    <li class="{{ (request()->is('user/support*') ? 'active' : '') }}"><a href="{{ route('support.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Technical</span></a>
+                    <li class="{{ (request()->is('user/support/technical*') ? 'active' : '') }}"><a href="{{ route('support.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Technical</span></a>
                     </li>
-                    <li class="{{ (request()->is('user/support*') ? 'active' : '') }}"><a href="{{ route('support.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Medical</span></a>
+                    <li class="{{ (request()->is('user/support/medical*') ? 'active' : '') }}"><a href="{{ route('support.medical.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Medical</span></a>
                     </li>
                 </ul>
             </li>
