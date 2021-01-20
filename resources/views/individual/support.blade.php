@@ -29,6 +29,7 @@
 
                         <form method="POST" action="{{ route('support.store') }}">
                             @csrf
+                            <input type="hidden" name="type" value="{{ (Request::segment(3) == 'technical' ? 0 : 1) }}">
                         <div class="row">
                         	<div class="col-sm-8">
                         		<div class="form-group">

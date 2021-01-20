@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Support extends Model
 {
-    protected $fillable = [ 'description' ];
+    protected $fillable = [ 'description', 'type' ];
 
     public static function boot() {
         parent::boot();
