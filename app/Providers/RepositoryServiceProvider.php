@@ -24,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repository\Interfaces\EmotionRepositoryInterface::class, \App\Repository\EmotionRepository::class);
         $this->app->bind(\App\Repository\Interfaces\GeneralRepositoryInterface::class, \App\Repository\GeneralRepository::class);
         $this->app->bind(\App\Repository\Interfaces\CouponRepositoryInterface::class, \App\Repository\CouponRepository::class);
+        $this->app->bind(\App\Repository\Interfaces\FAQRepositoryInterface::class, \App\Repository\FAQRepository::class);
     }
 
     /**

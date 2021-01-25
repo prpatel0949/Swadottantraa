@@ -34,4 +34,13 @@ class SupportController extends Controller
 
         return redirect()->route('admin.support.index')->with('success', 'Something went wrong happen!');
     }
+
+    public function addToFAQ($id)
+    {
+        if ($this->support->addToFAQ($id)) {
+            return redirect()->back()->with('success', 'Addred To successfully.');
+        }
+
+        return redirect()->back()->with('success', 'Something went wrong happen!');
+    }
 }

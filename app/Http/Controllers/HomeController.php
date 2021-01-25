@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Session;
 use Illuminate\Http\Request;
+use App\Repository\Interfaces\FAQRepositoryInterface;
 
 class HomeController extends Controller
 {
 
+    private $faq;
+    public function __construct(FAQRepositoryInterface $faq)
+    {
+        $this->faq = $faq;
+    }
     /**
      * Show the application dashboard.
      *
@@ -87,5 +93,10 @@ class HomeController extends Controller
         $request->session()->put('question_tags', $request->tags);
 
         return response()->json([ 'tag store successfully.' ], 200);
+    }
+
+    public function faqs($type = '')
+    {
+        return view('faq', [ 'faqs' => $this->faq->getAll($type) ]);
     }
 }
