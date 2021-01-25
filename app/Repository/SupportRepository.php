@@ -1,16 +1,18 @@
 <?php
 namespace App\Repository;
 
+use App\Faq;
 use App\Support;
 use App\Repository\Interfaces\SupportRepositoryInterface;
 
 class SupportRepository implements SupportRepositoryInterface
 {
-    private $support;
+    private $support, $faq;
 
-    public function __construct(Support $support)
+    public function __construct(Support $support, Faq $faq)
     {
         $this->support = $support;
+        $this->faq = $faq;
     }
 
     public function store($data)
@@ -38,6 +40,18 @@ class SupportRepository implements SupportRepositoryInterface
         $support->answer = $data['answer'];
         $support->status = $data['status'];
         $support->save();
+
+        return true;
+    }
+
+    public function addToFAQ($id)
+    {
+        $support = $this->support->find($id);
+        $faq = new $this->faq;
+        $faq->question = $support->description;
+        $faq->answer = $support->answer;
+        $faq->type = $support->type;
+        $faq->save();
 
         return true;
     }

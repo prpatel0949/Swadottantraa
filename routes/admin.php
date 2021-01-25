@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::get('support/{id}/edit', 'SupportController@edit')->name('admin.support.edit');
     Route::put('support/{id}/update', 'SupportController@update')->name('admin.support.update');
 
+    Route::get('support/{id}/faq', 'SupportController@addToFAQ')->name('admin.supoort.faq');
+
     Route::group([ 'prefix' => 'report' ], function () {
         Route::get('program', 'ReportController@program')->name('report.program');
         Route::post('program/list', 'ReportController@programList')->name('report.program.list');
@@ -38,4 +40,5 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
 
     Route::resource('institue', 'InstitueController');
     Route::resource('coupon', 'CouponController');
+    Route::resource('faq', 'FAQController');
 });

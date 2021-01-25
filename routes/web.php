@@ -93,3 +93,5 @@ Route::get('happiness', 'HomeController@happiness')->name('happiness');
 Route::get('question', 'HomeController@question')->name('question');
 Route::post('question/next', 'HomeController@nextQuestion')->name('question.next');
 Route::post('question/tag', 'HomeController@storeTags')->name('question.tag');
+
+Route::get('faq/{type?}', 'HomeController@faqs')->name('faq');
