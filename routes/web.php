@@ -55,6 +55,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
 
     Route::get('support/medical', 'SupportController@index')->name('support.medical.index');
     Route::post('support', 'SupportController@store')->name('support.store');
+
+    Route::get('fag/{type?}', 'SupportController@faqs')->name('support.faqs');
     
     Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');
     

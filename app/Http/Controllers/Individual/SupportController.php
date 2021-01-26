@@ -6,15 +6,17 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTicketRequest;
+use App\Repository\Interfaces\FAQRepositoryInterface;
 use App\Repository\Interfaces\SupportRepositoryInterface;
 
 class SupportController extends Controller
 {
-    private $support;
+    private $support, $faq;
 
-    public function __construct(SupportRepositoryInterface $support)
+    public function __construct(SupportRepositoryInterface $support, FAQRepositoryInterface $faq)
     {
         $this->support = $support;
+        $this->faq = $faq;
     }
 
     public function index()
@@ -33,5 +35,10 @@ class SupportController extends Controller
 
         return redirect()->back()->with('error', 'Something went wrong happen!');
         // return redirect()->route('support.index')->with('error', 'Something went wrong happen!');
+    }
+
+    public function faqs($type = '')
+    {
+        return view('individual.faq', [ 'faqs' => $this->faq->getAll($type) ]);
     }
 }

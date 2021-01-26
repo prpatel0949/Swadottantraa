@@ -21,7 +21,7 @@
     		<div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <p>Most of your questions are already answered. please, <a href="{{ route('faq', Request::segment(3)) }}" target="_blank">click here</a></p>
+                        <p>Most of your questions are already answered. please, <a href="{{ route('support.faqs', Request::segment(3)) }}" target="_blank">click here</a></p>
                     </div>
                 </div>
             </div>
