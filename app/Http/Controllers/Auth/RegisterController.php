@@ -71,7 +71,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $tags = collect(Session::get('question_tags'));
+        $tags = Session::get('question_tags');
         $type = 0;
         if (Hash::check(0, $data['type'])) {
             $type = 0;
@@ -91,7 +91,7 @@ class RegisterController extends Controller
             'mobile' => $data['mobile'],
             'code' => $code,
             'type' => 0,
-            'tags' => $tags->implode('tag', ',')
+            'tags' => $tags,
         ]);
     }
 

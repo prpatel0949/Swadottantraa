@@ -48,6 +48,8 @@
                     </li>
                 </ul>
             </li>
+            <li class="{{ (request()->is('admin/recommand/program*')) ? 'active' : '' }}"><a href="{{ route('recommand.program') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Recommand Program</span></a>
+            </li>
             <li>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

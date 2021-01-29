@@ -38,4 +38,12 @@ interface ProgramRepositoryInterface
     public function answerComment($data, $id);
 
     public function usersAnswers($step_id, $user_id);
+
+    public function recommandProgram($data);
+
+    public function allRecommandedProgram();
+
+    public function findRecommandProgram($id);
+
+    public function updateRecommandProgram($data, $id);
 }

@@ -90,7 +90,7 @@ class HomeController extends Controller
 
     public function storeTags(Request $request)
     {
-        $request->session()->put('question_tags', $request->tags);
+        $request->session()->put('question_tags', $request->tag);
 
         return response()->json([ 'tag store successfully.' ], 200);
     }
