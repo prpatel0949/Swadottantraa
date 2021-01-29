@@ -83,14 +83,12 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Tag</label>
+                                    @php $tags = $program->tags->pluck('tag')->toArray(); @endphp
                                     <select name="tag[]" id="tag" class="form-control old_select2" multiple style="width: 100%">
                                         <option value="" disabled>Select Tag</option>
-                                        <option value="A" {{ (Str::contains($program->tag, 'A') ? 'selected' : '') }}>A</option>
-                                        <option value="B" {{ (Str::contains($program->tag, 'B') ? 'selected' : '') }}>B</option>
-                                        <option value="C" {{ (Str::contains($program->tag, 'C') ? 'selected' : '') }}>C</option>
-                                        <option value="D" {{ (Str::contains($program->tag, 'D') ? 'selected' : '') }}>D</option>
-                                        <option value="E" {{ (Str::contains($program->tag, 'E') ? 'selected' : '') }}>E</option>
-                                        <option value="F" {{ (Str::contains($program->tag, 'F') ? 'selected' : '') }}>F</option>
+                                        @foreach (config('custom.tags') as $tag)
+                                            <option value="{{ $tag }}" {{ (in_array($tag, $tags) ? 'selected' : '') }}>{{ $tag }}</option>
+                                        @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control @error('tag') error @enderror" value="{{ (old('tag') ? old('tag') : $program->tag) }}" name="tag" placeholder="Tag"> --}}
                                     @error('tag')

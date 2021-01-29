@@ -11,6 +11,11 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
 
     Route::get('program/{id}/status/update', 'ProgramController@updateStatus')->name('program.status.update');
     Route::get('program/{id}/copy', 'ProgramController@copy')->name('program.copy');
+    Route::get('recommand/program', 'ProgramController@recommandProgram')->name('recommand.program');
+    Route::get('recommand/program/create', 'ProgramController@createRecommandProgram')->name('recommand.program.create');
+    Route::post('recommand/program/store', 'ProgramController@storeRecommandProgram')->name('recommand.program.store');
+    Route::get('recommand/program/{id}/edit', 'ProgramController@editRecommandProgram')->name('recommand.program.edit');
+    Route::put('recommand/program/{id}/update', 'ProgramController@updateRecommandProgram')->name('recommand.program.update');
     Route::resource('program', 'ProgramController');
 
     Route::resource('scale', 'ScaleController');

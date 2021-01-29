@@ -84,12 +84,9 @@
                                     <label>Tag</label>
                                     <select name="tag[]" id="tag" class="form-control old_select2" multiple style="width: 100%">
                                         <option value="" disabled>Select Tag</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="D">D</option>
-                                        <option value="E">E</option>
-                                        <option value="F">F</option>
+                                        @foreach (config('custom.tags') as $tag)
+                                            <option value="{{ $tag }}">{{ $tag }}</option>
+                                        @endforeach
                                     </select>
                                     {{-- <input type="text" class="form-control @error('tag') error @enderror" value="{{ old('tag') }}" name="tag" placeholder="Tag"> --}}
                                     @error('tag')

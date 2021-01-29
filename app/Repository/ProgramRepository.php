@@ -9,6 +9,7 @@ use App\Result;
 use App\Program;
 use App\StepScale;
 use Carbon\Carbon;
+use App\ProgramTag;
 use App\StageAccess;
 use App\StepWorkout;
 use App\Transaction;
@@ -18,13 +19,15 @@ use App\AnswerComment;
 use App\ProgramAnswer;
 use App\StepAttachment;
 use App\ProgramStageStep;
+use App\RecommandedProgram;
 use App\ScaleWorkoutSequence;
 use Illuminate\Support\Facades\Log;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
-    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer, $access, $comment;
+    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale;
+    private $workout, $attachment, $sequencce, $answer, $access, $comment, $tag, $recommand_program;
 
     public function __construct(
         Program $program,
@@ -40,7 +43,9 @@ class ProgramRepository implements ProgramRepositoryInterface
         ScaleWorkoutSequence $sequence,
         ProgramAnswer $answer,
         StageAccess $access,
-        AnswerComment $comment
+        AnswerComment $comment,
+        ProgramTag $tag,
+        RecommandedProgram $recommand_program
     )
     {
         $this->program = $program;
@@ -57,6 +62,8 @@ class ProgramRepository implements ProgramRepositoryInterface
         $this->answer = $answer;
         $this->access = $access;
         $this->comment = $comment;
+        $this->tag = $tag;
+        $this->recommand_program = $recommand_program;
     }
 
     public function all()
@@ -148,6 +155,15 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->is_active = $data['is_live'];
             // $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
+
+            if (!empty($data['tag'])) {
+                foreach ($data['tag'] as $tag) {
+                    $new_tag = new $this->tag;
+                    $new_tag->program_id = $program->id;
+                    $new_tag->tag = $tag;
+                    $new_tag->save();
+                }
+            }
 
 
             if (!empty($data['stage_name'])) {
@@ -255,6 +271,16 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             // $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
+
+            $allTags = [];
+            if (!empty($data['tag'])) {
+                foreach ($data['tag'] as $tag) {
+                    $new_tag = $this->tag->firstorcreate([ 'program_id' => $program->id, 'tag' => $tag ]);
+                    $allTags[] = $new_tag->id;
+                }
+            }
+
+            $this->tag->where('program_id', $program->id)->whereNotIn('id', $allTags)->delete();
 
             $allStage = [];
             if (!empty($data['stage_name'])) {
@@ -472,7 +498,21 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     public function active()
     {
-        return $this->program->active()->get();
+        $programs = $this->program->active();
+        $today = Carbon::parse(now())->format('Y-m-d');
+        $tags = explode(',', Auth::user()->tags);
+        $tags[] = 'general';
+        if (Auth::user()->franchisee_id > 0) {
+            $tags[] = 'franchisee';
+        }
+        $program_ids = Auth::user()->recommandedPrograms->pluck('program_id')->toArray();
+        $programs = $programs->whereHas('tags', function ($query) use ($tags) {
+            return $query->whereIn('tag', $tags);
+        });
+        $programs = $programs->orWhereIn('id', $program_ids);
+        return $programs->orWhereHas('userPrograms', function ($query) use ($today) {
+            return $query->where('user_id', Auth::user()->id)->where('end_date', '>=', $today);
+        })->get();
     }
 
     public function answers()
@@ -584,5 +624,58 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function usersAnswers($step_id, $user_id)
     {
         return $this->answer->where([ 'step_id' => $step_id, 'user_id' => $user_id ])->get();
+    }
+
+    public function recommandProgram($data)
+    {
+        $set_no = $this->recommand_program->max('set_no');
+        if (empty($set_no)) {
+            $set_no = 0;
+        }
+        $set_no = $set_no + 1; 
+        foreach ($data['program_id'] as $program) {
+            $recommand_program = new $this->recommand_program;
+            $recommand_program->program_id = $program;
+            $recommand_program->set_no = $set_no;
+            $recommand_program->user_id = $data['user_id'];
+            $recommand_program->added_by = Auth::user()->id;
+            $recommand_program->save();
+        }
+
+        return true;
+    }
+
+    public function allRecommandedProgram()
+    {
+        return $this->recommand_program->where('added_by', Auth::user()->id)->orderBy('id', 'DESC')->groupBy('set_no')->get();
+    }
+
+    public function findRecommandProgram($id)
+    {
+        $program = $this->recommand_program->find($id);
+        return $this->recommand_program->where('set_no', $program->set_no)->get(); 
+    }
+
+    public function updateRecommandProgram($data, $id)
+    {
+        $program = $this->recommand_program->find($id);
+        $allPrograms = [];
+        foreach ($data['program_id'] as $program_id) {
+            $cprogram = $this->recommand_program->where([ 'program_id' => $program_id, 'user_id' => $data['user_id'], 'set_no' => $program->set_no ])->first();
+            if (empty($cprogram)) {
+                $cprogram = new $this->recommand_program;
+                $cprogram->program_id = $program_id;
+                $cprogram->user_id = $data['user_id'];
+                $cprogram->set_no = $program->set_no;
+                $cprogram->added_by = Auth::user()->id;
+                $cprogram->save();
+            }
+
+            $allPrograms[] = $cprogram->id;
+        }
+
+        $this->recommand_program->where('set_no', $program->set_no)->whereNotIn('id', $allPrograms)->delete();
+
+        return true;
     }
 }
