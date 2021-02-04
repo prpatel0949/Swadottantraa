@@ -614,7 +614,7 @@
                 method: 'POST',
                 data: { '_token': '{{ csrf_token() }}', 'tag': tag },
                 success: function (res) {
-                    window.location.href = '{{ route("register") }}';
+                    window.location.href = '{{ (Auth::check() ? route("recheck") : route("register")) }}';
                 }
             });
         }

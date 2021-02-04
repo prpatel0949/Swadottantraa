@@ -511,7 +511,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         });
         $programs = $programs->orWhereIn('id', $program_ids);
         return $programs->orWhereHas('userPrograms', function ($query) use ($today) {
-            return $query->where('user_id', Auth::user()->id)->where('end_date', '>=', $today);
+            return $query->where('user_id', Auth::user()->id)->whereDate('end_date', '>=', $today);
         })->get();
     }
 

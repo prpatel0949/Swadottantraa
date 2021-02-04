@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
-use App\User;
 use Session;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -92,6 +93,7 @@ class RegisterController extends Controller
             'code' => $code,
             'type' => 0,
             'tags' => $tags,
+            'last_checked_at' => Carbon::now()->format('Y-m-d'),
         ]);
     }
 

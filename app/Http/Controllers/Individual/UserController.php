@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Individual;
 
 use Auth;
+use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Individual\ProfileUpdateRequest;
@@ -38,5 +39,15 @@ class UserController extends Controller
         }
 
         return redirect()->route('individual.profile')->with('error', 'Invalid token.');
+    }
+
+    public function reCheck()
+    {
+        if (Session::has('question_tags') && !empty(Session::get('question_tags'))) {
+            $this->user->reCheck();
+            return redirect()->route('individual.program');
+        }
+        
+        return redirect('/');
     }
 }

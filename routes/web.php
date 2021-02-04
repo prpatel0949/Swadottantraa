@@ -63,6 +63,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
     Route::post('program/{id}/question_answer', 'ProgramController@scaleQuestionAnswer')->name('user.program.question_answer');
     
     Route::post('coupon/apply', 'ProgramController@applyCode')->name('coupon.apply');
+
+    Route::get('recheck', 'UserController@reCheck')->name('recheck');
 });
 
 Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware' => [ 'auth', 'franchisee' ] ], function () {

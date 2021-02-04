@@ -19,7 +19,20 @@
 		            </div>
 		        </div>
 		    </div>
-		</div>
+        </div>
+        
+        @if (checkProgram() > 7 && checkProgram() < 14)
+            <div class="alert alert-warning">
+                It's good to keep Rechecking your Status regularly. <a href="{{ route('happiness') }}" target="_blank">Click here</a>
+            </div>
+        @endif
+
+        @if (checkProgram() >= 14)
+            <div class="alert alert-danger">
+                It's High Time to Recheck your Status. <a href="{{ route('happiness') }}" target="_blank">Click here</a>
+            </div>
+        @endif
+
     	<div class="content-body">
     		<section>
                 <div class="row match-height">
