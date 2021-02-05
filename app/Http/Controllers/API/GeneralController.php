@@ -18,28 +18,28 @@ class GeneralController extends Controller
 
     public function getTips()
     {
-        return $this->general->getTips();
+        return response()->json([ 'tbl' => $this->general->getTips() ], 200);
     }
 
     public function getTraumas()
     {
-        return $this->general->getTraumas();
+        return response()->json([ 'tbl' => $this->general->getTraumas() ], 200);
     }
 
     public function getMenuLinks()
     {
-        return $this->general->getMenuLinks();
+        return response()->json([ 'tbl' => $this->general->getMenuLinks() ], 200);
     }
 
     public function getImages()
     {
-        return $this->general->getImages();   
+        return response()->json([ 'tbl' => $this->general->getImages() ], 200);   
     }
 
     public function getScaleQuestionAnswers()
     {
         $questions = $this->general->getQuestions();
-        return response()->json([ 'question' => $questions, 'answers' => $questions->pluck('answers') ], 200);
+        return response()->json([ 'Table' => $questions, 'Table1' => $questions->pluck('answers') ], 200);
     }
 
     public function storeScaleQuestionAnswers(Request $request)

@@ -32,12 +32,12 @@ class EmotionController extends Controller
 
     public function getEmotionPainIntensity()
     {
-        return $this->emotion->getEmotionPainIntensity();
+        return response()->json([ 'tbl' => $this->emotion->getEmotionPainIntensity() ], 200);
     }
 
     public function getEmotionInjuries()
     {
-        return $this->emotion->getEmotionInjuries();
+        return response()->json([ 'tbl' => $this->emotion->getEmotionInjuries() ], 200);
     }
 
     public function storeEmotionInjuries(Request $request)
