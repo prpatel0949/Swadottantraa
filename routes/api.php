@@ -23,7 +23,7 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
 
     Route::get('emotions', 'EmotionController@index');
     Route::get('emotions_pain_intensity', 'EmotionController@getEmotionPainIntensity');
-    Route::get('emotions_injuries', 'EmotionController@getEmotionInjuries');
+    Route::post('emotions_injuries', 'EmotionController@getEmotionInjuries');
 
     Route::get('tips', 'GeneralController@getTips');
     Route::get('traumas', 'GeneralController@getTraumas');
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['api', 'auth:client']], function () {
     Route::get('scale_question_answers', 'GeneralController@getScaleQuestionAnswers');
     Route::post('scale_question_answers', 'GeneralController@storeScaleQuestionAnswers');
 
-    Route::post('emotions_injuries', 'EmotionController@storeEmotionInjuries');
+    Route::post('emotions_injuries/create', 'EmotionController@storeEmotionInjuries');
 
     Route::post('code', 'ClientController@applyCode');
 
