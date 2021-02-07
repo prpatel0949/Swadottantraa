@@ -46,4 +46,6 @@ interface ProgramRepositoryInterface
     public function findRecommandProgram($id);
 
     public function updateRecommandProgram($data, $id);
+
+    public function getTopPrograms();
 }

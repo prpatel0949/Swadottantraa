@@ -35,6 +35,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="code">Code</label>
+                                    <div class="input-group">
+                                        <input type="text" name="code" id="code" class="form-control" value="{{ old('code') }}" placeholder="Code">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text generate-code" id="basic-addon2" style="cursor: pointer;">Generate</span>
+                                        </div>
+                                    </div>
+                                    @error('code')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -100,6 +120,14 @@
             orientation: 'bottom',
             autoclose: true,
             format: 'dd-mm-yyyy'
+        });
+
+        $(document).on('click', '.generate-code', function() {
+            var result = '';
+            var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            for (var i = 6; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+
+            $('#code').val(result);
         });
     </script>
 @endsection

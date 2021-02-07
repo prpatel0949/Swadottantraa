@@ -28,7 +28,8 @@ class AddRequest extends FormRequest
             'title' => 'required|string|max:100',
             'start_date' => 'required|date_format:d-m-Y',
             'end_date' => 'required|date_format:d-m-Y',
-            'discount' => 'required|numeric'
+            'discount' => 'required|numeric',
+            'code' => 'required|string|min:5|max:8'
         ];
     }
 }

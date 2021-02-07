@@ -678,4 +678,17 @@ class ProgramRepository implements ProgramRepositoryInterface
 
         return true;
     }
+
+    public function getTopPrograms()
+    {
+        return $ptograms = $this->userProgram->select(
+            'user_programs.id',
+            'programs.title',
+            DB::raw('COUNT(user_programs.id) as cnt')
+        )
+        ->join('programs', 'programs.id', 'user_programs.program_id')
+        ->groupBy('user_programs.program_id')
+        ->limit(5)
+        ->get();
+    }
 }

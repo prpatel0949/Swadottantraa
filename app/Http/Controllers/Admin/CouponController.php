@@ -28,19 +28,8 @@ class CouponController extends Controller
 
     public function store(AddRequest $request)
     {
-        $data = $request->validated();
-        do {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $charactersLength = strlen($characters);
-            $code = '';
-            for ($i = 0; $i < 4; $i++) {
-                $code .= $characters[rand(0, $charactersLength - 1)];
-            }
-            $user_code = $this->coupon->all([ 'code' => $code ]);
-        } while(empty($user_code));
-
-        $data['code'] = $code;
-        if ($this->coupon->store($data)) {
+        
+        if ($this->coupon->store($request->validated())) {
             return redirect()->route('coupon.index')->with('success', 'Coupon created successfully.');
         }
 
