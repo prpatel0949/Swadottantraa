@@ -96,7 +96,7 @@
                                             <div id="scale_{{ $item->typable->scale->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                 <div class="card-body">
                                                     <div>
-                                                        <form  class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST">
+                                                        <form  class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" id="scale{{ $item->typable->scale->id }}">
                                                             @csrf
                                                             <input type="hidden" name="step_id" value="{{ $item->typable->step_id }}">
                                                             <input type="hidden" name="scale_id" value="{{ $item->typable->scale->id }}">
@@ -111,13 +111,17 @@
                                                                         <div class="card-options mb-2">
                                                                             @foreach ($question->answers as $answer)
                                                                                 @php
-                                                                                    $currect_answer = $answers->where('scale_question_id', $question->id)->first();
+                                                                                    $currect_answer = $answers->where('scale_question_id', $question->id)->last();
                                                                                 @endphp
                                                                             <label class="card-option form-control mb-2">
-                                                                                <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}" {{ (!empty($currect_answer) && $currect_answer->scale_question_answer_id == $answer->id ? 'checked' : '') }} required> <span>{{ $answer->answer }}</span>
+                                                                                <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}" {{ (!empty($currect_answer) && $currect_answer->is_draft == 1 && $currect_answer->scale_question_answer_id == $answer->id ? 'checked' : '') }} > <span>{{ $answer->answer }}</span>
                                                                                 <i class="fa fa-check"></i>
                                                                             </label>
                                                                             @endforeach
+                                                                            @php 
+                                                                                $question_answer = $answers->where('scale_question_id', $question->id)->first();
+                                                                            @endphp
+                                                                            <input type="hidden" id="" name="answer_id[{{ $question->id }}]" value="{{ (!empty($question_answer) && $question_answer->is_draft == 1 ? $question_answer->id : '') }}"> 
                                                                         </div>
                                                                         <div class="dropdown-divider"></div>
                                                                     </div>
@@ -128,12 +132,16 @@
                                                                 $ans = $answers->whereIn('scale_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('scale_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
-                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1))
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                                </div>
-                                                            </div>
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1) || ($ans->count() > 0 && $ans[0]->is_draft == 1))
+                                                                @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1))
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <input type="hidden" name="is_draft" id="scale_type_{{ $item->typable->scale->id }}" value="0">
+                                                                            <button type="button" class="btn btn-primary submit-answer" data-draft="1" data-type="scale" data-id="{{ $item->typable->scale->id }}">Save as Draft</button>
+                                                                            <button type="button" class="btn btn-primary submit-answer" data-draft="0" data-type="scale" data-id="{{ $item->typable->scale->id }}">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             @endif
                                                             @if ($comments->count() > 0)
                                                                 <div class="dropdown-divider"></div>
@@ -175,28 +183,28 @@
                                                 <div class="card-body">
 
                                                     <div>
-                                                        <form class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" style="width: 100%">
+                                                        <form class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" id="workout{{ $item->typable->workout->id }}" style="width: 100%">
                                                             @csrf
                                                             <input type="hidden" name="step_id" value="{{ $item->typable->step_id }}">
                                                             <input type="hidden" name="workout_id" value="{{ $item->typable->workout->id }}">
                                                             @foreach ($item->typable->workout->questions as $key => $question)
-                                                                {{-- @php
-                                                                    $currect_answer = $answers->where('workout_question_id', $question->id)->first();
-                                                                @endphp --}}
+                                                                @php
+                                                                    $currect_answer = $answers->where('workout_question_id', $question->id)->last();
+                                                                @endphp
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <input type="hidden" name="type[{{ $question->id }}]" value="">
+                                                                        <input type="hidden" name="type[{{ $question->id }}]" value="{{ $question->answer_type }}">
                                                                         <div class="card-question"><span class="q_no">
                                                                             {{ $key + 1 }}.</span>{{ $question->question }}<br>
                                                                             <small>{{ $question->description }}</small>
                                                                         </div>
                                                                         @if ($question->answer_type == 1)
-                                                                            <textarea class="form-control" name="question[{{ $question->id }}]" required></textarea>
+                                                                            <textarea class="form-control" name="question[{{ $question->id }}]" >{{ (!empty($currect_answer) && $currect_answer->is_draft == 1 ? $currect_answer->answer : '') }}</textarea>
                                                                         @else
                                                                         <div class="card-options mb-2">
                                                                             @foreach ($question->answers as $answer)
                                                                             <label class="card-option form-control mb-2">
-                                                                                <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"  required> <span>{{ $answer->answer }}</span>
+                                                                                <input name="question[{{ $question->id }}]" type="radio" value="{{ $answer->id }}"  {{ (!empty($currect_answer) && $currect_answer->is_draft == 1 && $currect_answer->workout_question_answer_id == $answer->id ? 'checked' : '') }}> <span>{{ $answer->answer }}</span>
                                                                                 <i class="fa fa-check"></i>
                                                                             </label>
                                                                             @endforeach
@@ -205,18 +213,27 @@
                                                                         <div class="dropdown-divider"></div>
                                                                     </div>
                                                                 </div>
+                                                                @php 
+                                                                    $question_answer = $answers->where('workout_question_id', $question->id)->first();
+                                                                @endphp
+                                                                <input type="hidden" id="" name="answer_id[{{ $question->id }}]" value="{{ (!empty($question_answer) && $question_answer->is_draft == 1 ? $question_answer->id : '') }}"> 
                                                             @endforeach
                                                             @php
                                                                 $questions_id = $item->typable->workout->questions->pluck('id');
                                                                 $ans = $answers->whereIn('workout_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('workout_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
-                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1))
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                                    </div>
-                                                                </div>
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1) 
+                                                                    || ($ans->count() > 0 && $ans[0]->is_draft == 1))
+                                                                    @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1))
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <input type="hidden" name="is_draft" id="workout_type_{{ $item->typable->workout->id }}" value="0">
+                                                                                <button type="button" class="btn btn-primary submit-answer" data-draft="1" data-type="workout" data-id="{{ $item->typable->workout->id }}">Save as Draft</button>
+                                                                                <button type="button" class="btn btn-primary submit-answer" data-draft="0" data-type="workout" data-id="{{ $item->typable->workout->id }}">Submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
                                                             @endif
                                                             @if ($comments->count() > 0)
                                                                 <div class="dropdown-divider"></div>
@@ -254,4 +271,19 @@
     </div>
 </div>
 
+@endsection
+
+@section('js')
+    <script>
+        $(document).on('click', '.submit-answer', function(e) {
+            e.preventDefault();
+            var is_draft = $(this).attr('data-draft');
+            var type = $(this).attr('data-type');
+            var id = $(this).attr('data-id');
+
+            $('#'+ type +'_type_' + id).val(is_draft);
+
+            $('#' + type + '' + id).submit();
+        });
+    </script>
 @endsection

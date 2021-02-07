@@ -450,23 +450,33 @@ class ProgramRepository implements ProgramRepositoryInterface
             $setno = (empty($setno) ? 1 : $setno + 1);
             if (isset($data['scale_id'])) {
                 foreach ($data['question'] as $key => $question) {
-                    $answer = new $this->answer;
+                    if (isset($data['answer_id']) && !empty($data['answer_id'][$key])) {
+                        $answer = $this->answer->find($data['answer_id'][$key]);
+                    } else {
+                        $answer = new $this->answer;
+                    }
                     $answer->set_no = $setno;
                     $answer->program_id = request()->id;
                     $answer->step_id = $data['step_id'];
                     $answer->scale_question_id = $key;
                     $answer->scale_question_answer_id = $question;
                     $answer->type = $data['type'][$key];
+                    $answer->is_draft = (isset($data['is_draft']) ? $data['is_draft'] : 0);
                     $answer->save();
                 }
             } else if (isset($data['workout_id'])) {
                 foreach ($data['question'] as $key => $question) {
-                    $answer = new $this->answer;
+                    if (isset($data['answer_id']) && !empty($data['answer_id'][$key])) {
+                        $answer = $this->answer->find($data['answer_id'][$key]);
+                    } else {
+                        $answer = new $this->answer;
+                    }
                     $answer->set_no = $setno;
                     $answer->program_id = request()->id;
                     $answer->step_id = $data['step_id'];
                     $answer->workout_question_id = $key;
                     $answer->type = $data['type'][$key];
+                    $answer->is_draft = (isset($data['is_draft']) ? $data['is_draft'] : 0);
                     if ($data['type'][$key] == 1) {
                         $answer->answer = $question;
                     } else {
@@ -517,7 +527,9 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     public function answers()
     {
-        return $this->answer->groupBy('set_no')->orderBy('id', 'DESC')->get();
+        return $this->answer->where('is_draft', 0)->whereHas('program', function ($query) {
+            return $query->where('type', 1);
+        })->groupBy('set_no')->orderBy('id', 'DESC')->get();
     }
 
     public function answer($id)
