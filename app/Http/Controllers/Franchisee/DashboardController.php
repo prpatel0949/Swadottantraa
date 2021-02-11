@@ -24,7 +24,7 @@ class DashboardController extends Controller
         return view('franchisee.dashboard', [
             'users' => $this->user->all([ 'franchisee_id' => $franchisee->id ]),
             'transactions' => $this->transaction->all([ 'user_id' => $franchisee->users->pluck('id') ]),
-            'monthly_transactions' => $this->transaction->getMonthlyTotal([ 'user_id' => $franchisee->users->pluck('id') ]),
+            'monthly_transactions' => $this->transaction->getMonthlyTotal([ 'user_id' => $franchisee->users->pluck('id')->toArray() ]),
         ]);
     }
 }

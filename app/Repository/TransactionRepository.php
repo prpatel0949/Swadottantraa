@@ -40,7 +40,7 @@ class TransactionRepository implements TransactionRepositoryInterface
             ->groupBy(DB::raw('YEAR(transactions.created_at) DESC, MONTH(transactions.created_at) DESC'))
             ->whereBetween('transactions.created_at', [ $accounting_year['start_date'], $accounting_year['end_date'] ]);
         if (isset($filters['user_id'])) {
-            $transactions = $transactions->where('user_id', $filters['user_id']);
+            $transactions = $transactions->whereIn('user_id', $filters['user_id']);
         }
         $transactions = $transactions->get();
         
