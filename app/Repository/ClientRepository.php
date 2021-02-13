@@ -106,4 +106,13 @@ class ClientRepository implements ClientRepositoryInterface
         Session::flash('error', 'Number of users reached');
         return true;
     }
+
+    public function all($filters = [])
+    {
+        if (count($filters) > 0) {
+            return $this->client->where($filters)->get();
+        }
+
+        return $this->client->all();
+    }
 }

@@ -16,4 +16,6 @@ interface ClientRepositoryInterface
     public function update($data, $id);
 
     public function approveUser($id);
+
+    public function all($filters = []);
 }

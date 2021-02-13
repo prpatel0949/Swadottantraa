@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Client\AddRequest;
 use App\Repository\Interfaces\ClientRepositoryInterface;
+use App\Repository\Interfaces\EmotionRepositoryInterface;
+use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class ClientController extends Controller
 {
-    private $client;
+    private $client, $emotion, $general;
 
-    public function __construct(ClientRepositoryInterface $client)
+    public function __construct(ClientRepositoryInterface $client, EmotionRepositoryInterface $emotion, GeneralRepositoryInterface $general)
     {
         $this->client = $client;
+        $this->emotion = $emotion;
+        $this->general = $general;
     }
 
     public function register(AddRequest $request)
@@ -84,5 +88,27 @@ class ClientController extends Controller
         if ($this->client->applyCode($request->all())) {
             return response()->json([ 'message' => 'Code apply successfully.' ], 200);
         }
+    }
+
+    public function generateToken(Request $request)
+    {
+
+        $proxy = Request::create('oauth/token', 'POST', $request->toArray());
+        $response = \Route::dispatch($proxy);
+        $result = (Array) json_decode($response->getContent());
+        if (isset($result['token_type']) && !empty($result['token_type'])) {
+
+            $questions = $this->general->getQuestions();
+
+            $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
+            $result['UserInfo'] = $this->client->all([ 'email' => $request->username ])->first();
+            $result['Questions'] = $questions;
+            $result['Answers'] = $questions->pluck('answers');
+            $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
+            
+            return response()->json($result, 200);
+        }
+
+        return $response;
     }
 }
