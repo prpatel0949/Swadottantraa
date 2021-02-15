@@ -71,7 +71,7 @@ class ClientController extends Controller
         ]);
 
         if ($client = $this->client->changePassword($request->all())) {
-            return response()->json([ 'message' => 'Password changed successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Your Password has been changed!' ] ] ], 200);
         }
 
         return response()->json([ 'message' => 'Old password is invalid.' ], 500);
@@ -101,7 +101,7 @@ class ClientController extends Controller
             $questions = $this->general->getQuestions();
 
             $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
-            $result['UserInfo'] = $this->client->all([ 'email' => $request->username ])->first();
+            $result['UserInfo'] = $this->client->all([ 'email' => $request->username ])->first()->toArray();
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
