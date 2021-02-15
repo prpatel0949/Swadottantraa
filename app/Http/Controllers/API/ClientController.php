@@ -101,7 +101,7 @@ class ClientController extends Controller
             $questions = $this->general->getQuestions();
 
             $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
-            $result['UserInfo'] = $this->client->all([ 'email' => $request->username ])->first()->toArray();
+            $result['UserInfo'][] = $this->client->all([ 'email' => $request->username ])->first()->toArray();
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
