@@ -87,13 +87,13 @@
                                 <div class="card-body p-0">
                                     <div class="accordion search-content-info" id="accordionExample">
                                         <div class="collapse-margin search-content mt-0 bg-white">
-                                            <div class="card-header" id="headingOne" role="button" data-toggle="collapse" data-target="#scale_{{ $item->typable->scale->id }}" aria-expanded="false" aria-controls="collapseOne">
+                                            <div class="card-header" id="headingOne" role="button" data-toggle="collapse" data-target="#scale_{{ $key }}" aria-expanded="false" aria-controls="collapseOne">
                                                 <span class="lead collapse-title">
                                                     {{ $item->typable->scale->title }}
                                                     <p><small>{{ $item->typable->scale->description }}</small></p>
                                                 </span>
                                             </div>
-                                            <div id="scale_{{ $item->typable->scale->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                            <div id="scale_{{ $key }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                 <div class="card-body">
                                                     <div>
                                                         <form  class="row" action="{{ route('user.program.question_answer', $program->id) }}" method="POST" id="scale{{ $item->typable->scale->id }}">
@@ -133,7 +133,7 @@
                                                                 $comments = $answers->whereIn('scale_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
                                                             @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1) || ($ans->count() > 0 && $ans[0]->is_draft == 1))
-                                                                @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1))
+                                                                @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1) || ($ans->count() > 0 && $ans[0]->is_draft == 1))
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
                                                                             <input type="hidden" name="is_draft" id="scale_type_{{ $item->typable->scale->id }}" value="0">
@@ -157,6 +157,28 @@
                                                                     </div>
                                                                 </div>
                                                                 @endforeach
+                                                            @endif
+                                                            @if ($program->type == 0)
+                                                            <div class="dropdown-divider"></div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <h3>Answer Interpretation</h3>
+                                                                </div>
+                                                                <ul>
+                                                                    
+                                                                    @foreach ($answers->unique('set_no') as $answer)
+                                                                    @foreach ($answer->scaleQuestion->scale->interpreatations as $interpreatation)
+                                                                            @php 
+                                                                                $val = $answers->where('set_no', $answer->set_no)->where('scaleQuestion.is_interpreatation', 1)->whereIn('scale_question_id', $interpreatation->questions->pluck('question_id')->toArray())->flatten()->pluck('scaleQuestionAnswer')->sum('answer_value');
+                                                                                $inter = $interpreatation->interpretations->filter(function ($value) use ($val) {
+                                                                                        return ($value->min <= $val && $value->max >= $val);
+                                                                                    })->first();
+                                                                                echo '<li>'.(!empty($inter) ? '<br>'.$inter->interpretation : '').'</li>';
+                                                                            @endphp
+                                                                        @endforeach
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>  
                                                             @endif
                                                         </form>
                                                     </div>

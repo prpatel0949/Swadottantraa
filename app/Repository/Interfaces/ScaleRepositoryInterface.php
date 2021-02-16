@@ -12,4 +12,6 @@ interface ScaleRepositoryInterface
     public function update($data, $id);
 
     public function destroy($id);
+
+    public function interpretation($data, $id);
 }

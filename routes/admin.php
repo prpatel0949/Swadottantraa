@@ -18,6 +18,8 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::put('recommand/program/{id}/update', 'ProgramController@updateRecommandProgram')->name('recommand.program.update');
     Route::resource('program', 'ProgramController');
 
+    Route::get('scale/{id}/interpretation', 'ScaleController@interpretation')->name('scale.interpretation');
+    Route::post('scale/{id}/interpretation', 'ScaleController@interpretationStore')->name('scale.interpretation.store');
     Route::resource('scale', 'ScaleController');
     Route::resource('workout', 'WorkoutController');
 

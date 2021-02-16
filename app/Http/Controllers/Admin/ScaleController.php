@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Scale\AddRequest;
 use App\Repository\Interfaces\ScaleRepositoryInterface;
+use App\Http\Requests\Admin\Scale\InterpretationRequest;
 
 class ScaleController extends Controller
 {
@@ -102,5 +103,19 @@ class ScaleController extends Controller
         }
 
         return response()->json([ 'error' => 'error' ], 500);
+    }
+
+    public function interpretation($id)
+    {
+        return view('admin.scale.interpretation', [ 'scale' => $this->scale->findorfail($id) ]);
+    }
+
+    public function interpretationStore(InterpretationRequest $request, $id)
+    {
+        if ($this->scale->interpretation($request->all(), $id)) {
+            return redirect()->route('scale.index')->with('success', 'Scale interpretation added successfully.');
+        }
+
+        return redirect()->route('scale.index')->with('error', 'Something went wrong happen.');
     }
 }

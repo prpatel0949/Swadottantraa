@@ -63,12 +63,8 @@
                     <div class="row">
                         @foreach ($steps as $key => $step)
                             <div class="col-sm-6 col-lg-6">
-                                <div class="card h100 {{ ($program->type == 1 && $key != 0 ? 'locked_stage' : '') }}" >
-                                    @if ($program->type == 1 && $key != 0)
-                                        <div class="locked_wrapper shadow">
-                                            <i class="fa fa-lock" aria-hidden="true"></i>
-                                        </div>
-                                    @endif
+                                <div class="card h100" >
+                                    
                                     <div class="card-header">
                                         <h4>{{ $step->title }}</h4>
                                     </div>
