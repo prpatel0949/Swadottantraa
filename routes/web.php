@@ -76,6 +76,12 @@ Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware
 
     Route::get('support', 'SupportController@index')->name('franchisee.support.index');
     Route::post('support', 'SupportController@store')->name('franchisee.support.store');
+
+    Route::get('recommand/program', 'ProgramController@recommandProgram')->name('franchisee.recommand.program');
+    Route::get('recommand/program/create', 'ProgramController@createRecommandProgram')->name('franchisee.recommand.program.create');
+    Route::post('recommand/program/store', 'ProgramController@storeRecommandProgram')->name('franchisee.recommand.program.store');
+    Route::get('recommand/program/{id}/edit', 'ProgramController@editRecommandProgram')->name('franchisee.recommand.program.edit');
+    Route::put('recommand/program/{id}/update', 'ProgramController@updateRecommandProgram')->name('franchisee.recommand.program.update');
 });
 
 
