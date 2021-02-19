@@ -107,6 +107,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <input type="checkbox" name="is_resubmit" value="1">
+                            <label class="label-control">Is Resubmit?</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>

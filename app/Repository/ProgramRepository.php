@@ -623,7 +623,7 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function answerComment($data, $id)
     {
         $answer = $this->answer->find($id);
-        $all_answer = $this->answer->where('set_no', $answer->set_no)->update([ 'is_resubmit' => 1 ]);
+        $all_answer = $this->answer->where('set_no', $answer->set_no)->update([ 'is_resubmit' => (isset($data['is_resubmit']) && $data['is_resubmit'] == 1 ? 1 : 0) ]);
 
         $comment = new $this->comment;
         $comment->program_answer_id = $id;

@@ -132,8 +132,9 @@
                                                                 $ans = $answers->whereIn('scale_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('scale_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
-                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1) || ($ans->count() > 0 && $ans[0]->is_draft == 1))
-                                                                @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1) || ($ans->count() > 0 && $ans[0]->is_draft == 1))
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1) || ($ans->count() > 0 && $ans[0]->is_draft == 1) || ($program->type == 1 && $ans->last()->is_resubmit == 1))
+                                                                @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1) 
+                                                                        || ($ans->count() > 0 && $ans[0]->is_draft == 1))
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
                                                                             <input type="hidden" name="is_draft" id="scale_type_{{ $item->typable->scale->id }}" value="0">
@@ -245,7 +246,7 @@
                                                                 $ans = $answers->whereIn('workout_question_id', $questions_id)->flatten();
                                                                 $comments = $answers->whereIn('workout_question_id', $questions_id)->flatten()->pluck('comments')->flatten();
                                                             @endphp
-                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1) 
+                                                            @if ($ans->count() == 0 || ($ans->count() > 0 && $item->step->is_multiple == 1 || ($program->type == 1 && $ans->last()->is_resubmit == 1)) 
                                                                     || ($ans->count() > 0 && $ans[0]->is_draft == 1))
                                                                     @if ($ans->count() == 0 || $program->type == 0 || ($program->type == 1 && $ans->last()->is_resubmit == 1))
                                                                         <div class="col-md-12">
