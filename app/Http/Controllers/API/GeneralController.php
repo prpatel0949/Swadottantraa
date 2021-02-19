@@ -39,7 +39,7 @@ class GeneralController extends Controller
     public function getScaleQuestionAnswers()
     {
         $questions = $this->general->getQuestions();
-        return response()->json([ 'Table' => $questions, 'Table1' => $questions->pluck('answers') ], 200);
+        return response()->json([ 'Table' => $questions, 'Table1' => $questions->pluck('answers')->flatten() ], 200);
     }
 
     public function storeScaleQuestionAnswers(Request $request)
