@@ -48,4 +48,8 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::resource('institue', 'InstitueController');
     Route::resource('coupon', 'CouponController');
     Route::resource('faq', 'FAQController');
+
+    Route::get('leads', 'ContactUsController@index')->name('leads');
+    Route::get('leads/list', 'ContactUsController@list')->name('leads.list');
+    Route::post('lead/{id}/change_status', 'ContactUsController@changeStatus')->name('lead.change_Status');
 });

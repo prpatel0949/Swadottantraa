@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use App\ContactUs;
 use Illuminate\Http\Request;
 use App\Repository\Interfaces\FAQRepositoryInterface;
 
@@ -98,5 +99,26 @@ class HomeController extends Controller
     public function faqs($type = '')
     {
         return view('faq', [ 'faqs' => $this->faq->getAll($type) ]);
+    }
+
+    public function contactUs(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => 'required|email|max:150',
+            'number' => 'required|numeric|digits:10',
+            'type' => 'required|integer',
+            'message' => 'required|string'
+        ]);
+
+        $contact = new ContactUs;
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->type = $request->type;
+        $contact->mobile = $request->code.' '.$request->number;
+        $contact->message = $request->message;
+        $contact->save();
+
+        return true;
     }
 }
