@@ -18,4 +18,8 @@ interface ClientRepositoryInterface
     public function approveUser($id);
 
     public function all($filters = []);
+
+    public function setTransaction();
+
+    public function getTransaction();
 }

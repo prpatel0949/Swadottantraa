@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
+        // $this->call(UserSeeder::class);
         // $this->call(EmotionSeeder::class);
         // $this->call(SubEmotionSeeder::class);
         // $this->call(EmotionalPainIntensitySeeder::class);
@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(MenuLinkSeeder::class);
         // $this->call(ImageSeeder::class);
         // $this->call(ApiScaleQuestionSeeder::class);
+        $this->call(SubscriptionSeeder::class);
     }
 }

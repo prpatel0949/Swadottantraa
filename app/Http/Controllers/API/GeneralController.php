@@ -54,4 +54,9 @@ class GeneralController extends Controller
 
         return response()->json([ 'messsage' => 'Something went wrong happen!' ], 500);
     }
+
+    public function getSubsciptions()
+    {
+        return response()->json([ 'tbl' => $this->general->getSubsciptions() ], 200);
+    }
 }

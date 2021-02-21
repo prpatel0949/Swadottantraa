@@ -95,20 +95,37 @@ class ClientController extends Controller
 
         $proxy = Request::create('oauth/token', 'POST', $request->toArray());
         $response = \Route::dispatch($proxy);
-        $result = (Array) json_decode($response->getContent());
-        if (isset($result['token_type']) && !empty($result['token_type'])) {
+        $token = (Array) json_decode($response->getContent());
+        $result = [];
+        if (isset($token['token_type']) && !empty($token['token_type'])) {
 
             $questions = $this->general->getQuestions();
+            $user = collect($this->client->all([ 'email' => $request->username ])->first()->toArray());
+            $token = collect($token);
+            $all = $user->merge($token);
 
             $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
-            $result['UserInfo'][] = $this->client->all([ 'email' => $request->username ])->first()->toArray();
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
-            
+            $result['UserInfo'] = $all->toArray();
             return response()->json($result, 200);
         }
 
         return $response;
+    }
+
+    public function setTransaction()
+    {
+        if ($client = $this->client->setTransaction()) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Payment done successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'message' => 'Something went wrong happen!.' ], 500);
+    }
+
+    public function getTransaction()
+    {
+        return response()->json([ 'tbl' => $this->client->getTransaction() ], 200);
     }
 }

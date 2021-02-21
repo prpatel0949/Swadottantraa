@@ -14,4 +14,6 @@ interface GeneralRepositoryInterface
     public function getQuestions();
 
     public function storeAnswer($data);
+
+    public function getSubsciptions();
 }

@@ -37,6 +37,11 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('code', 'ClientController@applyCode');
 
+    Route::post('user/transaction', 'ClientController@setTransaction');
+    Route::get('user/transaction', 'ClientController@getTransaction');
+
+    Route::get('subsciptions', 'GeneralController@getSubsciptions');
+
 });
 
 

@@ -6,6 +6,7 @@ use App\Tip;
 use App\Image;
 use App\Trauma;
 use App\MenuLink;
+use App\Subscription;
 use App\ApiScaleQuestion;
 use App\ApiUserScaleAnswer;
 use App\ApiScaleQuestionAnswer;
@@ -13,9 +14,18 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer;
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription;
 
-    public function __construct(Tip $tip, Trauma $trauma, MenuLink $menu, Image $image, ApiScaleQuestion $question, ApiUserScaleAnswer $answer)
+    public function __construct(
+        Tip $tip,
+        Trauma $trauma,
+        MenuLink $menu,
+        Image $image,
+        ApiScaleQuestion $question,
+        ApiUserScaleAnswer $answer,
+        Subscription $subscription
+
+    )
     {
         $this->tip = $tip;
         $this->trauma = $trauma;
@@ -23,6 +33,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->image = $image;
         $this->question = $question;
         $this->answer = $answer;
+        $this->subscription = $subscription;
     }
 
     public function getTips()
@@ -57,5 +68,10 @@ class GeneralRepository implements GeneralRepositoryInterface
         $answer->user_id = Auth::user()->id;
         $answer->save();
         return true;
+    }
+
+    public function getSubsciptions()
+    {
+        return $this->subscription->all();
     }
 }

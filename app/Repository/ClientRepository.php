@@ -8,16 +8,18 @@ use Session;
 use App\User;
 use App\Client;
 use Carbon\Carbon;
+use App\ClientTransaction;
 use App\Repository\Interfaces\ClientRepositoryInterface;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    private $client, $user;
+    private $client, $user, $transaction;
 
-    public function __construct(Client $client, User $user)
+    public function __construct(Client $client, User $user, ClientTransaction $transaction)
     {
         $this->client = $client;
         $this->user = $user;
+        $this->transaction = $transaction;
     }
 
     public function store($data)
@@ -114,5 +116,33 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
         return $this->client->all();
+    }
+
+    public function setTransaction()
+    {
+        $transaction = new $this->transaction;
+        $transaction->client_id = Auth::user()->id;
+        $transaction->save();
+
+        $client = Auth::user();
+        $client->is_payment_done = 1;
+        $client->save();
+
+        return true;
+    }
+
+    public function getTransaction()
+    {
+        $transactions = $this->transaction->where('client_id', Auth::user()->id)->get();
+        $allData = [];
+        foreach ($transactions as $transaction) {
+            $rowRes = new \StdClass;
+            $rowRes->id = $transaction->id;
+            $rowRes->name = $transaction->client->name;
+            $rowRes->created_at = $transaction->created_at;
+            $allData[] = $rowRes;
+        }
+
+        return $allData;
     }
 }
