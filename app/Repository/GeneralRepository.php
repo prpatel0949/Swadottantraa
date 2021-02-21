@@ -7,14 +7,16 @@ use App\Image;
 use App\Trauma;
 use App\MenuLink;
 use App\Subscription;
+use App\ClientMoodMark;
 use App\ApiScaleQuestion;
+use App\TraumaCopingCart;
 use App\ApiUserScaleAnswer;
 use App\ApiScaleQuestionAnswer;
 use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription;
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $mood_mark, $trauma_copying;
 
     public function __construct(
         Tip $tip,
@@ -23,7 +25,9 @@ class GeneralRepository implements GeneralRepositoryInterface
         Image $image,
         ApiScaleQuestion $question,
         ApiUserScaleAnswer $answer,
-        Subscription $subscription
+        Subscription $subscription,
+        ClientMoodMark $mood_mark,
+        TraumaCopingCart $trauma_copying
 
     )
     {
@@ -34,6 +38,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->question = $question;
         $this->answer = $answer;
         $this->subscription = $subscription;
+        $this->mood_mark = $mood_mark;  
+        $this->trauma_copying = $trauma_copying;  
     }
 
     public function getTips()
@@ -73,5 +79,15 @@ class GeneralRepository implements GeneralRepositoryInterface
     public function getSubsciptions()
     {
         return $this->subscription->all();
+    }
+
+    public function storeMoodMarks($data)
+    {
+        return $this->mood_mark->create($data);
+    }
+
+    public function getTraumaCopyingCart($request)
+    {
+        return $this->trauma_copying->where([ 'lflag' => $request->lflag, 'trauma_id' => $request->trauma_id ])->get();
     }
 }

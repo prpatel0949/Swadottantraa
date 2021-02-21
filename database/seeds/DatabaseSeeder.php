@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(MenuLinkSeeder::class);
         // $this->call(ImageSeeder::class);
         // $this->call(ApiScaleQuestionSeeder::class);
-        $this->call(SubscriptionSeeder::class);
+        // $this->call(SubscriptionSeeder::class);
+        $this->call(MoodSeeder::class);
+        $this->call(TraumaCopingCartSeeder::class);
+        
     }
 }

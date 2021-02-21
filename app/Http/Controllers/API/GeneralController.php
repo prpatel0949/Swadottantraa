@@ -59,4 +59,32 @@ class GeneralController extends Controller
     {
         return response()->json([ 'tbl' => $this->general->getSubsciptions() ], 200);
     }
+
+    public function storeMoodMarks(Request $request)
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+            'lower_mood_id' => 'required|exists:moods,id',
+            'marks' => 'required|numeric',
+            'lower_marks' => 'required|numeric',
+        ]);
+        if ($this->general->storeMoodMarks($request->all())) {
+            return response()->json([ 'messsage' => 'Mood marks submitted successfully.' ], 200);
+        }
+
+        return response()->json([ 'messsage' => 'Something went wrong happen!' ], 500);
+    }
+
+    public function submitAnswer(Request $request)
+    {
+        // $request->validate([
+        //     'answer_id' => 'required|exists:api_scale_question_answers,'
+        // ]);
+    }
+
+    public function getTraumaCopyingCart(Request $request)
+    {
+        return response()->json($this->general->getTraumaCopyingCart($request), 200);
+    }
 }
+

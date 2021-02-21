@@ -42,6 +42,12 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::get('subsciptions', 'GeneralController@getSubsciptions');
 
+    Route::post('user/mood_marks', 'GeneralController@storeMoodMarks');
+
+    Route::post('user/answer', 'GeneralController@submitAnswer');
+
+    Route::get('trauma_copying_cart', 'GeneralController@getTraumaCopyingCart');
+
 });
 
 

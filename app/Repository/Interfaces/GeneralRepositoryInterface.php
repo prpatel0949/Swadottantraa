@@ -16,4 +16,8 @@ interface GeneralRepositoryInterface
     public function storeAnswer($data);
 
     public function getSubsciptions();
+
+    public function storeMoodMarks($data);
+
+    public function getTraumaCopyingCart($request);
 }

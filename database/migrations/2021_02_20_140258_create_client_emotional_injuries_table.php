@@ -15,6 +15,13 @@ class CreateClientEmotionalInjuriesTable extends Migration
     {
         Schema::create('client_emotional_injuries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('client_id')->nullable();
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->unsignedBigInteger('emotional_injury_id')->nullable();
+            $table->foreign('emotional_injury_id')->references('id')->on('emotional_injuries')->onDelete('cascade');
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('client_transaction_id')->nullable();
+            $table->foreign('client_transaction_id')->references('id')->on('client_transactions')->onDelete('cascade');
             $table->timestamps();
         });
     }
