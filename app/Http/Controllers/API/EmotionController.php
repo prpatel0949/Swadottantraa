@@ -50,6 +50,6 @@ class EmotionController extends Controller
 
         $this->emotion->storeEmotionInjuries($request->all());
 
-        return response()->json([ 'message' => 'User emotionals injury created successfully.' ], 200);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'User emotionals injury created successfully.' ]] ], 200);
     }
 }

@@ -26,7 +26,7 @@ class ClientController extends Controller
             return response()->json([ 'message' => 'User register successfully.' ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function forgotPassword(Request $request)
@@ -39,7 +39,7 @@ class ClientController extends Controller
             return response()->json([ 'message' => 'Forgot password code sent to email.', 'code' => $client->code ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function resetPassword(Request $request)
@@ -60,7 +60,7 @@ class ClientController extends Controller
             return response()->json([ 'message' => 'Code is expired.' ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function changePassword(Request $request)
@@ -74,7 +74,7 @@ class ClientController extends Controller
             return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Your Password has been changed!' ] ] ], 200);
         }
 
-        return response()->json([ 'message' => 'Old password is invalid.' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Old password is invalid.' ]] ], 500);
     }
 
     public function applyCode(Request $request)
@@ -86,7 +86,7 @@ class ClientController extends Controller
         ]);
 
         if ($this->client->applyCode($request->all())) {
-            return response()->json([ 'message' => 'Code apply successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Code apply successfully.' ]] ], 200);
         }
     }
 
@@ -121,7 +121,7 @@ class ClientController extends Controller
             return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Payment done successfully.' ] ] ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen!.' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function getTransaction()

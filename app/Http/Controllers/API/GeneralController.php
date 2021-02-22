@@ -49,10 +49,10 @@ class GeneralController extends Controller
         ]);
 
         if ($this->general->storeAnswer($request->all())) {
-            return response()->json([ 'messsage' => 'Answer submit successfully.' ], 200);
+            return response()->json([ 'tbl' =>  [[ 'Msg' => 'Answer submit successfully.' ]] ], 200);
         }
 
-        return response()->json([ 'messsage' => 'Something went wrong happen!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function getSubsciptions()
@@ -69,10 +69,10 @@ class GeneralController extends Controller
             'lower_marks' => 'required|numeric',
         ]);
         if ($this->general->storeMoodMarks($request->all())) {
-            return response()->json([ 'messsage' => 'Mood marks submitted successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Mood marks submitted successfully.' ]] ], 200);
         }
 
-        return response()->json([ 'messsage' => 'Something went wrong happen!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function submitAnswer(Request $request)
