@@ -12,4 +12,14 @@ class Client extends Authenticatable
 
     protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve' ];
 
+    /**
+     * Get the transaction associated with the Client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function transaction(): HasOne
+    {
+        return $this->hasOne(ClientTransaction::class);
+    }
+
 }

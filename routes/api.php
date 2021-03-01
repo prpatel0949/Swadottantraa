@@ -48,6 +48,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::get('trauma_copying_cart', 'GeneralController@getTraumaCopyingCart');
 
+    Route::post('sleep_tracker/create', 'GeneralController@storeSleepTracker');
+
 });
 
 

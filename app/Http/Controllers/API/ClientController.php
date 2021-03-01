@@ -23,7 +23,7 @@ class ClientController extends Controller
     public function register(AddRequest $request)
     {
         if ($this->client->store($request->validated())) {
-            return response()->json([ 'message' => 'User register successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'User register successfully.' ] ] ], 200);
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
@@ -36,7 +36,7 @@ class ClientController extends Controller
         ]);
 
         if ($client = $this->client->forgotPassword($request->all())) {
-            return response()->json([ 'message' => 'Forgot password code sent to email.', 'code' => $client->code ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Forgot password code sent to email.', 'code' => $client->code ] ] ], 200);
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
@@ -53,11 +53,11 @@ class ClientController extends Controller
         $response = $this->client->resetPassword($request->all());
 
         if ($response == 1) {
-            return response()->json([ 'message' => 'Password reset successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Password reset successfully.' ]] ], 200);
         } else if ($response == 2) {
-            return response()->json([ 'message' => 'Code is invalid.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Code is invalid.' ]] ], 200);
         } else if ($response == 3) {
-            return response()->json([ 'message' => 'Code is expired.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Code is expired.' ]] ], 200);
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
@@ -100,7 +100,7 @@ class ClientController extends Controller
         if (isset($token['token_type']) && !empty($token['token_type'])) {
 
             $questions = $this->general->getQuestions();
-            $user = collect($this->client->all([ 'email' => $request->username ])->first()->toArray());
+            $user = collect($this->client->with('transaction')->all([ 'email' => $request->username ])->first()->toArray());
             $token = collect($token);
             $all = $user->merge($token);
 
@@ -108,7 +108,7 @@ class ClientController extends Controller
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
-            $result['UserInfo'] = $all->toArray();
+            $result['UserInfo'][] = $all->toArray();
             return response()->json($result, 200);
         }
 

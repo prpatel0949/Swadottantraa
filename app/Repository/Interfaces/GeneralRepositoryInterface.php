@@ -20,4 +20,6 @@ interface GeneralRepositoryInterface
     public function storeMoodMarks($data);
 
     public function getTraumaCopyingCart($request);
+
+    public function storeSleepTracker($data);
 }

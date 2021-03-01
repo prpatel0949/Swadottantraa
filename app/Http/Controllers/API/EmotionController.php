@@ -45,7 +45,7 @@ class EmotionController extends Controller
         $request->validate([
             'emotional_injury_id' => 'required|exists:emotional_injuries,id',
             'other' => 'nullable|string',
-            'client_transaction_id' => 'nullable|exists:client_transactions,id'
+            // 'client_transaction_id' => 'nullable|exists:client_transactions,id'
         ]);
 
         $this->emotion->storeEmotionInjuries($request->all());

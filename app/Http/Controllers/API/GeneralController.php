@@ -49,7 +49,7 @@ class GeneralController extends Controller
         ]);
 
         if ($this->general->storeAnswer($request->all())) {
-            return response()->json([ 'tbl' =>  [[ 'Msg' => 'Answer submit successfully.' ]] ], 200);
+            return response()->json($this->general->storeAnswer($request->all()), 200);
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
@@ -85,6 +85,21 @@ class GeneralController extends Controller
     public function getTraumaCopyingCart(Request $request)
     {
         return response()->json($this->general->getTraumaCopyingCart($request), 200);
+    }
+
+    public function storeSleepTracker(Request $request)
+    {
+        $request->validate([
+            'from' => 'required|date_format:Y-m-d H:i:s',
+            'to' => 'required|date_format:Y-m-d H:i:s',
+            'depth' => 'required'
+        ]);
+
+        if ($this->general->storeSleepTracker($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Sleep tracker submitted successfully.' ]] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 }
 

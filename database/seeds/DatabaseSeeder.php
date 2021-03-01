@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(ImageSeeder::class);
         // $this->call(ApiScaleQuestionSeeder::class);
         // $this->call(SubscriptionSeeder::class);
-        $this->call(MoodSeeder::class);
-        $this->call(TraumaCopingCartSeeder::class);
+        // $this->call(MoodSeeder::class);
+        // $this->call(TraumaCopingCartSeeder::class);
+        $this->call(ScaleTipsSeeder::class);
         
     }
 }
