@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use DB;
 use Auth;
 use App\Tip;
 use App\Image;
@@ -16,12 +17,13 @@ use App\ApiScaleQuestion;
 use App\TraumaCopingCart;
 use App\ApiUserScaleAnswer;
 use App\ApiScaleQuestionAnswer;
+use App\GratitudeQuestionAnswer;
 use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
     private $tip, $trauma, $menu, $image, $question, $answer, $subscription,
-            $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points;
+            $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer;
 
     public function __construct(
         Tip $tip,
@@ -36,7 +38,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         ApiScaleQuestionAnswer $scale_question_answer,
         ScaleTip $scale_tips,
         SleepTracker $sleep_tracker,
-        ClientPoint $points
+        ClientPoint $points,
+        GratitudeQuestionAnswer $gratitude_answer
     )
     {
         $this->tip = $tip;
@@ -52,6 +55,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->scale_tips = $scale_tips;
         $this->sleep_tracker = $sleep_tracker;
         $this->points = $points;
+        $this->gratitude_answer = $gratitude_answer;
     }
 
     public function getTips()
@@ -123,6 +127,43 @@ class GeneralRepository implements GeneralRepositoryInterface
         $points->rankable_id = $sleep_tracker->id;
         $points->points = 0.25;
         $points->save();
+
+        return true;
+    }
+
+    public function storeGratitudeAnswer($data)
+    {
+        DB::transaction(function () use ($data) {
+            // gratitude_answer
+
+            $set_no = $this->gratitude_answer->max('set_no');
+            if (empty($set_no)) {
+                $set_no = 1;
+            } else {
+                $set_no += 1;
+            }
+
+            foreach ($data['questions'] as $key => $question) {
+                $gratitude_answer = new $this->gratitude_answer;
+                $gratitude_answer->question = $question;
+                $gratitude_answer->answer = (isset($data['answers'][$key]) ? $data['answers'][$key] : '');
+                $gratitude_answer->score = $data['score'];
+                $gratitude_answer->set_no = $set_no;
+                $gratitude_answer->save();
+            }
+
+            $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($gratitude_answer))->count();
+
+            if ($cnt == 0) {
+                $points = new $this->points;
+                $points->client_id = Auth::user()->id;
+                $points->rankable_type = get_class($gratitude_answer);
+                $points->rankable_id = $gratitude_answer->id;
+                $points->points = $data['score'];
+                $points->save();
+            }
+
+        });
 
         return true;
     }

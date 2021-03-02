@@ -101,5 +101,21 @@ class GeneralController extends Controller
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
+
+    public function storeGratitudeAnswer(Request $request)
+    {
+        $request->validate([
+            'questions' => 'array|present',
+            'questions.*' => 'required|string',
+            'answers.*' => 'nullable|string',
+            'score' => 'required|numeric'
+        ]);
+
+        if ($this->general->storeGratitudeAnswer($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Answer submitted successfully.' ]] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
 }
 

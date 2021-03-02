@@ -50,6 +50,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('sleep_tracker/create', 'GeneralController@storeSleepTracker');
 
+    Route::post('gratitude/answer', 'GeneralController@storeGratitudeAnswer');
+
 });
 
 

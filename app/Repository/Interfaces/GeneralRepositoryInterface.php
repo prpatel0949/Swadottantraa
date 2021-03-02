@@ -22,4 +22,6 @@ interface GeneralRepositoryInterface
     public function getTraumaCopyingCart($request);
 
     public function storeSleepTracker($data);
+
+    public function storeGratitudeAnswer($data);
 }
