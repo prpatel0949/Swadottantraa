@@ -52,6 +52,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('gratitude/answer', 'GeneralController@storeGratitudeAnswer');
 
+    Route::get('institue/dashboard', 'GeneralController@getInstitueList');
+
 });
 
 

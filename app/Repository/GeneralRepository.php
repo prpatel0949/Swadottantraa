@@ -5,6 +5,7 @@ use DB;
 use Auth;
 use App\Tip;
 use App\Image;
+use App\Client;
 use App\Trauma;
 use App\MenuLink;
 use App\ScaleTip;
@@ -23,7 +24,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 class GeneralRepository implements GeneralRepositoryInterface
 {
     private $tip, $trauma, $menu, $image, $question, $answer, $subscription,
-            $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer;
+            $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client;
 
     public function __construct(
         Tip $tip,
@@ -39,7 +40,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         ScaleTip $scale_tips,
         SleepTracker $sleep_tracker,
         ClientPoint $points,
-        GratitudeQuestionAnswer $gratitude_answer
+        GratitudeQuestionAnswer $gratitude_answer,
+        Client $client
     )
     {
         $this->tip = $tip;
@@ -56,6 +58,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->sleep_tracker = $sleep_tracker;
         $this->points = $points;
         $this->gratitude_answer = $gratitude_answer;
+        $this->client = $client;
     }
 
     public function getTips()
@@ -166,5 +169,16 @@ class GeneralRepository implements GeneralRepositoryInterface
         });
 
         return true;
+    }
+
+    public function getInstitueList()
+    {
+        $month = Carbon::now()->month;
+        $clients = $this->client->select('id')->where('user_id', Auth::user()->user_id)->get();
+        $points = $this->points->select(DB::raw('SUM(points) as points'))->whereIn('client_id', $clients)->whereMonth('created_at', $month)->groupBy('client_id')->get()->take(10);
+        return $points->map(function($key, $value) {
+            $key->rank = $value + 1;
+            return $key;
+        });
     }
 }

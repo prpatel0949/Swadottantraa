@@ -24,4 +24,6 @@ interface GeneralRepositoryInterface
     public function storeSleepTracker($data);
 
     public function storeGratitudeAnswer($data);
+
+    public function getInstitueList();
 }

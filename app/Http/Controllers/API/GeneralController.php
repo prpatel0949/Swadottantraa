@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repository\Interfaces\GeneralRepositoryInterface;
@@ -116,6 +117,11 @@ class GeneralController extends Controller
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function getInstitueList()
+    {
+        return response()->json($this->general->getInstitueList(), 200);
     }
 }
 
