@@ -124,12 +124,16 @@ class GeneralRepository implements GeneralRepositoryInterface
         $sleep_tracker->depth = $data['depth'];
         $sleep_tracker->save();
 
-        $points = new $this->points;
-        $points->client_id = Auth::user()->id;
-        $points->rankable_type = get_class($sleep_tracker);
-        $points->rankable_id = $sleep_tracker->id;
-        $points->points = 0.25;
-        $points->save();
+        $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($gratitude_answer))->count();
+
+        if ($cnt == 0) {
+            $points = new $this->points;
+            $points->client_id = Auth::user()->id;
+            $points->rankable_type = get_class($sleep_tracker);
+            $points->rankable_id = $sleep_tracker->id;
+            $points->points = 0.25;
+            $points->save();
+        }
 
         return true;
     }
@@ -156,7 +160,7 @@ class GeneralRepository implements GeneralRepositoryInterface
             }
 
             $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($gratitude_answer))->count();
-
+            
             if ($cnt == 0) {
                 $points = new $this->points;
                 $points->client_id = Auth::user()->id;
