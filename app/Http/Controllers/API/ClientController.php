@@ -86,7 +86,7 @@ class ClientController extends Controller
         ]);
 
         if ($this->client->applyCode($request->all())) {
-            return response()->json([ 'tbl' => [[ 'Msg' => 'Code apply successfully.' ]] ], 200);
+            return response()->json( [ 'Msg' => 'Your request has been sent! waiting for your institue to approve.' ], 200);
         }
     }
 
