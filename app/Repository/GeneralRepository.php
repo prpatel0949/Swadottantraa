@@ -14,6 +14,7 @@ use App\ClientPoint;
 use App\SleepTracker;
 use App\Subscription;
 use App\ClientMoodMark;
+use App\ExerciseTracker;
 use App\ApiScaleQuestion;
 use App\TraumaCopingCart;
 use App\ApiUserScaleAnswer;
@@ -23,7 +24,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription,
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise,
             $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client;
 
     public function __construct(
@@ -41,7 +42,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         SleepTracker $sleep_tracker,
         ClientPoint $points,
         GratitudeQuestionAnswer $gratitude_answer,
-        Client $client
+        Client $client,
+        ExerciseTracker $exercise
     )
     {
         $this->tip = $tip;
@@ -59,6 +61,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->points = $points;
         $this->gratitude_answer = $gratitude_answer;
         $this->client = $client;
+        $this->exercise = $exercise;
     }
 
     public function getTips()
@@ -191,5 +194,29 @@ class GeneralRepository implements GeneralRepositoryInterface
             $key->rank = $value + 1;
             return $key;
         });
+    }
+
+    public function storeExerciseTracker($data)
+    {
+        $exercise = new $this->exercise;
+        $exercise->client_id = Auth::user()->id;
+        $exercise->start_time = $data['start_time'];
+        $exercise->end_time = $data['end_time'];
+        $exercise->exercise_type = $data['exercise_type'];
+        $exercise->score = $data['score'];
+        $exercise->save();
+
+        $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($exercise))->count();
+            
+        if ($cnt == 0) {
+            $points = new $this->points;
+            $points->client_id = Auth::user()->id;
+            $points->rankable_type = get_class($exercise);
+            $points->rankable_id = $exercise->id;
+            $points->points = $data['score'];
+            $points->save();
+        }
+
+        return true;
     }
 }

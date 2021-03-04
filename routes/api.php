@@ -54,6 +54,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::get('institue/dashboard', 'GeneralController@getInstitueList');
 
+    Route::post('exercise/tracker', 'GeneralController@storeExerciseTracker');
+
 });
 
 

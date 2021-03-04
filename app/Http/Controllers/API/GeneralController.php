@@ -123,5 +123,21 @@ class GeneralController extends Controller
     {
         return response()->json($this->general->getInstitueList(), 200);
     }
+
+    public function storeExerciseTracker(Request $request)
+    {
+        $request->validate([
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s',
+            'exercise_type' => 'required|string',
+            'score' => 'required|numeric'
+        ]);
+
+        if ($this->general->storeExerciseTracker($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Exercise submitted successfully.' ]] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
 }
 

@@ -26,4 +26,6 @@ interface GeneralRepositoryInterface
     public function storeGratitudeAnswer($data);
 
     public function getInstitueList();
+
+    public function storeExerciseTracker($data);
 }
