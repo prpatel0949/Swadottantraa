@@ -56,6 +56,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('exercise/tracker', 'GeneralController@storeExerciseTracker');
 
+    Route::post('profile/update', 'ClientController@updateProfile');
+
 });
 
 

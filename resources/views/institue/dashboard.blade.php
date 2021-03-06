@@ -76,48 +76,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>jhondoe@gmail.com</td>
-                                                    <td>9874562102</td>
-                                                    <td>90</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Smit</td>
-                                                    <td>smit@gmail.com</td>
-                                                    <td>9852364170</td>
-                                                    <td>88</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Charles Martin</td>
-                                                    <td>martin@gmail.com</td>
-                                                    <td>7896541230</td>
-                                                    <td>83</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Leslie Armstrong</td>
-                                                    <td>LeslieBArmstrong@teleworm.us</td>
-                                                    <td>785-830-3970</td>
-                                                    <td>76</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Marion J. Gagnon</td>
-                                                    <td>MarionJGagnon@armyspy.com</td>
-                                                    <td>916-468-0717</td>
-                                                    <td>71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Rita J. Gerardi</td>
-                                                    <td>RitaJGerardi@armyspy.com</td>
-                                                    <td>708-322-0215</td>
-                                                    <td>67</td>
-                                                </tr>
+                                                @foreach ($ranks as $key => $item)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->email }}</td>
+                                                        <td>{{ $item->mobile }}</td>
+                                                        <td>{{ $item->points }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

@@ -27,7 +27,8 @@ class AddRequest extends FormRequest
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:150|unique:clients,email',
             'mobile' => 'required|numeric|digits:10',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:8',
+            'birth_date' => 'required|date_format:Y-m-d'
         ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use DB;
 use Auth;
 use Hash;
 use Mail;
@@ -144,5 +145,27 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
         return $allData;
+    }
+
+    public function getLeaderboard()
+    {
+        $month = Carbon::now()->month;
+        $clients = $this->client->select('id')->where('user_id', Auth::user()->id)->get();
+        return DB::table('client_points')
+            ->select(DB::raw('SUM(client_points.points) as points, clients.name, clients.email, clients.mobile'))
+            ->join('clients', 'clients.id', 'client_points.client_id')
+            ->whereIn('client_points.client_id', $clients)
+            ->whereMonth('client_points.created_at', $month)->groupBy('client_id')->get()->take(10);
+    }
+
+    public function updateProfile($data)
+    {
+        $client = $this->client->find(Auth::user()->id);
+        $client->name = $data['name'];
+        $client->mobile = $data['mobile'];
+        $client->birth_date = $data['birth_date'];
+        $client->save();
+
+        return $client;
     }
 }

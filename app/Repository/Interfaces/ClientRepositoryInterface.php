@@ -22,4 +22,8 @@ interface ClientRepositoryInterface
     public function setTransaction();
 
     public function getTransaction();
+
+    public function getLeaderboard();
+
+    public function updateProfile($data);
 }

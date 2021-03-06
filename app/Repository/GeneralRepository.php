@@ -18,13 +18,14 @@ use App\ExerciseTracker;
 use App\ApiScaleQuestion;
 use App\TraumaCopingCart;
 use App\ApiUserScaleAnswer;
+use App\ExerciseTrackerPoint;
 use App\ApiScaleQuestionAnswer;
 use App\GratitudeQuestionAnswer;
 use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise,
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point,
             $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client;
 
     public function __construct(
@@ -43,7 +44,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         ClientPoint $points,
         GratitudeQuestionAnswer $gratitude_answer,
         Client $client,
-        ExerciseTracker $exercise
+        ExerciseTracker $exercise,
+        ExerciseTrackerPoint $exercise_point
     )
     {
         $this->tip = $tip;
@@ -62,6 +64,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->gratitude_answer = $gratitude_answer;
         $this->client = $client;
         $this->exercise = $exercise;
+        $this->exercise_point = $exercise_point;
     }
 
     public function getTips()
@@ -109,7 +112,20 @@ class GeneralRepository implements GeneralRepositoryInterface
 
     public function storeMoodMarks($data)
     {
-        return $this->mood_mark->create($data);
+        $mood = $this->mood_mark->create($data);
+        $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($mood))->count();
+
+        if ($cnt == 0) {
+            $points = new $this->points;
+            $points->client_id = Auth::user()->id;
+            $points->rankable_type = get_class($mood);
+            $points->rankable_id = $mood->id;
+            $points->points = 0.25;
+            $points->save();
+        }
+
+        return true;
+
     }
 
     public function getTraumaCopyingCart($request)
@@ -119,15 +135,35 @@ class GeneralRepository implements GeneralRepositoryInterface
 
     public function storeSleepTracker($data)
     {
+
+        $start = Carbon::parse($data['from']);
+        $end = Carbon::parse($data['to']);
+        $sleep = $end->diffInHours($start);
+
+        $age = Carbon::parse(Auth::user()->birth_date)->diff(\Carbon\Carbon::now())->format('%y');
+        $depth = 0;
+        if ($age >= 14 && $age <= 25) {
+            $depth = $sleep - 8;
+        }
+
+        if ($age > 25 && $age <= 55) {
+            $depth = $sleep - 7;
+        }
+
+        if ($age > 55) {
+            $depth = $sleep - 6;
+        }
+
+
         $sleep_tracker = new $this->sleep_tracker;
         $sleep_tracker->client_id = Auth::user()->id;
         $sleep_tracker->date = Carbon::now()->format('Y-m-d');
         $sleep_tracker->from = $data['from'];
         $sleep_tracker->to = $data['to'];
-        $sleep_tracker->depth = $data['depth'];
+        $sleep_tracker->depth = $depth;
         $sleep_tracker->save();
 
-        $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($gratitude_answer))->count();
+        $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($sleep_tracker))->count();
 
         if ($cnt == 0) {
             $points = new $this->points;
@@ -144,32 +180,36 @@ class GeneralRepository implements GeneralRepositoryInterface
     public function storeGratitudeAnswer($data)
     {
         DB::transaction(function () use ($data) {
-            // gratitude_answer
-
             $set_no = $this->gratitude_answer->max('set_no');
             if (empty($set_no)) {
                 $set_no = 1;
             } else {
                 $set_no += 1;
             }
-
-            foreach ($data['questions'] as $key => $question) {
+            $score = 0;
+            for ($i = 1; $i <= 4; $i++) {
+                if (isset($data['answer'.$i]) && !empty($data['answer'.$i])) {
+                    $score += 0.25;  
+                }
+            }
+            for ($i = 1; $i <= 4; $i++) {
                 $gratitude_answer = new $this->gratitude_answer;
-                $gratitude_answer->question = $question;
-                $gratitude_answer->answer = (isset($data['answers'][$key]) ? $data['answers'][$key] : '');
-                $gratitude_answer->score = $data['score'];
+                $gratitude_answer->question = $data['question'.$i];
+                $gratitude_answer->answer = (isset($data['answer'.$i]) ? $data['answer'.$i] : '');
+                $gratitude_answer->score = $score;
                 $gratitude_answer->set_no = $set_no;
                 $gratitude_answer->save();
             }
 
-            $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($gratitude_answer))->count();
+            
+            $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->count();
             
             if ($cnt == 0) {
                 $points = new $this->points;
                 $points->client_id = Auth::user()->id;
                 $points->rankable_type = get_class($gratitude_answer);
                 $points->rankable_id = $gratitude_answer->id;
-                $points->points = $data['score'];
+                $points->points = 0.25;
                 $points->save();
             }
 
@@ -203,17 +243,51 @@ class GeneralRepository implements GeneralRepositoryInterface
         $exercise->start_time = $data['start_time'];
         $exercise->end_time = $data['end_time'];
         $exercise->exercise_type = $data['exercise_type'];
-        $exercise->score = $data['score'];
+        $exercise->date = $data['date'];
+        $exercise->score = 0;
         $exercise->save();
 
+        $total_physical = 0;
+        $total_technical = 0;
+        $today_excericses = $this->exercise->whereDate('date', $data['date'])->get();
+        foreach ($today_excericses as $exc) {
+            $startTime = Carbon::parse($data['date'].$exc->start_time);
+            $finishTime = Carbon::parse($data['date'].$exc->end_time);
+            if ($exc->exercise_type == 'physical') {
+                $total_physical += $finishTime->diffInMinutes($startTime);
+            } else {
+                $total_technical += $finishTime->diffInMinutes($startTime);
+            }
+        }
+
+        $total_points = 0;
+        if ($total_physical >= 20) {
+            $total_points += 0.5;
+        } else if ($total_technical >= 20) {
+            $total_points += 0.5;
+        }
+
+        if ($total_points > 0) {
+            $exercise_point = $this->exercise_point->where([ 'date' => $data['date'], 'client_id' => Auth::user()->id ])->first();
+            if (empty($exercise_point)) {
+                $exercise_point = new $this->exercise_point;
+                $exercise_point->date = $data['date'];
+                $exercise_point->client_id = Auth::user()->id;
+            }
+
+            $exercise_point->points = $total_points;
+            $exercise_point->save();
+        }
+        
         $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($exercise))->count();
             
-        if ($cnt == 0) {
+        if ($cnt == 0 && $total >= 20) {
             $points = new $this->points;
             $points->client_id = Auth::user()->id;
             $points->rankable_type = get_class($exercise);
             $points->rankable_id = $exercise->id;
-            $points->points = $data['score'];
+            $points->points = 0.25;
+            $points->exercise_type = $data['exercise_type'];
             $points->save();
         }
 

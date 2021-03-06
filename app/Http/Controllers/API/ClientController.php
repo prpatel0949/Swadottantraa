@@ -82,7 +82,7 @@ class ClientController extends Controller
         $request->validate([
             'code' => 'required|exists:users,code'
         ], [
-            'code.exists' => 'Code is invalid'
+            'code.exists' => 'This Code is incorrect.'
         ]);
 
         if ($this->client->applyCode($request->all())) {
@@ -127,5 +127,20 @@ class ClientController extends Controller
     public function getTransaction()
     {
         return response()->json([ 'tbl' => $this->client->getTransaction() ], 200);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'mobile' => 'required|numeric|digits:10',
+            'birth_date' => 'required|date_format:Y-m-d'
+        ]);
+
+        if ($client = $this->client->updateProfile($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! profile update successfully.' ] ], 'data' => $client ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 }

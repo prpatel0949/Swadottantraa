@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ClientMoodMark extends Model
 {
 
-    protected $fillable = [ 'mood_id', 'lower_mood_id', 'marks', 'lower_marks' ];
+    protected $fillable = [ 'mood_id', 'lower_mood_id', 'marks', 'lower_marks', 'date' ];
 
     public static function boot() {
         parent::boot();

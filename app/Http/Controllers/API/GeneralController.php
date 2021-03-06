@@ -68,6 +68,7 @@ class GeneralController extends Controller
             'lower_mood_id' => 'required|exists:moods,id',
             'marks' => 'required|numeric',
             'lower_marks' => 'required|numeric',
+            'date' => 'required|date|date_format:Y-m-d'
         ]);
         if ($this->general->storeMoodMarks($request->all())) {
             return response()->json([ 'tbl' => [[ 'Msg' => 'Mood marks submitted successfully.' ]] ], 200);
@@ -93,7 +94,7 @@ class GeneralController extends Controller
         $request->validate([
             'from' => 'required|date_format:Y-m-d H:i:s',
             'to' => 'required|date_format:Y-m-d H:i:s',
-            'depth' => 'required'
+            // 'depth' => 'required'
         ]);
 
         if ($this->general->storeSleepTracker($request->all())) {
@@ -106,10 +107,14 @@ class GeneralController extends Controller
     public function storeGratitudeAnswer(Request $request)
     {
         $request->validate([
-            'questions' => 'array|present',
-            'questions.*' => 'required|string',
-            'answers.*' => 'nullable|string',
-            'score' => 'required|numeric'
+            'question1' => 'required|string',
+            'question2' => 'required|string',
+            'question3' => 'required|string',
+            'question4' => 'required|string',
+            'answer1' => 'nullable|string',
+            'answer2' => 'nullable|string',
+            'answer3' => 'nullable|string',
+            'answer4' => 'nullable|string',
         ]);
 
         if ($this->general->storeGratitudeAnswer($request->all())) {
@@ -129,8 +134,9 @@ class GeneralController extends Controller
         $request->validate([
             'start_time' => 'required|date_format:H:i:s',
             'end_time' => 'required|date_format:H:i:s',
-            'exercise_type' => 'required|string',
-            'score' => 'required|numeric'
+            'exercise_type' => 'required|string|in:physical,technical',
+            'date' => 'required|date|date:Y-m-d',
+            // 'score' => 'required|numeric'
         ]);
 
         if ($this->general->storeExerciseTracker($request->all())) {
