@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use Mail;
+use Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Client\AddRequest;
@@ -22,7 +24,14 @@ class ClientController extends Controller
 
     public function register(AddRequest $request)
     {
-        if ($this->client->store($request->validated())) {
+        if ($client = $this->client->store($request->validated())) {
+
+            Mail::send('emails.new_user', [ 'client' => $client, 'password' => $request->password ], function ($message) use ($client) {
+                $message->to($client->email, $client->name);
+                $message->subject('Welcome to Swa Heal');
+                // $message->setBody('<p>Thank you for registration. You can use same creditionals for SWA Tantraa login.<a href="'. url('login') .'?type='. Hash::make(0) .'">Click here</a> to login.</p>', 'text/html');
+            });
+
             return response()->json([ 'tbl' => [[ 'Msg' => 'User register successfully.' ] ] ], 200);
         }
 
@@ -142,5 +151,31 @@ class ClientController extends Controller
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function setUserInfo(Request $request)
+    {
+        $request->validate([
+            'sub_emotion_id' => 'required|exists:sub_emotions,id',
+            'flag' => 'required|in:I,S,T'
+        ]);
+
+        if ($client = $this->client->setUserInfo($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! user info added successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function getUserInfo()
+    {
+        $result = [];
+        $questions = $this->general->getQuestions();
+        $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
+        $result['Questions'] = $questions;
+        $result['Answers'] = $questions->pluck('answers');
+        $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
+        $result['UserInfo'][] = auth()->user()->toArray();
+        return response()->json($result, 200);
     }
 }

@@ -23,21 +23,25 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="card text-white bg-gradient-info text-center">
+                            <div class="card text-white bg-gradient-success text-center">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <h2 class="card-title text-white">Total User</h2>
+                                        <h2 class="card-title text-white">Used Licence</h2>
                                         <h4 class="card-text"><a href="#" class="text-white" target="_blank"> {{ Auth::user()->clients->count() }}<a></h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="card text-white bg-gradient-success text-center">
+                            <div class="card text-white bg-gradient-info text-center">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <h2 class="card-title text-white">Total Pending</h2>
-                                        <h4 class="card-text"><a href="#" class="text-white" target="_blank"> {{ Auth::user()->number_of_users - Auth::user()->clients->count() }}<a></h4>
+                                        @php
+                                            $active = Carbon\Carbon::now()->subDays(14)->format('Y-m-d H:i:s');
+                                        @endphp
+                                        <h2 class="card-title text-white">Active Users</h2>
+                                        {{-- last_login --}}
+                                        <h4 class="card-text"><a href="#" class="text-white" target="_blank"> {{ Auth::user()->clients->where('last_login', '>', $active)->count() }}<a></h4>
                                     </div>
                                 </div>
                             </div>
@@ -47,11 +51,27 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         @php
-                                            $active = Carbon\Carbon::now()->subDays(14)->format('Y-m-d H:i:s');
+                                            $Inactive = Carbon\Carbon::now()->subDays(90)->format('Y-m-d H:i:s');
                                         @endphp
-                                        <h2 class="card-title text-white">Total Active</h2>
+                                        <h2 class="card-title text-white">InActive Users</h2>
                                         {{-- last_login --}}
-                                        <h4 class="card-text"><a href="#" class="text-white" target="_blank"> {{ Auth::user()->clients->where('last_login', '>', $active)->count() }}<a></h4>
+                                        <h4 class="card-text"><a href="#" class="text-white" target="_blank"> {{ Auth::user()->clients->where('last_login', '<', $Inactive)->count() }}<a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Pie Chart</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body pl-0">
+                                        <div class="height-300">
+                                            <canvas id="simple-pie-chart" width="600" height="400"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,4 +115,30 @@
             </div>
         </div>
     </div>
+@endsection
+<script src="{{ asset('assets/dashboard/vendors/js/charts/chart.min.js') }}"></script>
+@section('js')
+    <script>
+        var oilCanvas = document.getElementById("simple-pie-chart").getContext('2d');
+        Chart.defaults.global.defaultFontFamily = "Lato";
+        var oilData = {
+            labels: [
+                "Active",
+                "Inactive",
+            ],
+            datasets: [
+                {
+                    data: [{{ $mood_trackers['active'] }}, {{ $mood_trackers['inactive'] }}],
+                    backgroundColor: [
+                        "#5cb85c",
+                        "#d9534f",
+                    ]
+                }]
+        };
+
+        var pieChart = new Chart(oilCanvas, {
+            type: 'pie',
+            data: oilData
+        });
+    </script>
 @endsection

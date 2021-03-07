@@ -57,12 +57,11 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
     Route::post('exercise/tracker', 'GeneralController@storeExerciseTracker');
 
     Route::post('profile/update', 'ClientController@updateProfile');
+    
+    Route::get('user', 'ClientController@getUserInfo');
 
-});
+    Route::post('user/info', 'ClientController@setUserInfo');
 
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
 
 Route::post('login', 'ClientController@generateToken');

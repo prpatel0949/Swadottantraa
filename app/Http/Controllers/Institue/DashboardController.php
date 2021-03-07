@@ -17,6 +17,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('institue.dashboard', [ 'ranks' => $this->client->getLeaderboard() ]);
+        return view('institue.dashboard', [ 
+            'ranks' => $this->client->getLeaderboard(),
+            'mood_trackers' => $this->client->getMoodTracker(),
+        ]);
     }
 }

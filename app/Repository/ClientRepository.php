@@ -8,25 +8,41 @@ use Mail;
 use Session;
 use App\User;
 use App\Client;
+use App\UserInfo;
 use Carbon\Carbon;
 use App\ClientTransaction;
 use App\Repository\Interfaces\ClientRepositoryInterface;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    private $client, $user, $transaction;
+    private $client, $user, $transaction, $user_info;
 
-    public function __construct(Client $client, User $user, ClientTransaction $transaction)
+    public function __construct(Client $client, User $user, ClientTransaction $transaction, UserInfo $user_info)
     {
         $this->client = $client;
         $this->user = $user;
         $this->transaction = $transaction;
+        $this->user_info = $user_info;
     }
 
     public function store($data)
     {
         $data['password'] = Hash::make($data['password']);
-        return $this->client->insert($data);
+        $client = $this->client->create($data);
+        
+        $user = $this->user->where('email', $client->email)->first();
+        if (empty($user)) {
+            $user = new $this->user;
+            $user->name = $client->name;
+            $user->email = $client->email;
+            $user->dob = $client->birth_date;
+            $user->mobile = $client->mobile;
+            $user->password = $client->password;
+            $user->type = 0;
+            $user->save();
+        }
+
+        return $client;
     }
 
     public function forgotPassword($data)
@@ -167,5 +183,33 @@ class ClientRepository implements ClientRepositoryInterface
         $client->save();
 
         return $client;
+    }
+
+    public function getMoodTracker()
+    {
+        $users = Auth::user()->clients;
+        $date = \Carbon\Carbon::today()->subDays(7)->format('Y-m-d');
+        $total_active = 0;
+        $total_inactive = 0;
+        foreach ($users as $user) {
+            $is_active = $user->moods->where('created_at', '>=', $date)->count();
+            if ($is_active > 0) {
+                $total_active += 1;
+            } else {
+                $total_inactive += 1;
+            }
+        }
+        return [ 'active' => $total_active, 'inactive' => $total_inactive ];
+    }
+
+    public function setUserInfo($data)
+    {
+        $user_info = new $this->user_info;
+        $user_info->flag = $data['flag'];
+        $user_info->client_id = Auth::user()->id;
+        $user_info->sub_emotion_id = $data['sub_emotion_id'];
+        $user_info->save();
+
+        return true;
     }
 }

@@ -26,4 +26,8 @@ interface ClientRepositoryInterface
     public function getLeaderboard();
 
     public function updateProfile($data);
+
+    public function getMoodTracker();
+
+    public function setUserInfo($data);
 }
