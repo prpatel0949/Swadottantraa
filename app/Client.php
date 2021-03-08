@@ -46,7 +46,7 @@ class Client extends Authenticatable
 
     public function getIsRegularAttribute()
     {
-        $date = \Carbon\Carbon::now()->subDays(14)->format('Y-m-d');
+        $date = \Carbon\Carbon::now()->subDays(21)->format('Y-m-d');
         $mood = $this->points->where('rankable_type', 'App\ClientMoodMark')->where('created_at', '>=', $date)->count();
         $sleep = $this->points->where('rankable_type', 'App\SleepTracker')->where('created_at', '>=', $date)->count();
         $excerise = $this->points->where('rankable_type', 'App\ExerciseTracker')->where('created_at', '>=', $date)->count();
@@ -57,6 +57,16 @@ class Client extends Authenticatable
         }
 
         return false;
+    }
+
+    /**
+     * Get the institue that owns the Client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function institue()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

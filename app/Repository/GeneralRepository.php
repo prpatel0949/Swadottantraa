@@ -221,12 +221,12 @@ class GeneralRepository implements GeneralRepositoryInterface
     public function getInstitueList()
     {
         $month = Carbon::now()->month;
-        $clients = $this->client->select('id')->where('user_id', Auth::user()->user_id)->get();
 
+        $clients = $this->client->select('id')->where('user_id', Auth::user()->user_id)->get();
         $points = DB::table('client_points')
             ->select(DB::raw('SUM(client_points.points) as points, clients.name'))
             ->join('clients', 'clients.id', 'client_points.client_id')
-            ->whereIn('client_points.client_id', $clients)
+            ->whereIn('client_points.client_id', $clients->pluck('id')->toArray())
             ->whereMonth('client_points.created_at', $month)->groupBy('client_id')->get()->take(10);
 
         // $points = $this->points->selectRaw('SUM(points) as points')->addSelect('clients.name')->whereIn('client_id', $clients)->whereMonth('created_at', $month)->groupBy('client_id')->get()->take(10);
