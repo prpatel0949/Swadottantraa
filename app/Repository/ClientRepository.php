@@ -170,7 +170,7 @@ class ClientRepository implements ClientRepositoryInterface
         return DB::table('client_points')
             ->select(DB::raw('SUM(client_points.points) as points, clients.name, clients.email, clients.mobile'))
             ->join('clients', 'clients.id', 'client_points.client_id')
-            ->whereIn('client_points.client_id', $clients)
+            ->whereIn('client_points.client_id', $clients->pluck('id')->toArray())
             ->whereMonth('client_points.created_at', $month)->groupBy('client_id')->get()->take(10);
     }
 
