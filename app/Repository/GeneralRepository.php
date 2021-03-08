@@ -202,7 +202,7 @@ class GeneralRepository implements GeneralRepositoryInterface
             }
 
             
-            $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->count();
+            $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('rankable_type', get_class($gratitude_answer))->where('client_id', Auth::user()->id)->count();
             
             if ($cnt == 0) {
                 $points = new $this->points;
