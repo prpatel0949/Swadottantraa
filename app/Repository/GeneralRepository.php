@@ -281,7 +281,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         
         $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($exercise))->count();
             
-        if ($cnt == 0 && $total >= 20) {
+        if ($cnt == 0) {
             $points = new $this->points;
             $points->client_id = Auth::user()->id;
             $points->rankable_type = get_class($exercise);
