@@ -36,7 +36,7 @@
                                             <i class="feather icon-package text-warning font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->count() }}</h2>
+                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_approve', 1)->count() }}</h2>
                                     <p class="mb-0">Used Licence</p>
                                 </div>
                                 <div class="card-content">
@@ -52,7 +52,7 @@
                                             <i class="feather icon-credit-card text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->number_of_users - Auth::user()->clients->count() }}</h2>
+                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->number_of_users - Auth::user()->clients->where('is_approve', 1)->count() }}</h2>
                                     <p class="mb-0">Pending Licence</p>
                                 </div>
                                 <div class="card-content">
@@ -70,7 +70,7 @@
                                     </div>
                                     @php
                                         $active = Carbon\Carbon::now()->subDays(14)->format('Y-m-d H:i:s');
-                                        $active_users = Auth::user()->clients->where('last_login', '>', $active)->count();
+                                        $active_users = Auth::user()->clients->where('is_approve', 1)->where('last_login', '>', $active)->count();
                                     @endphp
                                     <h2 class="text-bold-700 mt-1">{{ $active_users }}</h2>
                                     <p class="mb-0">Active Users</p>
@@ -88,7 +88,7 @@
                                             <i class="feather icon-users text-primary font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->count() - $active_users }}</h2>
+                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_approve', 1)->count() - $active_users }}</h2>
                                     <p class="mb-0">Inactive Users</p>
                                 </div>
                                 <div class="card-content">
@@ -152,7 +152,7 @@
                                             <i class="feather icon-users text-primary font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_regular', true)->count() }}</h2>
+                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_approve', 1)->where('is_regular', true)->count() }}</h2>
                                     <p class="mb-0">First Aid Box Unlocked</p>
                                 </div>
                                 <div class="card-content">
