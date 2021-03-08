@@ -161,6 +161,41 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Leaderboard</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body table-responsive">
+                                        <table class="table " style="width: 100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Rank</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone No</th>
+                                                    <th>Score</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($ranks as $key => $item)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->email }}</td>
+                                                        <td>{{ $item->mobile }}</td>
+                                                        <td>{{ $item->points }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
