@@ -126,7 +126,7 @@ class GeneralController extends Controller
 
     public function getInstitueList()
     {
-        return response()->json($this->general->getInstitueList(), 200);
+        return response()->json([ 'tbl' => $this->general->getInstitueList() ], 200);
     }
 
     public function storeExerciseTracker(Request $request)
