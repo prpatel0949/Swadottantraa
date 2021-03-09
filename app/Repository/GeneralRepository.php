@@ -227,7 +227,7 @@ class GeneralRepository implements GeneralRepositoryInterface
             ->select(DB::raw('SUM(client_points.points) as points, clients.name'))
             ->join('clients', 'clients.id', 'client_points.client_id')
             ->whereIn('client_points.client_id', $clients->pluck('id')->toArray())
-            ->whereMonth('client_points.created_at', $month)->groupBy('client_id')->get()->take(10);
+            ->whereMonth('client_points.created_at', $month)->groupBy('client_id')->orderBy('points')->get()->take(10);
 
         // $points = $this->points->selectRaw('SUM(points) as points')->addSelect('clients.name')->whereIn('client_id', $clients)->whereMonth('created_at', $month)->groupBy('client_id')->get()->take(10);
         return $points->map(function($key, $value) {
