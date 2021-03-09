@@ -62,6 +62,12 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('user/info', 'ClientController@setUserInfo');
 
+    Route::get('sleep_tracker/anaysis', 'GeneralController@getSleepTrackerAnalysis');
+
+    Route::get('exercise_tracker/anaysis', 'GeneralController@getExerciseTrackerAnalysis');
+
+    Route::get('gratitude_tracer/anaysis', 'GeneralController@getGratitudeTrackerAnalysis');
+
 });
 
 Route::post('login', 'ClientController@generateToken');

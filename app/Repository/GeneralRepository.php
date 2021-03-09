@@ -142,16 +142,23 @@ class GeneralRepository implements GeneralRepositoryInterface
 
         $age = Carbon::parse(Auth::user()->birth_date)->diff(\Carbon\Carbon::now())->format('%y');
         $depth = 0;
+        $per = 0;
+        if ($data['type'] == 'medium') {
+            $per = round(($sleep * 20) / 100);
+        } else if ($data['type'] == 'low') {
+            $per = round(($sleep * 40) / 100);
+        }
+
+        $sleep = $sleep - $per;
+
         if ($age >= 14 && $age <= 25) {
             $depth = $sleep - 8;
-        }
-
-        if ($age > 25 && $age <= 55) {
+        } else if ($age > 25 && $age <= 55) {
             $depth = $sleep - 7;
-        }
-
-        if ($age > 55) {
+        } else if ($age > 55) {
             $depth = $sleep - 6;
+        } else {
+            $depth = $sleep - 7;
         }
 
 
@@ -161,6 +168,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $sleep_tracker->from = $data['from'];
         $sleep_tracker->to = $data['to'];
         $sleep_tracker->depth = $depth;
+        $sleep_tracker->type = $data['type'];
         $sleep_tracker->save();
 
         $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($sleep_tracker))->count();
@@ -174,12 +182,13 @@ class GeneralRepository implements GeneralRepositoryInterface
             $points->save();
         }
 
-        return true;
+        return $depth;
     }
 
     public function storeGratitudeAnswer($data)
     {
-        DB::transaction(function () use ($data) {
+        $resp = '';
+        DB::transaction(function () use ($data, &$resp) {
             $set_no = $this->gratitude_answer->max('set_no');
             if (empty($set_no)) {
                 $set_no = 1;
@@ -198,7 +207,9 @@ class GeneralRepository implements GeneralRepositoryInterface
                 $gratitude_answer->answer = (isset($data['answer'.$i]) ? $data['answer'.$i] : '');
                 $gratitude_answer->score = $score;
                 $gratitude_answer->set_no = $set_no;
+                $gratitude_answer->client_id = Auth::user()->id;
                 $gratitude_answer->save();
+                $resp = $gratitude_answer;
             }
 
             
@@ -215,7 +226,7 @@ class GeneralRepository implements GeneralRepositoryInterface
 
         });
 
-        return true;
+        return $resp->score;
     }
 
     public function getInstitueList()
@@ -291,6 +302,6 @@ class GeneralRepository implements GeneralRepositoryInterface
             $points->save();
         }
 
-        return true;
+        return $total_points;
     }
 }
