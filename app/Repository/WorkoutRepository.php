@@ -40,7 +40,7 @@ class WorkoutRepository implements WorkoutRepositoryInterface
                         if ($data['answer_type'][$key] == 1) {
                             $workoutQuestionAnswer = new $this->workoutQuestionAnswer;
                             $workoutQuestionAnswer->workout_question_id = $workoutQuestion->id;
-                            $workoutQuestionAnswer->answer = $data['answer'][$key];
+                            $workoutQuestionAnswer->answer = '';
                             $workoutQuestionAnswer->save();
                         } else {
                             if (!empty($data['answer'][$key])) {
@@ -106,7 +106,7 @@ class WorkoutRepository implements WorkoutRepositoryInterface
                                 $workoutQuestionAnswer = new $this->workoutQuestionAnswer;
                                 $workoutQuestionAnswer->workout_question_id = $workoutQuestion->id;
                             }
-                            $workoutQuestionAnswer->answer = $data['answer'][$key];
+                            $workoutQuestionAnswer->answer = '';
                             $workoutQuestionAnswer->save();
                             $allAnswers[] = $workoutQuestionAnswer->id;
                         } else {

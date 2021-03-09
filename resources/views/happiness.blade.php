@@ -230,21 +230,21 @@
                     <div class="page-title">That's great! What will you like us to help for?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-1-1" data-tag="A"  data-hide=".question_1_1" data-show=".question_1_1_1">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-1-1"   data-hide=".question_1_1" data-show=".question_1_1_1">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Brighten up mind</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-1-2" data-tag="B" data-hide=".question_1_1" data-show=".question_1_1_2">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-1-2"  data-hide=".question_1_1" data-show=".question_1_1_2">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle"> Healthy Relations</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-1-3" data-tag="C" data-hide=".question_1_1" data-show=".question_1_1_3">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-1-3"  data-hide=".question_1_1" data-show=".question_1_1_3">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Brain Power</div>
                                 </div>
@@ -259,21 +259,21 @@
                     <div class="page-title">What would be your preference for this?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-1-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-1-1" data-tag="1.1.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-1-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-1-2" data-tag="1.1.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-1-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-1-3" data-tag="1.1.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -288,21 +288,21 @@
                     <div class="page-title">What would be your preference for this?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-2-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-2-1" data-tag="1.2.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-2-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-2-2" data-tag="1.2.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-2-3" data-tag="F" >
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-2-3"  data-tag="1.2.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -317,21 +317,21 @@
                     <div class="page-title">What would be your preference for this?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-3-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-3-1" data-tag="1.3.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-3-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-3-2" data-tag="1.3.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-3-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-1-3-3" data-tag="1.3.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -346,21 +346,21 @@
                     <div class="page-title">Ohk… Let's know what is bothering you the most..</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-2-1" data-tag="A"  data-hide=".question_1_2" data-show=".question_1_2_1">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-2-1"   data-hide=".question_1_2" data-show=".question_1_2_1">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Emotional Stress, Physical Stress, Bad Mood</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-2-2" data-tag="B"  data-hide=".question_1_2" data-show=".question_1_2_2">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-2-2"   data-hide=".question_1_2" data-show=".question_1_2_2">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">My own habits causing problems for health, work & relations</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-2-3" data-tag="C"  data-hide=".question_1_2" data-show=".question_1_2_3">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-2-3"   data-hide=".question_1_2" data-show=".question_1_2_3">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Difficulties in concentration, memory and problem solving</div>
                                 </div>
@@ -375,21 +375,21 @@
                     <div class="page-title">What would be your preference for this?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-1-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-1-1" data-tag="2.1.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-1-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-1-2" data-tag="2.1.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-1-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-1-3" data-tag="2.1.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -404,21 +404,21 @@
                     <div class="page-title">What would be your preference for this?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-2-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-2-1" data-tag="2.2.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-2-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-2-2" data-tag="2.2.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-2-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-2-3" data-tag="2.2.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -433,21 +433,21 @@
                     <div class="page-title">What would be your preference for this?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-3-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-3-1" data-tag="2.3.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-3-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-3-2" data-tag="2.3.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-3-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-2-3-3" data-tag="2.3.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -462,21 +462,21 @@
                     <div class="page-title">Please don't get disheartened! Let's start sorting the issues with…</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-3-1" data-tag="A"  data-hide=".question_1_3" data-show=".question_1_3_1">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-3-1"   data-hide=".question_1_3" data-show=".question_1_3_1">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Mood Management</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-3-2" data-tag="B"  data-hide=".question_1_3" data-show=".question_1_3_2">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-3-2"   data-hide=".question_1_3" data-show=".question_1_3_2">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Behavioural  Management</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag" data-question="1-3-3" data-tag="C"  data-hide=".question_1_3" data-show=".question_1_3_3">
+                            <div class="card shadow cursor-pointer capture-tag" data-question="1-3-3"   data-hide=".question_1_3" data-show=".question_1_3_3">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Thoughts Management</div>
                                 </div>
@@ -491,21 +491,21 @@
                     <div class="page-title">What are you ready for?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-1-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-1-1" data-tag="3.1.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-1-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-1-2" data-tag="3.1.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-1-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-1-3" data-tag="3.1.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -520,21 +520,21 @@
                     <div class="page-title">What are you ready for?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-2-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-2-1" data-tag="3.2.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-2-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-2-2" data-tag="3.2.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-2-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-2-3" data-tag="3.2.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -549,21 +549,21 @@
                     <div class="page-title">What are you ready for?</div>
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-3-1" data-tag="D">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-3-1" data-tag="3.3.quick-solution">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Quick solutions</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-3-2" data-tag="E">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-3-2" data-tag="3.3.depth-understanding">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">In-depth understanding</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-3-3" data-tag="F">
+                            <div class="card shadow cursor-pointer capture-tag last-question" data-question="1-3-3-3" data-tag="3.3.just-knowing">
                                 <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 150px">
                                     <div class="page-subtitle">Just knowing my status</div>
                                 </div>
@@ -607,17 +607,14 @@
     let tags = [];
     $(document).on('click', '.capture-tag', function(e) {
         e.preventDefault();
-        let tag = {};
-        tag['question_id'] = $(this).attr('data-question');
-        tag['tag'] = $(this).attr('data-tag');
-        tags.push(tag);
         if ($(this).hasClass('last-question')) {
+            let tag = $(this).attr('data-tag');
             $.ajax({
                 url: '{{ route("question.tag") }}',
                 method: 'POST',
-                data: { '_token': '{{ csrf_token() }}', 'tags': tags },
+                data: { '_token': '{{ csrf_token() }}', 'tag': tag },
                 success: function (res) {
-                    window.location.href = '{{ route("register") }}';
+                    window.location.href = '{{ (Auth::check() ? route("recheck") : route("register")) }}';
                 }
             });
         }

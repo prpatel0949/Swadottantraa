@@ -79,6 +79,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="name">Number of Users :</label>
+                                    <input type="text" class="form-control" name="number_of_users" value="{{ old('number_of_users') }}">
+                                    @error('number_of_users')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>

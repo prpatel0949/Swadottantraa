@@ -5,5 +5,5 @@ interface TransactionRepositoryInterface
 {
     public function all();
 
-    public function getMonthlyTotal();
+    public function getMonthlyTotal($filters = []);
 }

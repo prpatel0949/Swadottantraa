@@ -2,27 +2,40 @@
 
 namespace App\Http\Controllers\API;
 
+use Mail;
+use Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Client\AddRequest;
 use App\Repository\Interfaces\ClientRepositoryInterface;
+use App\Repository\Interfaces\EmotionRepositoryInterface;
+use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class ClientController extends Controller
 {
-    private $client;
+    private $client, $emotion, $general;
 
-    public function __construct(ClientRepositoryInterface $client)
+    public function __construct(ClientRepositoryInterface $client, EmotionRepositoryInterface $emotion, GeneralRepositoryInterface $general)
     {
         $this->client = $client;
+        $this->emotion = $emotion;
+        $this->general = $general;
     }
 
     public function register(AddRequest $request)
     {
-        if ($this->client->store($request->validated())) {
-            return response()->json([ 'message' => 'User register successfully.' ], 200);
+        if ($client = $this->client->store($request->validated())) {
+
+            Mail::send('emails.new_user', [ 'client' => $client, 'password' => $request->password ], function ($message) use ($client) {
+                $message->to($client->email, $client->name);
+                $message->subject('Welcome to Swa Heal');
+                // $message->setBody('<p>Thank you for registration. You can use same creditionals for SWA Tantraa login.<a href="'. url('login') .'?type='. Hash::make(0) .'">Click here</a> to login.</p>', 'text/html');
+            });
+
+            return response()->json([ 'tbl' => [[ 'Msg' => 'User register successfully.' ] ] ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function forgotPassword(Request $request)
@@ -32,10 +45,10 @@ class ClientController extends Controller
         ]);
 
         if ($client = $this->client->forgotPassword($request->all())) {
-            return response()->json([ 'message' => 'Forgot password code sent to email.', 'code' => $client->code ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Forgot password code sent to email.', 'code' => $client->code ] ] ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function resetPassword(Request $request)
@@ -49,14 +62,14 @@ class ClientController extends Controller
         $response = $this->client->resetPassword($request->all());
 
         if ($response == 1) {
-            return response()->json([ 'message' => 'Password reset successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Password reset successfully.' ]] ], 200);
         } else if ($response == 2) {
-            return response()->json([ 'message' => 'Code is invalid.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Code is invalid.' ]] ], 200);
         } else if ($response == 3) {
-            return response()->json([ 'message' => 'Code is expired.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Code is expired.' ]] ], 200);
         }
 
-        return response()->json([ 'message' => 'Something went wrong happen try again!' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 
     public function changePassword(Request $request)
@@ -67,9 +80,104 @@ class ClientController extends Controller
         ]);
 
         if ($client = $this->client->changePassword($request->all())) {
-            return response()->json([ 'message' => 'Password changed successfully.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Your Password has been changed!' ] ] ], 200);
         }
 
-        return response()->json([ 'message' => 'Old password is invalid.' ], 500);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Old password is invalid.' ]] ], 500);
+    }
+
+    public function applyCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|exists:users,code'
+        ], [
+            'code.exists' => 'This Code is incorrect.'
+        ]);
+
+        if ($this->client->applyCode($request->all())) {
+            return response()->json( [ 'Msg' => 'Your request has been sent! waiting for your institue to approve.' ], 200);
+        }
+    }
+
+    public function generateToken(Request $request)
+    {
+
+        $proxy = Request::create('oauth/token', 'POST', $request->toArray());
+        $response = \Route::dispatch($proxy);
+        $token = (Array) json_decode($response->getContent());
+        $result = [];
+        if (isset($token['token_type']) && !empty($token['token_type'])) {
+
+            $questions = $this->general->getQuestions();
+            $user = collect($this->client->all([ 'email' => $request->username ])->first()->toArray());
+            $token = collect($token);
+            $all = $user->merge($token);
+
+            $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
+            $result['Questions'] = $questions;
+            $result['Answers'] = $questions->pluck('answers');
+            $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
+            $result['institue'] = ($user['is_approve'] == 1 ? auth()->user()->institue : null);
+            $result['UserInfo'][] = $all->toArray();
+            return response()->json($result, 200);
+        }
+
+        return $response;
+    }
+
+    public function setTransaction()
+    {
+        if ($client = $this->client->setTransaction()) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Payment done successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function getTransaction()
+    {
+        return response()->json([ 'tbl' => $this->client->getTransaction() ], 200);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'mobile' => 'required|numeric|digits:10',
+            'birth_date' => 'required|date_format:Y-m-d'
+        ]);
+
+        if ($client = $this->client->updateProfile($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! profile update successfully.' ] ], 'data' => $client ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function setUserInfo(Request $request)
+    {
+        $request->validate([
+            'sub_emotion_id' => 'required|exists:sub_emotions,id',
+            'flag' => 'required|in:I,S,T'
+        ]);
+
+        if ($client = $this->client->setUserInfo($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! user info added successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function getUserInfo()
+    {
+        $result = [];
+        $questions = $this->general->getQuestions();
+        $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries();
+        $result['Questions'] = $questions;
+        $result['Answers'] = $questions->pluck('answers');
+        $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
+        $result['institue'] = (auth()->user()->is_approve == 1 ? auth()->user()->institue : null);
+        $result['UserInfo'][] = auth()->user()->toArray();
+        return response()->json($result, 200);
     }
 }

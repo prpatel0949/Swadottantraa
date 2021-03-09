@@ -28,7 +28,7 @@ class AddRequest extends FormRequest
             'title' => 'required|string|max:50',
             'question.*' => 'required|string|max:100',
             'description.*' => 'required|string|max:500',
-            'answer.*' => 'required|max:500',
+            // 'answer.*' => 'required|max:500',
             'answer.*.*' => 'required|max:100',
         ];
     }

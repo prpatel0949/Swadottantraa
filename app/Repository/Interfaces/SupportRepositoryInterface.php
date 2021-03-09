@@ -10,4 +10,6 @@ interface SupportRepositoryInterface
     public function find($id);
 
     public function update($data, $id);
+
+    public function addToFAQ($id);
 }

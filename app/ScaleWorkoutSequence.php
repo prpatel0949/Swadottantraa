@@ -12,4 +12,9 @@ class ScaleWorkoutSequence extends Model
     {
         return $this->morphTo();
     }
+
+    public function step()
+    {
+    return $this->belongsTo('App\ProgramStageStep', 'step_id');
+    }
 }

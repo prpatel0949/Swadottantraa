@@ -46,16 +46,25 @@ Route::group(['prefix' => 'user', 'namespace' => 'Individual', 'middleware' => [
         Route::get('/program/{id}', 'ProgramController@accessProgram')->name('individual.program.access');
         Route::get('/program/{id}/{stage_id}', 'ProgramController@accessProgramStage')->name('individual.program.stage');
         Route::get('/program/{id}/{stage_id}/{step_id}', 'ProgramController@accessProgramStep')->name('individual.program.step');
-        Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer'); 
-    });
+        Route::post('program/{id}/question/answer', 'ProgramController@questionAnswer')->name('program.question.answer');
 
-    Route::get('support', 'SupportController@index')->name('support.index');
+    });
+    
+    Route::get('support/technical', 'SupportController@index')->name('support.index');
     Route::post('support', 'SupportController@store')->name('support.store');
 
+    Route::get('support/medical', 'SupportController@index')->name('support.medical.index');
+    Route::post('support', 'SupportController@store')->name('support.store');
+
+    Route::get('fag/{type?}', 'SupportController@faqs')->name('support.faqs');
+    
     Route::get('join/franchisee/{token}', 'UserController@acceptInvitation')->name('user.join.franchisee');
-
+    
     Route::post('program/{id}/question_answer', 'ProgramController@scaleQuestionAnswer')->name('user.program.question_answer');
+    
+    Route::post('coupon/apply', 'ProgramController@applyCode')->name('coupon.apply');
 
+    Route::get('recheck', 'UserController@reCheck')->name('recheck');
 });
 
 Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware' => [ 'auth', 'franchisee' ] ], function () {
@@ -67,9 +76,34 @@ Route::group(['prefix' => 'franchisee', 'namespace' => 'Franchisee', 'middleware
 
     Route::get('support', 'SupportController@index')->name('franchisee.support.index');
     Route::post('support', 'SupportController@store')->name('franchisee.support.store');
+
+    Route::get('recommand/program', 'ProgramController@recommandProgram')->name('franchisee.recommand.program');
+    Route::get('recommand/program/create', 'ProgramController@createRecommandProgram')->name('franchisee.recommand.program.create');
+    Route::post('recommand/program/store', 'ProgramController@storeRecommandProgram')->name('franchisee.recommand.program.store');
+    Route::get('recommand/program/{id}/edit', 'ProgramController@editRecommandProgram')->name('franchisee.recommand.program.edit');
+    Route::put('recommand/program/{id}/update', 'ProgramController@updateRecommandProgram')->name('franchisee.recommand.program.update');
+});
+
+
+Route::group(['prefix' => 'institue', 'namespace' => 'Institue', 'middleware' => ['auth', 'institue' ] ], function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('institue.dashboard');
+    Route::get('/users', 'UserController@index')->name('institue.users');
+
+    Route::post('user/approve/{id}', 'UserController@approveUser')->name('user.approve');
+    Route::post('user/reject/{id}', 'UserController@approveReject')->name('user.reject');
+
+    Route::get('support', 'SupportController@index')->name('institue.support.index');
+    Route::post('support', 'SupportController@store')->name('institue.support.store');
+
+    Route::get('profile', 'UserController@profile')->name('institue.profile');
+    Route::PUT('profile', 'UserController@profileUpdate')->name('institue.profile.update');
 });
 
 Route::get('happiness', 'HomeController@happiness')->name('happiness');
 Route::get('question', 'HomeController@question')->name('question');
 Route::post('question/next', 'HomeController@nextQuestion')->name('question.next');
 Route::post('question/tag', 'HomeController@storeTags')->name('question.tag');
+
+Route::get('faq/{type?}', 'HomeController@faqs')->name('faq');
+
+Route::post('contact-us', 'HomeController@contactUs')->name('contact.us');

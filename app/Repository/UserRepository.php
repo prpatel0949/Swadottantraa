@@ -3,6 +3,7 @@ namespace App\Repository;
 
 use Auth;
 use Mail;
+use Session;
 use App\User;
 use App\Invite;
 use Carbon\Carbon;
@@ -130,5 +131,18 @@ class UserRepository implements UserRepositoryInterface
         }
 
         return false;
+    }
+
+    public function reCheck()
+    {
+        $tag = Session::get('question_tags');
+        $user = $this->user->find(Auth::user()->id);
+        $user->tags = $tag;
+        $user->last_checked_at = Carbon::now()->format('Y-m-d');
+        $user->save();
+
+        Session::forget('question_tags');
+
+        return true;
     }
 }

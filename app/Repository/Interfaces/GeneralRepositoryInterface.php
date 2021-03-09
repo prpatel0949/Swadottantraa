@@ -14,4 +14,18 @@ interface GeneralRepositoryInterface
     public function getQuestions();
 
     public function storeAnswer($data);
+
+    public function getSubsciptions();
+
+    public function storeMoodMarks($data);
+
+    public function getTraumaCopyingCart($request);
+
+    public function storeSleepTracker($data);
+
+    public function storeGratitudeAnswer($data);
+
+    public function getInstitueList();
+
+    public function storeExerciseTracker($data);
 }

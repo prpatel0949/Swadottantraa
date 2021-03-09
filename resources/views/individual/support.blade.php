@@ -12,14 +12,21 @@
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Support</h2>
-                        <div class="float-right">
-                            <a href="#" class="btn btn-primary">Technical</a>
-                            <a href="#" class="btn btn-primary">Medical</a>
-                        </div>
 		            </div>
 		        </div>
 		    </div>
-		</div>
+        </div>
+        
+        <div class="content-body">
+    		<div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <p>Most of your questions are already answered. please, <a href="{{ route('support.faqs', Request::segment(3)) }}" target="_blank">click here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     	<div class="content-body">
     		<div class="card">
                 <div class="card-content">
@@ -29,6 +36,7 @@
 
                         <form method="POST" action="{{ route('support.store') }}">
                             @csrf
+                            <input type="hidden" name="type" value="{{ (Request::segment(3) == 'technical' ? 0 : 1) }}">
                         <div class="row">
                         	<div class="col-sm-8">
                         		<div class="form-group">

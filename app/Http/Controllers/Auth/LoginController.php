@@ -76,6 +76,9 @@ class LoginController extends Controller
                 $this->username() => 'These credentials do not match our records.'
             ]);
         }
+
+        $user->last_login = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $user->save();
     }
 
     public function redirectTo()
@@ -86,6 +89,10 @@ class LoginController extends Controller
 
         if (Auth::user()->type == 2) {
             return 'franchisee/dashboard';
+        }
+
+        if (Auth::user()->type == 1) {
+            return 'institue/dashboard';
         }
 
         return '/';

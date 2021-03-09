@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Franchisee\AddRequest;
+use App\Http\Requests\Admin\Institue\AddRequest;
 use App\Http\Requests\Admin\Institue\UpdateRequest;
 use App\Repository\Interfaces\UserRepositoryInterface;
 
@@ -46,7 +46,18 @@ class InstitueController extends Controller
     {
         $data = $request->validated();
         $data['type'] = 1;
-        
+        do {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $code = '';
+            for ($i = 0; $i < 6; $i++) {
+                $code .= $characters[rand(0, $charactersLength - 1)];
+            }
+            $user_code = $this->user->all([ 'code' => $code ]);
+        } while(empty($user_code));
+
+        $data['code'] = $code;
+
         if ($this->user->store($data)) {
             return redirect()->route('institue.index')->with('success', 'Institue created successfully.');
         }

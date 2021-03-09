@@ -8,23 +8,26 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Program\AddRequest;
 use App\Http\Requests\Admin\Program\UpdateRequest;
+use App\Repository\Interfaces\UserRepositoryInterface;
 use App\Repository\Interfaces\ScaleRepositoryInterface;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 use App\Repository\Interfaces\WorkoutRepositoryInterface;
 
 class ProgramController extends Controller
 {
-    private $scale, $workout, $program;
+    private $scale, $workout, $program, $user;
 
     public function __construct(
         ScaleRepositoryInterface $scale,
         WorkoutRepositoryInterface $workout,
-        ProgramRepositoryInterface $program
+        ProgramRepositoryInterface $program,
+        UserRepositoryInterface $user
     )
     {
         $this->scale = $scale;
         $this->workout = $workout;
         $this->program = $program;
+        $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -235,5 +238,51 @@ class ProgramController extends Controller
         }
 
         return redirect()->back()->with('error', 'Something went wrong happen.');
+    }
+
+    public function recommandProgram()
+    {
+        return view('admin.program.recommand.index', [ 'programs' => $this->program->allRecommandedProgram() ]);
+    }
+
+    public function createRecommandProgram()
+    {
+        return view('admin.program.recommand.add', [
+            'users' => $this->user->all([ 'type' => 0 ]),
+            'programs' => $this->program->all(),
+        ]);
+    }
+
+    public function storeRecommandProgram(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'program_id' => 'required|array'
+        ]);
+        
+        $this->program->recommandProgram($request->all());
+
+        return redirect()->route('recommand.program')->with('success', 'Program recommanded Successfully.');
+    }
+
+    public function editRecommandProgram($id)
+    {
+        return view('admin.program.recommand.edit', [
+            'users' => $this->user->all([ 'type' => 0 ]),
+            'programs' => $this->program->all(),
+            'recommanded_programs' => $this->program->findRecommandProgram($id),
+        ]);
+    }
+
+    public function updateRecommandProgram(Request $request, $id)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'program_id' => 'required|array'
+        ]);
+        
+        $this->program->updateRecommandProgram($request->all(), $id);
+
+        return redirect()->route('recommand.program')->with('success', 'Program recommanded updated Successfully.');
     }
 }

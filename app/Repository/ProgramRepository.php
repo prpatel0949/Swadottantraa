@@ -9,6 +9,7 @@ use App\Result;
 use App\Program;
 use App\StepScale;
 use Carbon\Carbon;
+use App\ProgramTag;
 use App\StageAccess;
 use App\StepWorkout;
 use App\Transaction;
@@ -18,13 +19,15 @@ use App\AnswerComment;
 use App\ProgramAnswer;
 use App\StepAttachment;
 use App\ProgramStageStep;
+use App\RecommandedProgram;
 use App\ScaleWorkoutSequence;
 use Illuminate\Support\Facades\Log;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
-    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale, $workout, $attachment, $sequencce, $answer, $access, $comment;
+    private $program, $userProgram, $transaction, $result, $option, $stage, $step, $scale;
+    private $workout, $attachment, $sequencce, $answer, $access, $comment, $tag, $recommand_program;
 
     public function __construct(
         Program $program,
@@ -40,7 +43,9 @@ class ProgramRepository implements ProgramRepositoryInterface
         ScaleWorkoutSequence $sequence,
         ProgramAnswer $answer,
         StageAccess $access,
-        AnswerComment $comment
+        AnswerComment $comment,
+        ProgramTag $tag,
+        RecommandedProgram $recommand_program
     )
     {
         $this->program = $program;
@@ -57,6 +62,8 @@ class ProgramRepository implements ProgramRepositoryInterface
         $this->answer = $answer;
         $this->access = $access;
         $this->comment = $comment;
+        $this->tag = $tag;
+        $this->recommand_program = $recommand_program;
     }
 
     public function all()
@@ -69,6 +76,9 @@ class ProgramRepository implements ProgramRepositoryInterface
         try {
             DB::transaction(function () use ($request) {
                 $tnxId = explode('/', $request->txnid);
+
+                $program = $this->program->find($tnxId[1]);
+
                 $now = Carbon::now();
                 $end = $now->copy()->addYear();
                 $userProgram = $this->userProgram;
@@ -77,6 +87,8 @@ class ProgramRepository implements ProgramRepositoryInterface
                 $userProgram->subscribe_date = $now->format('Y-m-d');
                 $userProgram->end_date = $end->format('Y-m-d');
                 $userProgram->amount = $request->amount;
+                $userProgram->program_amount = $program->cost;
+                $userProgram->coupon_id = (isset($tnxId[2]) && $tnxId[2] ? $tnxId[2] : null);
                 $userProgram->save();
     
                 $transaction = $this->transaction;
@@ -141,8 +153,17 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
             $program->type = $data['type'];
             $program->is_active = $data['is_live'];
-            $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
+            // $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
+
+            if (!empty($data['tag'])) {
+                foreach ($data['tag'] as $tag) {
+                    $new_tag = new $this->tag;
+                    $new_tag->program_id = $program->id;
+                    $new_tag->tag = $tag;
+                    $new_tag->save();
+                }
+            }
 
 
             if (!empty($data['stage_name'])) {
@@ -156,11 +177,13 @@ class ProgramRepository implements ProgramRepositoryInterface
                     
                     if (!empty($data['step_name'][$index])) {
                         foreach ($data['step_name'][$index] as $key => $value) {
+                            $step_index = $data['step_index'][$index][$key];
                             $step = new $this->step;
                             $step->program_stage_id = $stage->id;
                             $step->title = $value;
                             $step->description = $data['step_description'][$index][$key];
                             $step->comment = (isset($data['comment']) ? $data['comment'][$index][$key] : '');
+                            $step->is_multiple = (isset($data['is_multiple'][$index][$step_index]) && !empty($data['is_multiple'][$index][$step_index]) ? 1 : 0);
                             $step->save();
 
                             $storeScale = [];
@@ -246,8 +269,18 @@ class ProgramRepository implements ProgramRepositoryInterface
             $program->cost = $data['cost'];
             $program->tag = $tags;
             $program->time = $data['year'].'-'.$data['month'].'-'.$data['day'];
-            $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
+            // $program->is_multiple = $program->is_multiple = (isset($data['is_multiple']) && !empty($data['is_multiple']) ? $data['is_multiple'] : 0);
             $program->save();
+
+            $allTags = [];
+            if (!empty($data['tag'])) {
+                foreach ($data['tag'] as $tag) {
+                    $new_tag = $this->tag->firstorcreate([ 'program_id' => $program->id, 'tag' => $tag ]);
+                    $allTags[] = $new_tag->id;
+                }
+            }
+
+            $this->tag->where('program_id', $program->id)->whereNotIn('id', $allTags)->delete();
 
             $allStage = [];
             if (!empty($data['stage_name'])) {
@@ -269,6 +302,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                     if (!empty($data['step_name'][$index])) {
                         foreach ($data['step_name'][$index] as $key => $value) {
                             $step_id = (isset($data['step_id'][$index]) ? $data['step_id'][$index][$key] : '');
+                            $step_index = $data['step_index'][$index][$key];
                             if (!empty($step_id)) {
                                 $step = $this->step->find($step_id);
                             } else {
@@ -278,6 +312,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                             $step->title = $value;
                             $step->description = $data['step_description'][$index][$key];
                             $step->comment = (isset($data['comment']) && isset($data['comment'][$index]) && isset($data['comment'][$index][$key]) ? $data['comment'][$index][$key] : '');
+                            $step->is_multiple = (isset($data['is_multiple'][$index][$step_index]) && !empty($data['is_multiple'][$index][$step_index]) ? 1 : 0);
                             $step->save();
                             $allSteps[] = $step->id;
                         }
@@ -415,23 +450,33 @@ class ProgramRepository implements ProgramRepositoryInterface
             $setno = (empty($setno) ? 1 : $setno + 1);
             if (isset($data['scale_id'])) {
                 foreach ($data['question'] as $key => $question) {
-                    $answer = new $this->answer;
+                    if (isset($data['answer_id']) && !empty($data['answer_id'][$key])) {
+                        $answer = $this->answer->find($data['answer_id'][$key]);
+                    } else {
+                        $answer = new $this->answer;
+                    }
                     $answer->set_no = $setno;
                     $answer->program_id = request()->id;
                     $answer->step_id = $data['step_id'];
                     $answer->scale_question_id = $key;
                     $answer->scale_question_answer_id = $question;
                     $answer->type = $data['type'][$key];
+                    $answer->is_draft = (isset($data['is_draft']) ? $data['is_draft'] : 0);
                     $answer->save();
                 }
             } else if (isset($data['workout_id'])) {
                 foreach ($data['question'] as $key => $question) {
-                    $answer = new $this->answer;
+                    if (isset($data['answer_id']) && !empty($data['answer_id'][$key])) {
+                        $answer = $this->answer->find($data['answer_id'][$key]);
+                    } else {
+                        $answer = new $this->answer;
+                    }
                     $answer->set_no = $setno;
                     $answer->program_id = request()->id;
                     $answer->step_id = $data['step_id'];
                     $answer->workout_question_id = $key;
                     $answer->type = $data['type'][$key];
+                    $answer->is_draft = (isset($data['is_draft']) ? $data['is_draft'] : 0);
                     if ($data['type'][$key] == 1) {
                         $answer->answer = $question;
                     } else {
@@ -463,12 +508,28 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     public function active()
     {
-        return $this->program->active()->get();
+        $programs = $this->program->active();
+        $today = Carbon::parse(now())->format('Y-m-d');
+        $tags = explode(',', Auth::user()->tags);
+        $tags[] = 'general';
+        if (Auth::user()->franchisee_id > 0) {
+            $tags[] = 'franchisee';
+        }
+        $program_ids = Auth::user()->recommandedPrograms->pluck('program_id')->toArray();
+        $programs = $programs->whereHas('tags', function ($query) use ($tags) {
+            return $query->whereIn('tag', $tags);
+        });
+        $programs = $programs->orWhereIn('id', $program_ids);
+        return $programs->orWhereHas('userPrograms', function ($query) use ($today) {
+            return $query->where('user_id', Auth::user()->id)->whereDate('end_date', '>=', $today);
+        })->get();
     }
 
     public function answers()
     {
-        return $this->answer->groupBy('set_no')->orderBy('id', 'DESC')->get();
+        return $this->answer->where('is_draft', 0)->whereHas('program', function ($query) {
+            return $query->where('type', 1);
+        })->groupBy('set_no')->orderBy('id', 'DESC')->get();
     }
 
     public function answer($id)
@@ -562,7 +623,7 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function answerComment($data, $id)
     {
         $answer = $this->answer->find($id);
-        $all_answer = $this->answer->where('set_no', $answer->set_no)->update([ 'is_resubmit' => 1 ]);
+        $all_answer = $this->answer->where('set_no', $answer->set_no)->update([ 'is_resubmit' => (isset($data['is_resubmit']) && $data['is_resubmit'] == 1 ? 1 : 0) ]);
 
         $comment = new $this->comment;
         $comment->program_answer_id = $id;
@@ -575,5 +636,71 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function usersAnswers($step_id, $user_id)
     {
         return $this->answer->where([ 'step_id' => $step_id, 'user_id' => $user_id ])->get();
+    }
+
+    public function recommandProgram($data)
+    {
+        $set_no = $this->recommand_program->max('set_no');
+        if (empty($set_no)) {
+            $set_no = 0;
+        }
+        $set_no = $set_no + 1; 
+        foreach ($data['program_id'] as $program) {
+            $recommand_program = new $this->recommand_program;
+            $recommand_program->program_id = $program;
+            $recommand_program->set_no = $set_no;
+            $recommand_program->user_id = $data['user_id'];
+            $recommand_program->added_by = Auth::user()->id;
+            $recommand_program->save();
+        }
+
+        return true;
+    }
+
+    public function allRecommandedProgram()
+    {
+        return $this->recommand_program->where('added_by', Auth::user()->id)->orderBy('id', 'DESC')->groupBy('set_no')->get();
+    }
+
+    public function findRecommandProgram($id)
+    {
+        $program = $this->recommand_program->find($id);
+        return $this->recommand_program->where('set_no', $program->set_no)->get(); 
+    }
+
+    public function updateRecommandProgram($data, $id)
+    {
+        $program = $this->recommand_program->find($id);
+        $allPrograms = [];
+        foreach ($data['program_id'] as $program_id) {
+            $cprogram = $this->recommand_program->where([ 'program_id' => $program_id, 'user_id' => $data['user_id'], 'set_no' => $program->set_no ])->first();
+            if (empty($cprogram)) {
+                $cprogram = new $this->recommand_program;
+                $cprogram->program_id = $program_id;
+                $cprogram->user_id = $data['user_id'];
+                $cprogram->set_no = $program->set_no;
+                $cprogram->added_by = Auth::user()->id;
+                $cprogram->save();
+            }
+
+            $allPrograms[] = $cprogram->id;
+        }
+
+        $this->recommand_program->where('set_no', $program->set_no)->whereNotIn('id', $allPrograms)->delete();
+
+        return true;
+    }
+
+    public function getTopPrograms()
+    {
+        return $ptograms = $this->userProgram->select(
+            'user_programs.id',
+            'programs.title',
+            DB::raw('COUNT(user_programs.id) as cnt')
+        )
+        ->join('programs', 'programs.id', 'user_programs.program_id')
+        ->groupBy('user_programs.program_id')
+        ->limit(5)
+        ->get();
     }
 }

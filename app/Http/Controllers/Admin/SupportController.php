@@ -17,7 +17,8 @@ class SupportController extends Controller
 
     public function index()
     {
-        return view('admin.support.index', [ 'supports' => $this->support->all() ]);
+        $type = (request()->segment(3) != '' && request()->segment(3) == 'medical' ? 1 : 0);
+        return view('admin.support.index', [ 'supports' => $this->support->all([ 'type' => $type ]) ]);
     }
 
     public function edit($id)
@@ -32,5 +33,14 @@ class SupportController extends Controller
         }
 
         return redirect()->route('admin.support.index')->with('success', 'Something went wrong happen!');
+    }
+
+    public function addToFAQ($id)
+    {
+        if ($this->support->addToFAQ($id)) {
+            return redirect()->back()->with('success', 'Addred To successfully.');
+        }
+
+        return redirect()->back()->with('success', 'Something went wrong happen!');
     }
 }

@@ -6,37 +6,28 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repository\Interfaces\CouponRepositoryInterface;
 use App\Repository\Interfaces\ProgramRepositoryInterface;
 
 class ProgramController extends Controller
 {
-    private $program;
+    private $program, $coupon;
 
-    public function __construct(ProgramRepositoryInterface $program)
+    public function __construct(ProgramRepositoryInterface $program, CouponRepositoryInterface $coupon)
     {
         $this->program = $program;
+        $this->coupon = $coupon;
     }
 
     public function index()
     {
         $programs = $this->program->active();
-        $tags = explode(',', Auth::user()->tags);
-        $programs = $programs->filter(function($value, $key) use ($tags) {
-            $program_tag = explode(',', $value->tag);
-            $return = false;
-            foreach ($tags as $tag) {
-                if (in_array($tag, $program_tag)) {
-                    $return = true;
-                }
-            }
-            return $return;
-        })->values();
         return view('individual.program', [ 'programs' => $programs ]);
     }
 
     public function hash(Request $request)
     {
-        return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->program['cost'].'|'.$request->program['title'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
+        return hash('sha512', config("payu.merchant_key").'|'.$request->timestamp.'|'.$request->cost.'|'.$request->program['title'].'|'.Auth::user()->name.'|'.Auth::user()->email.'|||||1||||||'.config("payu.merchant_salt"));
     }
 
     public function paymentResponse(Request $request)
@@ -133,5 +124,16 @@ class ProgramController extends Controller
         }
 
         return redirect()->back()->with('error', 'Something went wrong happen.');
+    }
+
+    public function applyCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|exists:coupons,code'
+        ], [
+            'code.exists' => 'Coupon code is invalid.'
+        ]);
+
+        return $this->coupon->applyCode($request->all());
     }
 }

@@ -338,18 +338,21 @@
                         <div class="card shadow h-100">
                             <div class="card-body h-100 contact-form-card">
                                 <p class="text-center">We <i class="fa fa-heart text-danger"></i> hearing our visitors. Feel free toshare your queries/thoughts.</p>
-                                <form action="#" method="get" id="contact_form">
+                                <form action="{{ route('contact.us') }}" method="post" id="contact_form">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="">Name <i class="text-danger">*</i></label>
-                                                <input type="text" class="form-control" placeholder="Name">
+                                                <input type="text" name="name" class="form-control" placeholder="Name">
+                                                <span class="text-danger name_error contact-error"></span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="">Email ID <i class="text-danger">*</i></label>
-                                                <input type="email" class="form-control" placeholder="Email ID">
+                                                <input type="email" name="email" class="form-control" placeholder="Email ID">
+                                                <span class="text-danger email_error contact-error"></span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -357,13 +360,14 @@
                                                 <label for="">Contact Number</label>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <select class="form-control">
-                                                            <option value="">+91</option>
+                                                        <select class="form-control" name="code">
+                                                            <option value="+91">+91</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-8">
-                                                        <input type="number" class="form-control"
+                                                        <input type="number" name="number" class="form-control"
                                                             placeholder="Contact Number">
+                                                            <span class="text-danger number_error contact-error"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -371,22 +375,24 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="">Who I am ..</label>
-                                                <select class="form-control">
+                                                <select class="form-control" name="type">
                                                     <option value=""> - Select - </option>
-                                                    <option value="">Individual</option>
-                                                    <option value="">Institute</option>
-                                                    <option value="">Doctor</option>
+                                                    <option value="0">Individual</option>
+                                                    <option value="1">Institute</option>
+                                                    <option value="2">Doctor</option>
                                                 </select>
+                                                <span class="text-danger type_error contact-error"></span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">Message</label>
-                                                <textarea name="" id="" rows="4" class="form-control"></textarea>
+                                                <textarea name="message" id="" rows="4" class="form-control"></textarea>
+                                                <span class="text-danger message_error contact-error"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-block">Submit</button>
+                                    <button class="btn btn-primary btn-block" >Submit</button>
                                 </form>
                             </div>
                             <div class="card-body contact-form-message h-100" style="display: none">
@@ -476,8 +482,23 @@
     $(function () {
         $("#contact_form").submit(function (e) {
 			e.preventDefault()
-			$(".contact-form-card").hide();
-			$(".contact-form-message").fadeIn();
+            $.ajax({
+                url: '{{ route("contact.us") }}',
+                method: 'POST',
+                data : $(this).serialize(),
+                success: function (res) {
+                    $(".contact-form-card").hide();
+			        $(".contact-form-message").fadeIn();
+                }, error: function (err) {
+                    $('.contact-error').html('');
+                    if(err.status == 422) {
+                        $.each(err.responseJSON.errors, function (key, value) {
+                            console.log(value)
+                            $('.' + key + '_error').html(value[0]);
+                        })
+                    }
+                }
+            });
 		})
     })
 

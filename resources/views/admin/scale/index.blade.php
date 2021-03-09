@@ -42,6 +42,7 @@
                                             <td>
                                                 <a href="{{ route('scale.edit', $scale->id) }}"><i class="fa fa-edit"></i></a>
                                                 <a href="{{ route('scale.destroy', $scale->id) }}" class="delete-scale"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('scale.interpretation', $scale->id) }}"><i class="fa fa-info"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

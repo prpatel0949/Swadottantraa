@@ -37,13 +37,15 @@
                         <div class="col-md-12">
                             @if ($answers->first()->scale_question_id)
                                 <strong>Interpretation : </strong>
-                                @php
-                                $val = $answers->where('scaleQuestion.is_interpreatation', 1)->flatten()->pluck('scaleQuestionAnswer')->sum('answer_value');
-                                $inter = $answers->first()->scaleQuestion->scale->interpreatations->filter(function ($value) use ($val) {
-                                    return ($value->start <= $val && $value->end >= $val);
-                                })->first();
-                                echo (!empty($inter) ? $inter->value : '');
-                                @endphp
+                                @foreach ($answers->first()->scaleQuestion->scale->interpreatations as $interpreatation)
+                                    @php 
+                                        $val = $answers->where('scaleQuestion.is_interpreatation', 1)->whereIn('scale_question_id', $interpreatation->questions->pluck('question_id')->toArray())->flatten()->pluck('scaleQuestionAnswer')->sum('answer_value');
+                                        $inter = $interpreatation->interpretations->filter(function ($value) use ($val) {
+                                                return ($value->min <= $val && $value->max >= $val);
+                                            })->first();
+                                        echo (!empty($inter) ? '<br>'.$inter->interpretation : '');
+                                    @endphp
+                                @endforeach
                             @endif
                         </div>
                     </div>
@@ -99,6 +101,14 @@
                         <div class="form-group">
                             <label>Comment</label>
                             <textarea class="form-control" name="comment" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="checkbox" name="is_resubmit" value="1">
+                            <label class="label-control">Is Resubmit?</label>
                         </div>
                     </div>
                 </div>

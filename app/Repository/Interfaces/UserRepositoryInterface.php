@@ -17,4 +17,6 @@ interface UserRepositoryInterface
     public function find($id);
 
     public function destroy($id);
+
+    public function reCheck();
 }

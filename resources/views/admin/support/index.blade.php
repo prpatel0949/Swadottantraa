@@ -51,6 +51,7 @@
                                                     <td>{{ ($support->user->type == 0 ? 'Customer' : 'Franchisee') }}</td>
                                                     <td>{{ $support->description }}</td>
                                                     <td>
+                                                        {!! (!empty($support->answer) ? '<a href="'. route('admin.supoort.faq', $support->id) .'" class="add-faq"><i class="fa fa-info-circle" title="Add to FAQ"></i></a>' : '') !!}
                                                         <a href="{{ route('admin.support.edit', $support->id) }}"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                 </tr>
@@ -81,6 +82,7 @@
                                                     <td>{{ ($support->user->type == 0 ? 'Customer' : 'Franchisee') }}</td>
                                                     <td>{{ $support->description }}</td>
                                                     <td>
+                                                        {!! (!empty($support->answer) ? '<a href="'. route('admin.supoort.faq', $support->id) .'" class="add-faq"><i class="fa fa-info-circle" title="Add to FAQ"></i></a>' : '') !!}
                                                         <a href="{{ route('admin.support.edit', $support->id) }}"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                 </tr>
@@ -103,5 +105,25 @@
 <script>
     $('#Tbl').DataTable();
     $('#Tbl1').DataTable();
+    $(document).on('click', '.add-faq', function (e) {
+        e.preventDefault();
+        let url = $(this).attr('href');
+        Swal.fire({
+                title: 'Are you sure?',
+                text: "You want add to FAQ?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                confirmButtonClass: 'btn btn-primary',
+                cancelButtonClass: 'btn btn-danger ml-1',
+                buttonsStyling: false,
+            }).then(function (result) {
+                if (result.value) {
+                    window.location.href = url;
+                }
+            });
+    });
 </script>
 @endsection

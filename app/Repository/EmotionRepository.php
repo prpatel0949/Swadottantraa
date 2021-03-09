@@ -41,6 +41,7 @@ class EmotionRepository implements EmotionRepositoryInterface
         $inj->user_id = Auth::user()->id;
         $inj->emotional_injury_id = $data['emotional_injury_id'];
         $inj->other = (isset($data['other']) ? $data['other'] : '');
+        // $inj->client_transaction_id = $data['client_transaction_id'];
         $inj->save();
 
         return true;

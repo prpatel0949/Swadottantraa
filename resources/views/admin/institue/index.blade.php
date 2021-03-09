@@ -31,6 +31,8 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
+                                        <th>Number Of Users</th>
+                                        <th>Code</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -41,6 +43,8 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->mobile }}</td>
+                                            <td>{{ $user->number_of_users }}</td>
+                                            <td>{{ $user->code }}</td>
                                             <td>
                                                 <a href="{{ route('institue.edit', $user->id) }}"><i class="fa fa-edit"></i></a>
                                                 <a href="{{ route('institue.destroy', $user->id) }}" class="delete-user"><i class="fa fa-trash"></i></a>

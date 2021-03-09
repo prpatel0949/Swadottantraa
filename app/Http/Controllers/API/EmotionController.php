@@ -32,23 +32,24 @@ class EmotionController extends Controller
 
     public function getEmotionPainIntensity()
     {
-        return $this->emotion->getEmotionPainIntensity();
+        return response()->json([ 'tbl' => $this->emotion->getEmotionPainIntensity() ], 200);
     }
 
     public function getEmotionInjuries()
     {
-        return $this->emotion->getEmotionInjuries();
+        return response()->json([ 'tbl' => $this->emotion->getEmotionInjuries() ], 200);
     }
 
     public function storeEmotionInjuries(Request $request)
     {
         $request->validate([
             'emotional_injury_id' => 'required|exists:emotional_injuries,id',
-            'other' => 'nullable|string'
+            'other' => 'nullable|string',
+            // 'client_transaction_id' => 'nullable|exists:client_transactions,id'
         ]);
 
         $this->emotion->storeEmotionInjuries($request->all());
 
-        return response()->json([ 'message' => 'User emotionals injury created successfully.' ], 200);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'User emotionals injury created successfully.' ]] ], 200);
     }
 }
