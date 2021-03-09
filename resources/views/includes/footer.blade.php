@@ -6,12 +6,15 @@
                 <a href="{{ url('terms-and-conditions') }}" class="text-light nav-link">Terms & Conditions</a>
             </div>
             <div class="mt-2 text-light">
-                Copyright &copy; 2018 SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA Wellness. Designed by Bestle Group
+                Copyright &copy; 2021 SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA Wellness Private Limited. Designed by Bestle Group
             </div>
         </div>
     </div>
 </footer>
 
+@if (Request::route()->getName() != 'frontend.home')
+    <a href="#"  onclick="goBack()" class="btn btn-dark float-back-btn"><i class="fa fa-angle-left fa-2x"></i></a>
+@endif
 <div class="modal fade" id="login_modal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -63,6 +66,9 @@
 <script src="{{ asset('assets/plugins/jquery/jquery.validate.min.js') }}"></script>
 
 <script>
+function goBack() {
+  window.history.back();
+}
 function myMap() {
     var myLatlng = new google.maps.LatLng(17.6847238, 73.9931717);
     var mapOptions = {

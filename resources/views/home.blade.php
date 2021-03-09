@@ -198,7 +198,7 @@
             </div>
         </section>
 
-        <section class="section section-product" id="pat">
+        <!-- <section class="section section-product" id="pat">
             <div class="container">
                 <div class="card shadow card-onhover">
                     <div class="card-body">
@@ -216,7 +216,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </div>
 
     <section class="section section-testimonial" id="testimonial">
@@ -716,7 +716,7 @@
 								this.element.append(`<div class="msg_received">${this.note}</div>`)
 								this.elem.scrollTop = this.elem.scrollHeight;
 								setTimeout(function () {
-									$("#wellness_modal").modal('hide')
+									// $("#wellness_modal").modal('hide')
 								}, 10000)
 							}.bind(this), this.interval)
 						}.bind(this), 1000)
@@ -724,7 +724,7 @@
 				}.bind(this), 1000)
 			} else {
 				setTimeout(function () {
-					$("#wellness_modal").modal('hide')
+					// $("#wellness_modal").modal('hide')
 				}, 10000)
 			}
 		}
