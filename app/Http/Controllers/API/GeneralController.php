@@ -140,7 +140,7 @@ class GeneralController extends Controller
 
         $data = $this->general->storeExerciseTracker($request->all());
 
-        return response()->json([ 'tbl' => [[ 'Msg' => 'Exercise submitted successfully.' ] ] ], 200);
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Exercise submitted successfully.' ], [ 'points' => $data ] ] ], 200);
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
