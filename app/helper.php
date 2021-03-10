@@ -53,7 +53,7 @@ if (!function_exists('sleep_tracker_anaysis')) {
 
         $sleeps = SleepTracker::where('from', '>=', $start)->where('to', '<=', $end)->where('client_id', \Auth::user()->id)->get();
         $depth = $sleeps->sum('depth');
-        return intdiv($depth, 60).':'. (abs($depth) % 60);
+        return sprintf("%02d", intdiv($depth, 60)).' Hours '. sprintf("%02d", (abs($depth) % 60)). ' Minutes';
     }
 }
 
