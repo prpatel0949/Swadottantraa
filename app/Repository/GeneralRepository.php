@@ -263,7 +263,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         foreach ($today_excericses as $exc) {
             $startTime = Carbon::parse($data['date'].$exc->start_time);
             $finishTime = Carbon::parse($data['date'].$exc->end_time);
-            if ($exc->exercise_type == 'physical') {
+            if ($exc->exercise_type == 'Physical') {
                 $total_physical += $finishTime->diffInMinutes($startTime);
             } else {
                 $total_technical += $finishTime->diffInMinutes($startTime);

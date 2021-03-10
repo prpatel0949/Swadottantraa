@@ -133,7 +133,7 @@ class GeneralController extends Controller
         $request->validate([
             'start_time' => 'required|date_format:H:i:s',
             'end_time' => 'required|date_format:H:i:s',
-            'exercise_type' => 'required|string|in:physical,technical',
+            'exercise_type' => 'required|string|in:Physical,Mental',
             'date' => 'required|date|date:Y-m-d',
             // 'score' => 'required|numeric'
         ]);
