@@ -138,29 +138,28 @@ class GeneralRepository implements GeneralRepositoryInterface
 
         $start = Carbon::parse($data['from']);
         $end = Carbon::parse($data['to']);
-        $sleep = $end->diffInHours($start);
-
+        $sleep = $end->diffInMinutes($start);
+        
         $age = Carbon::parse(Auth::user()->birth_date)->diff(\Carbon\Carbon::now())->format('%y');
         $depth = 0;
         $per = 0;
         if ($data['type'] == 'Moderate') {
-            $per = round(($sleep * 20) / 100);
+            $per = ($sleep * 20) / 100;
         } else if ($data['type'] == 'Low') {
-            $per = round(($sleep * 40) / 100);
+            $per = ($sleep * 40) / 100;
         }
 
         $sleep = $sleep - $per;
 
         if ($age >= 14 && $age <= 25) {
-            $depth = $sleep - 8;
+            $depth = $sleep - 480;
         } else if ($age > 25 && $age <= 55) {
-            $depth = $sleep - 7;
+            $depth = $sleep - 420;
         } else if ($age > 55) {
-            $depth = $sleep - 6;
+            $depth = $sleep - 360;
         } else {
-            $depth = $sleep - 7;
+            $depth = $sleep - 420;
         }
-
 
         $sleep_tracker = new $this->sleep_tracker;
         $sleep_tracker->client_id = Auth::user()->id;
@@ -182,7 +181,7 @@ class GeneralRepository implements GeneralRepositoryInterface
             $points->save();
         }
 
-        return $depth;
+        return intdiv($depth, 60).':'. (abs($depth) % 60);
     }
 
     public function storeGratitudeAnswer($data)

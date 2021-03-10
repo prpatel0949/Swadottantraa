@@ -52,7 +52,8 @@ if (!function_exists('sleep_tracker_anaysis')) {
         $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
 
         $sleeps = SleepTracker::where('from', '>=', $start)->where('to', '<=', $end)->where('client_id', \Auth::user()->id)->get();
-        return $sleeps->sum('depth');
+        $depth = $sleeps->sum('depth');
+        return intdiv($depth, 60).':'. (abs($depth) % 60);
     }
 }
 
