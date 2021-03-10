@@ -143,9 +143,9 @@ class GeneralRepository implements GeneralRepositoryInterface
         $age = Carbon::parse(Auth::user()->birth_date)->diff(\Carbon\Carbon::now())->format('%y');
         $depth = 0;
         $per = 0;
-        if ($data['type'] == 'medium') {
+        if ($data['type'] == 'Moderate') {
             $per = round(($sleep * 20) / 100);
-        } else if ($data['type'] == 'low') {
+        } else if ($data['type'] == 'Low') {
             $per = round(($sleep * 40) / 100);
         }
 
