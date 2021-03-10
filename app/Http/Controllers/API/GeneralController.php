@@ -86,7 +86,7 @@ class GeneralController extends Controller
 
     public function getTraumaCopyingCart(Request $request)
     {
-        return response()->json($this->general->getTraumaCopyingCart($request), 200);
+        return response()->json([ 'tbl' => $this->general->getTraumaCopyingCart($request) ], 200);
     }
 
     public function storeSleepTracker(Request $request)
@@ -94,12 +94,12 @@ class GeneralController extends Controller
         $request->validate([
             'from' => 'required|date_format:Y-m-d H:i:s',
             'to' => 'required|date_format:Y-m-d H:i:s',
+            'type' => 'required|string|in:high,medium,low'
             // 'depth' => 'required'
         ]);
 
-        if ($this->general->storeSleepTracker($request->all())) {
-            return response()->json([ 'tbl' => [[ 'Msg' => 'Sleep tracker submitted successfully.' ]] ], 200);
-        }
+        $data = $this->general->storeSleepTracker($request->all());
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Sleep tracker submitted successfully.', 'depth' => $data ]] ], 200);
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
@@ -117,9 +117,8 @@ class GeneralController extends Controller
             'answer4' => 'nullable|string',
         ]);
 
-        if ($this->general->storeGratitudeAnswer($request->all())) {
-            return response()->json([ 'tbl' => [[ 'Msg' => 'Answer submitted successfully.' ]] ], 200);
-        }
+        $data = $this->general->storeGratitudeAnswer($request->all());
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Answer submitted successfully.', 'score' => $data ]] ], 200);
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
@@ -139,11 +138,26 @@ class GeneralController extends Controller
             // 'score' => 'required|numeric'
         ]);
 
-        if ($this->general->storeExerciseTracker($request->all())) {
-            return response()->json([ 'tbl' => [[ 'Msg' => 'Exercise submitted successfully.' ]] ], 200);
-        }
+        $data = $this->general->storeExerciseTracker($request->all());
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Exercise submitted successfully.', 'points' => $data ] ] ], 200);
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
+
+    public function getSleepTrackerAnalysis()
+    {
+        return response()->json([ 'tbl' => [ [ 'depth' => sleep_tracker_anaysis() ] ] ], 200);
+    }
+
+    public function getExerciseTrackerAnalysis()
+    {
+        return response()->json([ 'tbl' => [ [ 'points' => exercise_tracker_anaysis() ] ] ], 200);
+    }
+
+    public function getGratitudeTrackerAnalysis()
+    {
+        return response()->json([ 'tbl' => [ [ 'points' => gratitude_tracker_anaysis() ] ] ], 200);
     }
 }
 

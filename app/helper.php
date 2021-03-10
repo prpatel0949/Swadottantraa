@@ -1,7 +1,10 @@
 <?php
 
 use Carbon\Carbon;
+use App\SleepTracker;
 use App\RecommandedProgram;
+use App\ExerciseTrackerPoint;
+use App\GratitudeQuestionAnswer;
 
 if (!function_exists('recommanded_program')) {
     function recommanded_program($set_no)
@@ -39,5 +42,40 @@ if (!function_exists('getCurrentYear')) {
                                     'end_date' => $end_date->format('Y-m-d'));
 
         return $date_range_arr;
+    }
+}
+
+if (!function_exists('sleep_tracker_anaysis')) {
+    function sleep_tracker_anaysis()
+    {
+        $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
+        $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
+
+        $sleeps = SleepTracker::where('from', '>=', $start)->where('to', '<=', $end)->where('client_id', \Auth::user()->id)->get();
+        return $sleeps->sum('depth');
+    }
+}
+
+if (!function_exists('exercise_tracker_anaysis')) {
+    function exercise_tracker_anaysis()
+    {
+        $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
+        $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
+
+        $sleeps = ExerciseTrackerPoint::where('date', '>=', $start)->where('date', '<=', $end)->where('client_id', \Auth::user()->id)->get();
+        return ($sleeps->sum('points') / $sleeps->count());
+    }
+}
+
+if (!function_exists('gratitude_tracker_anaysis')) {
+    function gratitude_tracker_anaysis()
+    {
+        $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
+        $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
+
+        $sleeps = GratitudeQuestionAnswer::whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end)->where('client_id', \Auth::user()->id)->groupBy('set_no')->get()->groupBy(function($item) {
+            return Carbon::parse($item->created_at)->format('Y-m-d');
+       })->flatten();
+       return $sleeps->sum('score') / $sleeps->count();
     }
 }
