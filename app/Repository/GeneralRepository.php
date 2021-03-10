@@ -273,7 +273,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         $total_points = 0;
         if ($total_physical >= 20) {
             $total_points += 0.5;
-        } else if ($total_technical >= 20) {
+        } 
+        if ($total_technical >= 20) {
             $total_points += 0.5;
         }
 
