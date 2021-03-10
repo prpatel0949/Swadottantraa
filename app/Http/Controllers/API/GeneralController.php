@@ -94,7 +94,7 @@ class GeneralController extends Controller
         $request->validate([
             'from' => 'required|date_format:Y-m-d H:i:s',
             'to' => 'required|date_format:Y-m-d H:i:s',
-            'type' => 'required|string|in:high,medium,low'
+            'type' => 'required|string|in:High,Moderate,Low'
             // 'depth' => 'required'
         ]);
 
