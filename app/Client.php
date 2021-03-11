@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\ClientPoint;
+use App\ClientMoodMark;
+use Carbon\CarbonPeriod;
+use App\ClientTransaction;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,17 +50,51 @@ class Client extends Authenticatable
 
     public function getIsRegularAttribute()
     {
-        $date = \Carbon\Carbon::now()->subDays(21)->format('Y-m-d');
-        $mood = $this->points->where('rankable_type', 'App\ClientMoodMark')->where('created_at', '>=', $date)->count();
-        $sleep = $this->points->where('rankable_type', 'App\SleepTracker')->where('created_at', '>=', $date)->count();
-        $excerise = $this->points->where('rankable_type', 'App\ExerciseTracker')->where('created_at', '>=', $date)->count();
-        $grad = $this->points->where('rankable_type', 'App\GratitudeQuestionAnswer')->where('created_at', '>=', $date)->count();
+        $ldate = \Carbon\Carbon::now()->subDays(20)->format('Y-m-d');
+        $today = \Carbon\Carbon::now()->format('Y-m-d');
 
-        if ($mood > 0 && $sleep > 0 && $excerise > 0 && $grad > 0) {
-            return true;
+        $period = CarbonPeriod::create($ldate, $today);
+        $skip_days = 0;
+        foreach ($period as $date) {
+            $formated_date = $date->format('Y-m-d');
+            $mood = $this->points->where('rankable_type', 'App\ClientMoodMark')->where('display_date', $formated_date)->count();
+            if ($mood == 0) {
+                $skip_days += 1;
+                continue;
+            }
+            $sleep = $this->points->where('rankable_type', 'App\SleepTracker')->where('display_date', $formated_date)->count();
+            if ($sleep == 0) {
+                $skip_days += 1;
+                continue;
+            }
+            $sleep = $this->points->where('rankable_type', 'App\ExerciseTracker')->where('display_date', $formated_date)->count();
+            if ($sleep == 0) {
+                $skip_days += 1;
+                continue;
+            }
+            $sleep = $this->points->where('rankable_type', 'App\GratitudeQuestionAnswer')->where('display_date', $formated_date)->count();
+            if ($sleep == 0) {
+                $skip_days += 1;
+                continue;
+            }
+
+        }
+        if ($skip_days > 3) {
+            return false;
         }
 
-        return false;
+        return true;
+
+        // $mood = $this->points->where('rankable_type', 'App\ClientMoodMark')->where('created_at', '>=', $date)->count();
+        // $sleep = $this->points->where('rankable_type', 'App\SleepTracker')->where('created_at', '>=', $date)->count();
+        // $excerise = $this->points->where('rankable_type', 'App\ExerciseTracker')->where('created_at', '>=', $date)->count();
+        // $grad = $this->points->where('rankable_type', 'App\GratitudeQuestionAnswer')->where('created_at', '>=', $date)->count();
+
+        // if ($mood > 0 && $sleep > 0 && $excerise > 0 && $grad > 0) {
+        //     return true;
+        // }
+
+        // return false;
     }
 
     /**
