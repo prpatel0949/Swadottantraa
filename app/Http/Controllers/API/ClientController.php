@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Mail;
 use Hash;
+use Auth;
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Client\AddRequest;
@@ -22,9 +24,26 @@ class ClientController extends Controller
         $this->general = $general;
     }
 
-    public function register(AddRequest $request)
+    public function register(Request $request)
     {
-        if ($client = $this->client->store($request->validated())) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|max:150|unique:clients,email',
+            'mobile' => 'required|numeric|digits:10',
+            'password' => 'required|string|min:8',
+            'birth_date' => 'required|date_format:Y-m-d'
+        ]);
+
+        if ($validator->fails()) {
+            $valid = $validator->errors()->toArray();
+            if (isset($valid['email']) && $valid['email'][0] == 'The email has already been taken.') {
+                return response()->json([ 'errors' => $validator->errors(), 'user_duplicate' => true ], 200);
+            } else {
+                return response()->json([ 'errors' => $validator->errors(), 'user_duplicate' => false ], 200);
+            }
+        }
+
+        if ($client = $this->client->store($validator->valid())) {
 
             // Mail::send('emails.new_user', [ 'client' => $client, 'password' => $request->password ], function ($message) use ($client) {
             //     $message->to($client->email, $client->name);
@@ -32,7 +51,7 @@ class ClientController extends Controller
             //     // $message->setBody('<p>Thank you for registration. You can use same creditionals for SWA Tantraa login.<a href="'. url('login') .'?type='. Hash::make(0) .'">Click here</a> to login.</p>', 'text/html');
             // });
 
-            return response()->json([ 'tbl' => [[ 'Msg' => 'User register successfully.' ] ] ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'User register successfully.', 'user_duplicate' => false ] ] ], 200);
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
@@ -144,7 +163,8 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required|string',
             'mobile' => 'required|numeric|digits:10',
-            'birth_date' => 'required|date_format:Y-m-d'
+            'birth_date' => 'required|date_format:Y-m-d',
+            'email' => 'required|email|unique:clients,email,'.Auth::user()->id
         ]);
 
         if ($client = $this->client->updateProfile($request->all())) {

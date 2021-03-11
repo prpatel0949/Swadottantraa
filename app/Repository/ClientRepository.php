@@ -180,6 +180,7 @@ class ClientRepository implements ClientRepositoryInterface
         $client->name = $data['name'];
         $client->mobile = $data['mobile'];
         $client->birth_date = $data['birth_date'];
+        $client->email = $data['email'];
         $client->save();
 
         return $client;
