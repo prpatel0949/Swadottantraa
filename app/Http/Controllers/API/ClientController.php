@@ -136,7 +136,7 @@ class ClientController extends Controller
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
-            $result['institue'] = ($user['is_approve'] == 1 ? auth()->user()->institue : null);
+            $result['institue'] = ($user['is_approve'] == 1 ? $user['institue']: null);
             $result['UserInfo'][] = $all->toArray();
             return response()->json($result, 200);
         }
@@ -199,5 +199,20 @@ class ClientController extends Controller
         $result['institue'] = (auth()->user()->is_approve == 1 ? auth()->user()->institue : null);
         $result['UserInfo'][] = auth()->user()->toArray();
         return response()->json($result, 200);
+    }
+
+    public function payment(Request $request)
+    {
+        $request->validate([
+            'transaction_id' => 'required',
+            'amount' => 'required|numeric',
+            'subscription_id' => 'required|exists:subscriptions,id'
+        ]);
+
+        if ($client = $this->client->payment($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! package subscribe successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 }

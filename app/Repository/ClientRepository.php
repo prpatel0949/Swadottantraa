@@ -10,19 +10,23 @@ use App\User;
 use App\Client;
 use App\UserInfo;
 use Carbon\Carbon;
+use App\Subscription;
+use App\ClientPayment;
 use App\ClientTransaction;
 use App\Repository\Interfaces\ClientRepositoryInterface;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    private $client, $user, $transaction, $user_info;
+    private $client, $user, $transaction, $user_info, $package, $payment;
 
-    public function __construct(Client $client, User $user, ClientTransaction $transaction, UserInfo $user_info)
+    public function __construct(Client $client, User $user, ClientTransaction $transaction, UserInfo $user_info, Subscription $package, ClientPayment $payment)
     {
         $this->client = $client;
         $this->user = $user;
         $this->transaction = $transaction;
         $this->user_info = $user_info;
+        $this->package = $package;
+        $this->payment = $payment;
     }
 
     public function store($data)
@@ -129,10 +133,10 @@ class ClientRepository implements ClientRepositoryInterface
     public function all($filters = [])
     {
         if (count($filters) > 0) {
-            return $this->client->where($filters)->get();
+            return $this->client->with('institue')->where($filters)->get();
         }
 
-        return $this->client->all();
+        return $this->client->with('institue')->all();
     }
 
     public function setTransaction()
@@ -210,6 +214,30 @@ class ClientRepository implements ClientRepositoryInterface
         $user_info->client_id = Auth::user()->id;
         $user_info->sub_emotion_id = $data['sub_emotion_id'];
         $user_info->save();
+
+        return true;
+    }
+
+    public function payment($data)
+    {
+        $date = Carbon::now();
+        $package = $this->package->find($data['subscription_id']);
+        if ($package->subscription == '6 MONTH') {
+            $end = $date->copy()->addMonths(6);
+        } else if ($package->subscription == '1 MONTH') {
+            $end = $date->copy()->addMonth();
+        } else {
+            $end = $date->copy()->addYear();
+        }
+        
+        $payment = $this->payment;
+        $payment->date = $date->format('Y-m-d');
+        $payment->transaction_id = $data['transaction_id'];
+        $payment->amount = $data['amount'];
+        $payment->subscription_id = $data['subscription_id'];
+        $payment->end_date = $end->format('Y-m-d');
+        $payment->client_id = Auth::user()->id;
+        $payment->save();
 
         return true;
     }

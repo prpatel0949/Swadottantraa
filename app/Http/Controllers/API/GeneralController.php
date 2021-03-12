@@ -64,8 +64,8 @@ class GeneralController extends Controller
     public function storeMoodMarks(Request $request)
     {
         $request->validate([
-            'mood_id' => 'required|exists:moods,id',
-            'lower_mood_id' => 'required|exists:moods,id',
+            'mood_id' => 'required|string',
+            'lower_mood_id' => 'required|string',
             'marks' => 'required|numeric',
             'lower_marks' => 'required|numeric',
             'date' => 'required|date|date_format:Y-m-d'
