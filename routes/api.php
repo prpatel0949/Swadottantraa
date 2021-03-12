@@ -68,6 +68,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::get('gratitude_tracer/anaysis', 'GeneralController@getGratitudeTrackerAnalysis');
 
+    Route::post('payment', 'ClientController@payment');
+
 });
 
 Route::post('login', 'ClientController@generateToken');

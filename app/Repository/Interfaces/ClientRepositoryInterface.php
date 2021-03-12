@@ -30,4 +30,6 @@ interface ClientRepositoryInterface
     public function getMoodTracker();
 
     public function setUserInfo($data);
+
+    public function payment($data);
 }
