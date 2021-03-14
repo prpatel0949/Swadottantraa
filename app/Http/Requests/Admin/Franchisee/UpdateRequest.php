@@ -29,7 +29,9 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|max:100|unique:users,name,'.$id,
             'email' => 'required|string|max:150|unique:users,email,'.$id,
             'mobile' => 'required|numeric|digits:10',
-            'address' => 'nullable|string'
+            'address' => 'nullable|string',
+            'city_id' => 'required',
+            'state_id' => 'required'
         ];
     }
 }

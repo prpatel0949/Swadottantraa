@@ -70,6 +70,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('payment', 'ClientController@payment');
 
+    Route::post('mood_marks', 'GeneralController@getMoodMarks');
+
 });
 
 Route::post('login', 'ClientController@generateToken');

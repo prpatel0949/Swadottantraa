@@ -159,5 +159,15 @@ class GeneralController extends Controller
     {
         return response()->json([ 'tbl' => [ [ 'points' => gratitude_tracker_anaysis() ] ] ], 200);
     }
+
+    public function getMoodMarks(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date|date_format:Y-m-d',
+            'end_date' => 'required|date|date_format:Y-m-d',
+        ]);
+
+        return response()->json([ 'tbl' =>[ $this->general->getMoodMarks($request->all()) ]], 200);
+    }
 }
 

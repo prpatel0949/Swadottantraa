@@ -5,6 +5,7 @@ use DB;
 use Auth;
 use App\Tip;
 use App\Image;
+use App\State;
 use App\Client;
 use App\Trauma;
 use App\MenuLink;
@@ -25,7 +26,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point,
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state,
             $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client;
 
     public function __construct(
@@ -45,7 +46,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         GratitudeQuestionAnswer $gratitude_answer,
         Client $client,
         ExerciseTracker $exercise,
-        ExerciseTrackerPoint $exercise_point
+        ExerciseTrackerPoint $exercise_point,
+        State $state
     )
     {
         $this->tip = $tip;
@@ -65,6 +67,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->client = $client;
         $this->exercise = $exercise;
         $this->exercise_point = $exercise_point;
+        $this->state = $state;
     }
 
     public function getTips()
@@ -303,5 +306,16 @@ class GeneralRepository implements GeneralRepositoryInterface
         }
 
         return $total_points;
+    }
+
+    public function getState()
+    {
+        return $this->state->all();
+    }
+
+    public function getMoodMarks($data)
+    {
+        $marks = $this->mood_mark->where('date', '>=', $data['start_date'])->where('date', '<=', $data['end_date'])->where('client_id', Auth::user()->id)->get();   
+        return [ 'marks' => $marks->sum('marks'), 'lower_marks' => $marks->sum('lower_marks') ];
     }
 }

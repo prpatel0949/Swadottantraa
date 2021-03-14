@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(SubscriptionSeeder::class);
         // $this->call(MoodSeeder::class);
         // $this->call(TraumaCopingCartSeeder::class);
-        $this->call(ScaleTipsSeeder::class);
+        // $this->call(ScaleTipsSeeder::class);
+        $this->call(StateSeeder::class);
+        $this->call(CitySeeder::class);
         
     }
 }

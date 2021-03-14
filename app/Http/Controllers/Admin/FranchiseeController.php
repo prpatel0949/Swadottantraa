@@ -7,14 +7,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Franchisee\AddRequest;
 use App\Http\Requests\Admin\Franchisee\UpdateRequest;
 use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class FranchiseeController extends Controller
 {
-    private $user;
+    private $user, $general;
 
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct(UserRepositoryInterface $user, GeneralRepositoryInterface $general)
     {
         $this->user = $user;
+        $this->general = $general;
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +35,7 @@ class FranchiseeController extends Controller
      */
     public function create()
     {
-        return view('admin.franchisee.add');
+        return view('admin.franchisee.add', [ 'states' => $this->general->getState() ]);
     }
 
     /**
@@ -84,7 +86,7 @@ class FranchiseeController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.franchisee.edit', [ 'user' => $this->user->find($id) ]);
+        return view('admin.franchisee.edit', [ 'user' => $this->user->find($id), 'states' => $this->general->getState() ]);
     }
 
     /**

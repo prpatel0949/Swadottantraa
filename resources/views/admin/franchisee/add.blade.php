@@ -79,6 +79,40 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select class="form-control state" name="state_id" id="state_id">
+                                        <option value="">Select State</option>
+                                        @foreach ($states as $state)
+                                            <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('state_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="state">City</label>
+                                    <select class="form-control" name="city_id" id="city_id">
+                                        <option value="">Select City</option>
+                                        
+                                    </select>
+                                    @error('city_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
@@ -95,6 +129,7 @@
 @section('js')
 
 <script>
+    let cities = {!! json_encode($states->pluck('cities')->flatten()->toArray()) !!}
     $('#addForm').validate({
         rules: {
             name: {
@@ -112,6 +147,18 @@
                 number: true
             },
         }
+    });
+
+    $(document).on('change', '.state', function () {
+        let state_id = $(this).val();
+        let scities = cities.filter(function(val) {
+            return val.state_id == state_id;
+        });
+        let html = '';
+        $.each(scities, function (key, value) {
+            html += '<option value="'+ value.id +'">'+ value.name +'</option>';
+        });
+        $('#city_id').html(html);
     });
 </script>
 

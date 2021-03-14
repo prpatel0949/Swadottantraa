@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Offline)
+@section('title', 'Offline')
 
 @section('content')
 <div class="header-space" >
@@ -180,50 +180,52 @@
                     <div class="col-sm-5">
                         <div id="offline_modal" class="collapse">
 
-                    <form action="#" method="get" class="contact-form-card" id="contact_form">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="">Country Name</label>
-                                    <select class="form-control">
-                                        <option value="">Select Country</option>
-                                        <option value="">India</option>
-                                    </select>
+                            <form action="#" method="get" class="contact-form-card" id="contact_form">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">Country Name</label>
+                                            <select class="form-control">
+                                                {{-- <option value="">Select Country</option> --}}
+                                                <option value="">India</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">State Name</label>
+                                            <select class="form-control state" name="state_id" id="state_id">
+                                                <option value="">Select State</option>
+                                                @foreach ($states as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">City Name</label>
+                                            <select class="form-control" name="city_id" id="city_id">
+                                                <option value="">Select City</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">Address</label>
+                                            <textarea class="form-control" name="" id="" rows="4">Rukminikunj, 599 Guruwar Peth, Satara - 415002</textarea>
+                                        </div>
+                                    </div> --}}
                                 </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="">State Name</label>
-                                    <select class="form-control">
-                                        <option value="">Select State</option>
-                                        <option value="">India</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="">City Name</label>
-                                    <select class="form-control">
-                                        <option value="">Select City</option>
-                                        <option value="">India</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="">Address</label>
-                                    <textarea class="form-control" name="" id="" rows="4">Rukminikunj, 599 Guruwar Peth, Satara - 415002</textarea>
+                                <button class="btn btn-primary float-right">Search</button>
+                            </form>
+                            <div class="contact-form-message" style="display: none">
+                                <div class=" d-flex align-items-center justify-content-center p-5">
+                                    <div class="text-center">We are coming up soon in your city!</div>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary float-right">Submit</button>
-                    </form>
-                    <div class="contact-form-message" style="display: none">
-                        <div class=" d-flex align-items-center justify-content-center p-5">
-                            <div class="text-center">We are coming up soon in your city!</div>
-                        </div>
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>
@@ -235,7 +237,8 @@
 
 @section('js')
 <script>
-    $(function(){
+    let cities = {!! json_encode($states->pluck('cities')->flatten()->toArray()) !!}
+    $(function() {
         $(".img-slider").slick({
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -243,6 +246,18 @@
             prevArrow: '<button class="img-slider-nav img-slick-prev"><i class="fa fa-angle-left"></i></button>',
             nextArrow: '<button class="img-slider-nav img-slick-next"><i class="fa fa-angle-right"></i></button>',
         })
-    })
+    });
+
+    $(document).on('change', '.state', function () {
+        let state_id = $(this).val();
+        let scities = cities.filter(function(val) {
+            return val.state_id == state_id;
+        });
+        let html = '';
+        $.each(scities, function (key, value) {
+            html += '<option value="'+ value.id +'">'+ value.name +'</option>';
+        });
+        $('#city_id').html(html);
+    });
 </script>
 @endsection

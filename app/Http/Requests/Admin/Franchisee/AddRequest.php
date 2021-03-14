@@ -28,7 +28,9 @@ class AddRequest extends FormRequest
             'name' => 'required|string|max:100|unique:users,name',
             'email' => 'required|string|max:150|unique:users,email',
             'mobile' => 'required|numeric|digits:10',
-            'address' => 'nullable|string'
+            'address' => 'nullable|string',
+            'state_id' => 'required',
+            'city_id' => 'required'
         ];
     }
 }
