@@ -6,14 +6,16 @@ use Session;
 use App\ContactUs;
 use Illuminate\Http\Request;
 use App\Repository\Interfaces\FAQRepositoryInterface;
+use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class HomeController extends Controller
 {
 
     private $faq;
-    public function __construct(FAQRepositoryInterface $faq)
+    public function __construct(FAQRepositoryInterface $faq, GeneralRepositoryInterface $general)
     {
         $this->faq = $faq;
+        $this->general = $general;
     }
     /**
      * Show the application dashboard.
@@ -61,7 +63,7 @@ class HomeController extends Controller
 
     public function offline()
     {
-        return view('product/offline');
+        return view('product/offline', [ 'states' => $this->general->getState() ]);
     }
 
     public function privacyPolicy()

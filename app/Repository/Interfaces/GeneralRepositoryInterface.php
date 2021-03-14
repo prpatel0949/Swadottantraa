@@ -28,4 +28,8 @@ interface GeneralRepositoryInterface
     public function getInstitueList();
 
     public function storeExerciseTracker($data);
+
+    public function getState();
+
+    public function getMoodMarks($data);
 }
