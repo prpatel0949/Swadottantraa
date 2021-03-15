@@ -62,7 +62,7 @@
                 <div class="section-title no-decoration mt-3">Check which options suits you the most?</div>
             </div>
             <div class="section-content text-center">
-                <button class="btn btn-primary pl-5 pr-5" data-toggle="modal" data-target="#online_modal">Check</button>
+                <button class="btn btn-primary pl-5 pr-5" data-toggle="modal" data-target="#question_modal">Check</button>
             </div>
         </section>
     </div>
