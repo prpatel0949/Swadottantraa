@@ -171,7 +171,7 @@
                         <button data-toggle="collapse" data-target="#offline_modal" class="btn btn-primary btn-block">View Centres</button>
                     </div>
                     <div class="col-sm-3">
-                        <a href="#" class="btn btn-primary btn-block">Get Franchisee</a>
+                        <a href="{{ asset('assets/Brain and Mind Gym - Get Franchisee.pdf') }}" download class="btn btn-primary btn-block">Get Franchisee</a>
                     </div>
                 </div>
             </div>
