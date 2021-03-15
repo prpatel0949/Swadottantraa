@@ -35,7 +35,7 @@
                 <p><b>We may share information with any successor to all or part of our business - </b>For example, if part of our business is sold we may give our customer list as part of that transaction.</p>
                 <p><b>We may share your information for reasons not described in this policy - </b>We will tell you before we do this.</p>
                 <p><b>Email Opt-Out:</b></p>
-                <p><b>You can opt out of receiving our marketing emails - </p>To stop receiving our promotional emails, please revert over the same email stating the word “Unsubscribe”. It may take about ten days to process your request. Even if you opt out of getting promotional messages or newsletter, we will still be sending you transactional messages through email and SMS about your purchases.</p>
+                <p><b>You can opt out of receiving our marketing emails - </b></p>To stop receiving our promotional emails, please revert over the same email stating the word “Unsubscribe”. It may take about ten days to process your request. Even if you opt out of getting promotional messages or newsletter, we will still be sending you transactional messages through email and SMS about your purchases.</p>
                 <p><b>Third party sites:</b></p>    
                 <p>If you click on one of the links to third party websites, you may be taken to websites we do not control. This policy does not apply to the privacy practices of those websites. Read the privacy policy of other websites carefully. We are not responsible for these third party sites.</p>
                 <p><b>Updates to this policy:</b></p>
