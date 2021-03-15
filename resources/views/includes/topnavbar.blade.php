@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-    <a href="{{url('/')}}" class="navbar-brand">SWA.TANTRAA<span class="text-primary">.COM</span></a>
+    <a href="{{url('/')}}" class="navbar-brand">SWA<span class="text-primary"><small class="logo-dot"><i class="fa fa-circle"></i></small></span>TANTRAA WELLNESS</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
