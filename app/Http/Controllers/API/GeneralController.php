@@ -27,9 +27,9 @@ class GeneralController extends Controller
         return response()->json([ 'tbl' => $this->general->getTraumas() ], 200);
     }
 
-    public function getMenuLinks()
+    public function getMenuLinks(Request $request)
     {
-        return response()->json([ 'tbl' => $this->general->getMenuLinks() ], 200);
+        return response()->json([ 'tbl' => $this->general->getMenuLinks($request) ], 200);
     }
 
     public function getImages()
