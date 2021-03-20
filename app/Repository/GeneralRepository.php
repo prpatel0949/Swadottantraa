@@ -80,9 +80,13 @@ class GeneralRepository implements GeneralRepositoryInterface
         return $this->trauma->all();
     }
 
-    public function getMenuLinks()
+    public function getMenuLinks($request = '')
     {
-        return $this->menu->all();
+        if (isset($request->id) && !empty($request->id)) {
+            return $this->menu->where('id', $request->id)->get();
+        } else {
+            return $this->menu->all();
+        }
     }
 
     public function getImages()
