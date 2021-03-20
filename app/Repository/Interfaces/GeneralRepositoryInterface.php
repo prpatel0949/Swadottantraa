@@ -7,7 +7,7 @@ interface GeneralRepositoryInterface
 
     public function getTraumas();
 
-    public function getMenuLinks();
+    public function getMenuLinks($request);
 
     public function getImages();
 

@@ -82,7 +82,7 @@ class GeneralRepository implements GeneralRepositoryInterface
 
     public function getMenuLinks($request = '')
     {
-        if (isset($request->id) && !empty($request->id)) {
+        if (isset($request->id) && $request->id > 0) {
             return $this->menu->where('id', $request->id)->get();
         } else {
             return $this->menu->all();
