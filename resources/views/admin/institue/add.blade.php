@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Add Institue')
+@section('title', 'Add Institute')
 
 @section('content')
 
@@ -12,7 +12,7 @@
 		    <div class="content-header-left col-md-12 col-12 mb-2">
 		        <div class="row breadcrumbs-top">
 		            <div class="col-12 d-flex justify-content-between">
-                        <h2 class="content-header-title float-left mb-0">Add Institue</h2>
+                        <h2 class="content-header-title float-left mb-0">Add Institute</h2>
                         
 		            </div>
 		        </div>

@@ -81,6 +81,9 @@ class ProgramRepository implements ProgramRepositoryInterface
 
                 $now = Carbon::now();
                 $end = $now->copy()->addYear();
+
+                $type = (!empty(Auth::user()->franchisee) ? 1 : 0);
+
                 $userProgram = $this->userProgram;
                 $userProgram->program_id = $tnxId[1];
                 $userProgram->user_id = Auth::user()->id;
@@ -89,6 +92,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                 $userProgram->amount = $request->amount;
                 $userProgram->program_amount = $program->cost;
                 $userProgram->coupon_id = (isset($tnxId[2]) && $tnxId[2] ? $tnxId[2] : null);
+                $userProgram->type = $type;
                 $userProgram->save();
     
                 $transaction = $this->transaction;

@@ -52,7 +52,7 @@
                                             </div>
                                             <div class="card-btns d-flex justify-content-between mt-2">
                                                 @if ($program->is_subcribe)
-                                                    <a href="{{ route('individual.program.access', $program->id) }}" class="btn btn-success text-white subscribe-btn">Access</a>
+                                                    <a href="{{ route('individual.program.access', $program->id) }}" class="btn btn-success text-white subscribe-btn">Proceed</a>
                                                 @else
                                                     <button type="button" data-program="{{ $program }}" class="btn btn-primary text-white show-program">Subscribe</button>
                                                 @endif

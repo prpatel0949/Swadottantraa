@@ -31,6 +31,7 @@ class DashboardController extends Controller
             'monthly_transactions' => $this->transaction->getMonthlyTotal(),
             'programs' => $this->program->getTopPrograms(),
             'pending_evolutions' => $this->program->answers()->where('is_read', 0),
+            'all_programs' => $this->program->all(),
         ]);
     }
 }
