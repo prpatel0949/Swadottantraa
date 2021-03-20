@@ -206,7 +206,8 @@ class ClientController extends Controller
         $request->validate([
             'transaction_id' => 'required',
             'amount' => 'required|numeric',
-            'subscription_id' => 'required|exists:subscriptions,id'
+            'subscription_id' => 'required|exists:subscriptions,id',
+            'user_transaction_id' => 'required|integer'
         ]);
 
         if ($client = $this->client->payment($request->all())) {

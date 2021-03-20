@@ -237,6 +237,7 @@ class ClientRepository implements ClientRepositoryInterface
         $payment->subscription_id = $data['subscription_id'];
         $payment->end_date = $end->format('Y-m-d');
         $payment->client_id = Auth::user()->id;
+        $payment->user_transaction_id = $data['user_transaction_id'];
         $payment->save();
 
         return true;
