@@ -72,6 +72,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('mood_marks', 'GeneralController@getMoodMarks');
 
+    Route::post('emrgncy_contact_and_payment', 'ClientController@updateEmrgncyContactAndPayment');
+
 });
 
 Route::post('login', 'ClientController@generateToken');

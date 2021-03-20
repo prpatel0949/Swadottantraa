@@ -32,4 +32,6 @@ interface ClientRepositoryInterface
     public function setUserInfo($data);
 
     public function payment($data);
+
+    public function updateEmrgncyContactAndPayment($data);
 }

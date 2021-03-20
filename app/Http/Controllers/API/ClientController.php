@@ -216,4 +216,19 @@ class ClientController extends Controller
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
+
+    public function updateEmrgncyContactAndPayment(Request $request)
+    {
+        $request->validate([
+            'emrgncy_contact' => 'nullable|string|max:20',
+            'is_payment_done' => 'required|in:0,1',
+            'user_transaction_id' => 'required|integer'
+        ]);
+
+        if ($client = $this->client->updateEmrgncyContactAndPayment($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Contact updated successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
 }

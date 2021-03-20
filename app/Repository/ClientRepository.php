@@ -242,4 +242,37 @@ class ClientRepository implements ClientRepositoryInterface
 
         return true;
     }
+
+    public function updateEmrgncyContactAndPayment($data)
+    {
+
+        $date = Carbon::now();
+        $package = $this->package->find(1);
+        if ($package->subscription == '6 MONTH') {
+            $end = $date->copy()->addMonths(6);
+        } else if ($package->subscription == '1 MONTH') {
+            $end = $date->copy()->addMonth();
+        } else {
+            $end = $date->copy()->addYear();
+        }
+
+        if ($data['is_payment_done'] == 1) {
+            $payment = $this->payment;
+            $payment->date = $date->format('Y-m-d');
+            $payment->transaction_id = '';
+            $payment->amount = 0;
+            $payment->subscription_id = 1;
+            $payment->end_date = $end->format('Y-m-d');
+            $payment->client_id = Auth::user()->id;
+            $payment->user_transaction_id = $data['user_transaction_id'];
+            $payment->save();
+        }
+
+        if (!empty($data['emrgncy_contact'])) {
+            $client = $this->client->find(Auth::user()->id);
+            $client->emrgncy_contact = $data['emrgncy_contact'];
+            $client->save();
+        }
+        return true;
+    }
 }

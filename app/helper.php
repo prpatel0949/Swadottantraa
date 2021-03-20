@@ -67,7 +67,7 @@ if (!function_exists('exercise_tracker_anaysis')) {
         if ($sleeps->count() == 0) {
             return 0;
         }
-        return ($sleeps->sum('points') / $sleeps->count());
+        return number_format(($sleeps->sum('points') / $sleeps->count()), 2, '.', '');
     }
 }
 
