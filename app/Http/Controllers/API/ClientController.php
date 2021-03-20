@@ -45,11 +45,11 @@ class ClientController extends Controller
 
         if ($client = $this->client->store($validator->valid())) {
 
-            Mail::send('emails.new_user', [ 'client' => $client, 'password' => $request->password ], function ($message) use ($client) {
-                $message->to($client->email, $client->name);
-                $message->subject('Welcome to Swa Heal');
-                // $message->setBody('<p>Thank you for registration. You can use same creditionals for SWA Tantraa login.<a href="'. url('login') .'?type='. Hash::make(0) .'">Click here</a> to login.</p>', 'text/html');
-            });
+            // Mail::send('emails.new_user', [ 'client' => $client, 'password' => $request->password ], function ($message) use ($client) {
+            //     $message->to($client->email, $client->name);
+            //     $message->subject('Welcome to Swa Heal');
+            //     // $message->setBody('<p>Thank you for registration. You can use same creditionals for SWA Tantraa login.<a href="'. url('login') .'?type='. Hash::make(0) .'">Click here</a> to login.</p>', 'text/html');
+            // });
 
             return response()->json([ 'tbl' => [[ 'Msg' => 'User register successfully.', 'user_duplicate' => false ] ] ], 200);
         }
