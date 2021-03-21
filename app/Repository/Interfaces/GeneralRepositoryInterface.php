@@ -32,4 +32,6 @@ interface GeneralRepositoryInterface
     public function getState();
 
     public function getMoodMarks($data);
+
+    public function storeUserMenu($data);
 }

@@ -74,6 +74,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('emrgncy_contact_and_payment', 'ClientController@updateEmrgncyContactAndPayment');
 
+    Route::post('user/menu', 'GeneralController@storeUserMenu');
+
 });
 
 Route::post('login', 'ClientController@generateToken');

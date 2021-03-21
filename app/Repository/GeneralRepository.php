@@ -10,6 +10,7 @@ use App\Client;
 use App\Trauma;
 use App\MenuLink;
 use App\ScaleTip;
+use App\UserMenu;
 use Carbon\Carbon;
 use App\ClientPoint;
 use App\SleepTracker;
@@ -27,7 +28,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 class GeneralRepository implements GeneralRepositoryInterface
 {
     private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state,
-            $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client;
+            $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client, $user_menu;
 
     public function __construct(
         Tip $tip,
@@ -47,7 +48,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         Client $client,
         ExerciseTracker $exercise,
         ExerciseTrackerPoint $exercise_point,
-        State $state
+        State $state,
+        UserMenu $user_menu
     )
     {
         $this->tip = $tip;
@@ -68,6 +70,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->exercise = $exercise;
         $this->exercise_point = $exercise_point;
         $this->state = $state;
+        $this->user_menu = $user_menu;
     }
 
     public function getTips()
@@ -321,5 +324,20 @@ class GeneralRepository implements GeneralRepositoryInterface
     {
         $marks = $this->mood_mark->where('date', '>=', $data['start_date'])->where('date', '<=', $data['end_date'])->where('client_id', Auth::user()->id)->get();   
         return [ 'marks' => $marks->sum('marks'), 'lower_marks' => $marks->sum('lower_marks') ];
+    }
+
+    public function storeUserMenu($data)
+    {
+        $menu_limks = $this->menu->all();
+        $menus = explode(',', $data['menu_list']);
+        foreach ($menus as $menu) {
+            $new_menu = new $this->user_menu;
+            $new_menu->client_id = Auth::user()->id;
+            $new_menu->menu = $menu;
+            $new_menu->client_transaction_id = (isset($data['client_transaction_id']) ? $data['client_transaction_id'] : '');
+            $new_menu->save();
+        }
+
+        return true;
     }
 }

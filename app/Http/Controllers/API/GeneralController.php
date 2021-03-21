@@ -169,5 +169,19 @@ class GeneralController extends Controller
 
         return response()->json([ 'tbl' =>[ $this->general->getMoodMarks($request->all()) ]], 200);
     }
+
+    public function storeUserMenu(Request $request)
+    {
+        $request->validate([
+            'menu_list' => 'required',
+            'client_transaction_id' => 'nullable|integer'
+        ]);
+
+        if ($this->general->storeUserMenu($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'User menu store successfully.' ]] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
+    }
 }
 
