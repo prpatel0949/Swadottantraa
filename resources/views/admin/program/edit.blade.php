@@ -199,24 +199,24 @@
                                                                 <div class="form-group">
                                                                     <label>Step Description</label>
                                                                     <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
-                                                                    <input type="hidden" name="step_index[{{ $index }}][]" value="{{ $key + 1 }}">
+                                                                    <input type="hidden" name="step_index[{{ $index }}][]" value="{{ $key }}">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <button class="btn btn-outline-primary add-scale-btn" data-index="{{ $index }}" data-step="0">Add Scale</button>
+                                                                    <button class="btn btn-outline-primary add-scale-btn" data-index="{{ $index }}" data-step="{{ $key }}">Add Scale</button>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <button class="btn btn-outline-primary add-workout-btn" data-index="{{ $index }}" data-step="0">Add Workout</button>
+                                                                    <button class="btn btn-outline-primary add-workout-btn" data-index="{{ $index }}" data-step="{{ $key }}">Add Workout</button>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <button class="btn btn-outline-primary add-attachment-btn" data-index="{{ $index }}" data-step="0">Add Attachment</button>
+                                                                    <button class="btn btn-outline-primary add-attachment-btn" data-index="{{ $index }}" data-step="{{ $key }}">Add Attachment</button>
                                                                 </div>
                                                             </div>
                                                         </div>

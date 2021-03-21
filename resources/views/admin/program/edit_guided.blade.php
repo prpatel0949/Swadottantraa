@@ -199,24 +199,24 @@
                                                             <div class="form-group">
                                                                 <label>Step Description</label>
                                                                 <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
-                                                                <input type="hidden" name="step_index[{{ $index }}][]" value="{{ $key + 1 }}">
+                                                                <input type="hidden" name="step_index[{{ $index }}][]" value="{{ $key }}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <button class="btn btn-outline-primary add-scale-btn" data-index="{{ $index }}" data-step="{{ $key + 1 }}">Add Scale</button>
+                                                                <button class="btn btn-outline-primary add-scale-btn" data-index="{{ $index }}" data-step="{{ $key }}">Add Scale</button>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <button class="btn btn-outline-primary add-workout-btn" data-index="{{ $index }}" data-step="{{ $key + 1 }}">Add Workout</button>
+                                                                <button class="btn btn-outline-primary add-workout-btn" data-index="{{ $index }}" data-step="{{ $key }}">Add Workout</button>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <button class="btn btn-outline-primary add-attachment-btn" data-index="{{ $index }}" data-step="{{ $key + 1 }}">Add Attachment</button>
+                                                                <button class="btn btn-outline-primary add-attachment-btn" data-index="{{ $index }}" data-step="{{ $key }}">Add Attachment</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -305,7 +305,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                        <button type="submit" data-button-spinner="Processing..." class="btn btn-primary submit-btn">Submit</button>
                     </div>
                 </div>
 
@@ -640,6 +640,11 @@
         });
 
         $('#addForm').submit(function() {
+            var $this = $('.submit-btn');
+            $this.data("ohtml", $this.html());
+            var nhtml = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Processing... ";
+            $this.html(nhtml);
+            $this.attr("disabled", true);
             var formData = new FormData($(this)[0]);
             $.ajax({
                 data: formData,
@@ -653,6 +658,8 @@
                 success: function(response) {
                     window.location.href = '{{ route("program.index") }}';
                 }, error: function (error) {
+                    $this.html($this.data("ohtml"));
+                    $this.attr("disabled", false);
                     $('#validation-errors').html('');
                     console.log(error.status);
                     if (error.status == 422) {

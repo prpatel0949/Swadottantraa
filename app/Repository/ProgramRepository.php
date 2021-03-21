@@ -215,7 +215,8 @@ class ProgramRepository implements ProgramRepositoryInterface
                             $storeAttachment = [];
                             if (!empty($data['attachment'][$index][$key])) {
                                 foreach ($data['attachment'][$index][$key] as $k1 => $value) {
-                                    $img = $value->store('attachments');
+                                    $file_name = $value->getClientOriginalName();
+                                    $img = $value->storeAs('attachments', $file_name);
                                     $attachment = new $this->attachment;
                                     $attachment->step_id = $step->id;
                                     $attachment->image = $img;
@@ -338,7 +339,7 @@ class ProgramRepository implements ProgramRepositoryInterface
                                 $allScales[] = $scale->id;
                             }
                         }
-
+                        
                         $this->scale->where('step_id', $step->id)->whereNotIn('id', $allScales)->delete();
 
                         $allWorkouts = [];
@@ -358,7 +359,8 @@ class ProgramRepository implements ProgramRepositoryInterface
                         if (!empty($data['attachment'][$index][$key])) {
                             foreach ($data['attachment'][$index][$key] as $k1 => $value) {
                                 if (is_file($value)) {
-                                    $img = $value->store('attachments');
+                                    $file_name = $value->getClientOriginalName();
+                                    $img = $value->storeAs('attachments', $file_name);
                                     $attachment = new $this->attachment;
                                     $attachment->step_id = $step->id;
                                     $attachment->image = $img;
