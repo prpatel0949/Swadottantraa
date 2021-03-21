@@ -183,5 +183,21 @@ class GeneralController extends Controller
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
+
+    public function getPayuMoneyParam(Request $request)
+    {
+        $request->validate([
+            'transaction_id' => 'required',
+            'amount' => 'required',
+            'product_name' => 'required',
+            'name' => 'required',
+            'email' => 'required'
+
+        ]);
+
+        $hash = hash('sha512', config("payu.merchant_key").'|'.$request->transaction_id.'|'.$request->amount.'|'.$request->product_name.'|'.$request->name.'|'.$request->email.'|||||1||||||'.config("payu.merchant_salt"));
+
+        return response()->json([ 'tbl' => [[ 'result' => $hash ]] ], 200);
+    }
 }
 

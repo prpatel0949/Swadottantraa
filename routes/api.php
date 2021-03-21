@@ -76,6 +76,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('user/menu', 'GeneralController@storeUserMenu');
 
+    Route::post('payu_money_param', 'GeneralController@getPayuMoneyParam');
+
 });
 
 Route::post('login', 'ClientController@generateToken');
