@@ -52,14 +52,13 @@
                         </div>
                         <div class="card-body pt-0 collapse show" id="stage_wrapper">
                             @foreach ($steps as $step)
-
                                 <a href="#" class="d-block border-top mt-1 pt-1 {{ ($step->id == request()->step_id ? 'active' : '') }}">
                                     <div class="user-page-info">
                                         <h5 class="mb-0 v-stage-description">{{ $step->title }}</h5>
                                     </div>
                                     <div class="progress progress-bar-primary mb-1 extra_progess_percentage_warpper">
-                                        <span class="extra_progess_percentage">50%</span>
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
+                                        <span class="extra_progess_percentage">{{ $step->Process }}%</span>
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $step->Process }}" aria-valuemin="{{ $step->Process }}" aria-valuemax="100" style="width:{{ $step->Process }}%"></div>
                                     </div>
                                 </a>
                             @endforeach

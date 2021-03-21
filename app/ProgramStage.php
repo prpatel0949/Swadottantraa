@@ -22,4 +22,15 @@ class ProgramStage extends Model
     {
         return $this->hasMany('App\ProgramStageStep');
     }
+
+    public function getProcessAttribute()
+    {
+        $used = $this->steps->sum('process');
+        $total = $this->steps->count() * 100;
+
+        if ($total == 0) {
+            return 0;
+        }
+        return $per = number_format(($used / $total) * 100, 2, '.', '');
+    }
 }

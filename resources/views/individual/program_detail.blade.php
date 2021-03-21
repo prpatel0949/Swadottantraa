@@ -44,8 +44,8 @@
                             </div>
                             <div class="card-body py-0">
                                 <div class="progress progress-bar-primary mb-1 extra_progess_percentage_warpper">
-                                    <span class="extra_progess_percentage">50%</span>
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
+                                    <span class="extra_progess_percentage">{{ $stage->process }}%</span>
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ $stage->process }}" aria-valuemin="{{ $stage->process }}" aria-valuemax="100" style="width:{{ $stage->process }}%"></div>
                                 </div>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="user-page-info">

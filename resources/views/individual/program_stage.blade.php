@@ -51,8 +51,8 @@
                                         <h5 class="mb-0 v-stage-description">{{ $stage->title }}</h5>
                                     </div>
                                     <div class="progress progress-bar-primary mb-1 extra_progess_percentage_warpper">
-                                        <span class="extra_progess_percentage">50%</span>
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="58" aria-valuemax="100" style="width:58%"></div>
+                                        <span class="extra_progess_percentage">{{ $stage->process }}%</span>
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $stage->process }}" aria-valuemin="{{ $stage->process }}" aria-valuemax="100" style="width:{{ $stage->process }}%"></div>
                                     </div>
                                 </a>
                             @endforeach
