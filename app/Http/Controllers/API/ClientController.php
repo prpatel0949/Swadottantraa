@@ -113,6 +113,10 @@ class ClientController extends Controller
             'code.exists' => 'This Code is incorrect.'
         ]);
 
+        if (Auth::user()->is_approve == 1) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'You are connected to the '. Auth::user()->institue->name ] ] ], 422);
+        }
+
         if ($this->client->applyCode($request->all())) {
             return response()->json( [ 'Msg' => 'Your request has been sent! waiting for your institue to approve.' ], 200);
         }
