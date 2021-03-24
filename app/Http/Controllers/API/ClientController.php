@@ -37,9 +37,13 @@ class ClientController extends Controller
         if ($validator->fails()) {
             $valid = $validator->errors()->toArray();
             if (isset($valid['email']) && $valid['email'][0] == 'The email has already been taken.') {
-                return response()->json([ 'errors' => $validator->errors(), 'user_duplicate' => true ], 200);
+                $error = array_merge($validator->errors()->toArray(), [ 'user_duplicate' => true ]);
+                return response()->json([ 'tbl' => [ $error  ] ], 200);
+                // return response()->json([ 'errors' => $validator->errors(), 'user_duplicate' => true ], 200);
             } else {
-                return response()->json([ 'errors' => $validator->errors(), 'user_duplicate' => false ], 200);
+                $error = array_merge($validator->errors()->toArray(), [ 'user_duplicate' => false ]);
+                return response()->json([ 'tbl' => [ $error  ] ], 200);
+                // return response()->json([ 'errors' => $validator->errors(), 'user_duplicate' => false ], 200);
             }
         }
 

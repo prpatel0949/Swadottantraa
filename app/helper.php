@@ -60,22 +60,32 @@ if (!function_exists('sleep_tracker_anaysis')) {
 if (!function_exists('exercise_tracker_anaysis')) {
     function exercise_tracker_anaysis()
     {
-        $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
-        $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
+
+        $end = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subDays(14)->format('Y-m-d');
+
+        // $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
+        // $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
 
         $sleeps = ExerciseTrackerPoint::where('date', '>=', $start)->where('date', '<=', $end)->where('client_id', \Auth::user()->id)->get();
         if ($sleeps->count() == 0) {
             return 0;
         }
-        return number_format(($sleeps->sum('points') / $sleeps->count()), 2, '.', '');
+
+
+        return number_format(($sleeps->sum('points') / 15) * 100, 2, '.', '');
+        // return number_format(($sleeps->sum('points') / $sleeps->count()), 2, '.', '');
     }
 }
 
 if (!function_exists('gratitude_tracker_anaysis')) {
     function gratitude_tracker_anaysis()
     {
-        $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
-        $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
+        // $start = Carbon::now()->startOfWeek(Carbon::MONDAY);
+        // $end = Carbon::now()->endOfWeek(Carbon::SUNDAY);
+
+        $end = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subDays(14)->format('Y-m-d');
 
         $sleeps = GratitudeQuestionAnswer::whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end)->where('client_id', \Auth::user()->id)->groupBy('set_no')->get()->groupBy(function($item) {
             return Carbon::parse($item->created_at)->format('Y-m-d');
@@ -83,6 +93,7 @@ if (!function_exists('gratitude_tracker_anaysis')) {
        if ($sleeps->count() == 0) {
             return 0;
         }
-       return $sleeps->sum('score') / $sleeps->count();
+        return number_format(($sleeps->sum('score') / 15) * 100, 2, '.', '');
+    //    return $sleeps->sum('score') / $sleeps->count();
     }
 }
