@@ -5,7 +5,7 @@
 @section('content')
 <div class="header-space" >
     <div class="container">
-        <section class="section">
+        <section class="section" style="text-align: justify">
             <div class="page-title">About <span class="text-primary">Us</span></div>
             <div class="section-content">
                 <p>Established in 2018, At <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA</b> provides comprehensive solutions for mental wellbeing. <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA</b> means self-help regarding wellbeing with the help of technological tools.</p>
@@ -49,7 +49,7 @@
                 <p><b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> tantraa</b> is unique in the fact that the team believes in a systematic approach towards handling any mental health issues be it simple anxiety or a complex problem like schizophrenia. We at <b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa</b> are staunch supporters of fact that emotional wellness is equally important to physical wellbeing and the true wellness is achieved only when both of these are at optimum levels, which is essential for us to perform at our best.
                 </p>
 
-                <p>We at <b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> tantraa</b> have developed Electronic Medical Record Systems <b class="text-primary">(Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> tantraa EMR)</b>, Telepsychiatry tool (<b class="text-primary">PsyTele</b>), Emotional First-aid self-help tool (<b class="text-primary">PsyHeal App</b>), and <b class="text-primary">Brain & Mind Gym</b>. These tools are useful in developing skills which enhance an individual’s productivity and performance.</p>
+                <p>We at <b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> tantraa</b> have developed Electronic Medical Record Systems <b class="text-primary">(Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> tantraa EMR)</b>, Telepsychiatry tool <b class="text-primary">(PsyTele)</b>, Emotional First-aid self-help tool <b class="text-primary">(PsyHeal App)</b>, and <b class="text-primary">Brain & Mind Gym</b>. These tools are useful in developing skills which enhance an individual’s productivity and performance.</p>
 
                 <p>Successful implementation of <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WEELNESS</b> tools will definitely enhance optimal, comprehensive wellness!</p>
 

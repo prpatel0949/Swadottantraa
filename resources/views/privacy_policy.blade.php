@@ -35,15 +35,11 @@
                 <p><b>We may share information with any successor to all or part of our business - </b>For example, if part of our business is sold we may give our customer list as part of that transaction.</p>
                 <p><b>We may share your information for reasons not described in this policy - </b>We will tell you before we do this.</p>
                 <p><b>Email Opt-Out:</b></p>
-                <p><b>You can opt out of receiving our marketing emails - </b></p>To stop receiving our promotional emails, please revert over the same email stating the word “Unsubscribe”. It may take about ten days to process your request. Even if you opt out of getting promotional messages or newsletter, we will still be sending you transactional messages through email and SMS about your purchases.</p>
-                <p><b>Third party sites:</b></p>    
-                <p>If you click on one of the links to third party websites, you may be taken to websites we do not control. This policy does not apply to the privacy practices of those websites. Read the privacy policy of other websites carefully. We are not responsible for these third party sites.</p>
-                <p><b>Updates to this policy:</b></p>
-                <p>This Privacy Policy was last updated on 16.2.2021. From time to time we may change our privacy practices. We will notify you of any material changes to this policy as required by law. We will also post an updated copy on our website. Please check our site periodically for updates.</p>
-                <p><b>Jurisdiction:</b></p>
-                <p>If you choose to visit the website, your visit and any dispute over privacy is subject to this Policy and the website's terms of use. In addition to the foregoing, any disputes arising under this Policy shall be governed by the laws of India.</p>
-                <p><b>Contact:</b></p>
-                <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@swadottantraa.com">info@swadottantraa.com</a></p>
+                <p><b>You can opt out of receiving our marketing emails - </b>To stop receiving our promotional emails, please revert over the same email stating the word “Unsubscribe”. It may take about ten days to process your request. Even if you opt out of getting promotional messages or newsletter, we will still be sending you transactional messages through email and SMS about your purchases.</p>
+                <p><b>Third party sites:</b><br />If you click on one of the links to third party websites, you may be taken to websites we do not control. This policy does not apply to the privacy practices of those websites. Read the privacy policy of other websites carefully. We are not responsible for these third party sites.</p>
+                <p><b>Updates to this policy:</b><br />This Privacy Policy was last updated on 16.2.2021. From time to time we may change our privacy practices. We will notify you of any material changes to this policy as required by law. We will also post an updated copy on our website. Please check our site periodically for updates.</p>
+                <p><b>Jurisdiction:</b><br />If you choose to visit the website, your visit and any dispute over privacy is subject to this Policy and the website's terms of use. In addition to the foregoing, any disputes arising under this Policy shall be governed by the laws of India.</p>
+                <p><b>Contact:</b><br />If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@swadottantraa.com">info@swadottantraa.com</a></p>
             </div>
         </section>
     </div>

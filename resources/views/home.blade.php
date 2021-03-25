@@ -123,8 +123,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify order-2">
-                                <div class="page-title">PsyHeal</div>
-                                <p><b class="text-primary">PsyHeal</b> is a unique mobile app for Emotional First Aid developed by experienced and qualified mental health professionals.</p>
+                                <div class="page-title">SwaHeal</div>
+                                <p><b class="text-primary">SwaHeal</b> is a unique mobile app for Emotional First Aid developed by experienced and qualified mental health professionals.</p>
                                 <p>Emotional First Aid is like Physical First Aid. We use and apply first aid measures like bandages, ointments, etc to protect further damage to health in case of injuries. If we fail to develop, maintain and strengthen our emotional health, we are likely to suffer from a lower quality of life. So, we must have some handy, easy yet effective psychological measures in case of day-to- day emotional injuries like frustrations, failures, stress, worries, rejections, anger, loss etc.</p>
                                 <a href="{{ url('psyheal') }}" class="btn btn-primary">Read More</a>
                             </div>

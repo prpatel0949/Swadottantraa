@@ -8,11 +8,7 @@
         <section class="section">
             <div class="page-title">We are coming up with various centers</div>
             <div class="section-content">
-                <p>Have you ever imagined a SPA for your Soul?</p>
-                <p>No need to stretch your imagination! Because, it is now here!</p>
-                <p>A unique and first of its kind space for everybody to Relax, Reform and Rejuvenate.</p>
-                <p>With the help of high tech instruments, games, mind exercises and many more specially designed tools you can now manage your stress, Develop your brain, And Find solutions for your real life issues.</p>
-                <p>And yes, we have many more things for your soul. Just visit to experience! We help you to help yourself!</p>
+                <p>Have you ever imagined a SPA for your Soul?<br />No need to stretch your imagination! Because, it is now here!<br />A unique and first of its kind space for everybody to Relax, Reform and Rejuvenate.<br />With the help of high tech instruments, games, mind exercises and many more specially designed tools you can now manage your stress, Develop your brain, And Find solutions for your real life issues.<br />And yes, we have many more things for your soul. Just visit to experience! We help you to help yourself!</p>
                 <div class="page-subtitle">Relax:</div>
                 <p>Be Nice to your Brain and Mind, and they will be nice to you.</p>
                 <ul>
@@ -31,28 +27,27 @@
 
                 <div class="page-subtitle mt-4">Reform</div>
                 <p>Every workout is a progress! Be prepared to reinvent yourself!</p>
-                <div class="page-subtitle mt-4">1. PsyHeal – </div>
+                <div class="page-subtitle mt-4">1. PsyHeal –</div>
                 <p>Experiencing Rejection, Loss, Guilt, Loneliness, Rumination, Failure, Low Self Esteem or Unfair treatment? We have a special Band-Aid for it! See what happens if you don't give up!</p>
-                <div class="page-subtitle mt-4">2. Plus Zone -</div>
+                <div class="page-subtitle mt-4">2. Plus Zone –</div>
                 <p>Be stronger than your excuses. Don't limit your challenges, Challenge your limit. Work for it more than you hope for it. Because Leaders never stop learning! Experience our specially designed online guided self-help programs for solutions in variety of life areas.</p>
-                <div class="page-subtitle mt-4">3. Core View – </div>
+                <div class="page-subtitle mt-4">3. Core View –</div>
                 <p>Love your body and it will love you back! Core View guides you to listen and respond compassionately to your own body!</p>
                 <div class="page-subtitle mt-4">4. Brain Buddy –</div>
                 <p>The shortest way to go anywhere is to have a good company! Brain Buddy has many modes to make you happy, relax, energetic, creative -- as per your wish!</p>
 
                 <div class="page-subtitle">Rejuvenate:</div>
                 <p>We must always change, renew, rejuvenate ourselves; otherwise we harden!</p>
-                <div class="page-subtitle">1. Crack the Nuts -</div>
+                <div class="page-subtitle">1. Crack the Nuts –</div>
                 <p>Challenge your brain, mind and body skills to solve crazy, exciting and cool games.</p>
-                <div class="page-subtitle">2. Selfie Sessions -</div>
+                <div class="page-subtitle">2. Selfie Sessions –</div>
                 <p>Take a selfie of the unseen you with our scientific tools and unlock your abilities.</p>
                 <div class="page-subtitle">3. Soul Spa –</div>
                 <p>Use our quick and effective programs stuffed with advanced tech, to make yourself glow with inner beauty and strength when you are facing difficulties.</p>
 
 
                 <div class="page-subtitle">Inner Zone GPS:</div>
-                <p>Body-Mind-Brain relationship is the basts of our wellness!</p>
-                <p>This Inner Zone GPS helps us to find the direction and zone to groom and develop!</p>
+                <p>Body-Mind-Brain relationship is the basts of our wellness!<br />This Inner Zone GPS helps us to find the direction and zone to groom and develop!</p>
 
                 <div class="page-subtitle">NeuroUx:</div>
                 <p>Play, learn and develop Attention, Memory, Executive Function, and Emotion & Social Cognition, Psychomotor Speed etc. using an interesting and playful suite of cognitive tasks.</p>
@@ -207,7 +202,7 @@
                                             <label for="">City Name</label>
                                             <select class="form-control" name="city_id" id="city_id">
                                                 <option value="">Select City</option>
-                                                
+
                                             </select>
                                         </div>
                                     </div>
