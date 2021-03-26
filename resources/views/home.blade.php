@@ -143,8 +143,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify">
-                                <div class="page-title">EMR</div>
-                                <p>An <b class="text-primary">Electronic Medical Record (EMR)</b> is a digital version of a patient’s paper chart. EMRs are real-time, patient-centred records that make information available instantly and securely to authorized users. While an EMR does contain the medical and treatment histories of patients, an EMR system is built to go beyond standard clinical data collected in a provider’s office and can be inclusive of a broader view of a patient’s care. EMRs are a vital part of health IT and can:.</p>
+                                <div class="page-title">SwaDocs (EMR)</div>
+                                <p>An <b class="text-primary">Electronic Medical Record (EMR)</b> is a digital version of a patient’s paper chart. SwaDocs (EMR) are real-time, patient-centred records that make information available instantly and securely to authorized users. While an SwaDocs (EMR) does contain the medical and treatment histories of patients, an SwaDocs (EMR) system is built to go beyond standard clinical data collected in a provider’s office and can be inclusive of a broader view of a patient’s care. SwaDocs (EMR) are a vital part of health IT and can:.</p>
                                 <a href="{{ url('emr') }}" class="btn btn-primary">Read More</a>
                             </div>
                             <div class="col-sm-4 product-img">
