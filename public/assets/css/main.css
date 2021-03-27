@@ -10246,6 +10246,9 @@ img.check_img {
     align-items: center;
     text-align: center;
 }
+.img-slider-flipper:hover {
+    z-index: 1000;
+}
 .img-slider-flipper:hover .img-slider,
 .img-slider-flipper:hover .img-non-slider {
     opacity: 1;
@@ -10761,4 +10764,8 @@ input.error {
 
 .h100 {
     height: 100%;
+}
+
+.section-testimonial .img-slider-flipper {
+    min-height: 250px;
 }

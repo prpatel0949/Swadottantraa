@@ -6,7 +6,7 @@
                 <a href="{{ url('terms-and-conditions') }}" class="text-light nav-link">Terms & Conditions</a>
             </div>
             <div class="mt-2 text-light">
-                Copyright &copy; 2021 SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA Wellness Private Limited. | Designed by Bestle Group
+                Copyright &copy; 2021 SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA Wellness Private Limited. | Designed by Bestla Group
             </div>
         </div>
     </div>
@@ -69,6 +69,7 @@
 function goBack() {
   window.history.back();
 }
+
 function myMap() {
     var myLatlng = new google.maps.LatLng(17.6847238, 73.9931717);
     var mapOptions = {

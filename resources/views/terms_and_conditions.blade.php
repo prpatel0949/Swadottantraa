@@ -5,7 +5,7 @@
     <div class="container">
         <section class="section">
             <div class="page-title">TERMS OF SERVICE AGREEMENT</div>
-            <div class="section-content">
+            <div class="section-content text-justify">
                 <p>LAST REVISION: 16th February 2021</p>
                 <p>
                     PLEASE READ THIS TERMS OF SERVICE AGREEMENT CAREFULLY. BY USING THIS WEBSITE YOU AGREE TO BE BOUND BY ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT.
