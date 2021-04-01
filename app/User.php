@@ -86,4 +86,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(RecommandedProgram::class);
     }
+
+    /**
+     * Get the city that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Get the city that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

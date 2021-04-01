@@ -14,149 +14,140 @@
                     <div class="row">
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-danger p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-shopping-cart text-danger font-medium-5"></i>
-                                        </div>
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">{{ Auth::user()->number_of_users }}</h2>
+                                        <p>Total Licenses</p>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->number_of_users }}</h2>
-                                    <p class="mb-0">Total Licenses</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-warning p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-package text-warning font-medium-5"></i>
-                                        </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_approve', 1)->count() }}</h2>
-                                    <p class="mb-0">Used Licence</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
                                     <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-credit-card text-success font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->number_of_users - Auth::user()->clients->where('is_approve', 1)->count() }}</h2>
-                                    <p class="mb-0">Unused Licence</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">{{ Auth::user()->clients->where('is_approve', 1)->count() }}</h2>
+                                        <p>Used Licence</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    @php
-                                        $active = Carbon\Carbon::now()->subDays(14)->format('Y-m-d H:i:s');
-                                        $active_users = Auth::user()->clients->where('is_approve', 1)->where('last_login', '>', $active)->count();
-                                    @endphp
-                                    <h2 class="text-bold-700 mt-1">{{ $active_users }}</h2>
-                                    <p class="mb-0">Active Users</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">{{ Auth::user()->number_of_users - Auth::user()->clients->where('is_approve', 1)->count() }}</h2>
+                                        <p>Unused Licence</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_approve', 1)->count() - $active_users }}</h2>
-                                    <p class="mb-0">Inactive Users</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        @php
+                                            $active = Carbon\Carbon::now()->subDays(14)->format('Y-m-d H:i:s');
+                                            $active_users = Auth::user()->clients->where('is_approve', 1)->where('last_login', '>', $active)->count();
+                                        @endphp
+                                        <h2 class="text-bold-700 mb-0">{{ $active_users }}</h2>
+                                        <p>Active Users</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">0</h2>
-                                    <p class="mb-0">Healthy Users</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">{{ Auth::user()->clients->where('is_approve', 1)->count() - $active_users }}</h2>
+                                        <p>Inactive Users</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">0</h2>
-                                    <p class="mb-0">Unhealthy Users</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">0</h2>
+                                        <p>Healthy Users</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">0</h2>
-                                    <p class="mb-0">Need Help</p>
-                                </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">0</h2>
+                                        <p>Unhealthy Users</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-server text-success font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="text-bold-700 mt-1">{{ Auth::user()->clients->where('is_approve', 1)->where('is_regular', true)->count() }}</h2>
-                                    <p class="mb-0">First Aid Box Unlocked</p>
                                 </div>
-                                <div class="card-content">
-                                    <div id="line-area-chart-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">0</h2>
+                                        <p>Need Help</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-server text-success font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0">{{ Auth::user()->clients->where('is_approve', 1)->where('is_regular', true)->count() }}</h2>
+                                        <p>First Aid Box Unlocked</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-server text-success font-medium-5"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -185,6 +185,8 @@ class ClientRepository implements ClientRepositoryInterface
         $client->mobile = $data['mobile'];
         $client->birth_date = $data['birth_date'];
         $client->email = $data['email'];
+        $client->education = $data['education'];
+        $client->occupation = $data['occupation'];
         $client->save();
 
         return $client;

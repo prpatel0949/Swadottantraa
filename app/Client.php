@@ -16,7 +16,7 @@ class Client extends Authenticatable
 
     protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve', 'birth_date' ];
 
-    protected $appends = [ 'is_regular' ];
+    protected $appends = [ 'is_regular', 'client_institue' ];
 
     /**
      * Get the transaction associated with the Client
@@ -105,6 +105,11 @@ class Client extends Authenticatable
     public function institue()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getClientInstitueAttribute()
+    {
+        return ($this->is_approve == 1 ? $this->institue : json_encode([]));
     }
 
 }

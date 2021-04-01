@@ -122,7 +122,7 @@ class ClientController extends Controller
         }
 
         if ($this->client->applyCode($request->all())) {
-            return response()->json( [ 'Msg' => 'Your request has been sent! waiting for your institue to approve.' ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Your request has been sent! waiting for your institue to approve.' ] ] ], 200);
         }
     }
 
@@ -172,7 +172,9 @@ class ClientController extends Controller
             'name' => 'required|string',
             'mobile' => 'required|numeric|digits:10',
             'birth_date' => 'required|date_format:Y-m-d',
-            'email' => 'required|email|unique:clients,email,'.Auth::user()->id
+            'email' => 'required|email|unique:clients,email,'.Auth::user()->id,
+            'education' => 'nullable|string|max:150',
+            'occupation' => 'nullable|string|max:150',
         ]);
 
         if ($client = $this->client->updateProfile($request->all())) {

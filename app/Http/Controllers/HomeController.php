@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use App\User;
 use App\ContactUs;
 use Illuminate\Http\Request;
 use App\Repository\Interfaces\FAQRepositoryInterface;
@@ -122,5 +123,11 @@ class HomeController extends Controller
         $contact->save();
 
         return true;
+    }
+
+    public function franchiseeSearch(Request $request)
+    {
+        $franchisees = User::where([ 'type' => 2, 'state_id' => $request->state_id, 'city_id' => $request->city_id ])->get();
+        return view('francisee', [ 'franchisees' => $franchisees ])->render();
     }
 }

@@ -1,6 +1,7 @@
 @extends('franchisee.layouts.app')
 
 @section('title', 'Dashboard')
+
 @section('content')
 
 <div class="app-content content">
@@ -19,46 +20,66 @@
         <div class="content-body">
             <section id="dashboard-ecommerce">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12">
-                        <div class="card text-white bg-gradient-primary text-center">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <h2 class="card-title text-white">Purchase Amount</h2>
-                                    <h4 class="card-text"><a href="#" class="text-white" target="_blank">₹ {{ number_format($transactions->sum('amount'), 2, '.', '') }}</a></h4>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-start pb-0">
+                                <div>
+                                    <h2 class="text-bold-700 mb-0">₹ {{ number_format($transactions->sum('amount'), 2, '.', '') }}</h2>
+                                    <p>Purchase Amount</p>
+                                </div>
+                                <div class="avatar bg-rgba-success p-50 m-0">
+                                    <div class="avatar-content">
+                                        <i class="feather icon-server text-success font-medium-5"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12">
-                        <div class="card text-white bg-gradient-info text-center">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <h2 class="card-title text-white">Total Users</h2>
-                                    <h4 class="card-text"><a href="#" class="text-white" target="_blank">{{ $users->count() }}</a></h4>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-start pb-0">
+                                <div>
+                                    <h2 class="text-bold-700 mb-0">{{ $users->count() }}</h2>
+                                    <p>Total Users</p>
+                                </div>
+                                <div class="avatar bg-rgba-success p-50 m-0">
+                                    <div class="avatar-content">
+                                        <i class="feather icon-server text-success font-medium-5"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12">
-                        <div class="card text-white bg-gradient-danger text-center">
-                            <div class="card-content">
-                                <div class="card-body">
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-start pb-0">
+                                <div>
                                     @php
                                         $active = Carbon\Carbon::now()->subDays(15)->format('Y-m-d H:i:s');
                                         $Inactive = Carbon\Carbon::now()->subDays(90)->format('Y-m-d H:i:s');
                                     @endphp
-                                    <h2 class="card-title text-white">Active User</h2>
-                                    <h4 class="card-text"><a href="#" class="text-white" target="_blank">{{ $users->where('last_login', '>', $active)->count() }}</a></h4>
+                                    <h2 class="text-bold-700 mb-0">{{ $users->where('last_login', '>', $active)->count() }}</h2>
+                                    <p>Active User</p>
+                                </div>
+                                <div class="avatar bg-rgba-success p-50 m-0">
+                                    <div class="avatar-content">
+                                        <i class="feather icon-server text-success font-medium-5"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12">
-                        <div class="card text-white bg-gradient-success text-center">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <h2 class="card-title text-white">InActive User</h2>
-                                    <h4 class="card-text"><a href="{{ route('report.program') }}" class="text-white" target="_blank">{{ $users->where('last_login', '<', $Inactive)->count() }}</a></h4>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-start pb-0">
+                                <div>
+                                    <h2 class="text-bold-700 mb-0">{{ $users->where('last_login', '<', $Inactive)->count() }}</h2>
+                                    <p>InActive User</p>
+                                </div>
+                                <div class="avatar bg-rgba-success p-50 m-0">
+                                    <div class="avatar-content">
+                                        <i class="feather icon-server text-success font-medium-5"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +103,6 @@
         </div>
     </div>
 </div>
-    	
 
 @endsection
 

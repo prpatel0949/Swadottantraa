@@ -30,7 +30,7 @@ class UpdateRequest extends FormRequest
             'time' => 'required|numeric',
             'cost' => 'required|numeric',
             'tag' => 'required|string',
-            'image' => 'nullable|mimes:jpeg, jpg, png',
+            'image' => 'nullable|mimes:jpeg,jpg,png,gif',
             'stage_name.*' => 'required|string|max:100', 
             'stage_description.*' => 'required|string',
             'attachment.*.*.*' => 'nullable|mimes:jpeg,jpg,png,pdf,mp4,avi',

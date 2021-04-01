@@ -107,3 +107,5 @@ Route::post('question/tag', 'HomeController@storeTags')->name('question.tag');
 Route::get('faq/{type?}', 'HomeController@faqs')->name('faq');
 
 Route::post('contact-us', 'HomeController@contactUs')->name('contact.us');
+
+Route::get('franchisee/search', 'HomeController@franchiseeSearch')->name('franchisee.search');

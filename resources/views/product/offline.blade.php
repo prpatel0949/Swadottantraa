@@ -213,8 +213,16 @@
                                         </div>
                                     </div> --}}
                                 </div>
-                                <button class="btn btn-primary float-right">Search</button>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary float-right search-franchisee" type="button">Search</button>
+                                    </div>
+                                </div>
+
+                                <div id="francisee_div"></div>
+
                             </form>
+
                             <div class="contact-form-message" style="display: none">
                                 <div class=" d-flex align-items-center justify-content-center p-5">
                                     <div class="text-center">We are coming up soon in your city!</div>
@@ -254,5 +262,19 @@
         });
         $('#city_id').html(html);
     });
+
+    $(document).on('click', '.search-franchisee', function (e) {
+        e.preventDefault();
+        let state_id = $('#state_id').val();
+        let city_id = $('#city_id').val();
+        // francisee_div
+        $.ajax({
+            url: '{{ route("franchisee.search") }}?state_id='+state_id+'&city_id='+city_id,
+            success: function (res) {
+                $('#francisee_div').html(res);
+            }
+        });
+    });
+
 </script>
 @endsection

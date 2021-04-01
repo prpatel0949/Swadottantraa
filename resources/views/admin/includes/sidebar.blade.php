@@ -34,7 +34,7 @@
             <li class="{{ (request()->is('admin/faq*')) ? 'active' : '' }}"><a href="{{ route('faq.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">FAQs</span></a>
             </li>
 
-            <li class="{{ (request()->is('admin/support*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Process</span></a>
+            <li class="{{ (request()->is('admin/support*') ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Support</span></a>
                 <ul class="menu-content">
                     <li class="{{ (!request()->is('admin/support/medical*') && request()->is('admin/support*')) ? 'active' : '' }}"><a href="{{ route('admin.support.index') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Technical</span></a>
                     </li>
