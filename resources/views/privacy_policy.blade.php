@@ -5,7 +5,7 @@
     <div class="container">
         <section class="section">
             <div class="page-title">Privacy Policy</div>
-            <div class="section-content">
+            <div class="section-content text-justify">
                 <p><b>This Privacy Policy applies to the Swa•Tantraa Wellness Private Limited</b></p>
                 <p>Swa•Tantraa Wellness Private Limited recognises the importance of maintaining your privacy. We value your privacy and appreciate your trust in us. This Policy describes how we treat user information we collect on www.swadottantraa.com and other offline sources. This Privacy Policy applies to current and former visitors to our website and to our online customers. By visiting and/or using our website, you agree to this Privacy Policy.</p>
                 <p>Swa•Tantraa Wellness Private Limited, is an Indian Company registered under the Companies Act, 2013 having its registered office at Satara, Maharashtra, India. Pin code - 415002.</p>

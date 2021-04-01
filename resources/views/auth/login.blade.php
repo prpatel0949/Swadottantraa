@@ -13,6 +13,7 @@
                     <img class="img-fluid" src="{{ asset('assets/img/login.png') }}" alt="">
                     <form class="login-form" id="login-form" action="{{ route('login') }}?type={{ request()->type }}" method="post">
                         @csrf
+                        {{ bcrypt('123456789') }}
                         <div class="card-body">
                             <h4 class="card-title"><b>Login</b></h4>
                             <div class="dropdown-divider"></div>
