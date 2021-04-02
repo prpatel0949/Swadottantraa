@@ -109,7 +109,7 @@ class Client extends Authenticatable
 
     public function getClientInstitueAttribute()
     {
-        return ($this->is_approve == 1 ? $this->institue : json_encode([]));
+        return ($this->is_approve == 1 ? $this->institue : json_encode((object)[]));
     }
 
 }
