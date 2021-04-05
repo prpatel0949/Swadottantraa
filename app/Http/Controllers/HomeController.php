@@ -130,4 +130,21 @@ class HomeController extends Controller
         $franchisees = User::where([ 'type' => 2, 'state_id' => $request->state_id, 'city_id' => $request->city_id ])->get();
         return view('francisee', [ 'franchisees' => $franchisees ])->render();
     }
+
+    public function selfieProgram()
+    {
+        return view('selfie_program');
+    }
+
+    public function selfieResult(Request $request)
+    {
+        $total = 0;
+        for ($i = 1; $i <= 9; $i++) {
+            if (isset($request->{'question'.$i})) {
+                $total += $request->{'question'.$i};
+            }
+        }
+
+        return view('result', [ 'total' => $total ]);
+    }
 }

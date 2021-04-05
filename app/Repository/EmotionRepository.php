@@ -30,8 +30,14 @@ class EmotionRepository implements EmotionRepositoryInterface
         return $this->emotion_pain->all();
     }
 
-    public function getEmotionInjuries()
+    public function getEmotionInjuries($is_last = 0)
     {
+        if ($is_last = 1) {
+
+            $emg = $this->user_emotion_injury->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
+
+            return $this->emotion_injury->where('id', (!empty($emg) ? $emg->id : ''))->get();
+        }
         return $this->emotion_injury->all();
     }
 

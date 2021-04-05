@@ -109,3 +109,7 @@ Route::get('faq/{type?}', 'HomeController@faqs')->name('faq');
 Route::post('contact-us', 'HomeController@contactUs')->name('contact.us');
 
 Route::get('franchisee/search', 'HomeController@franchiseeSearch')->name('franchisee.search');
+
+Route::get('personal-habit-stress', 'HomeController@selfieProgram')->name('selfie.program');
+
+Route::post('result', 'HomeController@selfieResult')->name('selfie.result');
