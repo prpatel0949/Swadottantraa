@@ -34,7 +34,7 @@ class EmotionRepository implements EmotionRepositoryInterface
     {
         if ($is_last = 1) {
 
-            $emg = $this->user_emotion_injury->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
+            $emg = $this->user_emotion_injury->where('user_id', (Auth::check() ? Auth::user()->id : ''))->orderBy('id', 'DESC')->first();
 
             return $this->emotion_injury->where('id', (!empty($emg) ? $emg->id : ''))->get();
         }
