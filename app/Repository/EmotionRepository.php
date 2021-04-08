@@ -32,7 +32,7 @@ class EmotionRepository implements EmotionRepositoryInterface
 
     public function getEmotionInjuries($is_last = 0)
     {
-        if ($is_last = 1) {
+        if ($is_last == 1) {
 
             $emg = $this->user_emotion_injury->where('user_id', (Auth::check() ? Auth::user()->id : ''))->orderBy('id', 'DESC')->first();
 
