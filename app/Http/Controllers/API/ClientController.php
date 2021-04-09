@@ -140,7 +140,7 @@ class ClientController extends Controller
             $token = collect($token);
             $all = $user->merge($token);
 
-            $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries(1);
+            $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries($user['id']);
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
