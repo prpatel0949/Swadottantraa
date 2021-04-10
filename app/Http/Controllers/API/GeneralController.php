@@ -46,12 +46,11 @@ class GeneralController extends Controller
     public function storeScaleQuestionAnswers(Request $request)
     {
         $request->validate([
-            'answer_id' => 'required|integer|exists:api_scale_question_answers,id'
+            'answer_id.*' => 'required|integer|exists:api_scale_question_answers,id',
+            'lflag' => 'required|boolean'
         ]);
 
-        if ($this->general->storeAnswer($request->all())) {
-            return response()->json($this->general->storeAnswer($request->all()), 200);
-        }
+        return response()->json($this->general->storeAnswer($request->all()), 200);
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
