@@ -144,6 +144,7 @@ class ClientController extends Controller
             
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
+            $result['userAnswer'] = $this->general->getUserLastQuestions($user['id']);
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
             $result['institue'][] = ($user['is_approve'] == 1 ? $user['institue'] : null);
             $result['UserInfo'][] = $all->toArray();

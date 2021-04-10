@@ -104,15 +104,28 @@ class GeneralRepository implements GeneralRepositoryInterface
 
     public function storeAnswer($data)
     {
-        $answer = new $this->answer;
-        $answer->answer_id = $data['answer_id'];
-        $answer->user_id = Auth::user()->id;
-        $answer->save();
+        $totalScore = 0;
+        $max = $this->answer->max('set_no');
+        if (empty($max)) {
+            $max = 0;
+        }
 
-        $score = $this->scale_question_answer->find($data['answer_id']);
-        $tips = $this->scale_tips->where('min_value', '<=', $score->score)->where('max_value', '>=', $score->score)->first();
+        $max += 1;
+        
+        foreach ($data['answer_id'] as $key => $value) {
+            $answer = new $this->answer;
+            $answer->answer_id = $value;
+            $answer->user_id = Auth::user()->id;
+            $answer->set_no = $max;
+            $answer->save();
 
-        return [ 'tbl_score' => [ [ 'score' => $score->score ] ], 'details' => [  $tips ] ];
+            $score = $this->scale_question_answer->find($value);
+            $totalScore = $totalScore + $score->score;
+        }
+        
+        $tips = $this->scale_tips->where('min_value', '<=', $totalScore)->where('max_value', '>=', $totalScore)->where('lflag', $data['lflag'])->first();
+
+        return [ 'tbl_score' => [ [ 'score' => $totalScore ] ], 'details' => [  $tips ] ];
     }
 
     public function getSubsciptions()
@@ -339,5 +352,14 @@ class GeneralRepository implements GeneralRepositoryInterface
         }
 
         return true;
+    }
+
+
+    public function getUserLastQuestions($user_id)
+    {
+        $ans = $this->answer->where('user_id', $user_id)->orderBy('id', 'DESC')->first();
+        $allAnswers = $this->answer->where('user_id', $user_id)->where('set_no', (!empty($ans) ? $ans->set_no : ''))->get();
+
+        return $this->question->whereIn('id', $allAnswers->pluck('answer')->flatten()->pluck('question_id'))->get();
     }
 }
