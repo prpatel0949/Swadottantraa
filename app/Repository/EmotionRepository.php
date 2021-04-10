@@ -36,7 +36,7 @@ class EmotionRepository implements EmotionRepositoryInterface
 
             $emg = $this->user_emotion_injury->where('user_id', $user_id)->orderBy('id', 'DESC')->first();
 
-            return $this->emotion_injury->where('id', (!empty($emg) ? $emg->id : ''))->get();
+            return $this->emotion_injury->where('id', (!empty($emg) ? $emg->emotional_injury_id : ''))->get();
         }
         return $this->emotion_injury->all();
     }

@@ -139,8 +139,9 @@ class ClientController extends Controller
             $user = collect($this->client->all([ 'email' => $request->username ])->first()->toArray());
             $token = collect($token);
             $all = $user->merge($token);
-
+    
             $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries($user['id']);
+            
             $result['Questions'] = $questions;
             $result['Answers'] = $questions->pluck('answers');
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
