@@ -1,18 +1,18 @@
 @extends('layouts.default')
 
-@section('title', 'PsyTele')
+@section('title', 'SwaTele')
 
 @section('content')
 <div class="header-space" >
     <div class="container">
         <section class="section">
-            <div class="page-title">PsyTele</div>
+            <div class="page-title">SwaTele</div>
             <div class="section-content">
-                <p><b class="text-primary">PsyTele</b> is designed for Psychiatric services over the Telephone.</p>
+                <p><b class="text-primary">SwaTele</b> is designed for Psychiatric services over the Telephone.</p>
                 <p>In today’s era, we have less number of Psychiatrists than what one need. And, in most of the cases, even the geographical barrier has created a big trouble.</p>
-                <p>To cater and solve this purpose, we have come up with the PsyTele Application which one Psychiatrist can give to his patients for further OPD services sitting back home over the Internet. Where one can save time and money for the travelling and repeated consultations. </p>
-                <p>Through PsyTele, We, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management.</p>
-                <p>PsyTele connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients. </p>
+                <p>To cater and solve this purpose, we have come up with the SwaTele Application which one Psychiatrist can give to his patients for further OPD services sitting back home over the Internet. Where one can save time and money for the travelling and repeated consultations. </p>
+                <p>Through SwaTele, We, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management.</p>
+                <p>SwaTele connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients. </p>
                 <div class="page-subtitle">Features:</div>
                 <ul>
                     <li>A telemedicine tool integration for EzeeMedNote (Electronic Medical Record system by Swa.tantraa)</li>
@@ -23,9 +23,9 @@
                     <li>Facility to take appointments and make advance payments digitally</li>
                     <li>Clients get real time prescription readily in their app and can choose pharmacy for the home delivery of the prescription</li>
                 </ul>
-                <div class="page-subtitle">Steps to Use PsyTele:</div>
+                <div class="page-subtitle">Steps to Use SwaTele:</div>
                 <ol>
-                    <li>User can download the PsyTele App from Google Play Store and Sign Up for Free.</li>
+                    <li>User can download the SwaTele App from Google Play Store and Sign Up for Free.</li>
                     <li>Use the code provided by your Psychiatrist to login</li>
                     <li>Fill up the form and create an appointment. Select the available time slot to connect for the online session </li>
                     <li>Connect over a video call and share the details with your Psychiatrist</li>

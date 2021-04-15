@@ -10307,13 +10307,13 @@ img.check_img {
 }
 
 .contact-map {
-    height: 300px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     border-radius: 1.2rem;
     background-position: center;
     background-size: cover;
     z-index: 2;
     position: relative;
+    overflow: hidden;
 }
 
 select.form-control {
