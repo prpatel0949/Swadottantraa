@@ -16,7 +16,8 @@
                             <div class="card-body">
                                 <div class="h120 d-flex align-items-center justify-content-center">
                                      <div class="result_number">
-                                        @if ($total >= 9 && $total <= 14)
+                                         {{ (!empty($inter) ? $inter->interpretation : '') }}
+                                        {{-- @if ($total >= 9 && $total <= 14)
                                             Very Low
                                         @elseif ($total >= 15 && $total <= 19)
                                             Medium
@@ -26,7 +27,7 @@
                                             Very High
                                         @elseif ($total > 30)
                                             Danger
-                                        @endif
+                                        @endif --}}
                                      </div>
                                 </div>
                             </div>

@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $users = $this->user->clients(1, $request->all());
+        $users = $this->user->clients(15, $request->all());
 
         if ($request->ajax()) {
             return Response::json(View::make('franchisee.client_list', array('users' => $users))->render());

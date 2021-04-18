@@ -52,4 +52,10 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::get('leads', 'ContactUsController@index')->name('leads');
     Route::get('leads/list', 'ContactUsController@list')->name('leads.list');
     Route::post('lead/{id}/change_status', 'ContactUsController@changeStatus')->name('lead.change_Status');
+
+    Route::get('selfi/program', 'SelfiController@index')->name('selfi_program');
+    Route::post('selfi/program/update', 'SelfiController@update')->name('selfi_program.update');
+
+    Route::get('selfi/interpretation', 'SelfiController@interpretation')->name('selfi.interpretation');
+    Route::post('selfi/interpretation/update', 'SelfiController@interpretationUpdate')->name('selfi.interpretation.update');
 });

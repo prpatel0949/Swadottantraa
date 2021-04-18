@@ -38,13 +38,13 @@ class ProgramController extends Controller
     public function storeRecommandProgram(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
+            'user_id.*' => 'required',
             'program_id' => 'required|array'
         ]);
         
         $this->program->recommandProgram($request->all());
 
-        return redirect()->route('recommand.program')->with('success', 'Program recommanded Successfully.');
+        return redirect()->route('franchisee.recommand.program')->with('success', 'Program recommanded Successfully.');
     }
 
     public function editRecommandProgram($id)
@@ -59,12 +59,12 @@ class ProgramController extends Controller
     public function updateRecommandProgram(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
+            'user_id' => 'required|array',
             'program_id' => 'required|array'
         ]);
         
         $this->program->updateRecommandProgram($request->all(), $id);
 
-        return redirect()->route('recommand.program')->with('success', 'Program recommanded updated Successfully.');
+        return redirect()->route('franchisee.recommand.program')->with('success', 'Program recommanded updated Successfully.');
     }
 }
