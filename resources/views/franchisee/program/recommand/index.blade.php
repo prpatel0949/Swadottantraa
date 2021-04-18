@@ -39,7 +39,7 @@
                                     @foreach ($programs as $key => $item)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->user->name }}</td>
+                                            <td>{{ recommanded_user($item->set_no) }}</td>
                                             <td>{{ recommanded_program($item->set_no) }}</td>
                                             <td>
                                                 <a href="{{ route('franchisee.recommand.program.edit', $item->id) }}"><i class="fa fa-edit"></i></a>

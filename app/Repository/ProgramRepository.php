@@ -652,12 +652,15 @@ class ProgramRepository implements ProgramRepositoryInterface
         }
         $set_no = $set_no + 1; 
         foreach ($data['program_id'] as $program) {
-            $recommand_program = new $this->recommand_program;
-            $recommand_program->program_id = $program;
-            $recommand_program->set_no = $set_no;
-            $recommand_program->user_id = $data['user_id'];
-            $recommand_program->added_by = Auth::user()->id;
-            $recommand_program->save();
+
+            foreach ($data['user_id'] as $user) {
+                $recommand_program = new $this->recommand_program;
+                $recommand_program->program_id = $program;
+                $recommand_program->set_no = $set_no;
+                $recommand_program->user_id = $user;
+                $recommand_program->added_by = Auth::user()->id;
+                $recommand_program->save();
+            }
         }
 
         return true;
@@ -679,17 +682,20 @@ class ProgramRepository implements ProgramRepositoryInterface
         $program = $this->recommand_program->find($id);
         $allPrograms = [];
         foreach ($data['program_id'] as $program_id) {
-            $cprogram = $this->recommand_program->where([ 'program_id' => $program_id, 'user_id' => $data['user_id'], 'set_no' => $program->set_no ])->first();
-            if (empty($cprogram)) {
-                $cprogram = new $this->recommand_program;
-                $cprogram->program_id = $program_id;
-                $cprogram->user_id = $data['user_id'];
-                $cprogram->set_no = $program->set_no;
-                $cprogram->added_by = Auth::user()->id;
-                $cprogram->save();
-            }
 
-            $allPrograms[] = $cprogram->id;
+            foreach ($data['user_id'] as $user) {
+                $cprogram = $this->recommand_program->where([ 'program_id' => $program_id, 'user_id' => $user, 'set_no' => $program->set_no ])->first();
+                if (empty($cprogram)) {
+                    $cprogram = new $this->recommand_program;
+                    $cprogram->program_id = $program_id;
+                    $cprogram->user_id = $user;
+                    $cprogram->set_no = $program->set_no;
+                    $cprogram->added_by = Auth::user()->id;
+                    $cprogram->save();
+                }
+
+                $allPrograms[] = $cprogram->id;
+            }
         }
 
         $this->recommand_program->where('set_no', $program->set_no)->whereNotIn('id', $allPrograms)->delete();

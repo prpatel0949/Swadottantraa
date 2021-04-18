@@ -10,7 +10,7 @@ if (!function_exists('recommanded_program')) {
     function recommanded_program($set_no)
     {
         $programs = RecommandedProgram::where('set_no', $set_no)->get();
-        return $programs->pluck('program')->flatten()->implode('title', ' ,');
+        return $programs->pluck('program')->flatten()->unique()->implode('title', ' ,');
     }
 }
 
@@ -95,5 +95,13 @@ if (!function_exists('gratitude_tracker_anaysis')) {
         }
         return number_format(($sleeps->sum('score') / 15) * 100, 2, '.', '');
     //    return $sleeps->sum('score') / $sleeps->count();
+    }
+}
+
+if (!function_exists('recommanded_user')) {
+    function recommanded_user($set_no)
+    {
+        $programs = RecommandedProgram::where('set_no', $set_no)->get();
+        return $programs->pluck('user')->flatten()->unique()->implode('name', ' ,');
     }
 }

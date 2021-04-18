@@ -78,7 +78,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-3 mt-4">
                         <a href="{{ route('selfie.program') }}" class="card shadow card-withhover bg-primary">
-                            <div class="text-center card-body pl-1 pr-1"><b>df Addiction Severity profile</b></div>
+                            <div class="text-center card-body pl-1 pr-1"><b>Personal Habits</b></div>
                         </a>
                     </div>
                     <div class="col-sm-3 mt-4">

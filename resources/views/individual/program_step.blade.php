@@ -147,7 +147,7 @@
                                                                 <div class="dropdown-divider"></div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <h3>Doctor Comment</h3>
+                                                                        <h3>Expert's Comment</h3>
                                                                     </div>
                                                                 </div>
                                                                 @foreach ($comments as $key => $comment)

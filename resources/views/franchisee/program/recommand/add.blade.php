@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">User</label>
-                                    <select name="user_id" class="form-control select2" style="width: 100%" required>
+                                    <select name="user_id[]" class="form-control select2" style="width: 100%" required multiple>
                                         <option value="">Select User</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>

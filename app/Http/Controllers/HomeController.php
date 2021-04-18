@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Session;
 use App\User;
 use App\ContactUs;
+use App\SelfiProgram;
+use App\SelfiInterpretation;
 use Illuminate\Http\Request;
 use App\Repository\Interfaces\FAQRepositoryInterface;
 use App\Repository\Interfaces\GeneralRepositoryInterface;
@@ -133,7 +135,7 @@ class HomeController extends Controller
 
     public function selfieProgram()
     {
-        return view('selfie_program');
+        return view('selfie_program', [ 'questions' => SelfiProgram::all() ]);
     }
 
     public function selfieResult(Request $request)
@@ -144,7 +146,7 @@ class HomeController extends Controller
                 $total += $request->{'question'.$i};
             }
         }
-
-        return view('result', [ 'total' => $total ]);
+        $inter = SelfiInterpretation::where('min', '<=', $total)->where('max', '>=', $total)->first();
+        return view('result', [ 'inter' => $inter ]);
     }
 }

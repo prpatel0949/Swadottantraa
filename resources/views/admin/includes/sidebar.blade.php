@@ -52,6 +52,14 @@
             </li>
             <li class="{{ (request()->is('admin/leads*')) ? 'active' : '' }}"><a href="{{ route('leads') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Leads</span></a>
             </li>
+            <li class="{{ (request()->is('admin/selfi/program*') || request()->is('admin/selfi/program*')   ? 'active' : '') }} nav-item"><a href="#"><i class="feather icon-circle"></i><span class="menu-title" data-i18n="User">Selfi</span></a>
+                <ul class="menu-content">
+                    <li class="{{ (request()->is('admin/selfi/program*') ? 'active' : '') }}"><a href="{{ route('selfi_program') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="List">Program</span></a>
+                    </li>
+                    <li class="{{ (request()->is('admin/selfi/interpretation*') ? 'active' : '') }}"><a href="{{ route('selfi.interpretation') }}"><i class="feather icon-minus"></i><span class="menu-item" data-i18n="View">Interpretation</span></a>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
