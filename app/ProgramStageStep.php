@@ -99,10 +99,8 @@ class ProgramStageStep extends Model
         }
 
         $per = ($used / $total) * 100;
-        if ($per >= 80) {
-            $per = 100;
-        } else {
-            $per = $per + 20;
+        if ($per == 0) {
+            $per = 20;
         }
         return number_format($per, 2, '.', '');
 
