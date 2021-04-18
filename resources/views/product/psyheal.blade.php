@@ -56,6 +56,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="img-slider-item p-3">
+                                <div class="img-slider-content">
+                                    <div class="card shadow mb-0">
+                                        <img class="img-fluid border-rounded" src="./assets/img/swaheal_1.jpg" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,7 +148,7 @@
 
 		//  Common
 		$(".img-slider").slick({
-			slidesToShow: 3,
+			slidesToShow: 4,
 			slidesToScroll: 1,
 			prevArrow: '<button class="img-slider-nav img-slick-prev"><i class="fa fa-angle-left"></i></button>',
 			nextArrow: '<button class="img-slider-nav img-slick-next"><i class="fa fa-angle-right"></i></button>',

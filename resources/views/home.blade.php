@@ -162,10 +162,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify order-2">
-                                <div class="page-title">PsyTele</div>
+                                <div class="page-title">SwaTele</div>
                                 <p>Erase the distance and create the trust!</p>
-                                <p>Through <b class="text-primary">PsyTele</b>, We Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management..</p>
-                                <p> <b class="text-primary">PsyTele</b> connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients.</p>
+                                <p>Through <b class="text-primary">SwaTele</b>, We Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management..</p>
+                                <p> <b class="text-primary">SwaTele</b> connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients.</p>
                                 <a href="{{ url('psytele') }}" class="btn btn-primary">Read More</a>
                             </div>
                             <div class="col-sm-4 product-img">
@@ -325,7 +325,9 @@
 
     <section class="section section-map">
         <div class="container">
-            <div id="googleMap" class="contact-map"></div>
+            <div id="" class="contact-map">
+                <img class="img-fluid" src="./assets/img/map.png" alt="">
+            </div>
         </div>
     </section>
 
@@ -458,7 +460,7 @@
 			<div class="modal-content">
 				<div class="modal-header align-items-center" style="padding-top: 0; padding-bottom: 0;">
 					<img src="{{ asset('assets/av1.gif') }}" style="width: 40px; margin-right: 10px;border-radius: 50%;" />
-					<h5 class="modal-title">Wellness status <span class="question_count" style="display: none">(<span class="question_number"></span> out of 5)</span></h5>
+					<h5 class="modal-title">WELLNESS STATUS <span class="question_count" style="display: none">(<span class="question_number"></span> out of 5)</span></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
