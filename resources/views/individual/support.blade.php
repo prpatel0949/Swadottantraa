@@ -42,8 +42,8 @@
                         		<div class="form-group">
                                     <div class="controls">
                                         <label for="description">Your Message</label>
-                                        <textarea type="text" class="form-control" name="description" rows="5" maxlength="200" id="description" placeholder="Your Message"></textarea>
-                                        <span id="rchars">200</span> <small>characters remaining</small>
+                                        <textarea type="text" class="form-control" name="description" rows="5"  id="description" placeholder="Your Message"></textarea>
+                                        {{-- <span id="rchars">200</span> <small>characters remaining</small> --}}
                                         @error('description')
                                             <span class="invalid-feedback" role="alert" style="display: block">
                                                 <strong>{{ $message }}</strong>
@@ -111,10 +111,10 @@
     var lastRow;
     let table = $('#tbl').DataTable();
     var maxLength = 200;
-    $('#description').keyup(function() {
-        var textlen = maxLength - $(this).val().length;
-        $('#rchars').text(textlen);
-    });
+    // $('#description').keyup(function() {
+    //     var textlen = maxLength - $(this).val().length;
+    //     $('#rchars').text(textlen);
+    // });
 
     $(document).on('click', '#tbl tbody td.details-control', function(){
         var tr = $(this).closest('tr');
