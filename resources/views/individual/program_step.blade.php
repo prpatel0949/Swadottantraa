@@ -293,6 +293,24 @@
     </div>
 </div>
 
+@if (Session::has('success') && !empty(Session::get('success')))
+<div class="modal fade" id="success_modal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title model_program_title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Keep an eye on all your completed scales and workouts for experts reviews.</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 @endsection
 
 @section('js')
@@ -308,4 +326,11 @@
             $('#' + type + '' + id).submit();
         });
     </script>
+
+    @if (Session::has('success') && !empty(Session::get('success')))
+        <script>
+            $('#success_modal').modal('show');
+        </script>
+    @endif
+
 @endsection

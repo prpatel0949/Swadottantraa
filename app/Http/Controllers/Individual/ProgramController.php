@@ -119,11 +119,14 @@ class ProgramController extends Controller
 
     public function scaleQuestionAnswer(Request $request, $id)
     {
-        if ($this->program->scaleQuestionAnswer($request->all(), $id)) {
-            return redirect()->back()->with('success', 'Answer submited successfully.');
+        $rep = $this->program->scaleQuestionAnswer($request->all(), $id);
+        if ($rep) {
+            return redirect()->back()->with('success', 'Answer submited successfully.')->with('success', 'Keep an eye on all your completed scales and workouts for experts reviews.');
         }
 
-        return redirect()->back()->with('error', 'Something went wrong happen.');
+        return redirect()->back()->with('success', 'Answer submited successfully.');
+
+        // return redirect()->back()->with('error', 'Something went wrong happen.');
     }
 
     public function applyCode(Request $request)
