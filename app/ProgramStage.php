@@ -31,6 +31,11 @@ class ProgramStage extends Model
         if ($total == 0) {
             return 0;
         }
-        return $per = number_format(($used / $total) * 100, 2, '.', '');
+
+        $per = ($used / $total) * 100;
+        if ($per == 0) {
+            $per = 20;
+        }
+        return $per = number_format($per, 2, '.', '');
     }
 }
