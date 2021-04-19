@@ -452,6 +452,7 @@ class ProgramRepository implements ProgramRepositoryInterface
     public function scaleQuestionAnswer($data, $id)
     {
         try {
+            $is_finish = 0;
             $setno = $this->answer->max('set_no');
             $setno = (empty($setno) ? 1 : $setno + 1);
             if (isset($data['scale_id'])) {
@@ -492,7 +493,15 @@ class ProgramRepository implements ProgramRepositoryInterface
                 }
             }
 
-            return true;
+
+            $lst = $this->answer->orderBy('id', 'DESC')->first();
+            if (!empty($lst)) {
+                if ($lst->program->type == 1 && $lst->is_draft == 0) {
+                    $is_finish = 1;
+                }
+            }   
+
+            return $is_finish;
 
 
         } catch (Exception $ex) {
