@@ -11,7 +11,7 @@
                 <p><b class="text-primary">SwaTele</b> is designed for Psychiatric services over the Telephone.</p>
                 <p>In today’s era, we have less number of Psychiatrists than what one need. And, in most of the cases, even the geographical barrier has created a big trouble.</p>
                 <p>To cater and solve this purpose, we have come up with the SwaTele Application which one Psychiatrist can give to his patients for further OPD services sitting back home over the Internet. Where one can save time and money for the travelling and repeated consultations. </p>
-                <p>Through SwaTele, We, Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management.</p>
+                <p>Through SwaTele, We Offer the value-based care goals of patient engagement, expanded hours for care, care coordination and time, cost effectiveness in health management.</p>
                 <p>SwaTele connects Psychiatrists, Psychotherapists, Physicians, Pharmacists and the Clients. </p>
                 <div class="page-subtitle">Features:</div>
                 <ul>

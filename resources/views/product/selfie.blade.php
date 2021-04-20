@@ -9,7 +9,7 @@
             <div class="page-title">Selfie</div>
             <div class="section-content">
                 <p>If a person wishes to engender self-improvement, he or she must seek an authentic conversation
-                    with the self. With <b class="text-primary">SELFIE</b> you can use the lens of your hearts to
+                    with the self. With <b class="text-primary">SELFIE</b>, you can use the lens of your hearts to
                     see the state of your souls.</p>
                 <p>A self‐evaluation is a great opportunity for everybody to honestly and objectively consider and
                     document their status.</p>
