@@ -10266,8 +10266,11 @@ img.check_img {
     }
 }
 .testimonial-slider .img-slider-content {
-    height: 155px;
+    height: 280px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .social-item {
@@ -10767,5 +10770,5 @@ input.error {
 }
 
 .section-testimonial .img-slider-flipper {
-    min-height: 250px;
+    min-height: 350px;
 }

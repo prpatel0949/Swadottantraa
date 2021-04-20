@@ -235,16 +235,35 @@
                                 <div class="img-slider testimonial-slider">
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>I am very satisfied with the services here. I am changing my thought process for the better and I have learned strategies to better cope with my stress.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Mr Shreedhar N</div>
                                     </div>
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>I will have to say that coming to the Brain &amp; Mind Gym has been awesome; my life has been so good since I have started to come here. I have learned how to deal with stress and how to handle tough problems. I learned not to let people bother me and to just move on with life.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Ms Gargi P</div>
                                     </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>I feel much better after my guided self-help sessions. It is vital to take care of oneself and I am learning to do just that. Theses sessions allow me to go deeper into self-examination and use the necessary tools to continue that sense of well-being.<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Mr Rujul A.</div>
+                                    </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>I can’t believe where I am now compared to few months ago.  My business is thriving, I have just started a new relationship and my confidence is growing daily<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Mr Anonymous</div>
+                                    </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>An admirable project for mind-cultivation!<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Ms Karanjkar S</div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -258,15 +277,15 @@
                                 <div class="img-slider testimonial-slider">
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>It is an awesome blend of thoughtful techniques and digital technology for emotional wellness!<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Ms Smita Godase, SAA, Pune</div>
                                     </div>
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>Our institute, Yashashree academy had a wonderful collaboration with the Swa dot Tantraa Wellness. They strived to understand our goals and customized their program to meet the needs of our Institute. Their content experts were friendly, outgoing and compassionate which provided an encouraging and supportive experience to program participants. We look forward to working with Swa dot Tantraa Wellness in the future to further support the emotional and mental well-being of our institute.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Mr Kiran Bhosle, Yasharee Academy</div>
                                     </div>
                                 </div>
                             </div>
@@ -281,15 +300,21 @@
                                 <div class="img-slider testimonial-slider">
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>SwaDocs and its Tele-mental Health feature (SwaTele) helped me a lot to provide my clients in rural areas the much needed easy access to mental health services.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Dr Nikam C</div>
                                     </div>
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>SwaDocs and SwaTele are extremely advanced yet very easy to use facilities for doctors who wish to provide authentic tele-medicine services in India!<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Geetanjali Hospital</div>
+                                    </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>The SwaDocs software is amazing. It provides comprehensive solution for clinic management including appointment scheduling, online appointment management, patient records management, lab-reports, billing and prescriptions. Their support system is also very good. This is one software which I would recommend to every doctor to manage his or her practice<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Dr Suhas P</div>
                                     </div>
                                 </div>
                             </div>

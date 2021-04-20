@@ -68,7 +68,7 @@
                     <div class="row justify-content-center">
                         <div class="col-sm-8">
                             <video class="video-item" controls>
-                                <source src="./assets/vid.mp4" type="video/mp4">
+                                <source src="./assets/selfie.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
