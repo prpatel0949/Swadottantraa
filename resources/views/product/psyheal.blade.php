@@ -33,6 +33,13 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-8">
                         <div class="img-slider">
+                            <div class="img-slider-item p-3">
+                                <div class="img-slider-content">
+                                    <div class="card shadow mb-0">
+                                        <img class="img-fluid border-rounded" src="./assets/img/swaheal_1.jpg" />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="img-slider-item">
                                 <div class="img-slider-content p-3">
                                     <div class="card shadow mb-0">
@@ -56,13 +63,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="img-slider-item p-3">
-                                <div class="img-slider-content">
-                                    <div class="card shadow mb-0">
-                                        <img class="img-fluid border-rounded" src="./assets/img/swaheal_1.jpg" />
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
