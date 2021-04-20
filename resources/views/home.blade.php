@@ -364,7 +364,7 @@
                     <div class="col-lg-7">
                         <div class="card shadow h-100">
                             <div class="card-body h-100 contact-form-card">
-                                <p class="text-center">We <i class="fa fa-heart text-danger"></i> hearing our visitors. Feel free toshare your queries/thoughts.</p>
+                                <p class="text-center pt-3 pb-3">We <i class="fa fa-heart text-danger"></i> hearing our visitors. Feel free toshare your queries/thoughts.</p>
                                 <form action="{{ route('contact.us') }}" method="post" id="contact_form">
                                     @csrf
                                     <div class="row">
@@ -437,7 +437,10 @@
                                 <div class="d-flex flex-column justify-content-between h-100">
                                     <div class="d-flex align-items-center">
                                         <div class="contact-icon"><i class="fa fa-map-marker"></i></div>
-                                        <div class="contact-detail">Rukminikunj <br> 599, Guruwar Peth, Satara 415002</div>
+                                        <div class="contact-detail">
+                                            <div class="mb-2"><b>Head Office :</b> Bestla Industries Private Limited, Level 1, Lane 1, NDA Pashan Link Road, Bavdhan, Pune - 411021</div>
+                                            <div><b>Research Unit :</b> Rukminikunj <br> 599, Guruwar Peth, Satara 415002</div>
+                                        </div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="d-flex align-items-center">
@@ -447,7 +450,7 @@
                                     <div class="dropdown-divider"></div>
                                     <div class="d-flex align-items-center">
                                         <div class="contact-icon"><i class="fa fa-phone"></i></div>
-                                        <div class="contact-detail">+91 (2162) 228201</div>
+                                        <div class="contact-detail">+91 (0)20 2295 1919 | +91 (2162) 228201</div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="d-flex align-items-center">
