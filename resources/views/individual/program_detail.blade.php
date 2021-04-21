@@ -18,7 +18,7 @@
         </div>
     	<div class="content-body">
             <div class="cs_program_title_section">
-                <div class="cs_program_img" style="background-image: url(https://via.placeholder.com/80)"></div>
+                <div class="cs_program_img" style="background-image: url({{ Storage::url($program->image) }})"></div>
                 <div class="cs_program_title">{{ $program->title }}</div>
             </div>
             <div class="card">
