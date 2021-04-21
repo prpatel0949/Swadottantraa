@@ -8,16 +8,11 @@
         <section class="section">
             <div class="page-title">SwaHeal</div>
             <div class="section-content">
-                <p>SwaHeal is a unique mobile app for Emotional First Aid developed by experienced and qualified mental health professionals.</p>
-                <p>Emotional First Aid is like Physical First Aid. We use and apply first aid measures like bandages, ointments, etc to protect further damage to health in case of injuries. If we fail to develop, maintain and strengthen our emotional health, we are likely to suffer from a lower quality of life. So, we must have some handy, easy yet effective psychological measures in case of day-to-day emotional injuries like frustrations, failures, stress, worries, rejections, anger, loss etc.</p>
-                <p>SwaHeal is a self-help tool for Emotional First Aid. Here you will get personalized first aid measures depending upon:</p>
-                <ul>
-                    <li>Your emotional injury</li>
-                    <li>Its severity</li>
-                    <li>Painful emotion associated with it and</li>
-                    <li>Reason behind emotional injury you have.</li>
-                </ul>
-                <p>In today’s competitive world no one can escape the various stresses that we are exposed to in different situations. And we are no exception to this; in fact we might be at a higher risk of being stressed. The various stresses that we come across are:</p>
+                <p>SwaHeal is a unique mobile app for Emotional First Aid, developed by experienced and qualified mental health professionals.</p>
+                <p>Emotional First Aid is like physical first-aid which we use and apply in the form of bandages, ointments, etc to protect further damage in case of injuries. Similarly, we must have some handy and easy yet effective psychological measures in case of day-to-day emotional injuries like frustrations, failures, stress, worries, rejections, anger, loss etc.</p>
+                <p>If we fail to timely develop, maintain and strengthen our emotional health, we are likely to suffer from a lower quality of life.</p>
+                <p>In today’s competitive world no one can escape the various stresses that we are exposed to in different situations.</p>
+                <p>The various stresses that we come across are:</p>
                 <ul>
                     <li>Personal stress</li>
                     <li>Relationship stress</li>
@@ -26,8 +21,7 @@
                     <li>Exam stress</li>
                     <li>Peer pressure</li>
                 </ul>
-                <p>And the list goes on. Notably most of us do not talk about these issues as we feel shy, embarrassed or simply cannot identify that we need help for dealing with these issues. And it is a well-known fact that these kinds of hidden issues surely impact our performance.</p>
-
+                <p>And the list goes on. Notably, most of us do not talk about these issues as we feel shy, embarrassed or simply cannot identify that we need help for dealing with these issues. And it is a well-known fact that these kinds of hidden issues surely impact our performance, unless we develop a healthy life-style.</p>
             </div>
             <div class="section-content">
                 <div class="row justify-content-center">
@@ -71,21 +65,20 @@
 
             <div class="section-content">
                 <div class="page-subtitle">Mood Tracker</div>
-                <p>Mood Track is an attractive, easy measure for development of Emotional Awareness, which is one of the components of Emotional Intelligence. You just have to click the most approximate label for your current emotion from the list. PsyHeal will tirelessly give you feedback of your emotional island over a large time scale, in the form of Healthy and Unhealthy emotions. With this simple exercise, your brain will experientially learn to connect with, identify and differentiate your emotions.</p>
+                <p>Mood Track is an attractive, easy measure for development of Emotional Awareness, which is one of the components of Emotional Intelligence. You just have to click the most approximate label for your current emotion from the list. SwaHeal will tirelessly give you feedback of your emotional island over a large time scale, in the form of Healthy and Unhealthy emotions. With this simple exercise, your brain will experientially learn to connect with, identify and differentiate your emotions.</p>
 
                 <div class="page-subtitle">Exercise Tracker</div>
-                <p>Exercise is the miracle cure we have all been waiting for. It is free, easy to start, has few side effects when done properly, and does not need a prescription. If exercise were a drug, it would be the most cost-effective medicine of all time.</p>
-                <p>Being physically active has an overwhelming number of attached benefits, such as helping you maintain a healthy weight, strengthening your heart, improving lung function, and reducing your risk for coronary heart disease. Furthermore, physical activity lowers your risk of depression, cognitive decline, diabetes, and cancer.</p>
-                <p>SwaHeal Exercise Tracker will help to track the timeline of the Physical and Mental Exercise. Along with that, one can check the productivity which will help to lead a Healthy life.</p>
+                <p>Exercise is a powerful tool that can help you take control of your physical and mental health. Regular Physical and Mental exercise can improve your health and quality of life; but it is important to develop the habit of exercising.</p>
+                <p>Three simple steps have helped many people stick with healthy lifestyle  - Set realistic goals, Reward yourself, and Establish a buddy system. Our Exercise Tracker does exactly the same for you!</p>
 
                 <div class="page-subtitle">Sleep Tracker</div>
-                <p>SwaHeal Sleep Tracker will help you to shine a light on your sleeping patterns. It will routinise your sleeping pattern and ultimately you will course correct your sleep if necessary. SwaHeal Sleep Tracker will help you to calculate your sleep debt so that you can manage your sleep well.</p>
+                <p>SwaHeal Sleep Tracker will help you to shine a light on your sleeping patterns. It will routinize your sleeping pattern and ultimately you will course correct your sleep if necessary. Based upon your age, SwaHeal Sleep Tracker will help you to calculate your sleep debt, so that you can manage your sleep well.</p>
 
                 <div class="page-subtitle">Gratitude Tracker</div>
-                <p>Out of all the trackers, the most unique tracker you will find in the SwaHeal is a Gratitude Tracker. Here, you can check your activity score, by simply answering about the best thing that happened to you in the past 24 hours, to whom you are thankful in your life at present, what thing in your life is going well at the moment and what is something that you take for granted in everyday’s life. Once you submit all the answers, it will be recorded and evaluated successfully. After evaluation, your activity score will be calculated.</p>
+                <p>Compassion is incredibly important in times of great stress in society. Compassion involves caring acceptance of ourselves and gratitude for our world. The most unique tracker you will find in the SwaHeal is a Gratitude Tracker. Here, you can check your compassion activity score, by simply answering just a few questions about your life.</p>
 
-                <div class="page-subtitle">Heal Emotional Injuries</div>
-                <p>It is again an attractive measure to heal your Emotional Injuries. You just have to select the most approximate Injury label, set the emotional thermometer, and select the level of Intensity of emotional pain and the reason for emotional injury. With this simple exercise you will be able to access the First Aid Box which is specifically designed by professionals to heal the emotional injuries.</p>
+                <div class="page-subtitle">First-aid Box</div>
+                <p>It is again an attractive measure to heal your Emotional Injuries. You just have to select the most approximate emotional injury label, set the emotional thermometer, and select the reason for emotional injury. With this simple input you will be able to access our unique, personalised Emotional First Aid Box which is specifically designed by professionals to heal the emotional injuries.</p>
 
                 <div class="page-subtitle">Useful Links</div>
                 <p>We have important and reliable resources to provide you useful information about mental health. You can access links to them through the app.</p>
@@ -129,7 +122,7 @@
                 <div class="page-subtitle">Are you an Institute?</div>
                 <div class="d-flex mt-3">
                     <div class="ml-3 mr-3">-</div>
-                    <div>We cater to a big pool of Institutes and MNCs by providing bulk subscriptions so as to develop their heads (Students, Employees, Staff) and stimulate mental wellbeing to Increase their productivity</div>
+                    <div>We cater to a big pool of Institutes and MNCs by providing bulk subscriptions so as to develop their heads (Students, Employees, Staff) and stimulate mental wellbeing to Increase their productivity.</div>
                 </div>
                 <p class="mt-3">To buy bulk users at special rates - <a class="text-primary" href="./#contact"><b>Click here</b></a></p>
 
