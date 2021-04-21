@@ -122,7 +122,7 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span>Total Payable</span>
-                                        <strong>$<span class="modal_program_payable">0.00</span></strong>
+                                        <strong>₹<span class="modal_program_payable">0.00</span></strong>
                                     </li>
                                 </ul>
                             </div>

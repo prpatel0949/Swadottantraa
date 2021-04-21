@@ -303,8 +303,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>Keep an eye on all your completed scales and workouts for experts reviews.</p>
+            <div class="modal-body text-center">
+                <p class="text-center">Keep an eye on all your completed scales and workouts for experts reviews.</p>
             </div>
         </div>
     </div>
