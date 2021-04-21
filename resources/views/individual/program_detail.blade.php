@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-1">
                     <div class="media">
-                        <img src="http://127.0.0.1:8000/storage/programs/wqtz4haDUN5FpaD1ixz30W0JKl9hlQKG36SOUkNh.gif" class="rounded mr-75" alt="profile image" height="64" width="64">
+                        <img src="{{ Storage::url($program->image) }}" class="rounded mr-75" alt="profile image" height="64" width="64">
                     </div>
                 </div>
                 <div class="col-md-11">
