@@ -11,9 +11,9 @@
                         Welcome to Swa<span class="text-primary"><small class="logo-dot-hero"><i class="fa fa-circle"></i></small></span>Tantraa
                     </div>
                     <div class="hero-subtitle">
-                        The Difference between who you are and who you want to be is what you do. Work on yourself and the rest will follow!
+                        The difference between Who You Are And Who You Want To Be is What You Do. Work on yourself and the rest will follow!
                         <br />
-                        At <b>SWA</b> (<i>self</i>) <b>DOT</b> (<i>digital</i>) <b>TANTRAA</b> (<i>techniques</i>), we help you, to help yourself!
+                        At <b>SWA</b> <i>(self)</i> <b>DOT</b> <i>(digital)</i> <b>TANTRAA</b> <i>(techniques)</i>, we help you to help yourself!
                     </div>
                 </div>
                 <div class="col-sm-4 sm-align-self-start">
@@ -35,9 +35,9 @@
                     <div class="section-title">
                         About <span class="text-primary">Us</span>
                     </div>
-                    <div class="section-content">
+                    <div class="section-content text-justify">
                         <p>
-                        <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD</b> provides comprehensive solutions for mental wellbeing. SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help for wellbeing with the help of technological tools. It is a beacon of light and trusted friend for those with wellness concerns. At SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA we have experts with more than 25 years of experience in providing  mental health and wellness with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also in preventive and positive mental health.
+                        <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA WELLNESS PVT LTD</b> provides comprehensive solutions for mental wellbeing. <b class="text-primary">SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help for wellbeing with the help of technological tools</b>. It is a beacon of light and trusted friend for those with wellness concerns. At SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA we have experts with more than 25 years of experience in providing  mental health and wellness with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also in preventive and positive mental health.
                         </p>
                         <!-- <p>Established in 2018, <b class="text-primary">Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa</b> provides comprehensive solutions for mental wellbeing. SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA means self-help regarding wellbeing with the help of technological tools.</p>
                         <p>It is beacon of light and trusted friend for those with mental health concerns. Mental health is just as important as one's physical health and yet, most of us are not mindful about the quality of our life. At SWA <small class="logo-dot-text"><i class="fa fa-circle"></i></small> TANTRAA we have experts with 25 years of experience in treating mental health and related issues with psycho-social modalities. Our expertise lies not only in treatment of mental illness, but also preventive and positive mental health.</p> -->
@@ -56,7 +56,7 @@
             <div class="section-content">
                 <div class="row justify-content-center">
                     <div class="col-sm-9 text-center">
-                        We Offer multiple Products and Services for Individuals, Institutes and Healthcare Professionals. Kindly check below what suits you the most.
+                        We Offer multiple products and services for Individuals, Institutes and Healthcare Professionals. Kindly check below what suits you the most.
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
     <section class="section section-who-am-i" id="product">
         <div class="container">
             <div class="section-title no-decoration">
-                Who <span class="text-primary">I</span> am<span class="text-primary"> ..</span>
+                Who <span class="text-primary">am</span> I<span class="text-primary"> ?</span>
             </div>
             <div class="section-content">
                 <div class="row justify-content-center">
@@ -105,7 +105,7 @@
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify">
                                 <div class="page-title">Brain and Mind Gym</div>
-                                <p>Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa’s <b class="text-primary">Brain & Mind Gym</b> is an International class emotional wellness development solution compliant to WHO & Other international standards and Indian Healthcare IT Standards. Adopting this solution will not only help the organizations to form a conducive and quality environment for the human resource but also will establish the fact that the organization is progressive who understands the importance of emotional well-being of the people.</p>
+                                <p>Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa’s <b class="text-primary">Brain & Mind Gym</b> is an International class for emotional wellness development solution compliant to WHO & Other International standards such as Indian Healthcare IT Standards. Adopting this solution will not only help the organizations to form a conducive and quality environment for the human resource but also will establish the fact that the organization is progressive who understands the importance of emotional well-being of the people.</p>
                                 <a href="{{url('brain-and-mind-gym')}}" class="btn btn-primary">Read More</a>
                             </div>
                             <div class="col-sm-4 product-img">
@@ -124,7 +124,7 @@
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify order-2">
                                 <div class="page-title">SwaHeal</div>
-                                <p><b class="text-primary">SwaHeal</b> is a unique mobile app for Emotional First Aid developed by experienced and qualified mental health professionals.</p>
+                                <p><b class="text-primary">SwaHeal</b> is an unique mobile app for Emotional First Aid developed by experienced and qualified mental health professionals.</p>
                                 <p>Emotional First Aid is like Physical First Aid. We use and apply first aid measures like bandages, ointments, etc to protect further damage to health in case of injuries. If we fail to develop, maintain and strengthen our emotional health, we are likely to suffer from a lower quality of life. So, we must have some handy, easy yet effective psychological measures in case of day-to- day emotional injuries like frustrations, failures, stress, worries, rejections, anger, loss etc.</p>
                                 <a href="{{ url('psyheal') }}" class="btn btn-primary">Read More</a>
                             </div>
@@ -144,7 +144,7 @@
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify">
                                 <div class="page-title">SwaDocs (EMR)</div>
-                                <p>An <b class="text-primary">Electronic Medical Record (EMR)</b> is a digital version of a patient’s paper chart. SwaDocs (EMR) are real-time, patient-centred records that make information available instantly and securely to authorized users. While an SwaDocs (EMR) does contain the medical and treatment histories of patients, an SwaDocs (EMR) system is built to go beyond standard clinical data collected in a provider’s office and can be inclusive of a broader view of a patient’s care. SwaDocs (EMR) are a vital part of health IT and can:.</p>
+                                <p>An <b class="text-primary">Electronic Medical Record (EMR)</b> is a digital version of a patient’s paper chart. SwaDocs (EMR) are real-time, patient-centred records that make information available instantly and securely to authorized users. While an SwaDocs (EMR) does contain the medical and treatment histories of patients, an SwaDocs (EMR) system is built to go beyond standard clinical data collected in a provider’s office and can be inclusive of a broader view of a patient’s care. SwaDocs (EMR) are a vital part of health IT and can.</p>
                                 <a href="{{ url('emr') }}" class="btn btn-primary">Read More</a>
                             </div>
                             <div class="col-sm-4 product-img">
@@ -235,16 +235,35 @@
                                 <div class="img-slider testimonial-slider">
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>I am very satisfied with the services here. I am changing my thought process for the better and I have learned strategies to better cope with my stress.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Mr Shreedhar N</div>
                                     </div>
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>I will have to say that coming to the Brain &amp; Mind Gym has been awesome; my life has been so good since I have started to come here. I have learned how to deal with stress and how to handle tough problems. I learned not to let people bother me and to just move on with life.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Ms Gargi P</div>
                                     </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>I feel much better after my guided self-help sessions. It is vital to take care of oneself and I am learning to do just that. Theses sessions allow me to go deeper into self-examination and use the necessary tools to continue that sense of well-being.<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Mr Rujul A.</div>
+                                    </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>I can’t believe where I am now compared to few months ago.  My business is thriving, I have just started a new relationship and my confidence is growing daily<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Mr Anonymous</div>
+                                    </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>An admirable project for mind-cultivation!<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Ms Karanjkar S</div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -258,15 +277,15 @@
                                 <div class="img-slider testimonial-slider">
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>It is an awesome blend of thoughtful techniques and digital technology for emotional wellness!<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Ms Smita Godase, SAA, Pune</div>
                                     </div>
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>Our institute, Yashashree academy had a wonderful collaboration with the Swa dot Tantraa Wellness. They strived to understand our goals and customized their program to meet the needs of our Institute. Their content experts were friendly, outgoing and compassionate which provided an encouraging and supportive experience to program participants. We look forward to working with Swa dot Tantraa Wellness in the future to further support the emotional and mental well-being of our institute.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Mr Kiran Bhosle, Yasharee Academy</div>
                                     </div>
                                 </div>
                             </div>
@@ -281,15 +300,21 @@
                                 <div class="img-slider testimonial-slider">
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>SwaDocs and its Tele-mental Health feature (SwaTele) helped me a lot to provide my clients in rural areas the much needed easy access to mental health services.<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Dr Nikam C</div>
                                     </div>
                                     <div class="img-slider-item">
                                         <div class="img-slider-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                            <p><big>“</big>SwaDocs and SwaTele are extremely advanced yet very easy to use facilities for doctors who wish to provide authentic tele-medicine services in India!<big>”</big></p>
                                         </div>
-                                        <div class="img-slider-author">John Doe</div>
+                                        <div class="img-slider-author">Geetanjali Hospital</div>
+                                    </div>
+                                    <div class="img-slider-item">
+                                        <div class="img-slider-content">
+                                            <p><big>“</big>The SwaDocs software is amazing. It provides comprehensive solution for clinic management including appointment scheduling, online appointment management, patient records management, lab-reports, billing and prescriptions. Their support system is also very good. This is one software which I would recommend to every doctor to manage his or her practice<big>”</big></p>
+                                        </div>
+                                        <div class="img-slider-author">Dr Suhas P</div>
                                     </div>
                                 </div>
                             </div>
@@ -326,7 +351,7 @@
     <section class="section section-map">
         <div class="container">
             <div id="" class="contact-map">
-                <img class="img-fluid" src="./assets/img/map.png" alt="">
+                <img class="img-fluid" src="./assets/img/map1.png" alt="">
             </div>
         </div>
     </section>
@@ -339,7 +364,7 @@
                     <div class="col-lg-7">
                         <div class="card shadow h-100">
                             <div class="card-body h-100 contact-form-card">
-                                <p class="text-center">We <i class="fa fa-heart text-danger"></i> hearing our visitors. Feel free toshare your queries/thoughts.</p>
+                                <p class="text-center pt-3 pb-3">We <i class="fa fa-heart text-danger"></i> hearing our visitors. Feel free to share your queries/thoughts.</p>
                                 <form action="{{ route('contact.us') }}" method="post" id="contact_form">
                                     @csrf
                                     <div class="row">
@@ -412,17 +437,20 @@
                                 <div class="d-flex flex-column justify-content-between h-100">
                                     <div class="d-flex align-items-center">
                                         <div class="contact-icon"><i class="fa fa-map-marker"></i></div>
-                                        <div class="contact-detail">Rukminikunj <br> 599, Guruwar Peth, Satara 415002</div>
+                                        <div class="contact-detail">
+                                            <div class="mb-2"><b>Head Office :</b> Bestla Industries Private Limited, Level 1, Lane 1, NDA Pashan Link Road, Bavdhan, Pune - 411021</div>
+                                            <div><b>Research Unit :</b> Rukminikunj <br> 599, Guruwar Peth, Satara 415002</div>
+                                        </div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="d-flex align-items-center">
                                         <div class="contact-icon"><i class="fa fa-clock-o"></i></div>
-                                        <div class="contact-detail">Mon.-Fri.: 10.00 AM to 7.00 PM <br> Sat - Sun : Closed</div>
+                                        <div class="contact-detail">Mon-Fri: 10.00 AM to 7.00 PM <br> Sat - Sun : Closed</div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="d-flex align-items-center">
                                         <div class="contact-icon"><i class="fa fa-phone"></i></div>
-                                        <div class="contact-detail">+91 (2162) 228201</div>
+                                        <div class="contact-detail">+91 (0)20 2295 1919 | +91 (2162) 228201</div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="d-flex align-items-center">

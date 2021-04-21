@@ -2082,7 +2082,7 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-text {
@@ -10266,8 +10266,11 @@ img.check_img {
     }
 }
 .testimonial-slider .img-slider-content {
-    height: 155px;
+    height: 280px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .social-item {
@@ -10340,6 +10343,7 @@ select.form-control {
 .contact-icon {
     height: 40px;
     width: 40px;
+    min-width: 40px;
     border-radius: 50%;
     background-color: #b61b68;
     color: #fff;
@@ -10767,5 +10771,32 @@ input.error {
 }
 
 .section-testimonial .img-slider-flipper {
-    min-height: 250px;
+    min-height: 350px;
+}
+
+.locked_stage {
+    position: relative;
+    pointer-events: none;
+}
+
+.locked_wrapper {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    bottom: 0px;
+    left: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.locked_wrapper i {
+    color: #fff;
+    font-size: 60px;
+    transition: all 0.2s;
+}
+
+.locked_stage .card-body {
+    opacity: 0.5;
 }
