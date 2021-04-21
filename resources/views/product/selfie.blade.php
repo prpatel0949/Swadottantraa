@@ -9,7 +9,7 @@
             <div class="page-title">Selfie</div>
             <div class="section-content">
                 <p>If a person wishes to engender self-improvement, he or she must seek an authentic conversation
-                    with the self. With <b class="text-primary">SELFIE</b> you can use the lens of your hearts to
+                    with the self. With <b class="text-primary">SELFIE</b>, you can use the lens of your hearts to
                     see the state of your souls.</p>
                 <p>A self‐evaluation is a great opportunity for everybody to honestly and objectively consider and
                     document their status.</p>
@@ -68,7 +68,7 @@
                     <div class="row justify-content-center">
                         <div class="col-sm-8">
                             <video class="video-item" controls>
-                                <source src="./assets/vid.mp4" type="video/mp4">
+                                <source src="./assets/selfie.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -82,17 +82,26 @@
                         </a>
                     </div>
                     <div class="col-sm-3 mt-4">
-                        <a href="#" class="card shadow card-withhover bg-primary">
+                        <a href="#" class="card shadow card-withhover bg-primary locked_stage">
+                            <div class="locked_wrapper shadow">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </div>
                             <div class="text-center card-body pl-1 pr-1"><b>Assess Your Sexual Health</b></div>
                         </a>
                     </div>
                     <div class="col-sm-3 mt-4">
-                        <a href="#" class="card shadow card-withhover bg-primary">
+                        <a href="#" class="card shadow card-withhover bg-primary locked_stage">
+                            <div class="locked_wrapper shadow">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </div>
                             <div class="text-center card-body pl-1 pr-1"><b>Check Your Anxiety Level</b></div>
                         </a>
                     </div>
                     <div class="col-sm-3 mt-4">
-                        <a href="#" class="card shadow card-withhover bg-primary">
+                        <a href="#" class="card shadow card-withhover bg-primary locked_stage">
+                            <div class="locked_wrapper shadow">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </div>
                             <div class="text-center card-body pl-1 pr-1"><b>Check Your Depression Level</b></div>
                         </a>
                     </div>
