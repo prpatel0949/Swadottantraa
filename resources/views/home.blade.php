@@ -105,7 +105,7 @@
                         <div class="row">
                             <div class="col-sm-8 product-desc text-justify">
                                 <div class="page-title">Brain and Mind Gym</div>
-                                <p>Swa <small class="logo-dot-text"><i class="fa fa-circle"></i></small> Tantraa’s <b class="text-primary">Brain & Mind Gym</b> is an International class for emotional wellness development solution compliant to WHO & Other International standards such as Indian Healthcare IT Standards. Adopting this solution will not only help the organizations to form a conducive and quality environment for the human resource but also will establish the fact that the organization is progressive who understands the importance of emotional well-being of the people.</p>
+                                <p><b class="text-primary">Brain & Mind Gym</b> is a set of scientifically designed, enjoyable and enriching programs for people from all walks of life. Supported by vast and varied clinical research, our thoughtfully designed activities promote improved health, greater sense of well-being, higher productivity, and enrichment in relationships. These activities help in leading a meaningful life.</p>
                                 <a href="{{url('brain-and-mind-gym')}}" class="btn btn-primary">Read More</a>
                             </div>
                             <div class="col-sm-4 product-img">
