@@ -24,11 +24,12 @@
             <li class="{{ (request()->is('franchisee/recommand/program*')) ? 'active' : '' }}"><a href="{{ route('franchisee.recommand.program') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Recommand Program</span></a>
             </li>
             <li>
-                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>                
+                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
             </li>
         </ul>
+        <img class="img-fluid" src="{{ asset('assets/img/sidebar.png') }}" />
     </div>
 </div>

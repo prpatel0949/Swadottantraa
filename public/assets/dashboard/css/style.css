@@ -427,3 +427,23 @@ h4.card-title-sm.cs_card_title {
 .locked_stage .card-body {
     opacity: 0.5;
 }
+
+.float-back-btn {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+}
+.float-back-btn:not(:hover) {
+    animation: floating_btn 1.5s ease infinite;
+}
+.main-menu {
+    width: 260px;
+}

@@ -148,6 +148,7 @@ class ClientController extends Controller
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
             $result['institue'][] = ($user['is_approve'] == 1 ? $user['institue'] : null);
             $result['UserInfo'][] = $all->toArray();
+            $reult['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
             return response()->json($result, 200);
         }
 
@@ -157,7 +158,7 @@ class ClientController extends Controller
     public function setTransaction()
     {
         if ($client = $this->client->setTransaction()) {
-            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Payment done successfully.' ] ] ], 200);
+            return response()->json([ 'tbl' => [[ 'Msg' => 'Success! Payment done successfully.', 'transaction_id' => $client->id ] ] ], 200);
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
@@ -210,6 +211,7 @@ class ClientController extends Controller
         $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
         $result['institue'] = (auth()->user()->is_approve == 1 ? auth()->user()->institue : null);
         $result['UserInfo'][] = auth()->user()->toArray();
+        $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
         return response()->json($result, 200);
     }
 

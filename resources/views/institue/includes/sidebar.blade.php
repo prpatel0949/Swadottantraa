@@ -21,11 +21,12 @@
             <li class="{{ (request()->is('institue/support*')) ? 'active' : '' }}"><a href="{{ route('institue.support.index') }}"><i class="feather icon-circle"></i><span class="menu-title">Support</span></a>
             </li>
             <li>
-                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>                
+                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-circle"></i><span class="menu-title">LogOut</span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
             </li>
         </ul>
+        <img class="img-fluid" src="{{ asset('assets/img/sidebar.png') }}" />
     </div>
 </div>
