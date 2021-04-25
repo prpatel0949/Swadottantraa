@@ -67,5 +67,6 @@
                 </form>
             </li>
         </ul>
+        <img class="img-fluid" src="{{ asset('assets/img/sidebar.png') }}" />
     </div>
 </div>
