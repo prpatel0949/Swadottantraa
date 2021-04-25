@@ -149,17 +149,20 @@ class ClientRepository implements ClientRepositoryInterface
         $client->is_payment_done = 1;
         $client->save();
 
-        return true;
+        return $transaction;
     }
 
     public function getTransaction()
     {
-        $transactions = $this->transaction->where('client_id', Auth::user()->id)->get();
+        $transactions = $this->payment->where('client_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         $allData = [];
         foreach ($transactions as $transaction) {
             $rowRes = new \StdClass;
             $rowRes->id = $transaction->id;
             $rowRes->name = $transaction->client->name;
+            $rowRes->amount = $transaction->amount;
+            $rowRes->date = Carbon::parse($transaction->date)->format('d-m-Y');
+            $rowRes->end_date = Carbon::parse($transaction->end_date)->format('d-m-Y');
             $rowRes->created_at = $transaction->created_at;
             $allData[] = $rowRes;
         }
@@ -220,12 +223,19 @@ class ClientRepository implements ClientRepositoryInterface
         return true;
     }
 
+    public function getUserEmotionalInfo()
+    {
+        return $this->user_info->where([ 'client_id' => Auth::user()->id ])->get();   
+    }
+
     public function payment($data)
     {
         $date = Carbon::now();
         $package = $this->package->find($data['subscription_id']);
         if ($package->subscription == '6 MONTH') {
             $end = $date->copy()->addMonths(6);
+        } else if ($package->subscription == '3 MONTH') {
+            $end = $date->copy()->addMonths(3);
         } else if ($package->subscription == '1 MONTH') {
             $end = $date->copy()->addMonth();
         } else {
