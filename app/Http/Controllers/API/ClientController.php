@@ -132,7 +132,7 @@ class ClientController extends Controller
         $proxy = Request::create('oauth/token', 'POST', $request->toArray());
         $response = \Route::dispatch($proxy);
         $token = (Array) json_decode($response->getContent());
-        $result = [];
+       // $result = [];
         if (isset($token['token_type']) && !empty($token['token_type'])) {
 
             $questions = $this->general->getQuestions();
@@ -148,7 +148,7 @@ class ClientController extends Controller
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
             $result['institue'][] = ($user['is_approve'] == 1 ? $user['institue'] : null);
             $result['UserInfo'][] = $all->toArray();
-            $reult['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
+            //$result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
             return response()->json($result, 200);
         }
 
