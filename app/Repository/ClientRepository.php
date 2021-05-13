@@ -164,6 +164,7 @@ class ClientRepository implements ClientRepositoryInterface
             $rowRes->date = Carbon::parse($transaction->date)->format('d-m-Y');
             $rowRes->end_date = Carbon::parse($transaction->end_date)->format('d-m-Y');
             $rowRes->created_at = $transaction->created_at;
+            $rowRes->subscription = $transaction->package->subscription;
             $allData[] = $rowRes;
         }
 
@@ -244,12 +245,13 @@ class ClientRepository implements ClientRepositoryInterface
         
         $payment = $this->payment;
         $payment->date = $date->format('Y-m-d');
-        $payment->transaction_id = $data['transaction_id'];
+        $payment->transaction_id = '';
         $payment->amount = $data['amount'];
         $payment->subscription_id = $data['subscription_id'];
         $payment->end_date = $end->format('Y-m-d');
         $payment->client_id = Auth::user()->id;
-        $payment->user_transaction_id = $data['user_transaction_id'];
+        $payment->user_transaction_id = '';
+        $payment->code_id = (isset($data['code_id']) ? $data['code_id'] : 0);
         $payment->save();
 
         return true;

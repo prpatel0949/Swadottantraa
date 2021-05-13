@@ -4,6 +4,7 @@ namespace App\Repository;
 use DB;
 use Auth;
 use App\Tip;
+use App\Code;
 use App\Image;
 use App\State;
 use App\Client;
@@ -27,7 +28,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state,
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state, $code,
             $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client, $user_menu;
 
     public function __construct(
@@ -49,7 +50,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         ExerciseTracker $exercise,
         ExerciseTrackerPoint $exercise_point,
         State $state,
-        UserMenu $user_menu
+        UserMenu $user_menu,
+        Code $code
     )
     {
         $this->tip = $tip;
@@ -71,6 +73,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->exercise_point = $exercise_point;
         $this->state = $state;
         $this->user_menu = $user_menu;
+        $this->code = $code;
     }
 
     public function getTips()
@@ -361,5 +364,10 @@ class GeneralRepository implements GeneralRepositoryInterface
         $allAnswers = $this->answer->where('user_id', $user_id)->where('set_no', (!empty($ans) ? $ans->set_no : ''))->get();
 
         return $this->question->whereIn('id', $allAnswers->pluck('answer')->flatten()->pluck('question_id'))->get();
+    }
+
+    public function validateCode($data)
+    {
+        return $this->code->where('code', $data['code'])->first();
     }
 }

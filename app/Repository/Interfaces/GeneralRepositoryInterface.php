@@ -34,4 +34,6 @@ interface GeneralRepositoryInterface
     public function getMoodMarks($data);
 
     public function storeUserMenu($data);
+
+    public function validateCode($data);
 }

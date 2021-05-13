@@ -15,4 +15,14 @@ class ClientPayment extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    /**
+     * Get the user that owns the ClientPayment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function package()
+    {
+        return $this->belongsTo(Subscription::class, 'subscription_id');
+    }
 }
