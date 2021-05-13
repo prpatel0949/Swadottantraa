@@ -16,7 +16,7 @@ class Client extends Authenticatable
 
     protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve', 'birth_date' ];
 
-    protected $appends = [ 'is_regular', 'client_institue' ];
+    protected $appends = [ 'is_regular', 'client_institue', 'is_paid' ];
 
     /**
      * Get the transaction associated with the Client
@@ -107,6 +107,16 @@ class Client extends Authenticatable
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Get all of the payments for the Client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany(ClientPayment::class);
+    }
+
     public function getClientInstitueAttribute()
     {
         if ($this->is_approve == 1) {
@@ -116,6 +126,16 @@ class Client extends Authenticatable
         } else {
             return json_encode((object)[]);
         }
+    }
+
+    public function getIsPaidAttribute()
+    {
+        $today_date = \Carbon\Carbon::now()->format('Y-m-d');
+        if ($this->payments->where('end_date', '>=', $today_date)->count() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
 }
