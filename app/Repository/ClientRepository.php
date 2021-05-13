@@ -6,6 +6,7 @@ use Auth;
 use Hash;
 use Mail;
 use Session;
+use App\Code;
 use App\User;
 use App\Client;
 use App\UserInfo;
@@ -17,9 +18,9 @@ use App\Repository\Interfaces\ClientRepositoryInterface;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    private $client, $user, $transaction, $user_info, $package, $payment;
+    private $client, $user, $transaction, $user_info, $package, $payment, $code;
 
-    public function __construct(Client $client, User $user, ClientTransaction $transaction, UserInfo $user_info, Subscription $package, ClientPayment $payment)
+    public function __construct(Client $client, User $user, ClientTransaction $transaction, UserInfo $user_info, Subscription $package, ClientPayment $payment, Code $code)
     {
         $this->client = $client;
         $this->user = $user;
@@ -27,6 +28,7 @@ class ClientRepository implements ClientRepositoryInterface
         $this->user_info = $user_info;
         $this->package = $package;
         $this->payment = $payment;
+        $this->code = $code;
     }
 
     public function store($data)
@@ -242,6 +244,12 @@ class ClientRepository implements ClientRepositoryInterface
         } else {
             $end = $date->copy()->addYear();
         }
+
+        $code_id = 0;
+        if (isset($data['code_id']) && !empty($data['code_id'])) {
+            $code = $this->code->where('code', $data['code_id'])->first();
+            $code_id = $code->id;
+        } 
         
         $payment = $this->payment;
         $payment->date = $date->format('Y-m-d');
@@ -251,7 +259,7 @@ class ClientRepository implements ClientRepositoryInterface
         $payment->end_date = $end->format('Y-m-d');
         $payment->client_id = Auth::user()->id;
         $payment->user_transaction_id = '';
-        $payment->code_id = (isset($data['code_id']) ? $data['code_id'] : 0);
+        $payment->code_id = $code_id;
         $payment->save();
 
         return true;
