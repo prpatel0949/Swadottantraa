@@ -78,6 +78,8 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('payu_money_param', 'GeneralController@getPayuMoneyParam');
 
+    Route::post('validate/code', 'GeneralController@validateCode');
+
 });
 
 Route::post('login', 'ClientController@generateToken');

@@ -198,5 +198,18 @@ class GeneralController extends Controller
 
         return response()->json([ 'tbl' => [[ 'result' => $hash ]] ], 200);
     }
+
+    public function validateCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required'
+        ]);
+
+        if ($code = $this->general->validateCode($request->all())) {
+            return response()->json([ 'tbl' => [ 'data' => $code ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Code is invalid.' ] ] ], 500);
+    }
 }
 

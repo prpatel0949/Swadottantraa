@@ -218,10 +218,9 @@ class ClientController extends Controller
     public function payment(Request $request)
     {
         $request->validate([
-            'transaction_id' => 'required',
             'amount' => 'required|numeric',
             'subscription_id' => 'required|exists:subscriptions,id',
-            'user_transaction_id' => 'required|integer'
+            'code_id' => 'nullable|exists:codes,id'
         ]);
 
         if ($client = $this->client->payment($request->all())) {
