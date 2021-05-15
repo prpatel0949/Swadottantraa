@@ -26,10 +26,10 @@ class AddRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:50',
-            'scale_description' => 'required|string|max:200',
-            'interpreatation' => 'nullable|string|max:200',
-            'question.*' => 'required|string|max:150',
-            'description.*' => 'required|string|max:200',
+            'scale_description' => 'nullable|string',
+            'interpreatation' => 'nullable|string',
+            'question.*' => 'required|string',
+            'description.*' => 'required|string',
             'answer.*.*' => 'required|string|max:100',
             'answer_value.*.*' => 'nullable|string|max:50',
             'start.*' => 'required|numeric',
