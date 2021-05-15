@@ -223,6 +223,10 @@ class ClientRepository implements ClientRepositoryInterface
         $user_info->sub_emotion_id = $data['sub_emotion_id'];
         $user_info->save();
 
+        $client = $this->client->find(Auth::user()->id);
+        $client->is_used = 1;
+        $client->save();
+
         return true;
     }
 

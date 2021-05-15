@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use Auth;
+use App\Client;
 use App\Emotion;
 use App\EmotionalInjury;
 use App\UserEmotionalInjury;
@@ -10,14 +11,15 @@ use App\Repository\Interfaces\EmotionRepositoryInterface;
 
 class EmotionRepository implements EmotionRepositoryInterface
 {
-    private $emotion, $emotion_pain, $emotion_injury, $user_emotion_injury;
+    private $emotion, $emotion_pain, $emotion_injury, $user_emotion_injury, $client;
 
-    public function __construct(Emotion $emotion, EmotionalPainIntensity $emotion_pain, EmotionalInjury $emotion_injury, UserEmotionalInjury $user_emotion_injury)
+    public function __construct(Emotion $emotion, EmotionalPainIntensity $emotion_pain, EmotionalInjury $emotion_injury, UserEmotionalInjury $user_emotion_injury, Client $client)
     {
         $this->emotion = $emotion;
         $this->emotion_pain = $emotion_pain;
         $this->emotion_injury = $emotion_injury;
         $this->user_emotion_injury = $user_emotion_injury;
+        $this->client = $client;
     }
 
     public function all()
@@ -49,6 +51,10 @@ class EmotionRepository implements EmotionRepositoryInterface
         $inj->other = (isset($data['other']) ? $data['other'] : '');
         // $inj->client_transaction_id = $data['client_transaction_id'];
         $inj->save();
+
+        $client = $this->client->find(Auth::user()->id);
+        $client->is_used = 1;
+        $client->save();
 
         return true;
 
