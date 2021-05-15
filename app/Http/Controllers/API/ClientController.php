@@ -220,7 +220,7 @@ class ClientController extends Controller
         $request->validate([
             'amount' => 'required|numeric',
             'subscription_id' => 'required|exists:subscriptions,id',
-            'code_id' => 'nullable|exists:codes,code'
+            'coupon_code' => 'nullable|exists:codes,code'
         ]);
 
         if ($client = $this->client->payment($request->all())) {
@@ -234,8 +234,8 @@ class ClientController extends Controller
     {
         $request->validate([
             'emrgncy_contact' => 'nullable|string|max:20',
-            'is_payment_done' => 'required|in:0,1',
-            'user_transaction_id' => 'required|integer'
+            // 'is_payment_done' => 'required|in:0,1',
+            // 'user_transaction_id' => 'required|integer'
         ]);
 
         if ($client = $this->client->updateEmrgncyContactAndPayment($request->all())) {

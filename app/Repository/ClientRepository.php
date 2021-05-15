@@ -246,8 +246,8 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
         $code_id = 0;
-        if (isset($data['code_id']) && !empty($data['code_id'])) {
-            $code = $this->code->where('code', $data['code_id'])->first();
+        if (isset($data['coupon_code']) && !empty($data['coupon_code'])) {
+            $code = $this->code->where('code', $data['coupon_code'])->first();
             $code_id = $code->id;
         } 
         
@@ -268,33 +268,35 @@ class ClientRepository implements ClientRepositoryInterface
     public function updateEmrgncyContactAndPayment($data)
     {
 
-        $date = Carbon::now();
-        $package = $this->package->find(1);
-        if ($package->subscription == '6 MONTH') {
-            $end = $date->copy()->addMonths(6);
-        } else if ($package->subscription == '1 MONTH') {
-            $end = $date->copy()->addMonth();
-        } else {
-            $end = $date->copy()->addYear();
-        }
+        // $date = Carbon::now();
+        // $package = $this->package->find(1);
+        // if ($package->subscription == '6 MONTH') {
+        //     $end = $date->copy()->addMonths(6);
+        // } else if ($package->subscription == '1 MONTH') {
+        //     $end = $date->copy()->addMonth();
+        // } else {
+        //     $end = $date->copy()->addYear();
+        // }
 
-        if ($data['is_payment_done'] == 1) {
-            $payment = $this->payment;
-            $payment->date = $date->format('Y-m-d');
-            $payment->transaction_id = '';
-            $payment->amount = 0;
-            $payment->subscription_id = 1;
-            $payment->end_date = $end->format('Y-m-d');
-            $payment->client_id = Auth::user()->id;
-            $payment->user_transaction_id = $data['user_transaction_id'];
-            $payment->save();
-        }
+        // if ($data['is_payment_done'] == 1) {
+        //     $payment = $this->payment;
+        //     $payment->date = $date->format('Y-m-d');
+        //     $payment->transaction_id = '';
+        //     $payment->amount = 0;
+        //     $payment->subscription_id = 1;
+        //     $payment->end_date = $end->format('Y-m-d');
+        //     $payment->client_id = Auth::user()->id;
+        //     $payment->user_transaction_id = $data['user_transaction_id'];
+        //     $payment->save();
+        // }
 
-        if (!empty($data['emrgncy_contact'])) {
-            $client = $this->client->find(Auth::user()->id);
-            $client->emrgncy_contact = $data['emrgncy_contact'];
-            $client->save();
-        }
+        $client = $this->client->find(Auth::user()->id);
+        $client->emrgncy_contact = $data['emrgncy_contact'];
+        $client->save();
+
+        // if (!empty($data['emrgncy_contact'])) {
+            
+        // }
         return true;
     }
 }
