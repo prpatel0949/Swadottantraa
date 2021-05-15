@@ -103,7 +103,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <input type="text" name="answer[{{ $index }}][]" value="{{ $answer }}" class="form-control" placeholder="Answer">
-                                                @error('answer.'.$index.$key)
+                                                @error('answer.'.$index.'.'.$key)
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

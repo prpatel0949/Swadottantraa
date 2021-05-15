@@ -131,7 +131,7 @@
                                 <div class="form-group">
                                     <label>Days</label>
                                     <select name="day" class="form-control">
-                                        @for ($i = 0; $i < 30; $i++)
+                                        @for ($i = 0; $i <= 31; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
