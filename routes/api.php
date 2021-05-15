@@ -33,7 +33,7 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
     Route::get('scale_question_answers', 'GeneralController@getScaleQuestionAnswers');
     Route::post('scale_question_answers', 'GeneralController@storeScaleQuestionAnswers');
 
-    Route::post('emotions_injuries/create', 'EmotionController@storeEmotionInjuries');
+    Route::post('emotions_injuries/create', 'EmotionController@storeEmotionInjuries')->middleware('firstedbox');
 
     Route::post('code', 'ClientController@applyCode');
 
@@ -60,7 +60,7 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
     
     Route::get('user', 'ClientController@getUserInfo');
 
-    Route::post('user/info', 'ClientController@setUserInfo');
+    Route::post('user/info', 'ClientController@setUserInfo')->middleware('firstedbox');
 
     Route::get('sleep_tracker/anaysis', 'GeneralController@getSleepTrackerAnalysis');
 

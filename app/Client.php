@@ -16,7 +16,7 @@ class Client extends Authenticatable
 
     protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve', 'birth_date' ];
 
-    protected $appends = [ 'is_regular', 'client_institue', 'is_paid' ];
+    protected $appends = [ 'is_regular', 'client_institue', 'is_paid', 'is_access' ];
 
     /**
      * Get the transaction associated with the Client
@@ -132,6 +132,19 @@ class Client extends Authenticatable
     {
         $today_date = \Carbon\Carbon::now()->format('Y-m-d');
         if ($this->payments->where('end_date', '>=', $today_date)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getIsAccessAttribute()
+    {
+        if ($this->is_paid) {
+            return true;
+        }
+
+        if ($this->is_regular && $this->is_used === 0) {
             return true;
         }
 

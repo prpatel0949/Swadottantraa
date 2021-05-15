@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'program.subscribe' => \App\Http\Middleware\IsSubscribeProgramMiddleware::class,
         'institue' => \App\Http\Middleware\Institue::class,
         'client.activity' => \App\Http\Middleware\CheckClientActivity::class,
+        'firstedbox' => \App\Http\Middleware\IsFirstedBoxAccessMiddleware::class,
     ];
 }
