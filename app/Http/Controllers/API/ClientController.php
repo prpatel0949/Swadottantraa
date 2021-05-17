@@ -148,7 +148,7 @@ class ClientController extends Controller
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
             $result['institue'][] = ($user['is_approve'] == 1 ? $user['institue'] : null);
             $result['UserInfo'][] = $all->toArray();
-            //$result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
+            $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
             return response()->json($result, 200);
         }
 
