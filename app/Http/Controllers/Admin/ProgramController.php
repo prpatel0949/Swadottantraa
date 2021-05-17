@@ -70,7 +70,7 @@ class ProgramController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             // 'time' => 'required|numeric',
             'cost' => 'required|numeric',
             'tag' => 'required',
@@ -143,7 +143,7 @@ class ProgramController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             // 'time' => 'required|numeric',
             'cost' => 'required|numeric',
             'tag' => 'required',
