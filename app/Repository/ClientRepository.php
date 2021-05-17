@@ -230,9 +230,9 @@ class ClientRepository implements ClientRepositoryInterface
         return true;
     }
 
-    public function getUserEmotionalInfo()
+    public function getUserEmotionalInfo($user_id)
     {
-        return $this->user_info->where([ 'client_id' => Auth::user()->id ])->get();   
+        return $this->user_info->where([ 'client_id' => $user_id ])->get();   
     }
 
     public function payment($data)

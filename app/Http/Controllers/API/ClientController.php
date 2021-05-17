@@ -148,7 +148,7 @@ class ClientController extends Controller
             $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
             $result['institue'][] = ($user['is_approve'] == 1 ? $user['institue'] : null);
             $result['UserInfo'][] = $all->toArray();
-            $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
+            $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo($user['id']);
             return response()->json($result, 200);
         }
 
@@ -205,13 +205,13 @@ class ClientController extends Controller
     {
         $result = [];
         $questions = $this->general->getQuestions();
-        $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries(1);
+        $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries(Auth::user()->id);
         $result['Questions'] = $questions;
         $result['Answers'] = $questions->pluck('answers');
         $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
         $result['institue'] = (auth()->user()->is_approve == 1 ? auth()->user()->institue : null);
         $result['UserInfo'][] = auth()->user()->toArray();
-        $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo();
+        $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo(Auth::user()->id);
         return response()->json($result, 200);
     }
 
