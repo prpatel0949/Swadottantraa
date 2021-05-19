@@ -135,8 +135,8 @@ class ClientController extends Controller
        // $result = [];
         if (isset($token['token_type']) && !empty($token['token_type'])) {
 
-            $questions = $this->general->getQuestions($user['id']);
             $user = collect($this->client->all([ 'email' => $request->username ])->first()->toArray());
+            $questions = $this->general->getQuestions($user['id']);
             $token = collect($token);
             $all = $user->merge($token);
     
