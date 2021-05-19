@@ -232,7 +232,7 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function getUserEmotionalInfo($user_id)
     {
-        return $this->user_info->where([ 'client_id' => $user_id ])->get();   
+        return $this->user_info->where([ 'client_id' => $user_id ])->limit(3)->get();   
     }
 
     public function payment($data)

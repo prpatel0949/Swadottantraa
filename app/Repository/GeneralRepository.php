@@ -5,6 +5,7 @@ use DB;
 use Auth;
 use App\Tip;
 use App\Code;
+use App\Goal;
 use App\Image;
 use App\State;
 use App\Client;
@@ -28,7 +29,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state, $code,
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state, $code, $goal,
             $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client, $user_menu;
 
     public function __construct(
@@ -51,7 +52,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         ExerciseTrackerPoint $exercise_point,
         State $state,
         UserMenu $user_menu,
-        Code $code
+        Code $code,
+        Goal $goal
     )
     {
         $this->tip = $tip;
@@ -74,6 +76,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->state = $state;
         $this->user_menu = $user_menu;
         $this->code = $code;
+        $this->goal = $goal;
     }
 
     public function getTips()
@@ -345,11 +348,16 @@ class GeneralRepository implements GeneralRepositoryInterface
     public function storeUserMenu($data)
     {
         $menu_limks = $this->menu->all();
-        $menus = explode(',', $data['menu_list']);
-        foreach ($menus as $menu) {
+        $max = $this->user_menu->max('set_no');
+        if (empty($max)) {
+            $max = 0;
+        }
+        $max += 1;
+        foreach ($data['menu_list'] as $menu) {
             $new_menu = new $this->user_menu;
             $new_menu->client_id = Auth::user()->id;
             $new_menu->menu = $menu;
+            $new_menu->set_no = $max;
             $new_menu->client_transaction_id = (isset($data['client_transaction_id']) ? $data['client_transaction_id'] : '');
             $new_menu->save();
         }
@@ -369,5 +377,32 @@ class GeneralRepository implements GeneralRepositoryInterface
     public function validateCode($data)
     {
         return $this->code->where('code', $data['code'])->first();
+    }
+
+    public function getGoals()
+    {
+        return $this->goal->all();
+    }
+
+    public function checkUserMenu($menu)
+    {
+
+        $menues = $this->user_menu->where('client_id', Auth::user()->id)->orderBy('set_no', 'DESC')->get();
+        if ($menues->count() > 0) {
+            return $this->user_menu->where([ 'menu' => $menu, 'client_id' => Auth::user()->id, 'set_no' => $menues[0]->set_no ])->count();
+        } else {
+            return 0;
+        }
+    }
+
+    public function usedUserMenu($data)
+    {
+        $menu = $this->user_menu->where([ 'client_id' => Auth::user()->id, 'menu' => $data['menu'] ])->get();
+        foreach ($menu as $key => $value) {
+            $value->is_used = 1;
+            $value->save();
+        }
+
+        return true;
     }
 }

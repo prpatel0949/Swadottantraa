@@ -171,8 +171,9 @@ class GeneralController extends Controller
 
     public function storeUserMenu(Request $request)
     {
+        $list = "Compassion,Behavioral Activation,Mindfulness,Ventilation,Visualization,Relaxation,Coping Cards";
         $request->validate([
-            'menu_list' => 'required',
+            'menu_list.*' => 'required|in:'.$list,
             'client_transaction_id' => 'nullable|integer'
         ]);
 
@@ -210,6 +211,33 @@ class GeneralController extends Controller
         }
 
         return response()->json([ 'tbl' => [[ 'Msg' => 'Code is invalid.' ] ] ], 500);
+    }
+
+    public function getGoals()
+    {
+        return response()->json([ 'tbl' =>[ $this->general->getGoals() ]], 200);
+    }
+
+    public function checkUserMenu($menu)
+    {
+        if ($this->general->checkUserMenu($menu) > 0) {
+            return response()->json([ [ 'tbl' => true ] ], 200);
+        }
+
+        return response()->json([ [ 'tbl' => false ] ], 200);
+    }
+
+    public function usedUserMenu(Request $request)
+    {
+        $request->validate([
+            'menu' => 'required|exists:user_menus,menu',
+        ]);
+
+        if ($this->general->usedUserMenu($request->all())) {
+            return response()->json([ 'tbl' => [[ 'Msg' => 'User menu used status updated successfully.' ] ] ], 200);
+        }
+
+        return response()->json([ 'tbl' => [[ 'Msg' => 'Something went wrong happen!.' ] ] ], 500);
     }
 }
 

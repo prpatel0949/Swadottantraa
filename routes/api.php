@@ -76,9 +76,15 @@ Route::group(['middleware' => [ 'api', 'auth:client', 'client.activity' ]], func
 
     Route::post('user/menu', 'GeneralController@storeUserMenu');
 
+    Route::get('check/user_menu/{menu}', 'GeneralController@checkUserMenu');
+
+    Route::post('user_menu/used', 'GeneralController@usedUserMenu');
+
     Route::post('payu_money_param', 'GeneralController@getPayuMoneyParam');
 
     Route::post('validate/code', 'GeneralController@validateCode');
+
+    Route::get('goal', 'GeneralController@getGoals');
 
 });
 
