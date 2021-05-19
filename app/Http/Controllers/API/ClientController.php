@@ -135,7 +135,7 @@ class ClientController extends Controller
        // $result = [];
         if (isset($token['token_type']) && !empty($token['token_type'])) {
 
-            $questions = $this->general->getQuestions();
+            $questions = $this->general->getQuestions($user['id']);
             $user = collect($this->client->all([ 'email' => $request->username ])->first()->toArray());
             $token = collect($token);
             $all = $user->merge($token);
@@ -143,9 +143,9 @@ class ClientController extends Controller
             $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries($user['id']);
             
             $result['Questions'] = $questions;
-            $result['Answers'] = $questions->pluck('answers');
+            $result['Answers'] = $this->general->getAnswerScale($user['id']);
             $result['userAnswer'] = $this->general->getUserLastQuestions($user['id']);
-            $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
+            // $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
             $result['institue'][] = ($user['is_approve'] == 1 ? $user['institue'] : null);
             $result['UserInfo'][] = $all->toArray();
             $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo($user['id']);
@@ -207,8 +207,8 @@ class ClientController extends Controller
         $questions = $this->general->getQuestions();
         $result['EmotionalInjury'] = $this->emotion->getEmotionInjuries(Auth::user()->id);
         $result['Questions'] = $questions;
-        $result['Answers'] = $questions->pluck('answers');
-        $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
+        $result['Answers'] = $this->general->getAnswerScale(Auth::user()->id);
+        // $result['ViewAllMenuStatus'] = $this->general->getMenuLinks();
         $result['institue'] = (auth()->user()->is_approve == 1 ? auth()->user()->institue : null);
         $result['UserInfo'][] = auth()->user()->toArray();
         $result['UserEmotionalInfo'] = $this->client->getUserEmotionalInfo(Auth::user()->id);

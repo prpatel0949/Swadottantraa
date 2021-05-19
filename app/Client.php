@@ -16,7 +16,7 @@ class Client extends Authenticatable
 
     protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve', 'birth_date' ];
 
-    protected $appends = [ 'is_regular', 'client_institue', 'is_paid', 'is_access' ];
+    protected $appends = [ 'is_regular', 'client_institue', 'is_paid', 'is_access', 'menu_used' ];
 
     /**
      * Get the transaction associated with the Client
@@ -145,6 +145,31 @@ class Client extends Authenticatable
         }
 
         if ($this->is_regular && $this->is_used === 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get all of the menues for the Client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function menues()
+    {
+        return $this->hasMany(UserMenu::class);
+    }
+
+    public function getMenuUsedAttribute()
+    {
+        $lst = $this->menues->sortByDESC('set_no')->first();
+        if (!empty($lst)) {
+            $cnt = $this->menues->where('set_no', $lst->set_no)->where('is_used', 0)->count();
+            if ($cnt > 0) {
+                return false;
+            }
+
             return true;
         }
 

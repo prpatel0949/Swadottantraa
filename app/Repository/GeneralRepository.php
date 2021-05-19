@@ -29,7 +29,7 @@ use App\Repository\Interfaces\GeneralRepositoryInterface;
 
 class GeneralRepository implements GeneralRepositoryInterface
 {
-    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state, $code, $goal,
+    private $tip, $trauma, $menu, $image, $question, $answer, $subscription, $exercise, $exercise_point, $state, $code, $goal, $user_scale_answer,
             $mood_mark, $trauma_copying, $scale_question_answer, $scale_tips, $sleep_tracker, $points, $gratitude_answer, $client, $user_menu;
 
     public function __construct(
@@ -53,7 +53,8 @@ class GeneralRepository implements GeneralRepositoryInterface
         State $state,
         UserMenu $user_menu,
         Code $code,
-        Goal $goal
+        Goal $goal,
+        ApiUserScaleAnswer $user_scale_answer
     )
     {
         $this->tip = $tip;
@@ -77,6 +78,7 @@ class GeneralRepository implements GeneralRepositoryInterface
         $this->user_menu = $user_menu;
         $this->code = $code;
         $this->goal = $goal;
+        $this->user_scale_answer = $user_scale_answer;
     }
 
     public function getTips()
@@ -106,6 +108,16 @@ class GeneralRepository implements GeneralRepositoryInterface
     public function getQuestions()
     {
         return $this->question->all();
+    }
+
+    public function getAnswerScale($user_id)
+    {
+        $set_no = $this->answer->where('user_id', $user_id)->orderBy('set_no', 'DESC')->first();
+        if (!empty($set_no)) {
+            return $this->answer->where('user_id', $user_id)->where('set_no', $set_no->set_no)->get();
+        }
+
+        return [];
     }
 
     public function storeAnswer($data)
