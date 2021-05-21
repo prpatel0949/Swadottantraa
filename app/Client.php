@@ -50,6 +50,11 @@ class Client extends Authenticatable
 
     public function getIsRegularAttribute()
     {
+
+        if (empty($this->user_id) || $this->user_id == 0) {
+            return false;
+        }
+
         $ldate = \Carbon\Carbon::now()->subDays(20)->format('Y-m-d');
         $today = \Carbon\Carbon::now()->format('Y-m-d');
 
