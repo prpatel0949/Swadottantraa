@@ -63,8 +63,8 @@ class GeneralController extends Controller
     public function storeMoodMarks(Request $request)
     {
         $request->validate([
-            'mood_id' => 'required|string',
-            'lower_mood_id' => 'required|string',
+            'mood_id.*' => 'required|integer',
+            'lower_mood_id.*' => 'required|integer',
             'marks' => 'required|numeric',
             'lower_marks' => 'required|numeric',
             'date' => 'required|date|date_format:Y-m-d'
@@ -163,7 +163,8 @@ class GeneralController extends Controller
     {
         $request->validate([
             'start_date' => 'required|date|date_format:Y-m-d',
-            'end_date' => 'required|date|date_format:Y-m-d',
+            'end_date' => 'required_if:flag,0|date_format:Y-m-d',
+            'flag' => 'required|in:0,1'
         ]);
 
         return response()->json([ 'tbl' =>[ $this->general->getMoodMarks($request->all()) ]], 200);

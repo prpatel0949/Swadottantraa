@@ -153,7 +153,26 @@ class GeneralRepository implements GeneralRepositoryInterface
 
     public function storeMoodMarks($data)
     {
-        $mood = $this->mood_mark->create($data);
+        $cnt = $this->mood_mark->max('set_no');
+        if (empty($cnt)) {
+            $cnt = 0;
+        }
+
+        $cnt += 1;
+
+        if (!empty($data['mood_id'])) {
+            foreach ($data['mood_id'] as $key => $mood_id) {
+                $mood = new $this->mood_mark;
+                $mood->mood_id = $mood_id;
+                $mood->lower_mood_id = (isset($data[$key]['lower_mood_id']) ? $data[$key]['lower_mood_id'] : 0);
+                $mood->marks = $data['marks'];
+                $mood->lower_marks = $data['lower_marks'];
+                $mood->date = $data['date'];
+                $mood->set_no = $cnt;
+                $mood->save();
+            }
+        }
+
         $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($mood))->count();
 
         if ($cnt == 0) {
@@ -353,8 +372,23 @@ class GeneralRepository implements GeneralRepositoryInterface
 
     public function getMoodMarks($data)
     {
-        $marks = $this->mood_mark->where('date', '>=', $data['start_date'])->where('date', '<=', $data['end_date'])->where('client_id', Auth::user()->id)->get();   
-        return [ 'marks' => $marks->sum('marks'), 'lower_marks' => $marks->sum('lower_marks') ];
+
+        if ($data['flag'] == 1) {
+            $start_date = Carbon::parse($data['start_date']);
+            $end_date = $start_date->subDays(10)->format('Y-m-d');
+            $start_date = Carbon::parse($data['start_date'])->format('Y-m-d');
+            $marks = $this->mood_mark->where('date', '<=', $start_date)->where('date', '>=', $end_date)->where('client_id', Auth::user()->id)->groupBy('set_no')->get();
+            return [ 'marks' => $marks->sum('marks'), 'lower_marks' => $marks->sum('lower_marks') ];
+        } else {
+            $marks = $this->mood_mark->select('marks', 'lower_marks', 'date')->where('date', '>=', $data['start_date'])->where('date', '<=', $data['end_date'])->where('client_id', Auth::user()->id)->groupBy('set_no')->get();
+            $marks = $marks->groupBy('date')->map(function ($row) {
+                $data = [];
+                $data['marks'] = $row->sum('marks');
+                $data['lower_marks'] = $row->sum('lower_marks');
+                return $data;
+            })->values();
+            return $marks;
+        }
     }
 
     public function storeUserMenu($data)
