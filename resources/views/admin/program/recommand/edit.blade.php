@@ -31,10 +31,11 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">User</label>
-                                    <select name="user_id" class="form-control select2" style="width: 100%" required>
+                                    @php $uids = $recommanded_programs->pluck('user_id')->unique()->toArray(); @endphp
+                                    <select name="user_id[]" class="form-control select2" style="width: 100%" required multiple>
                                         <option value="">Select User</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" {{ ($recommanded_programs->first()->user_id == $user->id ? 'selected' : '') }}>{{ $user->name }}</option>
+                                            <option value="{{ $user->id }}" {{ (in_array($user->id, $uids) ? 'selected' : '') }}>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('user_id')
@@ -68,7 +69,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Submt</button>
-                                    <a href="#" class="btn btn-danger">Cancel</a>
+                                    <a href="{{ route('recommand.program') }}" class="btn btn-danger">Cancel</a>
                                 </div>
                             </div>
                         </div>

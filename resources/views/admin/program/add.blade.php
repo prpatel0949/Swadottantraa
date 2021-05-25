@@ -414,6 +414,7 @@
             let section_number = $(this).parent().parent().parent().find('.step-div > div').length;
             console.log(section_number);
             section_number = (section_number == '' ? 0 : section_number);
+            section_number = section_number + 1;
             // section_number = parseInt(section_number) + 1;
             content = content.replace(/`SrNo`/gi, page);
             content = content.replace(/`SrNo~1`/gi, section_number);

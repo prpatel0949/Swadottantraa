@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Coupon\AddRequest;
+use App\Http\Requests\Admin\Coupon\UpdateRequest;
 use App\Repository\Interfaces\CouponRepositoryInterface;
 
 class CouponController extends Controller
@@ -41,7 +42,7 @@ class CouponController extends Controller
         return view('admin.coupon.edit', [ 'coupon' => $this->coupon->findorfail($id) ]);
     }
 
-    public function update(AddRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         if ($this->coupon->update($request->validated(), $id)) {
             return redirect()->route('coupon.index')->with('success', 'Coupon updated successfully.');

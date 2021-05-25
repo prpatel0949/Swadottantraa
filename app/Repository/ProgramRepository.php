@@ -661,7 +661,7 @@ class ProgramRepository implements ProgramRepositoryInterface
         }
         $set_no = $set_no + 1; 
         foreach ($data['program_id'] as $program) {
-
+            
             foreach ($data['user_id'] as $user) {
                 $recommand_program = new $this->recommand_program;
                 $recommand_program->program_id = $program;
