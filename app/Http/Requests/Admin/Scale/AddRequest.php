@@ -25,12 +25,12 @@ class AddRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:50',
+            'title' => 'required|string|max:200',
             'scale_description' => 'nullable|string',
             'interpreatation' => 'nullable|string',
             'question.*' => 'required|string',
             'description.*' => 'nullable|string',
-            'answer.*.*' => 'required|string|max:100',
+            'answer.*.*' => 'required|string|max:200',
             'answer_value.*.*' => 'nullable|string|max:50',
             'start.*' => 'required|numeric',
             'end.*' => 'required|numeric',
