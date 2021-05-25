@@ -29,7 +29,7 @@ class AddRequest extends FormRequest
             'scale_description' => 'nullable|string',
             'interpreatation' => 'nullable|string',
             'question.*' => 'required|string',
-            'description.*' => 'required|string',
+            'description.*' => 'nullable|string',
             'answer.*.*' => 'required|string|max:100',
             'answer_value.*.*' => 'nullable|string|max:50',
             'start.*' => 'required|numeric',
