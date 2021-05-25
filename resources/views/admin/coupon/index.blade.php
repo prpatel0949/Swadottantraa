@@ -69,6 +69,7 @@
         $('.delete-user').on('click', function (e) {
             e.preventDefault();
             let url = $(this).attr('href');
+            console.log(url);
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -83,7 +84,7 @@
             }).then(function (result) {
                 $.ajax({
                     url: url,
-                    method: 'PUT',
+                    method: 'DELETE',
                     data : { '_token': '{{ csrf_token() }}' },
                     success: function (res) {
                         window.location.reload();
