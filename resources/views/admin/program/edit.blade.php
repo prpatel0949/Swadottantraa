@@ -132,11 +132,12 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>Days</label>
-                                    <select name="day" class="form-control">
+                                    <input type="number" name="day" id="day" value="{{ (old('day') ? old('day') : $time[2]) }}" class="form-control">
+                                    {{-- <select name="day" class="form-control">
                                         @for ($i = 0; $i <= 31; $i++)
                                             <option value="{{ $i }}" {{ (old('day') && old('day') == $i ? 'selected=""' : ($time[2] == $i ? 'selected=""' : '') ) }}>{{ $i }}</option>
                                         @endfor
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
                         </div>
@@ -304,7 +305,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                        <button type="submit" data-button-spinner="Processing..." class="btn btn-primary submit-btn">Submit</button>
                     </div>
                 </div>
 
@@ -629,6 +630,11 @@
         });
 
         $('#addForm').submit(function() {
+            var $this = $('.submit-btn');
+            $this.data("ohtml", $this.html());
+            var nhtml = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Processing... ";
+            $this.html(nhtml);
+            $this.attr("disabled", true);
             var formData = new FormData($(this)[0]);
             $.ajax({
                 data: formData,
@@ -642,6 +648,8 @@
                 success: function(response) {
                     window.location.href = '{{ route("program.index") }}';
                 }, error: function (error) {
+                    $this.html($this.data("ohtml"));
+                    $this.attr("disabled", false);
                     $('#validation-errors').html('');
                     console.log(error.status);
                     if (error.status == 422) {

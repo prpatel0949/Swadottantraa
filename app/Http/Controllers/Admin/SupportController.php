@@ -43,4 +43,13 @@ class SupportController extends Controller
 
         return redirect()->back()->with('success', 'Something went wrong happen!');
     }
+
+    public function destroy($id)
+    {
+        if ($this->support->destroy($id)) {
+            return response()->json([ 'success' => 'success' ], 200);
+        }
+
+        return response()->json([ 'error' => 'error' ], 500);
+    }
 }

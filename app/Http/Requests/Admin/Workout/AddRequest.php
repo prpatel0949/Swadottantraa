@@ -26,6 +26,7 @@ class AddRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:200',
+            'wdescription' => 'nullable|string',
             'question.*' => 'required|string',
             'description.*' => 'nullable|string',
             // 'answer.*' => 'required|max:500',

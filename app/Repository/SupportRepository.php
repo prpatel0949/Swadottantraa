@@ -55,4 +55,9 @@ class SupportRepository implements SupportRepositoryInterface
 
         return true;
     }
+
+    public function destroy($id)
+    {
+        return $this->support->find($id)->delete();
+    }
 }

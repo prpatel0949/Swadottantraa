@@ -49,4 +49,13 @@ class CouponController extends Controller
 
         return redirect()->route('coupon.index')->with('error', 'Something went wrong happen.');
     }
+
+    public function destroy($id)
+    {
+        if ($this->coupon->destroy($id)) {
+            return redirect()->route('coupon.index')->with('success', 'Coupon deleted successfully.');
+        }
+
+        return redirect()->route('coupon.index')->with('error', 'Something went wrong happen.');
+    }
 }

@@ -66,7 +66,7 @@
 @section('js')
     <script>
         $('#scaleTbl').DataTable();
-        $('.delete-scale').on('click', function (e) {
+        $('.delete-user').on('click', function (e) {
             e.preventDefault();
             let url = $(this).attr('href');
             Swal.fire({
@@ -83,14 +83,14 @@
             }).then(function (result) {
                 $.ajax({
                     url: url,
-                    method: 'DELETE',
+                    method: 'PUT',
                     data : { '_token': '{{ csrf_token() }}' },
                     success: function (res) {
                         window.location.reload();
                     }, error: function (error) {
                         Swal.fire({
                             title: 'Error',
-                            text: 'Your Can`t delete this scale.',
+                            text: 'Your Can`t delete this coupon.',
                             type: 'error',
                             confirmButtonClass: 'btn btn-success',
                         });

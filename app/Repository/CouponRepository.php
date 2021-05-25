@@ -57,4 +57,9 @@ class CouponRepository implements CouponRepositoryInterface
         
         return response()->json([ 'message' => 'Coupon code expired.' ], 500);
     }
+
+    public function destroy($id)
+    {
+        return $this->coupon->find($id)->delete();
+    }
 }

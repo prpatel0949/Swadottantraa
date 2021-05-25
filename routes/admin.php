@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     Route::get('support/medical', 'SupportController@index')->name('admin.support.medical.index');
     Route::get('support/{id}/edit', 'SupportController@edit')->name('admin.support.edit');
     Route::put('support/{id}/update', 'SupportController@update')->name('admin.support.update');
+    Route::delete('support/{id}/delete', 'SupportController@destroy')->name('admin.support.delte');
 
     Route::get('support/{id}/faq', 'SupportController@addToFAQ')->name('admin.supoort.faq');
 

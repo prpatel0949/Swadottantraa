@@ -130,11 +130,12 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>Days</label>
-                                    <select name="day" class="form-control">
+                                    <input type="number" name="day" id="day" class="form-control">
+                                    {{-- <select name="day" class="form-control">
                                         @for ($i = 0; $i <= 31; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
                         </div>
@@ -155,8 +156,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <input type="hidden" name="is_live" id="is_live" value="0">
-                        <button type="button" class="btn btn-primary submit-btn" data-type="0">Complete & Save</button>
-                        <button type="button" class="btn btn-primary submit-btn" data-type="1">Complete & Live</button>
+                        <button type="button" class="btn btn-primary submit-btn" data-button-spinner="Processing..." data-type="0">Complete & Save</button>
+                        <button type="button" class="btn btn-primary submit-btn" data-button-spinner="Processing..." data-type="1">Complete & Live</button>
                         <a href="{{ route('program.index') }}" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
@@ -487,6 +488,11 @@
         });
 
         $('#addForm').submit(function(e) {
+            var $this = $('.submit-btn');
+            $this.data("ohtml", $this.html());
+            var nhtml = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Processing... ";
+            $this.html(nhtml);
+            $this.attr("disabled", true);
             var formData = new FormData($(this)[0]);
             $.ajax({
                 data: formData,
@@ -498,6 +504,8 @@
                     window.location.href = '{{ route("program.index") }}';
                 }, error: function (error) {
                     $('#validation-errors').html('');
+                    $this.html($this.data("ohtml"));
+                    $this.attr("disabled", false);
                     if (error.status == 422) {
                         $.each(error.responseJSON, function(key,value) {
                             $('#validation-errors').append('<div class="alert alert-danger">'+value[0] +'</div');

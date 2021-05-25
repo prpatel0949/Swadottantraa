@@ -53,6 +53,16 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-8">
+                                <div class="form-group mb-0">
+                                    <textarea class="form-control @error('wdescription') error @enderror" name="wdescription" placeholder="Workout Description">{{ old('wdescription') }}</textarea>
+                                    @error('wdescription')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

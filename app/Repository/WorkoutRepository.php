@@ -25,6 +25,7 @@ class WorkoutRepository implements WorkoutRepositoryInterface
             DB::transaction(function () use ($data) {
                 $workout = $this->workout;
                 $workout->title = $data['title'];
+                $workout->description = $data['wdescription'];
                 $workout->save();
 
                 if (!empty($data['question'])) {
@@ -80,6 +81,7 @@ class WorkoutRepository implements WorkoutRepositoryInterface
             DB::transaction(function () use ($data, $id) {
                 $workout = $this->workout->find($id);
                 $workout->title = $data['title'];
+                $workout->description = $data['wdescription'];
                 $workout->save();
 
                 $allQuestions = [];
