@@ -320,82 +320,85 @@ class ProgramRepository implements ProgramRepositoryInterface
                             $step->is_multiple = (isset($data['is_multiple'][$index][$step_index]) && !empty($data['is_multiple'][$index][$step_index]) ? 1 : 0);
                             $step->save();
                             $allSteps[] = $step->id;
-                        }
 
-                        $allScales = [];
-                        $storeScale = [];
-                        
-                        if (!empty($data['scales'][$index][$key])) {
-                            foreach ($data['scales'][$index][$key] as $k1 => $value) {
-                                $scale = $this->scale->where([ 'step_id' => $step->id, 'scale_id' => $value ])->first();
-                                if (empty($scale)) {
-                                    $scale = new $this->scale;
-                                    $scale->step_id = $step->id;
-                                    $scale->scale_id = $value;
-                                    $scale->save();
-                                }
-                                $scale = $this->scale->firstorcreate([ 'step_id' => $step->id, 'scale_id' => $value ]);
-                                $storeScale[$index][$key][$k1] = $scale->id;
-                                $allScales[] = $scale->id;
-                            }
-                        }
-                        
-                        $this->scale->where('step_id', $step->id)->whereNotIn('id', $allScales)->delete();
 
-                        $allWorkouts = [];
-                        $storeWorkout = [];
-                        if (!empty($data['workouts'][$index][$key])) {
-                            foreach ($data['workouts'][$index][$key] as $k1 => $value) {
-                                $workout = $this->workout->firstorcreate([ 'step_id' => $step->id, 'workout_id' => $value ]);
-                                $allWorkouts[] = $workout->id;
-                                $storeWorkout[$index][$key][$k1] = $workout->id;
-                            }
-                        }
-
-                        $this->workout->where('step_id', $step->id)->whereNotIn('id', $allWorkouts)->delete();
-
-                        $allAttachment = [];
-                        $storeAttachment = [];
-                        if (!empty($data['attachment'][$index][$key])) {
-                            foreach ($data['attachment'][$index][$key] as $k1 => $value) {
-                                if (is_file($value)) {
-                                    $file_name = $value->getClientOriginalName();
-                                    $img = $value->storeAs('attachments', $file_name);
-                                    $attachment = new $this->attachment;
-                                    $attachment->step_id = $step->id;
-                                    $attachment->image = $img;
-                                    $attachment->save();
-                                    $allAttachment[] = $attachment->id;
-                                    $storeAttachment[$index][$key][$k1] = $attachment->id;
-                                } else {
-                                    $allAttachment[] = $value;
-                                    $storeAttachment[$index][$key][$k1] = $value;
+                            $allScales = [];
+                            $storeScale = [];
+                            
+                            if (!empty($data['scales'][$index][$key])) {
+                                foreach ($data['scales'][$index][$key] as $k1 => $value) {
+                                    $scale = $this->scale->where([ 'step_id' => $step->id, 'scale_id' => $value ])->first();
+                                    if (empty($scale)) {
+                                        $scale = new $this->scale;
+                                        $scale->step_id = $step->id;
+                                        $scale->scale_id = $value;
+                                        $scale->save();
+                                    }
+                                    // $scale = $this->scale->firstorcreate([ 'step_id' => $step->id, 'scale_id' => $value ]);
+                                    $storeScale[$index][$key][$k1] = $scale->id;
+                                    $allScales[] = $scale->id;
                                 }
                             }
-                        }
+                            
+                            $this->scale->where('step_id', $step->id)->whereNotIn('id', $allScales)->delete();
 
-                        $this->attachment->where('step_id', $step->id)->whereNotIn('id', $allAttachment)->delete();
-
-                        $this->sequence->where('step_id', $step->id)->delete(); 
-                        if (!empty($data['innerOrder'][$index][$key])) {
-                            foreach ($data['innerOrder'][$index][$key] as $key1 => $value) {
-                                $type = $data['innerType'][$index][$key][$key1];
-                                $orderNo = $data['innerOrder'][$index][$key][$key1];
-                                $sequence = new $this->sequence;
-                                if ($type == 'scale') {
-                                    $sequence->typable_type = get_class($this->scale);
-                                    $sequence->typable_id = $storeScale[$index][$key][$orderNo];
-                                } elseif ($type == 'workout') {
-                                    $sequence->typable_type = get_class($this->workout);
-                                    $sequence->typable_id = $storeWorkout[$index][$key][$orderNo];
-                                } else {
-                                    $sequence->typable_type = get_class($this->attachment);
-                                    $sequence->typable_id = $storeAttachment[$index][$key][$orderNo];
+                            $allWorkouts = [];
+                            $storeWorkout = [];
+                            
+                            if (!empty($data['workouts'][$index][$key])) {
+                                foreach ($data['workouts'][$index][$key] as $k1 => $value) {
+                                    $workout = $this->workout->firstorcreate([ 'step_id' => $step->id, 'workout_id' => $value ]);
+                                    $allWorkouts[] = $workout->id;
+                                    $storeWorkout[$index][$key][$k1] = $workout->id;
                                 }
-                                $sequence->step_id = $step->id;
-                                $sequence->sequence = $value;
-                                $sequence->save();
                             }
+
+                            $this->workout->where('step_id', $step->id)->whereNotIn('id', $allWorkouts)->delete();
+
+                            $allAttachment = [];
+                            $storeAttachment = [];
+                            if (!empty($data['attachment'][$index][$key])) {
+                                foreach ($data['attachment'][$index][$key] as $k1 => $value) {
+                                    if (is_file($value)) {
+                                        $file_name = $value->getClientOriginalName();
+                                        $img = $value->storeAs('attachments', $file_name);
+                                        $attachment = new $this->attachment;
+                                        $attachment->step_id = $step->id;
+                                        $attachment->image = $img;
+                                        $attachment->save();
+                                        $allAttachment[] = $attachment->id;
+                                        $storeAttachment[$index][$key][$k1] = $attachment->id;
+                                    } else {
+                                        $allAttachment[] = $value;
+                                        $storeAttachment[$index][$key][$k1] = $value;
+                                    }
+                                }
+                            }
+
+                            $this->attachment->where('step_id', $step->id)->whereNotIn('id', $allAttachment)->delete();
+
+                            $this->sequence->where('step_id', $step->id)->delete(); 
+                            if (!empty($data['innerOrder'][$index][$key])) {
+                                foreach ($data['innerOrder'][$index][$key] as $key1 => $value) {
+                                    $type = $data['innerType'][$index][$key][$key1];
+                                    $orderNo = $data['innerOrder'][$index][$key][$key1];
+                                    $sequence = new $this->sequence;
+                                    if ($type == 'scale') {
+                                        $sequence->typable_type = get_class($this->scale);
+                                        $sequence->typable_id = $storeScale[$index][$key][$orderNo];
+                                    } elseif ($type == 'workout') {
+                                        $sequence->typable_type = get_class($this->workout);
+                                        $sequence->typable_id = $storeWorkout[$index][$key][$orderNo];
+                                    } else {
+                                        $sequence->typable_type = get_class($this->attachment);
+                                        $sequence->typable_id = $storeAttachment[$index][$key][$orderNo];
+                                    }
+                                    $sequence->step_id = $step->id;
+                                    $sequence->sequence = $value;
+                                    $sequence->save();
+                                }
+                            }
+
                         }
                     }
 

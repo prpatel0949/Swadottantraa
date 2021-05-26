@@ -193,14 +193,14 @@
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
                                                                 <label>Step Title</label>
-                                                                <input type="text" name="step_name[{{ $index }}][]" value="{{ $step->title }}" class="form-control" placeholder="Step Name">
+                                                                <input type="text" name="step_name[{{ $index }}][{{ $key }}]" value="{{ $step->title }}" class="form-control" placeholder="Step Name">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
                                                                 <label>Step Description</label>
-                                                                <input type="text" name="step_description[{{ $index }}][]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
-                                                                <input type="hidden" name="step_index[{{ $index }}][]" value="{{ $key }}">
+                                                                <input type="text" name="step_description[{{ $index }}][{{ $key }}]" value="{{ $step->description }}" class="form-control" placeholder="Step Description">
+                                                                <input type="hidden" name="step_index[{{ $index }}][{{ $key }}]" value="{{ $key }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -355,14 +355,14 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Step Title</label>
-                                        <input type="text" name="step_name[`SrNo`][]" class="form-control" placeholder="Step Name">
+                                        <input type="text" name="step_name[`SrNo`][1]" class="form-control" placeholder="Step Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Step Description</label>
-                                        <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
-                                        <input type="hidden" name="step_index[`SrNo`][]" value="1">
+                                        <input type="text" name="step_description[`SrNo`][1]" class="form-control" placeholder="Step Description">
+                                        <input type="hidden" name="step_index[`SrNo`][1]" value="1">
                                     </div>
                                 </div>
                             </div>
@@ -421,14 +421,14 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Step Title</label>
-                            <input type="text" name="step_name[`SrNo`][]" class="form-control" placeholder="Step Name">
+                            <input type="text" name="step_name[`SrNo`][`SrNo~1`]" class="form-control" placeholder="Step Name">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Step Description</label>
-                            <input type="text" name="step_description[`SrNo`][]" class="form-control" placeholder="Step Description">
-                            <input type="hidden" name="step_index[`SrNo`][]" value="`SrNo~1`">
+                            <input type="text" name="step_description[`SrNo`][`SrNo~1`]" class="form-control" placeholder="Step Description">
+                            <input type="hidden" name="step_index[`SrNo`][`SrNo~1`]" value="`SrNo~1`">
                         </div>
                     </div>
                 </div>
