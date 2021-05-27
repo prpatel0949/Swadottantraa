@@ -374,20 +374,30 @@ class GeneralRepository implements GeneralRepositoryInterface
     {
 
         if ($data['flag'] == 1) {
+
             $start_date = Carbon::parse($data['start_date']);
-            $end_date = $start_date->subDays(10)->format('Y-m-d');
-            $start_date = Carbon::parse($data['start_date'])->format('Y-m-d');
-            $marks = $this->mood_mark->where('date', '<=', $start_date)->where('date', '>=', $end_date)->where('client_id', Auth::user()->id)->groupBy('set_no')->get();
-            return [ 'marks' => $marks->sum('marks'), 'lower_marks' => $marks->sum('lower_marks') ];
-        } else {
-            $marks = $this->mood_mark->select('marks', 'lower_marks', 'date')->where('date', '>=', $data['start_date'])->where('date', '<=', $data['end_date'])->where('client_id', Auth::user()->id)->groupBy('set_no')->get();
+            $end_date = Carbon::parse($data['end_date']);
+
+            $diff_in_days = $end_date->diffInDays($start_date);
+            if ($diff_in_days > 6) {
+                $start_date = $end_date->subDays(6);
+            }
+
+            $marks = $this->mood_mark->select('marks', 'lower_marks', 'date')->where('date', '>=', $start_date->format('Y-m-d'))->where('date', '<=', $data['end_date'])->where('client_id', Auth::user()->id)->groupBy('set_no')->get();
             $marks = $marks->groupBy('date')->map(function ($row) {
                 $data = [];
                 $data['marks'] = $row->sum('marks');
                 $data['lower_marks'] = $row->sum('lower_marks');
+                $data['date'] = $row[0]->date;
                 return $data;
             })->values();
             return $marks;
+        } else {
+            $start_date = Carbon::parse($data['start_date']);
+            // $end_date = $start_date->subDays(10)->format('Y-m-d');
+            $start_date = Carbon::parse($data['start_date'])->format('Y-m-d');
+            $marks = $this->mood_mark->where('date', $start_date)->where('client_id', Auth::user()->id)->groupBy('set_no')->get();
+            return [ 'marks' => $marks->sum('marks'), 'lower_marks' => $marks->sum('lower_marks'), 'date' => $start_date ];
         }
     }
 

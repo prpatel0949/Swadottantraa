@@ -163,7 +163,7 @@ class GeneralController extends Controller
     {
         $request->validate([
             'start_date' => 'required|date|date_format:Y-m-d',
-            'end_date' => 'required_if:flag,0|date_format:Y-m-d',
+            'end_date' => 'required_if:flag,1|date_format:Y-m-d',
             'flag' => 'required|in:0,1'
         ]);
 
