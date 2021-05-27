@@ -16,7 +16,7 @@ class Client extends Authenticatable
 
     protected $fillable = [ 'name', 'email', 'mobile', 'password', 'is_approve', 'birth_date' ];
 
-    protected $appends = [ 'is_regular', 'client_institue', 'is_paid', 'is_access', 'menu_used' ];
+    protected $appends = [ 'is_regular', 'client_institue', 'is_paid', 'is_access', 'menu_used', 'latest_payment' ];
 
     /**
      * Get the transaction associated with the Client
@@ -120,6 +120,11 @@ class Client extends Authenticatable
     public function payments()
     {
         return $this->hasMany(ClientPayment::class);
+    }
+
+    public function getLatestPaymentAttribute()
+    {
+        return (Array) $this->payments->sortByDESC('id')->first()->toArray();
     }
 
     public function getClientInstitueAttribute()
