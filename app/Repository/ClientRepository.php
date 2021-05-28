@@ -135,10 +135,10 @@ class ClientRepository implements ClientRepositoryInterface
     public function all($filters = [])
     {
         if (count($filters) > 0) {
-            return $this->client->with(['institue', 'latestPayment' ])->where($filters)->get();
+            return $this->client->with(['institue' ])->where($filters)->get();
         }
 
-        return $this->client->with(['institue' , 'latestPayment' ])->all();
+        return $this->client->with(['institue'  ])->all();
     }
 
     public function setTransaction()
