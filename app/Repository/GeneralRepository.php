@@ -160,28 +160,45 @@ class GeneralRepository implements GeneralRepositoryInterface
 
         $cnt += 1;
 
-        if (!empty($data['mood_id'])) {
-            foreach ($data['mood_id'] as $key => $mood_id) {
-                $mood = new $this->mood_mark;
-                $mood->mood_id = $mood_id;
-                $mood->lower_mood_id = (isset($data[$key]['lower_mood_id']) ? $data[$key]['lower_mood_id'] : 0);
-                $mood->marks = $data['marks'];
-                $mood->lower_marks = $data['lower_marks'];
-                $mood->date = $data['date'];
-                $mood->set_no = $cnt;
-                $mood->save();
+        if ((!empty($data['lower_mood_id']) && empty($data['mood_id'])) || (count($data['lower_mood_id']) > count($data['mood_id']))) {
+            if (!empty($data['lower_mood_id'])) {
+                foreach ($data['lower_mood_id'] as $key => $value) {
+                    $mood = new $this->mood_mark;
+                    $mood->mood_id = (isset($data['mood_id'][$key]) ? $data['mood_id'][$key] : 0);
+                    $mood->lower_mood_id = $value;
+                    $mood->marks = $data['marks'];
+                    $mood->lower_marks = $data['lower_marks'];
+                    $mood->date = $data['date'];
+                    $mood->set_no = $cnt;
+                    $mood->save();
+                }
+            }
+        } else {
+            if (!empty($data['mood_id'])) {
+                foreach ($data['mood_id'] as $key => $mood_id) {
+                    $mood = new $this->mood_mark;
+                    $mood->mood_id = $mood_id;
+                    $mood->lower_mood_id = (isset($data['lower_mood_id'][$key]) ? $data['lower_mood_id'][$key] : 0);
+                    $mood->marks = $data['marks'];
+                    $mood->lower_marks = $data['lower_marks'];
+                    $mood->date = $data['date'];
+                    $mood->set_no = $cnt;
+                    $mood->save();
+                }
             }
         }
 
-        $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($mood))->count();
+        if (!empty($mood)) {
+            $cnt = $this->points->whereDate('created_at', Carbon::now()->format('Y-m-d'))->where('client_id', Auth::user()->id)->where('rankable_type', get_class($mood))->count();
 
-        if ($cnt == 0) {
-            $points = new $this->points;
-            $points->client_id = Auth::user()->id;
-            $points->rankable_type = get_class($mood);
-            $points->rankable_id = $mood->id;
-            $points->points = 0.25;
-            $points->save();
+            if ($cnt == 0) {
+                $points = new $this->points;
+                $points->client_id = Auth::user()->id;
+                $points->rankable_type = get_class($mood);
+                $points->rankable_id = $mood->id;
+                $points->points = 0.25;
+                $points->save();
+            }
         }
 
         return true;
