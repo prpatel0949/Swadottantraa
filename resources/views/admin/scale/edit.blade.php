@@ -85,14 +85,14 @@
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
                                             <button type="button" class="btn btn-primary copy-div">Copy</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ old('order.'.$index) }}" class="order-cls">
-                                            <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ old('question_id.'.$index) }}">
+                                            <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ old('question_id.'.$index) }}" class="question_id">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="question[{{ $index }}]" value="{{ old('question.'.$index) }}" class="form-control @error('question.'.$index) error @enderror" placeholder="Question">
+                                            <input type="text" name="question[{{ $index }}]" value="{{ old('question.'.$index) }}" class="form-control question @error('question.'.$index) error @enderror" placeholder="Question">
                                             @error('question.'.$index)
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="description[{{ $index }}]" value="{{ old('description.'.$index) }}" class="form-control @error('description.'.$index) error @enderror" placeholder="Description">
+                                            <input type="text" name="description[{{ $index }}]" value="{{ old('description.'.$index) }}" class="form-control description @error('description.'.$index) error @enderror" placeholder="Description">
                                             @error('description.'.$index)
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -115,11 +115,11 @@
                                     <div class="row answer-section">
                                         <div class="col-md-4">
                                             <div class="form-group input-group">
-                                                <input type="text" name="answer[{{ $index }}][]" value="{{ $answer }}" class="form-control @error('answer.'.$index.'.'.$key) error @enderror" placeholder="Answer">
-                                                <input type="hidden" name="answer_id[{{ $index }}][]" data-index="{{ $index }}" value="{{ old('answer_id.'.$index.'.'.$key) }}">
+                                                <input type="text" name="answer[{{ $index }}][]" value="{{ $answer }}" class="form-control @error('answer.'.$index.'.'.$key) error @enderror answer" placeholder="Answer">
+                                                <input type="hidden" name="answer_id[{{ $index }}][]" data-index="{{ $index }}" value="{{ old('answer_id.'.$index.'.'.$key) }}" class="answer_id">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text add-value" id="basic-addon2">$</span>
-                                                    <input type="text" name="answer_value[{{ $index }}][]" value="{{ old('answer_value.'.$index.'.'.$key) }}" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                                                    <input type="text" name="answer_value[{{ $index }}][]" value="{{ old('answer_value.'.$index.'.'.$key) }}" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
                                                 </div>
                                                 @error('answer.'.$index.'.'.$key)
                                                     <span class="invalid-feedback" role="alert">
@@ -155,19 +155,19 @@
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
                                             <button type="button" class="btn btn-primary copy-div">Copy</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $index }}" class="order-cls">
-                                            <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->id }}">
+                                            <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->id }}" class="question_id">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="question[{{ $index }}]" value="{{ $question->question }}" class="form-control" placeholder="Question">
+                                            <input type="text" name="question[{{ $index }}]" value="{{ $question->question }}" class="form-control question" placeholder="Question">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="description[{{ $index }}]" value="{{ $question->description }}" class="form-control" placeholder="Description">
+                                            <input type="text" name="description[{{ $index }}]" value="{{ $question->description }}" class="form-control description" placeholder="Description">
                                         </div>
                                     </div>
                                 </div>
@@ -175,11 +175,11 @@
                                 <div class="row answer-section">
                                     <div class="col-md-4">
                                         <div class="form-group input-group">
-                                            <input type="text" name="answer[{{ $index }}][]" value="{{ $answer->answer }}" class="form-control" placeholder="Answer">
+                                            <input type="text" name="answer[{{ $index }}][]" value="{{ $answer->answer }}" class="answer form-control" placeholder="Answer">
                                             <div class="input-group-append">
                                                 <span class="input-group-text add-value" id="basic-addon2">$</span>
-                                                <input type="text" name="answer_value[{{ $index }}][]" value="{{ $answer->answer_value }}" class="input-group-text value-box" style="width: 60px" readonly=""/>
-                                                <input type="hidden" name="answer_id[{{ $index }}][]" data-index="{{ $index }}" value="{{ $answer->id }}">
+                                                <input type="text" name="answer_value[{{ $index }}][]" value="{{ $answer->answer_value }}" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
+                                                <input type="hidden" name="answer_id[{{ $index }}][]" data-index="{{ $index }}" value="{{ $answer->id }}" class="answer_id">
                                             </div>
                                         </div>
                                     </div>
@@ -223,29 +223,29 @@
                         <button type="button" class="btn btn-primary delete-question" data-index="`SrNo`">Delete Question</button>
                         <button type="button" class="btn btn-primary copy-div">Copy</button>
                         <input type="hidden" name="order[`SrNo`]" data-index="`SrNo`" value="0" class="order-cls">
-                        <input type="hidden" name="question_id[`SrNo`]" data-index="`SrNo`" value="">
+                        <input type="hidden" name="question_id[`SrNo`]" data-index="`SrNo`" value="" class="question_id">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" name="question[`SrNo`]" class="form-control" placeholder="Question">
+                        <input type="text" name="question[`SrNo`]" class="form-control question" placeholder="Question">
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" name="description[`SrNo`]" class="form-control" placeholder="Description">
+                        <input type="text" name="description[`SrNo`]" class="form-control description" placeholder="Description">
                     </div>
                 </div>
             </div>
             <div class="row answer-section">
                 <div class="col-md-4">
                     <div class="form-group input-group">
-                        <input type="text" name="answer[`SrNo`][]" class="form-control" placeholder="Answer">
+                        <input type="text" name="answer[`SrNo`][]" class="form-control answer" placeholder="Answer">
                         <div class="input-group-append">
                             <span class="input-group-text add-value" id="basic-addon2">$</span>
-                            <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                            <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
                         </div>
                     </div>
                 </div>
@@ -270,11 +270,11 @@
     <div class="row answer-section">
         <div class="col-md-4">
             <div class="form-group input-group">
-                <input type="text" name="answer[`SrNo`][]" class="form-control" placeholder="Answer">
+                <input type="text" name="answer[`SrNo`][]" class="form-control answer" placeholder="Answer">
                 <div class="input-group-append">
                     <span class="input-group-text add-value" id="basic-addon2">$</span>
-                    <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box" style="width: 60px" readonly=""/>
-                    <input type="hidden" name="answer_id[`SrNo`][]" data-index="`SrNo`" value="">
+                    <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
+                    <input type="hidden" name="answer_id[`SrNo`][]" data-index="`SrNo`" value="" class="answer_id">
                 </div>
             </div>
         </div>
@@ -409,15 +409,17 @@
 
                 $('#copy-content').find('.question').attr('name', 'question['+ question +']');
                 $('#copy-content').find('.description').attr('name', 'description['+ question +']');
+                $('#copy-content').find('.question_id').attr('name', 'question_id['+ question +']');
                 $('#copy-content').find('.answer').attr('name', 'answer['+ question +'][]');
                 $('#copy-content').find('.anser_value').attr('name', 'answer_value['+ question +'][]');
+                $('#copy-content').find('.answer_id').attr('name', 'answer_id['+ question +'][]');
                 $('#copy-content').find('.is_interpretation').attr('name', 'is_interpreatation['+ question +']');
                 $('#copy-content').find('.add-answer').attr('data-index', question);
 
                 let content = $('#copy-content').clone();
                 // content = '<div class="card">'+ content + '</div>';
                 question++;
-                console.log(content);
+                console.log($('#copy-content').html());
                 $('#question-tab').append(content);
                 $('#copy-content').html('')
             });

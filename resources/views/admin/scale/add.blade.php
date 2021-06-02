@@ -91,7 +91,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="question[{{ $index }}]" value="{{ old('question.'.$index) }}" class="form-control @error('question.'.$index) error @enderror" placeholder="Question">
+                                            <input type="text" name="question[{{ $index }}]" value="{{ old('question.'.$index) }}" class="form-control @error('question.'.$index) error @enderror question" placeholder="Question">
                                             @error('question.'.$index)
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="description[{{ $index }}]" value="{{ old('description.'.$index) }}" class="form-control @error('description.'.$index) error @enderror" placeholder="Description">
+                                            <input type="text" name="description[{{ $index }}]" value="{{ old('description.'.$index) }}" class="form-control @error('description.'.$index) error @enderror description" placeholder="Description">
                                             @error('description.'.$index)
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -114,10 +114,10 @@
                                     <div class="row answer-section">
                                         <div class="col-md-4">
                                             <div class="form-group input-group">
-                                                <input type="text" name="answer[{{ $index }}][]" value="{{ $answer }}" class="form-control @error('answer.'.$index.'.'.$key) error @enderror" placeholder="Answer">
+                                                <input type="text" name="answer[{{ $index }}][]" value="{{ $answer }}" class="form-control @error('answer.'.$index.'.'.$key) error @enderror answer" placeholder="Answer">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text add-value" id="basic-addon2">$</span>
-                                                    <input type="text" name="answer_value[{{ $index }}][]" value="{{ old('answer_value.'.$index.'.'.$key) }}" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                                                    <input type="text" name="answer_value[{{ $index }}][]" value="{{ old('answer_value.'.$index.'.'.$key) }}" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
                                                 </div>
                                                 @error('answer.'.$index.'.'.$key)
                                                     <span class="invalid-feedback" role="alert">
@@ -222,22 +222,22 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" name="question[`SrNo`]" class="form-control" placeholder="Question">
+                        <input type="text" name="question[`SrNo`]" class="form-control question" placeholder="Question">
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="text" name="description[`SrNo`]" class="form-control" placeholder="Description">
+                        <input type="text" name="description[`SrNo`]" class="form-control description" placeholder="Description">
                     </div>
                 </div>
             </div>
             <div class="row answer-section">
                 <div class="col-md-4">
                     <div class="form-group input-group">
-                        <input type="text" name="answer[`SrNo`][]" class="form-control" placeholder="Answer">
+                        <input type="text" name="answer[`SrNo`][]" class="form-control answer" placeholder="Answer">
                         <div class="input-group-append">
                             <span class="input-group-text add-value" id="basic-addon2">$</span>
-                            <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                            <input type="text" name="answer_value[`SrNo`][]" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
                         </div>
                     </div>
                 </div>
