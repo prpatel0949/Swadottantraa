@@ -83,6 +83,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
+                                            <button type="button" class="btn btn-primary copy-div">Copy</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ old('order.'.$index) }}" class="order-cls">
                                             <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ old('question_id.'.$index) }}">
                                         </div>
@@ -152,6 +153,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
+                                            <button type="button" class="btn btn-primary copy-div">Copy</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $index }}" class="order-cls">
                                             <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->id }}">
                                         </div>
@@ -219,6 +221,7 @@
                     <div class="form-group float-right">
                         <button type="button" class="btn btn-primary add-answer" data-index="`SrNo`">Add Answer</button>
                         <button type="button" class="btn btn-primary delete-question" data-index="`SrNo`">Delete Question</button>
+                        <button type="button" class="btn btn-primary copy-div">Copy</button>
                         <input type="hidden" name="order[`SrNo`]" data-index="`SrNo`" value="0" class="order-cls">
                         <input type="hidden" name="question_id[`SrNo`]" data-index="`SrNo`" value="">
                     </div>
@@ -310,6 +313,10 @@
     </div>
 </div>
 
+<div id="copy-content">
+
+</div>
+
 @endsection
 
 @section('js')
@@ -391,6 +398,28 @@
             $(document).on('click', '.delete-inter', function (e) {
                 e.preventDefault();
                 $(this).closest('.row').remove();
+            });
+
+            $(document).on('click', '.copy-div', function (e) {
+                e.preventDefault();
+                $('#copy-content').html($(this).closest('.card').clone());
+                $('#copy-content').find('.order-cls').attr('name', 'order['+ question +']');
+                $('#copy-content').find('.order-cls').attr('data-index', question);
+                $('#copy-content').find('.order-cls').val(question);
+
+                $('#copy-content').find('.question').attr('name', 'question['+ question +']');
+                $('#copy-content').find('.description').attr('name', 'description['+ question +']');
+                $('#copy-content').find('.answer').attr('name', 'answer['+ question +'][]');
+                $('#copy-content').find('.anser_value').attr('name', 'answer_value['+ question +'][]');
+                $('#copy-content').find('.is_interpretation').attr('name', 'is_interpreatation['+ question +']');
+                $('#copy-content').find('.add-answer').attr('data-index', question);
+
+                let content = $('#copy-content').clone();
+                // content = '<div class="card">'+ content + '</div>';
+                question++;
+                console.log(content);
+                $('#question-tab').append(content);
+                $('#copy-content').html('')
             });
 
             // dragula([document.getElementById('question-tab')], { moves: function (el, source, handle, sibling) {

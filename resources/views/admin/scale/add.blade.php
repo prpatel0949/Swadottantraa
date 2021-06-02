@@ -214,6 +214,7 @@
                     <div class="form-group float-right">
                         <button type="button" class="btn btn-primary add-answer" data-index="`SrNo`">Add Answer</button>
                         <button type="button" class="btn btn-primary delete-question" data-index="`SrNo`">Delete Question</button>
+                        <button type="button" class="btn btn-primary copy-div">Copy</button>
                         <input type="hidden" name="order[`SrNo`]" data-index="`SrNo`" value="0" class="order-cls">
                     </div>
                 </div>
