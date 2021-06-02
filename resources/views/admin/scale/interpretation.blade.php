@@ -38,6 +38,13 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="title[{{ $key }}]" id="title" value="{{ $item->title }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Questions</label>
                                         <select name="question[{{ $key }}][]" class="form-control select2" multiple style="width: 100%;">
                                             <option value="" disabled>Select interpratation</option>
                                             @foreach ($scale->questions as $question)
@@ -46,7 +53,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <div class="form-group float-right">
                                         <button type="button" class="btn btn-primary add-value" data-index="{{ $key }}">Add</button>
                                     </div>
@@ -90,6 +97,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" name="title[0]" id="title_0" value="" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Questions</label>
                                     <input type="hidden" name="id[0]" value="" >
                                     <select name="question[0][]" class="form-control select2" multiple style="width: 100%;">
                                         <option value="" disabled>Select interpratation</option>
@@ -99,7 +113,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <div class="form-group float-right">
                                     <button type="button" class="btn btn-primary add-value" data-index="0">Add</button>
                                 </div>
@@ -184,6 +198,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title[`index`]" id="title_`index`" value="" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Questions</label>
                         <input type="hidden" name="id[`index`]" value="" >
                         <select name="question[`index`][]" id="question_`index`" multiple class="form-control" style="width: 100%;">
                             <option value="" disabled>Select interpratation</option>
@@ -193,7 +214,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="form-group float-right">
                         <button type="button" class="btn btn-primary add-value" data-index="`index`">Add</button>
                     </div>

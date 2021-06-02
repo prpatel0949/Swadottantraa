@@ -25,6 +25,7 @@ class InterpretationRequest extends FormRequest
     public function rules()
     {
         return [
+            'title.*' => 'required',
             'question.*' => 'required',
             'min.*.*' => 'required|integer',
             'max.*.*' => 'required|integer',

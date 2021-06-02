@@ -83,6 +83,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
+                                            <button type="button" class="btn btn-primary">Copy</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ old('order.'.$index) }}" class="order-cls">
                                         </div>
                                     </div>
@@ -149,6 +150,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="0">Add Answer</button>
+                                            <button type="button" class="btn btn-primary copy-div">Copy</button>
                                             <input type="hidden" name="order[0]" data-index="0" value="0" class="order-cls">
                                         </div>
                                     </div>
@@ -156,22 +158,22 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="question[0]" class="form-control" placeholder="Question">
+                                            <input type="text" name="question[0]" class="form-control question" placeholder="Question">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="description[0]" class="form-control" placeholder="Description">
+                                            <input type="text" name="description[0]" class="form-control description" placeholder="Description">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row answer-section">
                                     <div class="col-md-4">
                                         <div class="form-group input-group">
-                                            <input type="text" name="answer[0][]" class="form-control" placeholder="Answer">
+                                            <input type="text" name="answer[0][]" class="form-control answer" placeholder="Answer">
                                             <div class="input-group-append">
                                                 <span class="input-group-text add-value" id="basic-addon2">$</span>
-                                                <input type="text" name="answer_value[0][]" class="input-group-text value-box" style="width: 60px" readonly=""/>
+                                                <input type="text" name="answer_value[0][]" class="input-group-text value-box anser_value" style="width: 60px" readonly=""/>
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +185,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="checkbox" name="is_interpreatation[0]" value="1" >
+                                            <input type="checkbox" name="is_interpreatation[0]" class="is_interpretation" value="1" >
                                             <label>Is Interpreatation</label>
                                         </div>
                                     </div>
@@ -300,6 +302,10 @@
     </div>
 </div>
 
+<div id="copy-content">
+
+</div>
+
 @endsection
 
 @section('js')
@@ -381,6 +387,28 @@
             $(document).on('click', '.delete-inter', function (e) {
                 e.preventDefault();
                 $(this).closest('.row').remove();
+            });
+
+            $(document).on('click', '.copy-div', function (e) {
+                e.preventDefault();
+                $('#copy-content').html($(this).closest('.card').clone());
+                $('#copy-content').find('.order-cls').attr('name', 'order['+ question +']');
+                $('#copy-content').find('.order-cls').attr('data-index', question);
+                $('#copy-content').find('.order-cls').val(question);
+
+                $('#copy-content').find('.question').attr('name', 'question['+ question +']');
+                $('#copy-content').find('.description').attr('name', 'description['+ question +']');
+                $('#copy-content').find('.answer').attr('name', 'answer['+ question +'][]');
+                $('#copy-content').find('.anser_value').attr('name', 'answer_value['+ question +'][]');
+                $('#copy-content').find('.is_interpretation').attr('name', 'is_interpreatation['+ question +']');
+                $('#copy-content').find('.add-answer').attr('data-index', question);
+
+                let content = $('#copy-content').clone();
+                // content = '<div class="card">'+ content + '</div>';
+                question++;
+                console.log(content);
+                $('#question-tab').append(content);
+                $('#copy-content').html('')
             });
         });
     </script>

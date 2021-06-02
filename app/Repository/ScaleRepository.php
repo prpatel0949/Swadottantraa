@@ -163,6 +163,7 @@ class ScaleRepository implements ScaleRepositoryInterface
                 $int->set_no = 0;
                 $int->start = 0;
                 $int->end = 0;
+                $int->title = $data['title'][$key];
                 $int->save();
                 $allIds[] = $int->id;
                 
