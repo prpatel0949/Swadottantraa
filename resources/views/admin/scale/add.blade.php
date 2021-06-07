@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <textarea type="text" class="form-control @error('interpreatation') error @enderror" value="{{ old('interpreatation') }}" name="interpreatation" placeholder="Note for Interpreatation">{{ old('interpreatation') }}</textarea>
+                                            <textarea type="text" class="form-control @error('interpreatation') error @enderror" value="{{ old('interpreatation') }}" name="interpreatation" placeholder="Note for Interpreatation [For Internal Use]">{{ old('interpreatation') }}</textarea>
                                             @error('interpreatation')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -303,7 +303,7 @@
     </div>
 </div>
 
-<div id="copy-content">
+<div id="copy-content" style="display: none;">
 
 </div>
 
@@ -391,7 +391,7 @@
             });
 
             $(document).on('click', '.copy-div', function (e) {
-                e.preventDefault();
+                // e.preventDefault();
                 $('#copy-content').html($(this).closest('.card').clone());
                 $('#copy-content').find('.order-cls').attr('name', 'order['+ question +']');
                 $('#copy-content').find('.order-cls').attr('data-index', question);

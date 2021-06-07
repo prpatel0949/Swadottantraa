@@ -44,9 +44,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Questions</label>
-                                        <select name="question[{{ $key }}][]" class="form-control select2" multiple style="width: 100%;">
-                                            <option value="" disabled>Select interpratation</option>
+                                        <label>Questions: <input type="checkbox" data-id="{{ $key }}" class="select-all"> Select All</label>
+                                        <select name="question[{{ $key }}][]" id="question_{{ $key }}" class="form-control select2" multiple style="width: 100%;">
                                             @foreach ($scale->questions as $question)
                                                 <option value="{{ $question->id }}" {{ (in_array($question->id, $item->questions->pluck('question_id')->toArray()) ? 'selected' : '') }}>{{ $question->question }}</option>
                                             @endforeach
@@ -103,10 +102,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Questions</label>
+                                    <label>Questions: <input type="checkbox" data-id="0" class="select-all"> Select All</label>
                                     <input type="hidden" name="id[0]" value="" >
-                                    <select name="question[0][]" class="form-control select2" multiple style="width: 100%;">
-                                        <option value="" disabled>Select interpratation</option>
+                                    <select name="question[0][]" id="question_0" class="form-control select2" multiple style="width: 100%;">
                                         @foreach ($scale->questions as $question)
                                             <option value="{{ $question->id }}">{{ $question->question }}</option>
                                         @endforeach
@@ -204,10 +202,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Questions</label>
+                        <label>Questions: <input type="checkbox" data-id="`index`" class="select-all"> Select All</label>
                         <input type="hidden" name="id[`index`]" value="" >
                         <select name="question[`index`][]" id="question_`index`" multiple class="form-control" style="width: 100%;">
-                            <option value="" disabled>Select interpratation</option>
                             @foreach ($scale->questions as $question)
                                 <option value="{{ $question->id }}">{{ $question->question }}</option>
                             @endforeach
@@ -254,7 +251,9 @@
 @section('js')
     <script src="{{ asset('assets/dashboard/vendors/js/forms/select/select2.min.js') }}"></script>
     <script>
-        $('.select2').select2();
+        $('.select2').select2({
+            placeholder: "Select Questions"
+        });
         let number = 1;
         $(document).on('click', '.add-value', function () {
             let index = $(this).attr('data-index');
@@ -273,6 +272,18 @@
 
         $(document).on('click', '.delete-value', function () {
             $(this).closest('.row').remove();
-        })
+        });
+
+        $(document).on('click', '.select-all', function (e) {
+            var id = $(this).attr('data-id');
+            if($(this).prop("checked") == true){
+                $("#question_" + id + " > option").prop("selected","selected");
+                $("#question_" + id).trigger("change");
+            } else {
+                $("#question_" + id).val('').trigger("change");
+                // $("#question_" + id + " > option").removeAttr("selected");
+                // $("#question_" + id).trigger("change");
+            }
+        });
     </script>
 @endsection

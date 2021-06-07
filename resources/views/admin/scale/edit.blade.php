@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <textarea type="text" class="form-control @error('interpreatation') error @enderror"
-                                            value="{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}" name="interpreatation" placeholder="Note for Interpreatation">{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}</textarea>
+                                            value="{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}" name="interpreatation" placeholder="Note for Interpreatation [For Internal Use]">{{ (old('interpreatation') ? old('interpreatation') : $scale->interpreatation) }}</textarea>
                                         @error('interpreatation')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -313,7 +313,7 @@
     </div>
 </div>
 
-<div id="copy-content">
+<div id="copy-content" style="display: none">
 
 </div>
 

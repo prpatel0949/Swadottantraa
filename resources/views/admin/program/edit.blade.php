@@ -315,7 +315,7 @@
 </div>
 
 
-<div class="stage-section d-none">
+<div id="stage-section" class="stage-section d-none">
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             Stage `SrNo~1`
@@ -547,7 +547,7 @@
         let index = {{ $program->stages->count() }};
         $(document).on('click', '.add-stage', function(e) {
             e.preventDefault();
-            let content = $('.stage-section').html();
+            let content = $('#stage-section').html();
             content = content.replace(/`SrNo`/gi, index);
             content = content.replace(/`SrNo~1`/gi, parseInt(index) + 1);
             $('.stage-div').append(content);
@@ -563,7 +563,7 @@
             let section_number = $(this).parent().parent().parent().find('.step-div > div').length;
             console.log(section_number);
             section_number = (section_number == '' ? 0 : section_number);
-            // section_number = parseInt(section_number) + 1;
+            section_number = section_number + 1;
             content = content.replace(/`SrNo`/gi, page);
             content = content.replace(/`SrNo~1`/gi, section_number);
             console.log($(this).parent().parent().find('.step-div'));

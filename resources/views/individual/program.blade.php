@@ -159,8 +159,8 @@
 @endsection
 
 @section('js')
-    <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script>
-    {{-- <script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script> --}}
+    {{-- <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script> --}}
+    <script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="##B61B68" bolt-logo="" ></script>
     <script>
         let selected_program;
         let coupon = {};
