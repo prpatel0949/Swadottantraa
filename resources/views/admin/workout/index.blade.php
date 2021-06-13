@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>SrNo</th>
                                         <th>Title</th>
+                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -37,6 +38,7 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $workout->title }}</td>
+                                            <td>{{ $workout->description }}</td>
                                             <td>
                                                 <a href="{{ route('workout.edit', $workout->id) }}"><i class="fa fa-edit"></i></a>
                                                 <a href="{{ route('workout.destroy', $workout->id) }}" class="delete-scale"><i class="fa fa-trash"></i></a>
