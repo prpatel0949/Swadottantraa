@@ -146,7 +146,7 @@
                         </div>
                         @endforeach
                     @else
-                        @foreach ($scale->questions as $index => $question)
+                        @foreach ($scale->questions->sortBy('order') as $index => $question)
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
