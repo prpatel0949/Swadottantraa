@@ -265,7 +265,7 @@
                                                                         <a href="#" class="delete-scale"><i class="fa fa-trash fa-2x"></i></a>
                                                                     </div>
                                                                 </div>
-                                                            @else
+                                                                @elseif (!empty($sequence->typable))
                                                                 <div class="row">
                                                                     <input type="hidden" name="innerType[{{ $index }}][{{ $key }}][]" value="attachment">
                                                                     <input type="hidden" name="innerOrder[{{ $index }}][{{ $key }}][]" value="{{ $length }}">
