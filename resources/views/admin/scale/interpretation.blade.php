@@ -55,6 +55,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group float-right">
                                         <button type="button" class="btn btn-primary add-value" data-index="{{ $key }}">Add</button>
+                                        <button type="button" class="btn btn-primary delete-interpretation" data-index="{{ $key }}">Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +115,7 @@
                             <div class="col-md-4">
                                 <div class="form-group float-right">
                                     <button type="button" class="btn btn-primary add-value" data-index="0">Add</button>
+                                    <button type="button" class="btn btn-primary delete-interpretation" data-index="0">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -214,6 +216,7 @@
                 <div class="col-md-4">
                     <div class="form-group float-right">
                         <button type="button" class="btn btn-primary add-value" data-index="`index`">Add</button>
+                        <button type="button" class="btn btn-primary delete-interpretation" data-index="`index`">Delete</button>
                     </div>
                 </div>
             </div>
@@ -254,19 +257,21 @@
         $('.select2').select2({
             placeholder: "Select Questions"
         });
-        let number = 1;
+        let number = {{ ($scale->interpreatations->count() > 0 ? $scale->interpreatations->count() : 1) }};
         $(document).on('click', '.add-value', function () {
             let index = $(this).attr('data-index');
             let content = $('.inner-section').html();
             content = content.replace(/`SrNo`/gi, index);
             $(this).closest('.card').find('.inner-div').append(content);
+            $('#question_' + index).select2();
         });
 
         $(document).on('click', '.add-interpretation', function() {
             let content = $('.int-section').html();
             content = content.replace(/`index`/gi, number);
             $('.int-div').append(content);
-            $('#question_' + number).select2();
+            console.log(number);
+            $('#question_' + number).select2().trigger('change');
             number++;
         });
 
@@ -284,6 +289,11 @@
                 // $("#question_" + id + " > option").removeAttr("selected");
                 // $("#question_" + id).trigger("change");
             }
+        });
+
+        $(document).on('click', '.delete-interpretation', function (e) {
+            e.preventDefault();
+            $(this).closest('.card').remove();
         });
     </script>
 @endsection
