@@ -84,6 +84,7 @@
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
                                             <button type="button" class="btn btn-primary copy-div">Copy</button>
+                                            <button type="button" class="btn btn-primary delete-question" data-index="{{ $index }}">Delete Question</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ old('order.'.$index) }}" class="order-cls">
                                             <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ old('question_id.'.$index) }}" class="question_id">
                                         </div>
@@ -154,6 +155,7 @@
                                         <div class="form-group float-right">
                                             <button type="button" class="btn btn-primary add-answer" data-index="{{ $index }}">Add Answer</button>
                                             <button type="button" class="btn btn-primary copy-div">Copy</button>
+                                            <button type="button" class="btn btn-primary delete-question" data-index="{{ $index }}">Delete Question</button>
                                             <input type="hidden" name="order[{{ $index }}]" data-index="{{ $index }}" value="{{ $index }}" class="order-cls">
                                             <input type="hidden" name="question_id[{{ $index }}]" data-index="{{ $index }}" value="{{ $question->id }}" class="question_id">
                                         </div>
