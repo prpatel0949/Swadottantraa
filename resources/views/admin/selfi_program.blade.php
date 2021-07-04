@@ -30,7 +30,18 @@
         <div class="content-body">
             <form action="{{ route('selfi_program.update') }}" id="addForm" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="{{ (isset($questions[0]) ? $questions[0]->title : '') }}" name="title" placeholder="Title" required>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @if (isset($questions) && !empty($questions))
                     @foreach ($questions as $key => $question)
                     <div class="card">

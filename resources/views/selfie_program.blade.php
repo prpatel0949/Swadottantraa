@@ -7,7 +7,9 @@
 <div class="header-space" >
     <div class="container">
         <section class="section">
-            <div class="page-title">Personal Habits Stress Indicators Questionnaire</div>
+            <div class="page-title">
+                {{ (isset($questions[0]) ? $questions[0]->title : 'Personal Habits Stress Indicators Questionnaire') }}
+            </div>
             <form action="{{ route('selfie.result') }}" class="section-content" method="POST">
                 @csrf
                 <div class="card shadow mb-5">

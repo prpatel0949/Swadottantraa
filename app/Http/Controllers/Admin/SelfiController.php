@@ -21,7 +21,8 @@ class SelfiController extends Controller
         $request->validate([
             'question.*' => 'required',
             'option.*.*' => 'required',
-            'answer_value.*.*' => 'required|integer'
+            'answer_value.*.*' => 'required|integer',
+            'title' => 'required|string|max:200'
         ]);
 
 
@@ -34,6 +35,7 @@ class SelfiController extends Controller
                 }
 
                 $program->question = $value;
+                $program->title = $request->title;
                 $program->save();
                 $allQuestion[] = $program->id;
                 
